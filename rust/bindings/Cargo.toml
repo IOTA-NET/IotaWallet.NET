@@ -13,3 +13,4 @@ crate-type = ["cdylib"]
 [dependencies]
 iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "develop" }
 libc = "0.2"
+futures = "0.3"
