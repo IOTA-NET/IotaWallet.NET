@@ -16,12 +16,30 @@ namespace IotaWalletNet
         /// This is however temporary. It is planned to remove the hardcoded mnemonic.
         /// </remarks>
         /// <param name="password">A password for the stronghold file to encrypot your mnemonic and other data.</param>
-        [DllImport("bindings", CallingConvention = CallingConvention.Cdecl, EntryPoint = "create_stronghold_secret_manager")]
+        [DllImport("bindings", EntryPoint = "create_stronghold_secret_manager", CallingConvention = CallingConvention.Cdecl)]
         private static extern void CreateSecretManager(string password);
+
+        [DllImport("bindings", EntryPoint = "generate_mnemonic", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr GenerateMnemonic();
 
         public SecretManager(string password)
         {
             CreateSecretManager(password);
+        }
+
+        public static string GenerateNewMnemonic()
+        {
+            IntPtr mnemonic_ptr = GenerateMnemonic();
+
+            if (mnemonic_ptr == IntPtr.Zero)
+                throw new Exception("Unable to generate a new mnemonic as ffi returned null pointer to mnemonic");
+            
+            
+            string mnemonic = Marshal.PtrToStringAnsi(mnemonic_ptr)!;
+
+            RustCommons.FreeCString(mnemonic_ptr);
+            
+            return mnemonic;
         }
     }
 }
