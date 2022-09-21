@@ -8,7 +8,7 @@ use iota_wallet::{
 
 use libc::c_char;
 use std::ffi::{CString, CStr};
-use crate::commons::{convert_c_ptr_to_string, create_stronghold_adapter};
+use crate::commons::{convert_c_ptr_to_string, create_stronghold_adapter, create_client_options};
 
 #[no_mangle]
 pub extern "C" fn create_wallet_manager
@@ -23,12 +23,8 @@ pub extern "C" fn create_wallet_manager
     let node_url: String = convert_c_ptr_to_string(node_url_ptr);
 
     let secret_manager: StrongholdAdapter = create_stronghold_adapter(password);
-
     
-    let client_options: ClientOptions = 
-        ClientOptions::new()
-        .with_node(node_url.as_str())
-        .unwrap();
+    let client_options: ClientOptions = create_client_options(node_url);
 
     let account_manager: AccountManager = 
             block_on(AccountManager::builder()

@@ -1,4 +1,4 @@
-use iota_wallet::{secret::stronghold::StrongholdSecretManager, iota_client::stronghold::StrongholdAdapter};
+use iota_wallet::{secret::stronghold::StrongholdSecretManager, iota_client::stronghold::StrongholdAdapter, ClientOptions};
 use libc::c_char;
 use std::ffi::{CStr};
 
@@ -37,4 +37,11 @@ pub fn create_stronghold_adapter(password:String) -> StrongholdAdapter
                 .password(password.as_str())
                 .build("./mystronghold")
                 .unwrap()
+}
+
+pub fn create_client_options(node_url:String) -> ClientOptions
+{
+    ClientOptions::new()
+        .with_node(node_url.as_str())
+        .unwrap()
 }
