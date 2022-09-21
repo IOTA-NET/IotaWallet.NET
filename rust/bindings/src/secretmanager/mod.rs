@@ -1,11 +1,20 @@
 use iota_wallet::{
-    iota_client::{stronghold::StrongholdAdapter},
-    secret::{stronghold::StrongholdSecretManager},
+    iota_client::{stronghold::StrongholdAdapter, Client},
+    secret::{stronghold::StrongholdSecretManager, mnemonic::MnemonicSecretManager},
 };
 use libc::c_char;
-use std::ffi::CStr;
+use std::ffi::{CString, CStr};
 
 use futures::{self, executor::block_on};
+
+#[no_mangle]
+pub extern "C" fn generate_mnemonic() -> *const c_char
+{
+    let mnemonic: String = Client::generate_mnemonic().unwrap();
+    let c_string: CString = CString::new(mnemonic).unwrap();
+    
+    c_string.into_raw()
+}
 
 #[no_mangle]
 pub  extern "C" fn create_stronghold_secret_manager(password_ptr: *const c_char)
