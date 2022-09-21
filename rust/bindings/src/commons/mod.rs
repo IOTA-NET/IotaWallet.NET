@@ -1,7 +1,7 @@
 use futures::executor::block_on;
 use iota_wallet::{secret::{stronghold::StrongholdSecretManager, SecretManager}, iota_client::stronghold::StrongholdAdapter, ClientOptions, account_manager::AccountManager};
 use libc::c_char;
-use std::ffi::{CStr};
+use std::ffi::{CStr, CString};
 
 
 #[no_mangle]
@@ -31,6 +31,12 @@ pub fn convert_c_ptr_to_string(c_char_ptr: *const c_char) -> String
     String::from(str)
 }
 
+pub fn convert_string_to_c_ptr(rust_string:String) -> *const c_char
+{
+    let c_string: CString = CString::new(rust_string).unwrap();
+    
+    c_string.into_raw()
+}
 
 pub fn create_stronghold_adapter(password:&str) -> StrongholdAdapter
 {
