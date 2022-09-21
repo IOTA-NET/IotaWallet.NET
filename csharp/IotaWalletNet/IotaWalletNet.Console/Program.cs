@@ -14,16 +14,18 @@ namespace IotaWalletNet.Testbed
                                             //.StoreMnemonic(newMnemonic);
                                                 
 
-            WalletManager walletManager = new WalletManager()
+            Wallet wallet = new Wallet()
                                                 .SetSecretManager(secretManager)
-                                                .SetCoinType(WalletManager.CoinType.SHIMMER)
-                                                .SetNodeUrl(WalletManager.DEFAULT_NODE_URL)
+                                                .SetCoinType(Wallet.CoinType.SHIMMER)
+                                                .SetNodeUrl(Wallet.DEFAULT_NODE_URL)
                                                 .Connect();
 
             //walletManager.CreateAccount("zayyan");
 
-            List<string> usernames = walletManager.GetUsernames();
+            List<string> usernames = wallet.GetUsernames();
             usernames.ForEach(username => Console.WriteLine(username));
+
+            Account zanaAccount = wallet.GetAccount("zanamonster");
 
             Console.WriteLine("End of program...");
             Console.Read();
