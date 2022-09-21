@@ -5,15 +5,14 @@ use iota_wallet::{
 };
 use libc::c_char;
 use std::{ffi::{CString, CStr}, sync::Arc};
-use crate::commons::{convert_c_ptr_to_string, create_stronghold_adapter};
+use crate::commons::{convert_c_ptr_to_string, create_stronghold_adapter, convert_string_to_c_ptr};
 
 #[no_mangle]
 pub extern "C" fn generate_mnemonic() -> *const c_char
 {
     let mnemonic: String = Client::generate_mnemonic().unwrap();
-    let c_string: CString = CString::new(mnemonic).unwrap();
     
-    c_string.into_raw()
+    convert_string_to_c_ptr(mnemonic)
 }
 
 

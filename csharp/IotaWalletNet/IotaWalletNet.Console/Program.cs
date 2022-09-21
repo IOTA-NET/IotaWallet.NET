@@ -5,7 +5,7 @@ namespace IotaWalletNet.Testbed
     {
         static void Main(string[] args)
         {
-            string newMnemonic = SecretManager.GenerateNewMnemonic();
+            //string newMnemonic = SecretManager.GenerateNewMnemonic();
             string password = "password";
 
             SecretManager secretManager = new SecretManager()
@@ -20,7 +20,10 @@ namespace IotaWalletNet.Testbed
                                                 .SetNodeUrl(WalletManager.DEFAULT_NODE_URL)
                                                 .Connect();
 
-            walletManager.CreateAccount("zanamonster");
+            //walletManager.CreateAccount("zayyan");
+
+            List<string> usernames = walletManager.GetUsernames();
+            usernames.ForEach(username => Console.WriteLine(username));
 
             Console.WriteLine("End of program...");
             Console.Read();

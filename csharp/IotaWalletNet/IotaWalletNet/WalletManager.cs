@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using Newtonsoft.Json;
+using System.Runtime.InteropServices;
 
 namespace IotaWalletNet
 {
@@ -9,6 +10,9 @@ namespace IotaWalletNet
 
         [DllImport("bindings", EntryPoint = "create_account", CallingConvention = CallingConvention.Cdecl)]
         private static extern void CreateAccount(IntPtr accountManagerHandle, string accountName);
+
+        [DllImport("bindings", EntryPoint = "get_usernames", CallingConvention = CallingConvention.Cdecl)]
+        private static extern string GetUsernames(IntPtr accountManagerHandle);
 
 
         public enum CoinType : UInt32
@@ -64,7 +68,20 @@ namespace IotaWalletNet
             return this;
         }
 
+        public List<string> GetUsernames()
+        {
+            if (_secretManager == null)
+                throw new Exception("SecretManager is not initialized. Try using the SetSecretManager() function.");
+
+            string jsonResponse = WalletManager.GetUsernames(GetHandle());
+
+            if (jsonResponse == null)
+                return new List<string>();
+
+            return JsonConvert.DeserializeObject<List<string>>(jsonResponse)!;
+        }
         public void CreateAccount(string accountName) => WalletManager.CreateAccount(GetHandle(), accountName);
+        
         public IntPtr GetHandle() => _walletManagerHandle;
     }
 }
