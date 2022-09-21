@@ -1,3 +1,4 @@
+use iota_wallet::{secret::stronghold::StrongholdSecretManager, iota_client::stronghold::StrongholdAdapter};
 use libc::c_char;
 use std::ffi::{CStr};
 
@@ -26,4 +27,14 @@ pub fn convert_c_ptr_to_string(c_char_ptr: *const c_char) -> String
                         .to_str()
                         .unwrap();
     String::from(str)
+}
+
+
+pub fn create_stronghold_adapter(password:String) -> StrongholdAdapter
+{
+    
+        StrongholdSecretManager::builder()
+                .password(password.as_str())
+                .build("./mystronghold")
+                .unwrap()
 }
