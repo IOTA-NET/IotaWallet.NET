@@ -5,10 +5,14 @@ namespace IotaWalletNet.Testbed
     {
         static void Main(string[] args)
         {
-            //SecretManager secretManager = new SecretManager("password");
+            string newMnemonic = SecretManager.GenerateNewMnemonic();
+            string password = "password";
 
-            Console.WriteLine(SecretManager.GenerateNewMnemonic());
-            Console.WriteLine("Hello, World!");
+            SecretManager secretManager = new SecretManager(password)
+                                                .StoreMnemonic(newMnemonic);
+
+
+            Console.WriteLine("End of program...");
             Console.Read();
         }
     }
