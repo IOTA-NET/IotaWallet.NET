@@ -5,7 +5,7 @@ use iota_wallet::{
 };
 use libc::c_char;
 use std::ffi::{CString, CStr};
-
+use crate::commons::convert_c_ptr_to_string;
 
 #[no_mangle]
 pub extern "C" fn generate_mnemonic() -> *const c_char
@@ -20,27 +20,15 @@ pub extern "C" fn generate_mnemonic() -> *const c_char
 pub  extern "C" fn create_stronghold_secret_manager(password_ptr: *const c_char)
  -> *mut StrongholdAdapter
 {
-    let c_str_password = unsafe{
-
-        assert!(!password_ptr.is_null());
-        CStr::from_ptr(password_ptr)
-    };
-
-    let password: &str = c_str_password.to_str().unwrap();
-
+    let password: String = convert_c_ptr_to_string(password_ptr);
+    
     let secret_manager: StrongholdAdapter 
         = StrongholdSecretManager::builder()
-            .password(password)
+            .password(password.as_str())
             .build("./mystronghold")
             .unwrap();
 
     Box::into_raw(Box::new(secret_manager))
-
-
-    // let mnemonic: String = String::from("sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf");
-
-    // block_on(secret_manager.store_mnemonic(mnemonic)).unwrap();
-
 }
 
 #[no_mangle]
@@ -54,15 +42,7 @@ pub  extern "C" fn store_mnemonic(
         &mut *secret_manager_ptr
     };
 
-    let c_str_mnemonic = unsafe{
-
-        assert!(!mnemonic_ptr.is_null());
-        CStr::from_ptr(mnemonic_ptr)
-    };
-
-    let mnemonic: &str = c_str_mnemonic.to_str().unwrap();
-
-    let mnemonic_string :String = String::from(mnemonic);
+    let mnemonic_string :String = convert_c_ptr_to_string(mnemonic_ptr);
     
     block_on(secret_manager.store_mnemonic(mnemonic_string)).unwrap();
 }
