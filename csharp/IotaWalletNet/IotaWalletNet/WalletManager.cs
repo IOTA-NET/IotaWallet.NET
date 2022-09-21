@@ -7,6 +7,10 @@ namespace IotaWalletNet
         [DllImport("bindings", EntryPoint = "create_wallet_manager", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr CreateWalletManager(string password, string nodeUrl, UInt32 coinType);
 
+        [DllImport("bindings", EntryPoint = "create_account", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void CreateAccount(IntPtr accountManagerHandle, string accountName);
+
+
         public enum CoinType : UInt32
         {
             IOTA = 4218,
@@ -60,6 +64,7 @@ namespace IotaWalletNet
             return this;
         }
 
+        public void CreateAccount(string accountName) => WalletManager.CreateAccount(GetHandle(), accountName);
         public IntPtr GetHandle() => _walletManagerHandle;
     }
 }

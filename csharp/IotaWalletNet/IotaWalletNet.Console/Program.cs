@@ -10,8 +10,8 @@ namespace IotaWalletNet.Testbed
 
             SecretManager secretManager = new SecretManager()
                                             .SetPassword(password)
-                                            .InitializeStronghold()
-                                            .StoreMnemonic(newMnemonic);
+                                            .InitializeStronghold();
+                                            //.StoreMnemonic(newMnemonic);
                                                 
 
             WalletManager walletManager = new WalletManager()
@@ -20,6 +20,7 @@ namespace IotaWalletNet.Testbed
                                                 .SetNodeUrl(WalletManager.DEFAULT_NODE_URL)
                                                 .Connect();
 
+            walletManager.CreateAccount("zanamonster");
 
             Console.WriteLine("End of program...");
             Console.Read();

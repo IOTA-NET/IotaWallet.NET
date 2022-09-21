@@ -26,3 +26,22 @@ pub extern "C" fn create_wallet_manager
     
     Box::into_raw(Box::new(account_manager))
 }
+
+#[no_mangle]
+pub extern "C" fn create_account(
+    account_manager_ptr: *mut AccountManager,
+    account_name_ptr: *const c_char,
+)
+{
+    let account_name: String = convert_c_ptr_to_string(account_name_ptr);
+    let x = unsafe {
+        assert!(!account_manager_ptr.is_null());
+        &mut *account_manager_ptr
+    };
+    
+    block_on(x.create_account()
+    .with_alias(account_name)
+    .finish()).unwrap();
+    
+
+}
