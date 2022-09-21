@@ -34,14 +34,14 @@ pub extern "C" fn create_account(
 )
 {
     let account_name: String = convert_c_ptr_to_string(account_name_ptr);
-    let x = unsafe {
+    let account_manager: &mut AccountManager = unsafe {
         assert!(!account_manager_ptr.is_null());
         &mut *account_manager_ptr
     };
     
-    block_on(x.create_account()
+    block_on(account_manager.create_account()
     .with_alias(account_name)
     .finish()).unwrap();
-    
+
 
 }
