@@ -22,7 +22,7 @@ pub  extern "C" fn create_stronghold_secret_manager(password_ptr: *const c_char)
 {
     let password: String = convert_c_ptr_to_string(password_ptr);
     
-    create_stronghold_adapter(password);
+    create_stronghold_adapter(password.as_str());
 }
 
 #[no_mangle]
@@ -35,10 +35,9 @@ pub  extern "C" fn store_mnemonic(
     
     let mnemonic :String = convert_c_ptr_to_string(mnemonic_ptr);
     
-    block_on(StrongholdSecretManager::builder()
-                .password(password.as_str())
-                .build("./mystronghold")
-                .unwrap()
-                .store_mnemonic(mnemonic))
-            .unwrap()
+    block_on(
+            create_stronghold_adapter(password.as_str())
+            .store_mnemonic(mnemonic)
+        )
+        .unwrap();
 }
