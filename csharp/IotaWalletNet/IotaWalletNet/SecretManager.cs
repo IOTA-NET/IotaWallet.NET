@@ -28,6 +28,12 @@ namespace IotaWalletNet
             secretManagerHandle = CreateSecretManager(password);
         }
 
+        /// <summary>
+        /// Encrypts and stores the mnemonic. Do only do this the first time you are creating
+        /// the wallet.
+        /// </summary>
+        /// <param name="mnemonic"></param>
+        /// <returns></returns>
         public SecretManager StoreMnemonic(string mnemonic)
         {
             SecretManager.StoreMnemonic(secretManagerHandle, mnemonic);
