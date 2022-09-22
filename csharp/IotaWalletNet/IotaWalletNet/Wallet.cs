@@ -26,6 +26,9 @@ namespace IotaWalletNet
         private IntPtr _walletHandle;
         private StringBuilder _errorBuffer;
 
+        private WalletOptions _walletOptions;
+
+        public WalletOptions GetWalletOptions() => _walletOptions;
         public Wallet()
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
@@ -33,18 +36,30 @@ namespace IotaWalletNet
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
             };
 
-            ManagerOptions managerOptions = new ManagerOptions();
+            _walletOptions = new WalletOptions();
 
-            
 
-            string managerOptionsSerialized = JsonConvert.SerializeObject(managerOptions);
-            //if (managerOptionsSerialized.Contains("clientOptions"))
-            //    managerOptionsSerialized = managerOptionsSerialized.Replace("clientOptions", "ClientOptions");
-            
-            _errorBuffer = new StringBuilder(1024);
 
-            _walletHandle = Wallet.InitializeIotaWallet(managerOptionsSerialized, _errorBuffer, 1024);
+            string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
+            ////if (managerOptionsSerialized.Contains("clientOptions"))
+            ////    managerOptionsSerialized = managerOptionsSerialized.Replace("clientOptions", "ClientOptions");
+
+            int errorBufferSize = 1024;
+
+            _errorBuffer = new StringBuilder(errorBufferSize);
+
+            _walletHandle = Wallet.InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
         }
+
+        public ClientOptionsBuilder ConfigureClientOptions()
+            => new ClientOptionsBuilder(this);
+
+
+        public SecretManagerOptionsBuilder ConfigureSecretManagerOptions()
+            => new SecretManagerOptionsBuilder(this);
+
+        public WalletOptionsBuilder ConfigureWalletOptions()
+            => new WalletOptionsBuilder(this);
 
 
     }
