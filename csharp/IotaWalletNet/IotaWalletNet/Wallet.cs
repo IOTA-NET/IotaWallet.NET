@@ -23,12 +23,29 @@ namespace IotaWalletNet
         [DllImport("bindings", EntryPoint = "iota_initialize", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr InitializeIotaWallet(string managerOptions, [MarshalAs(UnmanagedType.LPStr)] StringBuilder errorBuffer, int errorBufferSize);
 
+        [DllImport("bindings", EntryPoint = "iota_send_message", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SendMessageToRust(IntPtr walletHandle, string message, [MarshalAs(UnmanagedType.FunctionPtr)] MyCallback callback, IntPtr context);
+
+        private delegate void MyCallback(string message, string errors, IntPtr context);
+
+        private MyCallback _callback =  (message, error, context) =>
+        {
+            Console.WriteLine(error);
+        };
+
+
         private IntPtr _walletHandle;
+
         private StringBuilder _errorBuffer;
 
         private WalletOptions _walletOptions;
 
         public WalletOptions GetWalletOptions() => _walletOptions;
+        
+        public void SendMessage(string message)
+        {
+            SendMessageToRust(_walletHandle, message, _callback, IntPtr.Zero);
+        }
         public Wallet()
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
@@ -39,6 +56,8 @@ namespace IotaWalletNet
             _walletOptions = new WalletOptions();
 
             _walletHandle = IntPtr.Zero;
+
+            _errorBuffer = new StringBuilder();
         }
 
         public ClientOptionsBuilder ConfigureClientOptions()
