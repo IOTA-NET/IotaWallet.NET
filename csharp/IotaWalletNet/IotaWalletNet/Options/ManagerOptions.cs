@@ -11,7 +11,7 @@ namespace IotaWalletNet.Options
 
         public string StoragePath { get; set; } = "./walletdb";
 
-        public int CoinType { get; set; } = 4219;
+        public int CoinType { get; set; } = ((int)TypeOfCoin.Shimmer);
 
         public enum TypeOfCoin:int
         {
