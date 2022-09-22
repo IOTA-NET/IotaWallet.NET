@@ -20,7 +20,9 @@ namespace IotaWalletNet.Testbed
                             .SetSnapshotPath("./mystronghold")
                             .ThenBuild();
 
-            ;
+            wallet.Connect();
+
+
             Console.Read();
         }
     }

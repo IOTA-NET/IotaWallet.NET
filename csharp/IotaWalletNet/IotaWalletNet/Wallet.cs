@@ -37,18 +37,6 @@ namespace IotaWalletNet
             };
 
             _walletOptions = new WalletOptions();
-
-
-
-            string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
-            ////if (managerOptionsSerialized.Contains("clientOptions"))
-            ////    managerOptionsSerialized = managerOptionsSerialized.Replace("clientOptions", "ClientOptions");
-
-            int errorBufferSize = 1024;
-
-            _errorBuffer = new StringBuilder(errorBufferSize);
-
-            _walletHandle = Wallet.InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
         }
 
         public ClientOptionsBuilder ConfigureClientOptions()
@@ -61,6 +49,19 @@ namespace IotaWalletNet
         public WalletOptionsBuilder ConfigureWalletOptions()
             => new WalletOptionsBuilder(this);
 
+        public void Connect()
+        {
+            string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
 
+            int errorBufferSize = 1024;
+
+            _errorBuffer = new StringBuilder(errorBufferSize);
+
+            _walletHandle = Wallet.InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
+
+            if (!string.IsNullOrEmpty(_errorBuffer.ToString()))
+                throw new Exception(_errorBuffer.ToString());
+
+        }
     }
 }
