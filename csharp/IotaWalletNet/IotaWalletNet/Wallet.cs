@@ -37,6 +37,8 @@ namespace IotaWalletNet
             };
 
             _walletOptions = new WalletOptions();
+
+            _walletHandle = IntPtr.Zero;
         }
 
         public ClientOptionsBuilder ConfigureClientOptions()
