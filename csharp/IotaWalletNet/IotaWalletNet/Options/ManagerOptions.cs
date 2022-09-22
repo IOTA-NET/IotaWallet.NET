@@ -13,6 +13,12 @@ namespace IotaWalletNet.Options
 
         public int CoinType { get; set; } = 4219;
 
+        public enum TypeOfCoin:int
+        {
+            Iota = 4218,
+            Shimmer = 4219,
+        }
+
         public ManagerOptions()
         {
             SecretManager = new SecretManagerOptions();
