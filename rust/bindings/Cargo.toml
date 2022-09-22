@@ -11,8 +11,10 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "develop" }
 libc = "0.2"
-futures = "0.3"
-serde_json = "1.0.85"
-serde = "1.0.144"
+futures =  { version = "0.3.23", default-features = false }
+once_cell = { version = "1.13.1", default-features = false }
+serde = { version = "1.0.143", default-features = false, features = ["derive"] }
+serde_json = { version = "1.0.83", default-features = false }
+tokio = { version = "1.20.1", default-features = false}
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "develop" , features = ["message_interface", "events"]}
