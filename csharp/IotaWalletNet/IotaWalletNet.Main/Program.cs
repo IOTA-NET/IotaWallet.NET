@@ -1,12 +1,7 @@
 ﻿
+using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
-using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
-using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
-using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
-using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
-using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
-using IotaWalletNet.Domain;
 using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Options;
@@ -41,11 +36,12 @@ namespace IotaWalletNet.Testbed
                 //string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
                 //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
 
-                /* VerifyMnemonic */
-                string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
-                string wrongMnemonic = "venture symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
-                await mediator.Send(new VerifyMnemonicCommand(wallet, mnemonic));
-                await mediator.Send(new VerifyMnemonicCommand(wallet, wrongMnemonic));
+                /* VerifyMnemonicCommand */
+                //string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+                //string wrongMnemonic = "venture symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+                //await mediator.Send(new VerifyMnemonicCommand(wallet, mnemonic));
+                //await mediator.Send(new VerifyMnemonicCommand(wallet, wrongMnemonic));
+
 
 
                 /* CreateAccountCommand */
@@ -59,6 +55,9 @@ namespace IotaWalletNet.Testbed
                 //await mediator.Send(new GetAccountQuery(wallet, "zana"));
                 //await mediator.Send(new GetAccountQuery(wallet, "monster"));
                 //await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
+
+                /* GetBalanceQuery */
+                await mediator.Send(new GetBalanceQuery(wallet, "zana"));
 
                 //Alternatively send a raw message
                 //wallet.SendMessage(@"

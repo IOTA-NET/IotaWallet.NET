@@ -15,4 +15,10 @@
     <ProjectReference Include="..\IotaWalletNet\IotaWalletNet.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AccountContext\Commands\" />
+    <Folder Include="NetworkContext\Commands\" />
+    <Folder Include="NetworkContext\Queries\" />
+  </ItemGroup>
+
 </Project>

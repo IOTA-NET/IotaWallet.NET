@@ -112,5 +112,6 @@ VerifyMnemonicCommand | mnemonic : String
 Queries | Requires
 --------- | -----------
 GetAccountsQuery | -
-GetAccountQuery | username/index : String
+GetAccountQuery | username : String
 GetAccountQuery | -
+GetBalanceQuery | username : String
