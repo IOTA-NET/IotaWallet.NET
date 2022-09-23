@@ -4,6 +4,7 @@ using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
+using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Domain;
 using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Interfaces;
@@ -32,16 +33,24 @@ namespace IotaWalletNet.Testbed
 
                 IMediator mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
-                //string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+                /* GetNewMnemonicQuery */
+                await mediator.Send(new GetNewMnemonicQuery(wallet));
 
+                /* StoreMnemonicCommand */
+                //string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
                 //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
+
+                /* CreateAccountCommand */
                 //await mediator.Send(new CreateAccountCommand(wallet, "zana"));
                 //await mediator.Send(new CreateAccountCommand(wallet, "monster"));
+
+                /* GetAccountsQuery */
                 //await mediator.Send(new GetAccountsQuery(wallet));
 
-                await mediator.Send(new GetAccountQuery(wallet, "zana"));
-                await mediator.Send(new GetAccountQuery(wallet, "monster"));
-                await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
+                /* GetAccountQuery */
+                //await mediator.Send(new GetAccountQuery(wallet, "zana"));
+                //await mediator.Send(new GetAccountQuery(wallet, "monster"));
+                //await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
 
 
                 //Alternatively send a raw message

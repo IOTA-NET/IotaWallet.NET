@@ -111,3 +111,4 @@ Queries | Requires
 --------- | -----------
 GetAccounts | -
 GetAccountQuery | username/index : String
+GetAccountQuery | -
