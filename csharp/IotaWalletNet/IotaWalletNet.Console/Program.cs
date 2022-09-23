@@ -2,6 +2,7 @@
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
+using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
 using IotaWalletNet.Domain;
 using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Interfaces;
@@ -33,7 +34,11 @@ namespace IotaWalletNet.Testbed
                 //string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
 
                 //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
-                await mediator.Send(new CreateAccountCommand(wallet, "zana"));
+                //await mediator.Send(new CreateAccountCommand(wallet, "zana"));
+                //await mediator.Send(new CreateAccountCommand(wallet, "monster"));
+                await mediator.Send(new GetAccountsQuery(wallet));
+
+
 
                 //Alternatively send a raw message
                 //wallet.SendMessage(@"
