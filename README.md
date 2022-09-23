@@ -97,7 +97,16 @@ We have to inherit from `INotificationHandler<MessageReceivedNotification>`.
 ```
 
 ## Supported Commands/Queries
+
+### Commands
+
 Commands  | Requires
 ------------- | -------------
 StoreMnemonicCommand  | mnemonic : String
 CreateAccountCommand | username : String
+
+### Queries
+
+Queries | Requires
+--------- | -----------
+GetAccounts | -
