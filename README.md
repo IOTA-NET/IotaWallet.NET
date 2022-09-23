@@ -125,7 +125,7 @@ GetNewMnemonicQuery | -
 
 Commands  | Requires
 ------------- | -------------
-
+- | -
 
 #### Queries
 
