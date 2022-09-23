@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using static IotaWalletNet.Options.WalletOptions;
+using static IotaWalletNet.Domain.Options.WalletOptions;
 using JsonIgnoreAttribute = Newtonsoft.Json.JsonIgnoreAttribute;
 
-namespace IotaWalletNet.Options
+namespace IotaWalletNet.Domain.Options
 {
     public class WalletOptionsBuilder
     {
@@ -39,7 +39,7 @@ namespace IotaWalletNet.Options
 
         public int CoinType { get; set; } = (int)TypeOfCoin.Shimmer;
 
-        public enum TypeOfCoin:int
+        public enum TypeOfCoin : int
         {
             Iota = 4218,
             Shimmer = 4219,
@@ -64,10 +64,6 @@ namespace IotaWalletNet.Options
                 _secretManagerOptions = value;
 
                 SecretManagerJson = JsonConvert.SerializeObject(SecretManager);
-
-                ////iota.rs is particular on pascal case for stronghold
-                //if (SecretManagerJson.Contains("stronghold"))
-                //    SecretManagerJson = SecretManagerJson.Replace("stronghold", "Stronghold");
             }
         }
 

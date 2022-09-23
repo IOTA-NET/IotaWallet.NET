@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Serialization;
 
-namespace IotaWalletNet.SerializerSettings
+namespace IotaWalletNet.Domain.SerializerSettings
 {
     /// <summary>
     /// Uses Pascal case naming strategy, first letter is capitalized, and first letter
@@ -88,7 +88,7 @@ namespace IotaWalletNet.SerializerSettings
                     break;
                 }
 
-                bool hasNext = (i + 1 < chars.Length);
+                bool hasNext = i + 1 < chars.Length;
                 if (i > 0 && hasNext && !char.IsUpper(chars[i + 1]))
                 {
                     if (char.IsSeparator(chars[i + 1]))

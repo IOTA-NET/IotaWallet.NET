@@ -1,38 +1,19 @@
-﻿using IotaWalletNet.Options;
+﻿using IotaWalletNet.Domain.Common.Interfaces;
+using IotaWalletNet.Domain.Options;
+using MediatR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Runtime.InteropServices;
 using System.Text;
+using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
+using IotaWalletNet.Domain.Common.Notifications;
+using System.Threading.Tasks;
 
-namespace IotaWalletNet
+namespace IotaWalletNet.Domain
 {
-    public class Wallet
+    public class Wallet : IWallet
     {
-        //[DllImport("bindings", EntryPoint = "create_wallet_manager", CallingConvention = CallingConvention.Cdecl)]
-        //private static extern IntPtr CreateWalletManager(string password, string nodeUrl, UInt32 coinType);
 
-        //[DllImport("bindings", EntryPoint = "create_account", CallingConvention = CallingConvention.Cdecl)]
-        //private static extern void CreateAccount(IntPtr accountManagerHandle, string accountName);
-
-        //[DllImport("bindings", EntryPoint = "get_usernames", CallingConvention = CallingConvention.Cdecl)]
-        //private static extern string GetUsernames(IntPtr accountManagerHandle);
-
-        //[DllImport("bindings", EntryPoint = "get_account", CallingConvention = CallingConvention.Cdecl)]
-        //private static extern IntPtr GetAccount(IntPtr accountManagerHandle, string username);
-
-        [DllImport("bindings", EntryPoint = "iota_initialize", CallingConvention = CallingConvention.Cdecl)]
-        private static extern IntPtr InitializeIotaWallet(string managerOptions, [MarshalAs(UnmanagedType.LPStr)] StringBuilder errorBuffer, int errorBufferSize);
-
-        [DllImport("bindings", EntryPoint = "iota_send_message", CallingConvention = CallingConvention.Cdecl)]
-        private static extern void SendMessageToRust(IntPtr walletHandle, string message, [MarshalAs(UnmanagedType.FunctionPtr)] MyCallback callback, IntPtr context);
-
-        private delegate void MyCallback(string message, string errors, IntPtr context);
-
-        private MyCallback _callback =  (message, error, context) =>
-        {
-            Console.WriteLine(error);
-        };
-
+        #region Variables
 
         private IntPtr _walletHandle;
 
@@ -40,13 +21,12 @@ namespace IotaWalletNet
 
         private WalletOptions _walletOptions;
 
-        public WalletOptions GetWalletOptions() => _walletOptions;
-        
-        public void SendMessage(string message)
-        {
-            SendMessageToRust(_walletHandle, message, _callback, IntPtr.Zero);
-        }
-        public Wallet()
+        private readonly IMediator _mediator;
+
+        private MessageReceivedCallback _messageReceivedCallback;
+        #endregion
+
+        public Wallet(IMediator mediator)
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
             {
@@ -58,7 +38,37 @@ namespace IotaWalletNet
             _walletHandle = IntPtr.Zero;
 
             _errorBuffer = new StringBuilder();
+            _mediator = mediator;
+
+            _messageReceivedCallback = WalletMessageReceivedCallback;
         }
+
+        public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
+        {
+            _mediator.Publish(new MessageReceivedNotification(message, error)).Wait();
+        }
+
+        public void Connect()
+        {
+            string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
+
+            int errorBufferSize = 1024;
+
+            _errorBuffer = new StringBuilder(errorBufferSize);
+
+            _walletHandle = InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
+
+            if (!string.IsNullOrEmpty(_errorBuffer.ToString()))
+                throw new Exception(_errorBuffer.ToString());
+
+        }
+        public void SendMessage(string message)
+        {
+            SendMessageToRust(_walletHandle, message, _messageReceivedCallback, IntPtr.Zero);
+        }
+
+        public WalletOptions GetWalletOptions() => _walletOptions;
+
 
         public ClientOptionsBuilder ConfigureClientOptions()
             => new ClientOptionsBuilder(this);
@@ -70,19 +80,5 @@ namespace IotaWalletNet
         public WalletOptionsBuilder ConfigureWalletOptions()
             => new WalletOptionsBuilder(this);
 
-        public void Connect()
-        {
-            string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
-
-            int errorBufferSize = 1024;
-
-            _errorBuffer = new StringBuilder(errorBufferSize);
-
-            _walletHandle = Wallet.InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
-
-            if (!string.IsNullOrEmpty(_errorBuffer.ToString()))
-                throw new Exception(_errorBuffer.ToString());
-
-        }
     }
 }
