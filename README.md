@@ -1,4 +1,4 @@
-9# IotaWallet.NET
+# IotaWallet.NET
 
 ## Usage Example
 
