@@ -98,7 +98,8 @@ We have to inherit from `INotificationHandler<MessageReceivedNotification>`.
 
 ## Supported Commands/Queries
 
-### Commands
+### Wallet
+#### Commands
 
 Commands  | Requires
 ------------- | -------------
@@ -107,11 +108,28 @@ CreateAccountCommand | username : String
 VerifyMnemonicCommand | mnemonic : String
 
 
-### Queries
+#### Queries
 
 Queries | Requires
 --------- | -----------
-GetAccountsQuery | -
 GetAccountQuery | username : String
-GetAccountQuery | -
+GetAccountsQuery | -
+GetNewMnemonicQuery | -
+
+
+### Account
+
+
+
+#### Commands
+
+Commands  | Requires
+------------- | -------------
+
+
+#### Queries
+
+
+Queries | Requires
+--------- | -----------
 GetBalanceQuery | username : String
