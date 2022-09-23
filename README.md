@@ -104,6 +104,8 @@ Commands  | Requires
 ------------- | -------------
 StoreMnemonicCommand  | mnemonic : String
 CreateAccountCommand | username : String
+VerifyMnemonic | mnemonic : String
+
 
 ### Queries
 
