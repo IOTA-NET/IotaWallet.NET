@@ -2,6 +2,7 @@
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
+using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
 using IotaWalletNet.Domain;
 using IotaWalletNet.Domain.Common.Extensions;
@@ -36,8 +37,11 @@ namespace IotaWalletNet.Testbed
                 //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
                 //await mediator.Send(new CreateAccountCommand(wallet, "zana"));
                 //await mediator.Send(new CreateAccountCommand(wallet, "monster"));
-                await mediator.Send(new GetAccountsQuery(wallet));
+                //await mediator.Send(new GetAccountsQuery(wallet));
 
+                await mediator.Send(new GetAccountQuery(wallet, "zana"));
+                await mediator.Send(new GetAccountQuery(wallet, "monster"));
+                await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
 
 
                 //Alternatively send a raw message
@@ -60,7 +64,7 @@ namespace IotaWalletNet.Testbed
             return new ServiceCollection()
                                         .AddDomainServices()
                                         .AddApplicationServices()
-                                        .AddConsoleServices();
+                                        .AddMainServices();
         }
 
         private static IWallet ConfigureWallet(IWallet wallet)

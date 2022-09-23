@@ -6,7 +6,7 @@ namespace IotaWalletNet.Testbed.Common.Extensions
 {
     public static class DependencyInjectionExtensions
     {
-        public static IServiceCollection AddConsoleServices(this IServiceCollection serviceDescriptors)
+        public static IServiceCollection AddMainServices(this IServiceCollection serviceDescriptors)
         {
             serviceDescriptors.AddMediatR(Assembly.GetExecutingAssembly());
 
