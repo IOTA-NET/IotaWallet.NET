@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Domain", "IotaWalletNet\IotaWalletNet.Domain.csproj", "{D9E0FB0A-9B39-40FF-AAF1-443159440885}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Main", "IotaWalletNet.Console\IotaWalletNet.Main.csproj", "{67BE8657-E6A4-4696-B30F-C3E781446133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Main", "IotaWalletNet.Main\IotaWalletNet.Main.csproj", "{67BE8657-E6A4-4696-B30F-C3E781446133}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Application", "IotaWalletNet.Application\IotaWalletNet.Application.csproj", "{DB96F7DF-8012-4BE7-A13B-AC48EB901F0C}"
 EndProject
