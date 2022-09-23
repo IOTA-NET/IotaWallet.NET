@@ -110,3 +110,4 @@ CreateAccountCommand | username : String
 Queries | Requires
 --------- | -----------
 GetAccounts | -
+GetAccountQuery | username/index : String
