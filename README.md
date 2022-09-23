@@ -1,4 +1,4 @@
-# IotaWallet.NET
+9# IotaWallet.NET
 
 ## Usage Example
 
@@ -104,13 +104,13 @@ Commands  | Requires
 ------------- | -------------
 StoreMnemonicCommand  | mnemonic : String
 CreateAccountCommand | username : String
-VerifyMnemonic | mnemonic : String
+VerifyMnemonicCommand | mnemonic : String
 
 
 ### Queries
 
 Queries | Requires
 --------- | -----------
-GetAccounts | -
+GetAccountsQuery | -
 GetAccountQuery | username/index : String
 GetAccountQuery | -
