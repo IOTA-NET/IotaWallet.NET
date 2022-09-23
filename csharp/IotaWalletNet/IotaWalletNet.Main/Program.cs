@@ -75,8 +75,7 @@ namespace IotaWalletNet.Main
         private static IServiceCollection GetServices()
         {
             return new ServiceCollection()
-                                        .AddDomainServices()
-                                        .AddApplicationServices()
+                                        .AddIotaWalletServices()
                                         .AddMainServices();
         }
 

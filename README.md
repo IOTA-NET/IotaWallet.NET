@@ -10,9 +10,8 @@ static async Task Main(string[] args)
     //Collate all dependencies of the project.
     //This will help you in dependency injection
     IServiceCollection services = new ServiceCollection()
-                                        .AddDomainServices()
-                                        .AddApplicationServices()
-                                        .AddConsoleServices();
+                                        .AddIotaWalletServices()
+                                        .AddMainServices();
 
     //Create your dependency injection provider
     IServiceProvider serviceProvider = services.BuildServiceProvider();
