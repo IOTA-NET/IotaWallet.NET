@@ -2,7 +2,7 @@
 using MediatR;
 using Newtonsoft.Json;
 
-namespace IotaWalletNet.Testbed.Common.Notifications
+namespace IotaWalletNet.Main.Common.Notifications
 {
     public class MessageReceivedNotificationHandler : INotificationHandler<MessageReceivedNotification>
     {

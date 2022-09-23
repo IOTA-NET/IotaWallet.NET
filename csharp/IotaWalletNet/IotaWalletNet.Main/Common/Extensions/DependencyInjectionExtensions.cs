@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace IotaWalletNet.Testbed.Common.Extensions
+namespace IotaWalletNet.Main.Common.Extensions
 {
     public static class DependencyInjectionExtensions
     {

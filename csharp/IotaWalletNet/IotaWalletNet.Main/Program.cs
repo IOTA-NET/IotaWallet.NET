@@ -1,15 +1,13 @@
-﻿
-using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+﻿using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
-using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
 using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Options;
-using IotaWalletNet.Testbed.Common.Extensions;
+using IotaWalletNet.Main.Common.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IotaWalletNet.Testbed
+namespace IotaWalletNet.Main
 {
     internal class Program
     {
@@ -69,7 +67,7 @@ namespace IotaWalletNet.Testbed
 
                 Console.Read();
 
-                
+
             }
 
         }

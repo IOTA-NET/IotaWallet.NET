@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
-using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Domain.Common.Interfaces;
 using MediatR;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.CreateAccount

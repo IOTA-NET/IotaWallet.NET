@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Domain", "IotaWalletNet\IotaWalletNet.Domain.csproj", "{D9E0FB0A-9B39-40FF-AAF1-443159440885}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Domain", "IotaWalletNet.Domain\IotaWalletNet.Domain.csproj", "{D9E0FB0A-9B39-40FF-AAF1-443159440885}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotaWalletNet.Main", "IotaWalletNet.Main\IotaWalletNet.Main.csproj", "{67BE8657-E6A4-4696-B30F-C3E781446133}"
 EndProject
