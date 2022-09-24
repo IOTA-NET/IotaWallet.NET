@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IotaWalletNet.Domain
 {
-    public class Wallet : IWallet
+    public class Wallet : IWallet, IDisposable
     {
 
         #region Variables
@@ -80,5 +80,10 @@ namespace IotaWalletNet.Domain
         public WalletOptionsBuilder ConfigureWalletOptions()
             => new WalletOptionsBuilder(this);
 
+        public void Dispose()
+        {
+            CloseIotaWallet(_walletHandle);
+            _walletHandle = IntPtr.Zero;
+        }
     }
 }
