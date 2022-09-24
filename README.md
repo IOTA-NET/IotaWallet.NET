@@ -115,10 +115,7 @@ GetAccountQuery | username : String
 GetAccountsQuery | -
 GetNewMnemonicQuery | -
 
-
 ### Account
-
-
 
 #### Commands
 
