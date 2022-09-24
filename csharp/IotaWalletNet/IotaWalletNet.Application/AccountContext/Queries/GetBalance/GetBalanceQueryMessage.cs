@@ -6,11 +6,9 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
     {
         private const string METHOD_NAME = "GetBalance";
         public GetBalanceQueryMessage(string username)
+            : base(username, METHOD_NAME)
         {
-            PayloadMethod payloadMethod = new PayloadMethod(METHOD_NAME);
-            AccountPayload accountPayload = new AccountPayload(username, payloadMethod);
             
-            Payload = accountPayload;
         }
     }
 }

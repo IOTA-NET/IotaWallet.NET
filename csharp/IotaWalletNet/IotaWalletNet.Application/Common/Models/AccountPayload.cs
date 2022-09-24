@@ -2,10 +2,10 @@
 {
     public class AccountPayload
     {
-        public AccountPayload(string username, PayloadMethod method)
+        public AccountPayload(string username, string payloadMethodName)
         {
             AccountId = username;
-            Method = method;
+            Method = new PayloadMethod(payloadMethodName);
         }
         public string AccountId { get; }
         public PayloadMethod Method { get; }
@@ -13,10 +13,10 @@
 
     public class AccountPayload<TPayloadMethodData>
     {
-        public AccountPayload(string username, PayloadMethod<TPayloadMethodData> method)
+        public AccountPayload(string username, string payloadMethodName, TPayloadMethodData methodData)
         {
-            Method = method;
             AccountId = username;
+            Method = new PayloadMethod<TPayloadMethodData>(payloadMethodName, methodData);
         }
         public string AccountId { get; }
         public PayloadMethod<TPayloadMethodData> Method { get; }

@@ -4,7 +4,7 @@
     {
         public List<string> Nodes { get; set; } = new List<string>();
 
-        public bool LocalPow { get; set; } = false;
+        public bool LocalPow { get; set; } = true;
 
         public bool FallbackToLocalPow { get; set; } = true;
 

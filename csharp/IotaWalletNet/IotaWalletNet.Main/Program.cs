@@ -1,5 +1,7 @@
-﻿using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+﻿using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
+using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
+using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
 using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Options;
@@ -50,12 +52,15 @@ namespace IotaWalletNet.Main
                 //await mediator.Send(new GetAccountsQuery(wallet));
 
                 /* GetAccountQuery */
-                //await mediator.Send(new GetAccountQuery(wallet, "zana"));
+                await mediator.Send(new GetAccountQuery(wallet, "zana"));
                 //await mediator.Send(new GetAccountQuery(wallet, "monster"));
                 //await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
 
+                /* SyncAccountCommand */
+                await mediator.Send(new SyncAccountCommand(wallet, "zana"));
+
                 /* GetBalanceQuery */
-                await mediator.Send(new GetBalanceQuery(wallet, "zana"));
+                //await mediator.Send(new GetBalanceQuery(wallet, "zana"));
 
                 //Alternatively send a raw message
                 //wallet.SendMessage(@"
@@ -90,7 +95,7 @@ namespace IotaWalletNet.Main
                         .AddNodeUrl("https://api.testnet.shimmer.network")
                         .IsOffline(false)
                         .IsFallbackToLocalPow()
-                        .IsLocalPow(false)
+                        .IsLocalPow()
                         .ThenBuild()
                     .ConfigureSecretManagerOptions()
                         .SetPassword("password")

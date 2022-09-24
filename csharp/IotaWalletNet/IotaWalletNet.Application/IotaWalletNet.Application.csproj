@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AccountContext\Commands\" />
     <Folder Include="NetworkContext\Commands\" />
     <Folder Include="NetworkContext\Queries\" />
   </ItemGroup>

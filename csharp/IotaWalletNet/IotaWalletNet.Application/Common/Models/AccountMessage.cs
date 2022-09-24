@@ -2,9 +2,10 @@
 {
     public class AccountMessage : Message<AccountPayload>
     {
-        public AccountMessage()
+        public AccountMessage(string username, string payloadMethodName)
         {
             Cmd = "CallAccountMethod";
+            Payload = new AccountPayload(username, payloadMethodName);
         }
     }
 
@@ -14,9 +15,10 @@
     /// <typeparam name="T">The type of payload method data</typeparam>
     public class AccountMessage<T> : Message<AccountPayload<T>>
     {
-        public AccountMessage()
+        public AccountMessage(string username, string payloadMethodName, T methodData)
         {
             Cmd = "CallAccountMethod";
+            Payload= new AccountPayload<T>(username, payloadMethodName, methodData);
         }
     }
 
