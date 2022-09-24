@@ -124,7 +124,7 @@ GetNewMnemonicQuery | -
 
 Commands  | Requires
 ------------- | -------------
-TBD | TBD
+SyncAccountCommand | -
 
 #### Queries
 
