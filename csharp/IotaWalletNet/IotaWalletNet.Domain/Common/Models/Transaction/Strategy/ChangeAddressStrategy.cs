@@ -1,4 +1,4 @@
-﻿namespace IotaWalletNet.Application.Common.Models.Transaction.Strategy
+﻿namespace IotaWalletNet.Domain.Common.Models.Transaction.Strategy
 {
     public class ChangeAddressStrategy : RemainderValueStrategy
     {

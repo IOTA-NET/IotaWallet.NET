@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
+﻿using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
+using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
@@ -7,6 +8,7 @@ using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Options;
 using IotaWalletNet.Main.Common.Extensions;
 using MediatR;
@@ -55,7 +57,7 @@ namespace IotaWalletNet.Main
                 //await mediator.Send(new GetAccountsQuery(wallet));
 
                 /* GetAccountQuery */
-                //await mediator.Send(new GetAccountQuery(wallet, "zana"));
+                await mediator.Send(new GetAccountQuery(wallet, "zana"));
                 //await mediator.Send(new GetAccountQuery(wallet, "monster"));
                 //await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
 
@@ -65,6 +67,15 @@ namespace IotaWalletNet.Main
                 /* GetBalanceQuery */
                 await mediator.Send(new GetBalanceQuery(wallet, "zana"));
 
+                /* SendAmountCommand */
+                string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
+
+                var addressesWithOptions = new AddressesWithAmountAndTransactionOptions(new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, "1000000") });
+                //Console.Read();
+                await mediator.Send(new SendAmountCommand(wallet, "zana", addressesWithOptions));
+
+                await mediator.Send(new SyncAccountCommand(wallet, "zana"));
+                Console.Read();
                 //Alternatively send a raw message
                 //wallet.SendMessage(@"
                 //{

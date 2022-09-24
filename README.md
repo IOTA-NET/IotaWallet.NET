@@ -122,7 +122,7 @@ GetNewMnemonicQuery | -
 Commands  | Requires
 ------------- | -------------
 SyncAccountCommand | -
-
+SendAmount | [{address:String, amount:String}]
 #### Queries
 
 

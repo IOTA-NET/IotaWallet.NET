@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Application.Common.Models;
+﻿using IotaWalletNet.Domain.Common.Models;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
 {

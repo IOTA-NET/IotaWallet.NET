@@ -1,4 +1,4 @@
-﻿namespace IotaWalletNet.Application.Common.Models
+﻿namespace IotaWalletNet.Domain.Common.Models
 {
     public class AccountPayload
     {

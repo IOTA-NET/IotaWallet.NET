@@ -1,6 +1,6 @@
-﻿using IotaWalletNet.Application.Common.Models.Transaction.Strategy;
+﻿using IotaWalletNet.Domain.Common.Models.Transaction.Strategy;
 
-namespace IotaWalletNet.Application.Common.Models.Transaction
+namespace IotaWalletNet.Domain.Common.Models.Transaction
 {
     public class TransactionOptions
     {

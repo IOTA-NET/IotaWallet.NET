@@ -1,4 +1,4 @@
-﻿namespace IotaWalletNet.Application.Common.Models
+﻿namespace IotaWalletNet.Domain.Common.Models
 {
     public class AccountMessage : Message<AccountPayload>
     {
@@ -18,7 +18,7 @@
         public AccountMessage(string username, string payloadMethodName, T methodData)
         {
             Cmd = "CallAccountMethod";
-            Payload= new AccountPayload<T>(username, payloadMethodName, methodData);
+            Payload = new AccountPayload<T>(username, payloadMethodName, methodData);
         }
     }
 

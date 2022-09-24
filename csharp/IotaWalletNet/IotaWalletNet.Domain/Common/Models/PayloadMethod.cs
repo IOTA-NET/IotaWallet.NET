@@ -1,8 +1,8 @@
-﻿namespace IotaWalletNet.Application.Common.Models
+﻿namespace IotaWalletNet.Domain.Common.Models
 {
     public class PayloadMethod<T> : PayloadMethod
     {
-        public PayloadMethod(string payloadMethodName, T data) 
+        public PayloadMethod(string payloadMethodName, T data)
             : base(payloadMethodName)
         {
             Data = data;
