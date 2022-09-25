@@ -46,53 +46,21 @@ static async Task Main(string[] args)
         string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
 
         //Let's send a StoreMnemonicCommand
-        await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
-
+        string response = await wallet.StoreMnemonic(mnemonic);
+        
         //Alternatively we can send a StoreMnemonicCommand with raw jsonified string
-        //wallet.SendMessage(@"
+        //await wallet.SendMessageAsync(@"
         //{
         //    ""cmd"": ""StoreMnemonic"",
         //    ""payload"": mnemonic
         //}
         //");
 
-        /*  NOTE:
-            That's about it!
-            When you send a command/query, you are most likely going to get a response back from the rust library.
-            Remember to subscribe to Response Notifications as seen in the next example to receive these responses.
-        */
-
         Console.Read();
 
         
     }
 }
-```
-
-### Subscribing to the responses
-
-We have to inherit from `INotificationHandler<MessageReceivedNotification>`.
-
-```cs
-    public class MessageReceivedNotificationHandler : INotificationHandler<MessageReceivedNotification>
-    {
-        public Task Handle(MessageReceivedNotification notification, CancellationToken cancellationToken)
-        {
-            if (!string.IsNullOrEmpty(notification.Message))
-                Console.WriteLine($"Message: {PrettyJson(notification.Message)}");
-
-            if (!string.IsNullOrEmpty(notification.Error))
-                Console.WriteLine($"Rust Bridge Errors: {PrettyJson(notification.Error)}");
-
-            return Task.CompletedTask;
-        }
-
-        private string PrettyJson(string json)
-        {
-            dynamic jsonObject = JsonConvert.DeserializeObject(json)!;
-            return JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
-        }
-    }
 ```
 
 ## Supported Commands/Queries
