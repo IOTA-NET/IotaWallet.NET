@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
 {
-    public class VerifyMnemonicCommand : IRequest
+    public class VerifyMnemonicCommand : IRequest<string>
     {
         public VerifyMnemonicCommand(IWallet wallet, string mnemonic)
         {

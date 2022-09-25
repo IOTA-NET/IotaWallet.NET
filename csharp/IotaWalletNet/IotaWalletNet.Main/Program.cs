@@ -20,7 +20,7 @@ namespace IotaWalletNet.Main
     {
         static async Task Main(string[] args)
         {
-            IServiceCollection services = GetServices();
+            IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
@@ -34,52 +34,42 @@ namespace IotaWalletNet.Main
 
                 IMediator mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
-                /* GetNewMnemonicQuery */
-                await mediator.Send(new GetNewMnemonicQuery(wallet));
+                string response = String.Empty;
+                
+                ///* GetNewMnemonicQuery */
+                //response = await wallet.GetNewMnemonicAsync();
 
-                return;
-                /* StoreMnemonicCommand */
+                ///* StoreMnemonicCommand */
                 //string mnemonic = "above couple immune stadium enjoy enough sense what december fetch maximum budget chicken memory giant about icon evidence wrestle flash pilot law key embody";
-                //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
+                //response = await wallet.StoreMnemonicAsync(mnemonic);
 
-                /* VerifyMnemonicCommand */
-                //string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+                ///* VerifyMnemonicCommand */
                 //string wrongMnemonic = "venture symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
-                //await mediator.Send(new VerifyMnemonicCommand(wallet, mnemonic));
-                //await mediator.Send(new VerifyMnemonicCommand(wallet, wrongMnemonic));
+                //response = await wallet.VerifyMnemonicAsync(wrongMnemonic);
+                //response = await wallet.VerifyMnemonicAsync(mnemonic);
 
 
+                /////* CreateAccountCommand */
+                //response = await wallet.CreateAccountAsync("zana");
+                //response = await wallet.CreateAccountAsync("monster");
 
-                ///* CreateAccountCommand */
-                //await mediator.Send(new CreateAccountCommand(wallet, "zana"));
-                //await mediator.Send(new CreateAccountCommand(wallet, "monster"));
+                
+                /////* SyncAccountCommand */
+                //await mediator.Send(new SyncAccountCommand(wallet, "zana"));
 
-                /* GetAccountsQuery */
-                //await mediator.Send(new GetAccountsQuery(wallet));
+                /////* GetAccountQuery */
+                response = await wallet.GetAccountAsync("zana");
+                //response = await wallet.GetAccountAsync("monster");
+                //response = await wallet.GetAccountAsync("unexisting_username");
 
-                ///* SyncAccountCommand */
-                await mediator.Send(new SyncAccountCommand(wallet, "zana"));
+                ///* GetBalanceQuery */
+                //response = await wallet.GetBalanceAsync("zana");
 
-                ///* GetAccountQuery */
-                //await mediator.Send(new GetAccountQuery(wallet, "zana"));
-                //await mediator.Send(new GetAccountQuery(wallet, "monster"));
-                //await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
-
-                /* GetBalanceQuery */
-                //await mediator.Send(new GetBalanceQuery(wallet, "zana"));
-
-                /* SendAmountCommand */
-                string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
-
-                var addressesWithOptions = new AddressesWithAmountAndTransactionOptions(new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, "1000000") });
-
-                await mediator.Send(new SendAmountCommand(wallet, "zana", addressesWithOptions));
-
-                //for(int i = 0; i < 10; i++)
-                //    Thread.Sleep(1000);
-                /* GetBalanceQuery */
-                await mediator.Send(new SyncAccountCommand(wallet, "zana"));
-                //await mediator.Send(new GetBalanceQuery(wallet, "zana"));
+                ///* SendAmountCommand */
+                //string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
+                //var addressesWithOptions = new AddressesWithAmountAndTransactionOptions(new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, "1000000") });
+                //response = await wallet.SendAmountAsync("zana", addressesWithOptions);
+               
 
                 //Alternatively send a raw message
                 //wallet.SendMessage(@"
@@ -96,12 +86,6 @@ namespace IotaWalletNet.Main
 
         }
 
-        private static IServiceCollection GetServices()
-        {
-            return new ServiceCollection()
-                                        .AddIotaWalletServices()
-                                        .AddMainServices();
-        }
 
         private static IWallet ConfigureWallet(IWallet wallet)
         {

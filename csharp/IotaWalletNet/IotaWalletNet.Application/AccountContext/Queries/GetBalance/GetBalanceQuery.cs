@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
 {
-    public class GetBalanceQuery : IRequest
+    public class GetBalanceQuery : IRequest<string>
     {
         public GetBalanceQuery(IWallet wallet, string username)
         {

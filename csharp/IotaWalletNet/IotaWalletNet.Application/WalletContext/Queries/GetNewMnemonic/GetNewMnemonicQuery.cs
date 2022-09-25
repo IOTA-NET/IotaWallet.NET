@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
 {
-    public class GetNewMnemonicQuery : IRequest
+    public class GetNewMnemonicQuery : IRequest<string>
     {
         public GetNewMnemonicQuery(IWallet wallet)
         {

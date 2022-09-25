@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.CreateAccount
 {
-    public class CreateAccountCommand : IRequest
+    public class CreateAccountCommand : IRequest<string>
     {
         public CreateAccountCommand(IWallet wallet, string username)
         {

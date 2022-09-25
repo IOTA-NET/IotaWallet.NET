@@ -3,15 +3,15 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic
 {
-    public class StoreMnemonicCommandHandler : IRequestHandler<StoreMnemonicCommand>
+    public class StoreMnemonicCommandHandler : IRequestHandler<StoreMnemonicCommand, string>
     {
-        public Task<Unit> Handle(StoreMnemonicCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(StoreMnemonicCommand request, CancellationToken cancellationToken)
         {
             StoreMnemonicCommandMessage message = new StoreMnemonicCommandMessage(request.Mnemonic);
             string messageJson = JsonConvert.SerializeObject(message);
-            request.Wallet.SendMessage(messageJson);
+            string response = await request.Wallet.SendMessageAsync(messageJson);
 
-            return Unit.Task;
+            return response;
         }
     }
 }

@@ -3,16 +3,16 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.CreateAccount
 {
-    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand>
+    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, string>
     {
-        public Task<Unit> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
             CreateAccountCommandMessage message = new CreateAccountCommandMessage(request.Username);
-            string messageJson = JsonConvert.SerializeObject(message);
+            string json = JsonConvert.SerializeObject(message);
 
-            request.Wallet.SendMessage(messageJson);
+            string response = await request.Wallet.SendMessageAsync(json);
 
-            return Unit.Task;
+            return response;
         }
     }
 }

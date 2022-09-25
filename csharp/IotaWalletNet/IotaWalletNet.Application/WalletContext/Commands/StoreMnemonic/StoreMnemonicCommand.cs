@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic
 {
-    public class StoreMnemonicCommand : IRequest
+    public class StoreMnemonicCommand : IRequest<string>
     {
         public StoreMnemonicCommand(IWallet wallet, string mnemonic)
         {
