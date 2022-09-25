@@ -40,9 +40,6 @@ static async Task Main(string[] args)
         //Connect your wallet
         wallet.Connect();
 
-        //We will be using mediator to send our commands to the rust interface
-        IMediator mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-
         string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
 
         //Let's send a StoreMnemonicCommand
