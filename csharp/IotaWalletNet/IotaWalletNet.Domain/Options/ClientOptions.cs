@@ -1,4 +1,6 @@
-﻿namespace IotaWalletNet.Domain.Options
+﻿using IotaWalletNet.Domain.Common.Interfaces;
+
+namespace IotaWalletNet.Domain.Options
 {
     public class ClientOptions
     {
@@ -14,10 +16,10 @@
 
     public class ClientOptionsBuilder
     {
-        private Wallet _wallet;
+        private IWallet _wallet;
         private ClientOptions _clientOptions;
 
-        public ClientOptionsBuilder(Wallet wallet)
+        public ClientOptionsBuilder(IWallet wallet)
         {
             _wallet = wallet;
             _clientOptions = _wallet.GetWalletOptions().ClientConfigOptions;
@@ -47,7 +49,7 @@
             return this;
         }
 
-        public Wallet ThenBuild()
+        public IWallet ThenBuild()
         {
             //To trigger json re-construction
             _wallet.GetWalletOptions().ClientConfigOptions = _clientOptions;

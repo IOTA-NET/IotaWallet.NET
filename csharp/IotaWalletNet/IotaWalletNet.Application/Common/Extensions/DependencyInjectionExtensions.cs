@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Domain.Common.Extensions;
+using IotaWalletNet.Domain.Common.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -9,8 +10,10 @@ namespace IotaWalletNet.Application.Common.Extensions
     {
         private static IServiceCollection AddApplicationServices(this IServiceCollection serviceDescriptors)
         {
-            serviceDescriptors.AddMediatR(Assembly.GetExecutingAssembly());
-
+            serviceDescriptors
+                .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddTransient<IWallet, Wallet>();
+            
             return serviceDescriptors;
         }
 

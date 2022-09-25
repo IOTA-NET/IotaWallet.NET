@@ -1,14 +1,13 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Notifications;
+using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Options;
 using MediatR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Text;
 using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
-using IotaWalletNet.Domain.Common.Notifications;
-using System.Threading.Tasks;
 
-namespace IotaWalletNet.Domain
+namespace IotaWalletNet.Application
 {
     public class Wallet : IWallet, IDisposable
     {

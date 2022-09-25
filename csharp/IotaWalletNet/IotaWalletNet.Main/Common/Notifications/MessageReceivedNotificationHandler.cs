@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Notifications;
+﻿using IotaWalletNet.Application.Common.Notifications;
 using MediatR;
 using Newtonsoft.Json;
 

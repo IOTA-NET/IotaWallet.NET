@@ -7,8 +7,7 @@ namespace IotaWalletNet.Domain.Common.Extensions
     {
         public static IServiceCollection AddDomainServices(this IServiceCollection serviceDescriptors)
         {
-            serviceDescriptors
-                .AddTransient<IWallet, Wallet>();
+            
 
             return serviceDescriptors;
         }

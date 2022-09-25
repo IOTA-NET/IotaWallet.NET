@@ -38,7 +38,7 @@ namespace IotaWalletNet.Main
                 //await mediator.Send(new GetNewMnemonicQuery(wallet));
 
                 /* StoreMnemonicCommand */
-                //string mnemonic = "wide believe journey slow share surround depth tube black behave again pigeon pencil arch deliver napkin exhibit sphere artwork pumpkin second vague round robust";
+                //string mnemonic = "above couple immune stadium enjoy enough sense what december fetch maximum budget chicken memory giant about icon evidence wrestle flash pilot law key embody";
                 //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
 
                 /* VerifyMnemonicCommand */
@@ -49,33 +49,37 @@ namespace IotaWalletNet.Main
 
 
 
-                /* CreateAccountCommand */
+                ///* CreateAccountCommand */
                 //await mediator.Send(new CreateAccountCommand(wallet, "zana"));
                 //await mediator.Send(new CreateAccountCommand(wallet, "monster"));
 
                 /* GetAccountsQuery */
                 //await mediator.Send(new GetAccountsQuery(wallet));
 
-                /* GetAccountQuery */
-                await mediator.Send(new GetAccountQuery(wallet, "zana"));
+                ///* SyncAccountCommand */
+                await mediator.Send(new SyncAccountCommand(wallet, "zana"));
+
+                ///* GetAccountQuery */
+                //await mediator.Send(new GetAccountQuery(wallet, "zana"));
                 //await mediator.Send(new GetAccountQuery(wallet, "monster"));
                 //await mediator.Send(new GetAccountQuery(wallet, "unexisting_username"));
 
-                /* SyncAccountCommand */
-                await mediator.Send(new SyncAccountCommand(wallet, "zana"));
-
                 /* GetBalanceQuery */
-                await mediator.Send(new GetBalanceQuery(wallet, "zana"));
+                //await mediator.Send(new GetBalanceQuery(wallet, "zana"));
 
                 /* SendAmountCommand */
                 string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
 
                 var addressesWithOptions = new AddressesWithAmountAndTransactionOptions(new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, "1000000") });
-                //Console.Read();
+
                 await mediator.Send(new SendAmountCommand(wallet, "zana", addressesWithOptions));
 
+                for(int i = 0; i < 10; i++)
+                    Thread.Sleep(1000);
+                /* GetBalanceQuery */
                 await mediator.Send(new SyncAccountCommand(wallet, "zana"));
-                Console.Read();
+                //await mediator.Send(new GetBalanceQuery(wallet, "zana"));
+
                 //Alternatively send a raw message
                 //wallet.SendMessage(@"
                 //{

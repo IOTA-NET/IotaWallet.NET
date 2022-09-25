@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using IotaWalletNet.Domain.Common.Interfaces;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using static IotaWalletNet.Domain.Options.WalletOptions;
 using JsonIgnoreAttribute = Newtonsoft.Json.JsonIgnoreAttribute;
@@ -7,9 +8,9 @@ namespace IotaWalletNet.Domain.Options
 {
     public class WalletOptionsBuilder
     {
-        private readonly Wallet _wallet;
+        private readonly IWallet _wallet;
         private WalletOptions _walletOptions;
-        public WalletOptionsBuilder(Wallet wallet)
+        public WalletOptionsBuilder(IWallet wallet)
         {
             _wallet = wallet;
             _walletOptions = _wallet.GetWalletOptions();
@@ -27,7 +28,7 @@ namespace IotaWalletNet.Domain.Options
             return this;
         }
 
-        public Wallet ThenBuild() => _wallet;
+        public IWallet ThenBuild() => _wallet;
     }
 
     public class WalletOptions

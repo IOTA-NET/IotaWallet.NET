@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace IotaWalletNet.Domain.Common.Notifications
+namespace IotaWalletNet.Application.Common.Notifications
 {
     /// <summary>
     ///In order to subscribe for this notification, inherit from INotificationHandler<CallbackNotificaton> 
