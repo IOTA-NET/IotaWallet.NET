@@ -1,13 +1,15 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
+using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
-using IotaWalletNet.Application.Common.Notifications;
 using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
+using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Options;
+using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -16,22 +18,16 @@ using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
 
 namespace IotaWalletNet.Application
 {
-    public class Wallet : IWallet, IDisposable
+    public class Wallet : RustBridgeCommunicator, IWallet, IDisposable
     {
 
         #region Variables
-
-        private IntPtr _walletHandle;
 
         private StringBuilder _errorBuffer;
 
         private WalletOptions _walletOptions;
 
         private readonly IMediator _mediator;
-
-        private MessageReceivedCallback _messageReceivedCallback;
-
-        private Action<string>? _endOfCallbackSignaller;
 
         #endregion
 
@@ -48,10 +44,18 @@ namespace IotaWalletNet.Application
 
             _errorBuffer = new StringBuilder();
             _mediator = mediator;
+        }
 
-            _messageReceivedCallback = WalletMessageReceivedCallback;
+        
 
-            _endOfCallbackSignaller = null;
+        public async Task<string> GetAccountsAsync()
+        {
+            return await _mediator.Send(new GetAccountsQuery(this));
+        }
+
+        public async Task<string> SyncAccountAsync(string username)
+        {
+            return await _mediator.Send(new SyncAccountCommand(this, username));
         }
 
         public async Task<string> SendAmountAsync(string username, AddressesWithAmountAndTransactionOptions addressesWithAmount)
@@ -88,15 +92,6 @@ namespace IotaWalletNet.Application
         {
             return await _mediator.Send(new CreateAccountCommand(this, username));
         }
-
-        public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
-        {
-            string messageToSignal = String.IsNullOrEmpty(message) ? error : message;
-
-            if (_endOfCallbackSignaller != null)
-                _endOfCallbackSignaller(messageToSignal);
-        }
-
         public void Connect()
         {
             string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
@@ -111,26 +106,7 @@ namespace IotaWalletNet.Application
                 throw new Exception(_errorBuffer.ToString());
 
         }
-        public void SendMessage(string message)
-        {
-            SendMessageToRust(_walletHandle, message, _messageReceivedCallback, IntPtr.Zero);
-        }
-        public async Task<string> SendMessageAsync(string message)
-        {
-            
-            var taskCompletionSource = new TaskCompletionSource<string>();
-            var task = taskCompletionSource.Task;
-            _endOfCallbackSignaller = taskCompletionSource.SetResult;
-
-            await Task.Factory.StartNew(() =>
-            {
-                SendMessage(message);
-            }, TaskCreationOptions.AttachedToParent);
-
-
-            return await task;
-        }
-
+       
         public WalletOptions GetWalletOptions() => _walletOptions;
 
 

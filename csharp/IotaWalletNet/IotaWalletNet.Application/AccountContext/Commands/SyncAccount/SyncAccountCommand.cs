@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {
-    public class SyncAccountCommand : IRequest
+    public class SyncAccountCommand : IRequest<string>
     {
         public SyncAccountCommand(IWallet wallet, string username)
         {

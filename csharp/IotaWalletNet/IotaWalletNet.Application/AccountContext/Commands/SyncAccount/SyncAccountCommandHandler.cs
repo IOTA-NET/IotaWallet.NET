@@ -3,15 +3,15 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {
-    public class SyncAccountCommandHandler : IRequestHandler<SyncAccountCommand>
+    public class SyncAccountCommandHandler : IRequestHandler<SyncAccountCommand, string>
     {
-        public Task<Unit> Handle(SyncAccountCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(SyncAccountCommand request, CancellationToken cancellationToken)
         {
             SyncAccountCommandMessage message = new SyncAccountCommandMessage(request.Username, new AccountSyncOptions());
             string json = JsonConvert.SerializeObject(message);
-            request.Wallet.SendMessage(json);
+            string response = await request.Wallet.SendMessageAsync(json);
 
-            return Unit.Task;
+            return response;
         }
     }
 }

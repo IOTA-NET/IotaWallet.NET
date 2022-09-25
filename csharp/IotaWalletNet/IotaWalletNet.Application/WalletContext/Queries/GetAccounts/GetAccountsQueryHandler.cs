@@ -3,14 +3,14 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetAccounts
 {
-    public class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery>
+    public class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, string>
     {
-        public Task<Unit> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+        public async Task<string> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
         {
             GetAccountsQueryMessage message = new GetAccountsQueryMessage();
-            string messageJson = JsonConvert.SerializeObject(message);
-            request.Wallet.SendMessage(messageJson);
-            return Unit.Task;
+            string json = JsonConvert.SerializeObject(message);
+            string response = await request.Wallet.SendMessageAsync(json);
+            return response;
         }
     }
 }
