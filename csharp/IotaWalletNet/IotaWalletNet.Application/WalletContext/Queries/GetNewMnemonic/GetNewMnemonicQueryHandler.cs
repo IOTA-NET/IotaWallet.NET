@@ -5,13 +5,14 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
 {
     public class GetNewMnemonicQueryHandler : IRequestHandler<GetNewMnemonicQuery>
     {
-        public Task<Unit> Handle(GetNewMnemonicQuery request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(GetNewMnemonicQuery request, CancellationToken cancellationToken)
         {
             GetNewMnemonicQueryMessage message = new GetNewMnemonicQueryMessage();
             string json = JsonConvert.SerializeObject(message);
-            request.Wallet.SendMessage(json);
+            string? s = await request.Wallet.SendMessageAsync(json);
 
-            return Unit.Task;
+            return Unit.Value;
+            //return Unit.Task;
         }
     }
 }

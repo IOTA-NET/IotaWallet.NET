@@ -10,5 +10,7 @@ namespace IotaWalletNet.Domain.Common.Interfaces
         void Connect();
         WalletOptions GetWalletOptions();
         void SendMessage(string message);
+
+        Task<string?> SendMessageAsync(string message);
     }
 }

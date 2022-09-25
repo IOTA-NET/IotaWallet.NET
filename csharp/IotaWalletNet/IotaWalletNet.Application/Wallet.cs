@@ -42,9 +42,11 @@ namespace IotaWalletNet.Application
             _messageReceivedCallback = WalletMessageReceivedCallback;
         }
 
+        
         public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
         {
-            _mediator.Publish(new MessageReceivedNotification(message, error)).Wait();
+            //_mediator.Publish(new MessageReceivedNotification(message, error)).Wait();
+            _endtaskcallback(message);
         }
 
         public void Connect()
@@ -64,6 +66,22 @@ namespace IotaWalletNet.Application
         public void SendMessage(string message)
         {
             SendMessageToRust(_walletHandle, message, _messageReceivedCallback, IntPtr.Zero);
+        }
+        private Action<string> _endtaskcallback;
+        public async Task<string?> SendMessageAsync(string message)
+        {
+            
+            var taskCompletionSource = new TaskCompletionSource<string>();
+            var task = taskCompletionSource.Task;
+            _endtaskcallback = taskCompletionSource.SetResult;
+
+            await Task.Factory.StartNew(() =>
+            {
+                SendMessage(message);
+            }, TaskCreationOptions.AttachedToParent);
+
+
+            return await task;
         }
 
         public WalletOptions GetWalletOptions() => _walletOptions;

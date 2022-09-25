@@ -35,8 +35,9 @@ namespace IotaWalletNet.Main
                 IMediator mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
                 /* GetNewMnemonicQuery */
-                //await mediator.Send(new GetNewMnemonicQuery(wallet));
+                await mediator.Send(new GetNewMnemonicQuery(wallet));
 
+                return;
                 /* StoreMnemonicCommand */
                 //string mnemonic = "above couple immune stadium enjoy enough sense what december fetch maximum budget chicken memory giant about icon evidence wrestle flash pilot law key embody";
                 //await mediator.Send(new StoreMnemonicCommand(wallet, mnemonic));
