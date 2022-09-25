@@ -74,8 +74,8 @@ namespace IotaWalletNet.Main
 
                 await mediator.Send(new SendAmountCommand(wallet, "zana", addressesWithOptions));
 
-                for(int i = 0; i < 10; i++)
-                    Thread.Sleep(1000);
+                //for(int i = 0; i < 10; i++)
+                //    Thread.Sleep(1000);
                 /* GetBalanceQuery */
                 await mediator.Send(new SyncAccountCommand(wallet, "zana"));
                 //await mediator.Send(new GetBalanceQuery(wallet, "zana"));

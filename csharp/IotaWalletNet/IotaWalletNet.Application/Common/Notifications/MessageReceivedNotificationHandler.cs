@@ -1,8 +1,7 @@
-﻿using IotaWalletNet.Application.Common.Notifications;
-using MediatR;
+﻿using MediatR;
 using Newtonsoft.Json;
 
-namespace IotaWalletNet.Main.Common.Notifications
+namespace IotaWalletNet.Application.Common.Notifications
 {
     public class MessageReceivedNotificationHandler : INotificationHandler<MessageReceivedNotification>
     {
