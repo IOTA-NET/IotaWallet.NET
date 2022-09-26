@@ -1,14 +1,11 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
-using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
-using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+﻿using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccount;
 using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
-using IotaWalletNet.Domain.Common.Interfaces;
-using IotaWalletNet.Domain.Options;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
@@ -53,27 +50,26 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new GetAccountsQuery(this));
         }
 
-        public async Task<string> SyncAccountAsync(string username)
+
+        public async Task<(string response, IAccount? account)> GetAccountAsync(string username)
         {
-            return await _mediator.Send(new SyncAccountCommand(this, username));
+            string response =  await _mediator.Send(new GetAccountQuery(this, username));
+            dynamic jsonResponse = JsonConvert.DeserializeObject(response);
+            string retrievedUsername = jsonResponse.alias;
+
+            if(int.TryParse(retrievedUsername, out _)) //not a usernamed alias but an index instead
+            {
+                return (response, null);
+            }
+            else
+            {
+                IAccount account = new Account(_mediator, username, this);
+
+                return (response, account);
+            }
         }
 
-        public async Task<string> SendAmountAsync(string username, AddressesWithAmountAndTransactionOptions addressesWithAmount)
-        {
-            return await _mediator.Send(new SendAmountCommand(this, username, addressesWithAmount));
-        }
-
-        public async Task<string> GetBalanceAsync(string username)
-        {
-            return await _mediator.Send(new GetBalanceQuery(this, username));
-        }
-
-        public async Task<string> GetAccountAsync(string username)
-        {
-            return await _mediator.Send(new GetAccountQuery(this, username));
-        }
-
-        public async Task<string> GetNewMnemonicAsync()
+        public async Task<GetNewMnemonicQueryResponse> GetNewMnemonicAsync()
         {
             return await _mediator.Send(new GetNewMnemonicQuery(this));
         }
@@ -88,11 +84,29 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new VerifyMnemonicCommand(this, mnemonic));
         }
 
-        public async Task<string> CreateAccountAsync(string username)
+
+        public async Task<(string response, IAccount? account)> CreateAccountAsync(string username)
         {
-            return await _mediator.Send(new CreateAccountCommand(this, username));
+
+            string response = await _mediator.Send(new CreateAccountCommand(this, username));
+
+            if (response.Contains("\"alias\":"))
+            {
+
+                IAccount account = new Account(_mediator, username, this);
+
+                return (response, account);
+            }
+            else
+            {
+                return (response, null);
+
+            }
+
+
         }
-        public void Connect()
+
+        public IWallet ThenInitialize()
         {
             string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
 
@@ -105,6 +119,7 @@ namespace IotaWalletNet.Application
             if (!string.IsNullOrEmpty(_errorBuffer.ToString()))
                 throw new Exception(_errorBuffer.ToString());
 
+            return this;
         }
        
         public WalletOptions GetWalletOptions() => _walletOptions;
@@ -125,5 +140,6 @@ namespace IotaWalletNet.Application
             CloseIotaWallet(_walletHandle);
             _walletHandle = IntPtr.Zero;
         }
+
     }
 }

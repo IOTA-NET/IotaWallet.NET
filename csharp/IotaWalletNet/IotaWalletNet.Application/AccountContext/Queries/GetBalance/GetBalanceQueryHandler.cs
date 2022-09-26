@@ -9,7 +9,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
         {
             GetBalanceQueryMessage message = new GetBalanceQueryMessage(request.Username);
             string json = JsonConvert.SerializeObject(message);
-            string response = await request.Wallet.SendMessageAsync(json);
+            string response = await request.Account.SendMessageAsync(json);
 
             return response;
         }

@@ -1,7 +1,6 @@
-﻿using IotaWalletNet.Domain.Common.Models.Address;
-using IotaWalletNet.Domain.Common.Models.Transaction;
+﻿using IotaWalletNet.Domain.Common.Models.Transaction;
 
-namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
+namespace IotaWalletNet.Domain.Common.Models.Address
 {
     public class AddressesWithAmountAndTransactionOptions
     {

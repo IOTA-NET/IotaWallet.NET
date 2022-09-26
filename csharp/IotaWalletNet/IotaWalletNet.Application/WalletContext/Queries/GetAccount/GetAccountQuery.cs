@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Interfaces;
 using MediatR;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetAccount

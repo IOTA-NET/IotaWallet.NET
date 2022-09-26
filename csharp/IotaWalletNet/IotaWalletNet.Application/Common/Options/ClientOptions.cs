@@ -1,6 +1,7 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Interfaces;
 
-namespace IotaWalletNet.Domain.Options
+namespace IotaWalletNet.Application.Common.Options
 {
     public class ClientOptions
     {

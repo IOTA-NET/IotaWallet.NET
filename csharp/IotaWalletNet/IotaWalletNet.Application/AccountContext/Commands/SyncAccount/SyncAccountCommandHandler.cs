@@ -9,7 +9,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
         {
             SyncAccountCommandMessage message = new SyncAccountCommandMessage(request.Username, new AccountSyncOptions());
             string json = JsonConvert.SerializeObject(message);
-            string response = await request.Wallet.SendMessageAsync(json);
+            string response = await request.Account.SendMessageAsync(json);
 
             return response;
         }

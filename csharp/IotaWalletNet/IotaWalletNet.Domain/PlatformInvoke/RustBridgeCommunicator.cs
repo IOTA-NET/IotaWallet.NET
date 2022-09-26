@@ -1,8 +1,9 @@
-﻿using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
+﻿using IotaWalletNet.Domain.Common.Interfaces;
+using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
 
 namespace IotaWalletNet.Domain.PlatformInvoke
 {
-    public abstract class RustBridgeCommunicator
+    public abstract class RustBridgeCommunicator : IRustBridgeCommunicator
     {
         protected MessageReceivedCallback _messageReceivedCallback;
         protected Action<string>? _endOfCallbackSignaller;

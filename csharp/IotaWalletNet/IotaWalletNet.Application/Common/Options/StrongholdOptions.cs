@@ -1,4 +1,4 @@
-﻿namespace IotaWalletNet.Domain.Options
+﻿namespace IotaWalletNet.Application.Common.Options
 {
     public class StrongholdOptions
     {

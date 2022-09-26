@@ -1,5 +1,5 @@
-﻿using IotaWalletNet.Domain.Common.Extensions;
-using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;

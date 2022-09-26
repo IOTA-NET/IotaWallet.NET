@@ -1,17 +1,17 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Interfaces;
 using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {
     public class SyncAccountCommand : IRequest<string>
     {
-        public SyncAccountCommand(IWallet wallet, string username)
+        public SyncAccountCommand(IAccount account, string username)
         {
-            Wallet = wallet;
+            Account = account;
             Username = username;
         }
 
-        public IWallet Wallet { get; }
+        public IAccount Account { get; }
         public string Username { get; }
     }
 }

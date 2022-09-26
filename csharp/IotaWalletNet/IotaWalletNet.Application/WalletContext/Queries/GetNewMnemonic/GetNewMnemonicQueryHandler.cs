@@ -3,13 +3,14 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
 {
-    public class GetNewMnemonicQueryHandler : IRequestHandler<GetNewMnemonicQuery, string>
+    public class GetNewMnemonicQueryHandler : IRequestHandler<GetNewMnemonicQuery, GetNewMnemonicQueryResponse>
     {
-        public async Task<string> Handle(GetNewMnemonicQuery request, CancellationToken cancellationToken)
+        public async Task<GetNewMnemonicQueryResponse> Handle(GetNewMnemonicQuery request, CancellationToken cancellationToken)
         {
             GetNewMnemonicQueryMessage message = new GetNewMnemonicQueryMessage();
             string json = JsonConvert.SerializeObject(message);
-            string response = await request.Wallet.SendMessageAsync(json);
+            string jsonResponse = await request.Wallet.SendMessageAsync(json);
+            GetNewMnemonicQueryResponse response = JsonConvert.DeserializeObject<GetNewMnemonicQueryResponse>(jsonResponse);
 
             return response;
         }

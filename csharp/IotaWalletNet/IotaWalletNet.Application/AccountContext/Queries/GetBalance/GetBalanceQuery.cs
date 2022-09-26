@@ -1,17 +1,17 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Interfaces;
 using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
 {
     public class GetBalanceQuery : IRequest<string>
     {
-        public GetBalanceQuery(IWallet wallet, string username)
+        public GetBalanceQuery(IAccount account, string username)
         {
-            Wallet = wallet;
+            Account = account;
             Username = username;
         }
 
-        public IWallet Wallet { get; }
+        public IAccount Account { get; }
         public string Username { get; }
     }
 }
