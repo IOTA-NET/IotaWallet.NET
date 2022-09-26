@@ -2,11 +2,12 @@
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
+using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 {
-        public static class CreateAWalletAndAccountExample
+    public static class CreateAWalletAndAccountExample
         {
         
             public async static Task Run()
@@ -49,14 +50,14 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 
                     //Store into stronghold
                     string response = await wallet.StoreMnemonicAsync(newMnemonic);
-                    Console.WriteLine($"StoreMnemonicAsync: {JsonHelper.PrettyJson(response)}");
+                    Console.WriteLine($"StoreMnemonicAsync: {response.PrettyJson()}");
 
                     //Let's create 2 accounts, with usernames cookiemonster and elmo
                     (response, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
-                    Console.WriteLine($"CreateAccountAsync: {JsonHelper.PrettyJson(response)}");
+                    Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");
 
                     (response, IAccount? elmoAccount) = await wallet.CreateAccountAsync("elmo");
-                    Console.WriteLine($"CreateAccountAsync: {JsonHelper.PrettyJson(response)}");
+                    Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");
 
                 }
             }

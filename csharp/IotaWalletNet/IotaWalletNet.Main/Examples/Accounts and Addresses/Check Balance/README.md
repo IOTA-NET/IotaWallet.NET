@@ -1,19 +1,18 @@
-﻿# Create a Wallet and an Account
+﻿# Check Balance
 
 ## Code Example
 
 The following example will:
 
-1. Create an wallet
-2. Create a Stronghold mnemonic
-2. Use the wallet to store the Stronghold mnemonic into a stronghold file
-3. Create 2 accounts with usernames `cookiemonster` and `elmo`
+1. Initialize our wallet
+2. Get our `cookiemonster` account
+2. Sync the account
+3. Retrieve the balance
 
 ```cs
-    public static class CreateAWalletAndAccountExample
+    public static class CheckBalanceExample
     {
-        
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
@@ -45,25 +44,23 @@ The following example will:
                                 .ThenBuild()
                             .ThenInitialize();
 
+                //Let's retrieve our cookiemonster account
+                (string response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
 
-                //Let's generate a new Mnemonic
-                GetNewMnemonicQueryResponse getNewMnemonicQueryResponse = await wallet.GetNewMnemonicAsync();
-                string newMnemonic = getNewMnemonicQueryResponse.Payload;
-                Console.WriteLine($"GetNewMnemonicAsync: {newMnemonic}");
+                if(account == null)
+                {
+                    Console.WriteLine("There was a problem retreiving the account.");
+                    return;
+                }
 
-                //Store into stronghold
-                string response = await wallet.StoreMnemonicAsync(newMnemonic);
-                Console.WriteLine($"StoreMnemonicAsync: {JsonHelper.PrettyJson(response)}");
+                //Sync the account with the tangle
+                await account.SyncAccountAsync();
 
-                //Let's create 2 accounts, with usernames cookiemonster and elmo
-                (response, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
-                Console.WriteLine($"CreateAccountAsync: {JsonHelper.PrettyJson(response)}");
-
-                (response, IAccount? elmoAccount) = await wallet.CreateAccountAsync("elmo");
-                Console.WriteLine($"CreateAccountAsync: {JsonHelper.PrettyJson(response)}");
-
+                //Retrieve balance
+                response = await account.GetBalanceAsync();
+                Console.WriteLine($"GetBalanceAsync: {response.PrettyJson()}");
             }
         }
-
     }
 ```

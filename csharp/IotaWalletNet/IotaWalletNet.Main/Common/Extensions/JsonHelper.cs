@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace IotaWalletNet.Main.Examples
+namespace IotaWalletNet.Main.Common.Extensions
 {
     public static class JsonHelper
     {
-        public static string PrettyJson(string json)
+        public static string PrettyJson(this string json)
         {
             dynamic jsonObject = JsonConvert.DeserializeObject(json)!;
             return JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
