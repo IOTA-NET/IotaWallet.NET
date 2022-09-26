@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 {
     public static class CreateAWalletAndAccountExample
-        {
+    {
         
             public async static Task Run()
             {
@@ -62,5 +62,5 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
                 }
             }
 
-        }
+    }
 }

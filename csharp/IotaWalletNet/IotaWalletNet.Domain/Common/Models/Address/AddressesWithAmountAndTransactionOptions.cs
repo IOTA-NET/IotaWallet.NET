@@ -4,12 +4,16 @@ namespace IotaWalletNet.Domain.Common.Models.Address
 {
     public class AddressesWithAmountAndTransactionOptions
     {
-        public AddressesWithAmountAndTransactionOptions(List<AddressWithAmount> addressWithAmounts)
+        
+        public AddressesWithAmountAndTransactionOptions AddAddressAndAmount(string address, string amount)
         {
-            AddressesWithAmount = addressWithAmounts;
+            AddressWithAmount addressWithAmount = new AddressWithAmount(address, amount);
+            AddressesWithAmount.Add(addressWithAmount);
+
+            return this;
         }
 
-        public List<AddressWithAmount> AddressesWithAmount { get; }
+        public List<AddressWithAmount> AddressesWithAmount { get; } = new List<AddressWithAmount>();
         public TransactionOptions TransactionOptions { get; set; } = new TransactionOptions();
     }
 }
