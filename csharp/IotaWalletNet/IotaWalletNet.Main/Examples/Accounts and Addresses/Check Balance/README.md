@@ -44,8 +44,12 @@ The following example will:
                                 .ThenBuild()
                             .ThenInitialize();
 
+                //We can retrieve all account info
+                string response = await wallet.GetAccountsAsync();
+                
+                //Or we can simply retrieve a particular account with its username
                 //Let's retrieve our cookiemonster account
-                (string response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                (response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
                 Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
 
                 if(account == null)
