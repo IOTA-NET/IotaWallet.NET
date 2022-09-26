@@ -10,7 +10,7 @@ The following example will:
 3. Create 2 accounts with usernames `cookiemonster` and `elmo`
 
 ```cs
-public static class CreateAWalletAndAccountExample
+    public static class CreateAWalletAndAccountExample
     {
         
         public async static Task Run()
