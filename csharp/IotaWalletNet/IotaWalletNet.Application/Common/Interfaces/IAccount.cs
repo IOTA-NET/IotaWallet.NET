@@ -14,5 +14,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<string> SyncAccountAsync();
 
         Task<string> GetBalanceAsync();
+        Task RequestFromFaucet(string address, string url);
     }
 }
