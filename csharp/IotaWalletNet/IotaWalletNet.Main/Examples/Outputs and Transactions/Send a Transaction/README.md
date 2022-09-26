@@ -1,4 +1,4 @@
-﻿# Create a Wallet and an Account
+# Send a Transaction
 
 ## Code Example
 
