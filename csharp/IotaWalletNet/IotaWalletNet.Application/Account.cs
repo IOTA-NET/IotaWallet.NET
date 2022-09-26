@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
+﻿using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
+using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Interfaces;
@@ -26,6 +27,11 @@ namespace IotaWalletNet.Application
         public async Task<string> GetBalanceAsync(string username)
         {
             return await _mediator.Send(new GetBalanceQuery(this, username));
+        }
+
+        public async Task RequestFromFaucet(string address, string url)
+        {
+            await _mediator.Send(new RequestFromFaucetCommand("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", url));
         }
 
         public async Task<string> GetBalanceAsync()
