@@ -141,5 +141,6 @@ namespace IotaWalletNet.Application
             _walletHandle = IntPtr.Zero;
         }
 
+        public IntPtr GetWalletHandle() => _walletHandle;
     }
 }

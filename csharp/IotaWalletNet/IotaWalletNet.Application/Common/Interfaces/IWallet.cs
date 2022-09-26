@@ -17,6 +17,8 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<GetNewMnemonicQueryResponse> GetNewMnemonicAsync();
         WalletOptions GetWalletOptions();
 
+        IntPtr GetWalletHandle();
+
         Task<string> StoreMnemonicAsync(string mnemonic);
         Task<string> VerifyMnemonicAsync(string mnemonic);
     }

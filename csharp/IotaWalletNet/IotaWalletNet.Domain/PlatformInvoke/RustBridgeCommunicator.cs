@@ -15,6 +15,11 @@ namespace IotaWalletNet.Domain.PlatformInvoke
             _endOfCallbackSignaller = null;
         }
 
+        public RustBridgeCommunicator(IntPtr walletHandle)
+            : this()
+        {
+            _walletHandle = walletHandle;
+        }
         public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
         {
             string messageToSignal = String.IsNullOrEmpty(message) ? error : message;

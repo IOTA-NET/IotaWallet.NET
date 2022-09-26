@@ -7,7 +7,7 @@ namespace IotaWalletNet.Domain.Common.Models.Transaction
         public RemainderValueStrategy? RemainderValueStrategy { get; set; } = new ReuseAddressStrategy();
 
         /** Custom inputs that should be used for the transaction */
-        public List<string> CustomInputs { get; set; } = new List<string>();
+        public List<string>? CustomInputs { get; set; }
 
         /** Optional note, that is only stored locally */
         public string? Note { get; set; }
