@@ -27,7 +27,7 @@ namespace IotaWalletNet.Application
 
         public async Task RequestFromFaucet(string address, string url)
         {
-            await _mediator.Send(new RequestFromFaucetCommand("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", url));
+            await _mediator.Send(new RequestFromFaucetCommand(address, url));
         }
 
         public async Task<string> GetBalanceAsync()
