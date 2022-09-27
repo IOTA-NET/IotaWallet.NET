@@ -67,18 +67,18 @@ static async Task Main(string[] args)
 
 Commands  | Requires
 ------------- | -------------
-StoreMnemonicCommand  | mnemonic : String
-CreateAccountCommand | username : String
-VerifyMnemonicCommand | mnemonic : String
+StoreMnemonicAsync  | mnemonic : String
+CreateAccountAsync | username : String
+VerifyMnemonicAsync | mnemonic : String
 
 
 #### Queries
 
 Queries | Requires
 --------- | -----------
-GetAccountQuery | username : String
-GetAccountsQuery | -
-GetNewMnemonicQuery | -
+GetAccountAsync | username : String
+GetAccountsAsync | -
+GetNewMnemonicAsync | -
 
 ### Account
 
@@ -86,11 +86,13 @@ GetNewMnemonicQuery | -
 
 Commands  | Requires
 ------------- | -------------
-SyncAccountCommand | -
-SendAmount | [{address:String, amount:String}]
+SyncAccountAsync     | -
+SendAmountAsync | [{address:String, amount:String}]
+RequestFromFaucet | {address:String, url:String}]
+
 #### Queries
 
 
 Queries | Requires
 --------- | -----------
-GetBalanceQuery | username : String
+GetBalanceAsync | username : String
