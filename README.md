@@ -1,8 +1,16 @@
-# IotaWallet.NET
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12537739/192513130-58bdd96d-60c7-4303-a8b1-949c301485ef.png" width="500" >
+</p>
 
-## Usage Example
+# Introduction
 
-### Setting up your wallet and sending a command
+This wallet leverages IOTA's official wallet.rs bindings and ports it over to .Net.
+
+Now .Net developers can have a chance trying out IOTA/Shimmer as well!
+
+# Usage Example
+
+## Setting up your wallet and sending a command
 
 ```cs
 static async Task Main(string[] args)
@@ -60,10 +68,12 @@ static async Task Main(string[] args)
 }
 ```
 
-## Supported Commands/Queries
+For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.NET/tree/main/csharp/IotaWalletNet/IotaWalletNet.Main/Examples) directory.
 
-### Wallet
-#### Commands
+# Supported Commands/Queries
+
+## Wallet
+### Commands
 
 Commands  | Requires
 ------------- | -------------
@@ -72,7 +82,7 @@ CreateAccountAsync | username : String
 VerifyMnemonicAsync | mnemonic : String
 
 
-#### Queries
+### Queries
 
 Queries | Requires
 --------- | -----------
@@ -80,9 +90,9 @@ GetAccountAsync | username : String
 GetAccountsAsync | -
 GetNewMnemonicAsync | -
 
-### Account
+## Account
 
-#### Commands
+### Commands
 
 Commands  | Requires
 ------------- | -------------
@@ -90,7 +100,7 @@ SyncAccountAsync     | -
 SendAmountAsync | [{address:String, amount:String}]
 RequestFromFaucet | {address:String, url:String}]
 
-#### Queries
+### Queries
 
 
 Queries | Requires
