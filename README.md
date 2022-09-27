@@ -17,18 +17,18 @@ static async Task Main(string[] args)
 {
     //Collate all dependencies of the project.
     //This will help you in dependency injection
-    IServiceCollection services = new ServiceCollection()
-                                        .AddIotaWalletServices()
-                                        .AddMainServices();
+    IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
     //Create your dependency injection provider
     IServiceProvider serviceProvider = services.BuildServiceProvider();
 
+    //Use serviceprovider to create a scope, which disposes of all services at end of scope
     using (IServiceScope scope = serviceProvider.CreateScope())
     {
+        //Request IWallet service from service provider
         IWallet wallet = scope.ServiceProvider.GetRequiredService<IWallet>();
 
-        //Configure your wallet with a fluent-styled interface
+        //Build wallet using a fluent-style configuration api
         wallet = wallet
                     .ConfigureWalletOptions()
                         .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
@@ -43,17 +43,15 @@ static async Task Main(string[] args)
                     .ConfigureSecretManagerOptions()
                         .SetPassword("password")
                         .SetSnapshotPath("./mystronghold")
-                        .ThenBuild();
-
-        //Connect your wallet
-        wallet.Connect();
+                        .ThenBuild()
+                    .ThenInitialize();
 
         string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
 
-        //Let's send a StoreMnemonicCommand
+        //Let's send a StoreMnemonic request
         string response = await wallet.StoreMnemonic(mnemonic);
         
-        //Alternatively we can send a StoreMnemonicCommand with raw jsonified string
+        //Alternatively we can send a StoreMnemonic request with raw jsonified string
         //await wallet.SendMessageAsync(@"
         //{
         //    ""cmd"": ""StoreMnemonic"",
