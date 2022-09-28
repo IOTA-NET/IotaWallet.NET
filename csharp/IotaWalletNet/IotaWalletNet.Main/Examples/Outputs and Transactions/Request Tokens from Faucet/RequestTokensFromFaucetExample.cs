@@ -51,8 +51,9 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     Console.WriteLine("There was a problem retreiving the account.");
                     return;
                 }
-
-                await account.RequestFromFaucet("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", @"https://faucet.testnet.shimmer.network");
+                string r = await account.GenerateAddresses(1, Domain.Common.Models.Network.NetworkType.Testnet);
+                Console.WriteLine(r);
+                //await account.RequestFromFaucet("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", @"https://faucet.testnet.shimmer.network");
             }
         }
 
