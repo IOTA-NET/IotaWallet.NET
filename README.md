@@ -2,6 +2,9 @@
     <img src="https://user-images.githubusercontent.com/12537739/192513130-58bdd96d-60c7-4303-a8b1-949c301485ef.png" width="500" >
 </p>
 
+[![Compile IotaWallet.NET](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml/badge.svg?branch=main)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml)
+
+
 # Introduction
 
 This wallet leverages IOTA's official wallet.rs bindings and ports it over to .Net.
