@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy to NuGet
+name: Deploy to Github NuGet
 
 # Controls when the workflow will run
 on:
@@ -45,6 +45,6 @@ jobs:
           path: ${{ env.NUGET_PATH }}\IotaWallet.Net.${{ steps.version.outputs.version-without-v }}.nupkg
       
       - name: Push Nuget
-        run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate --no-symbols
-        
+        #run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate --no-symbols
+        run: dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg  --api-key ${{ secrets.GHUB_NUGET_AUTH_TOKEN }} --source "github"
 
