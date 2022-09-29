@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
 env:
-  MAIN_SOLUTION_PATH: ".\csharp\IotaWalletNet\IotaWalletNet.sln"
+  MAIN_SOLUTION_PATH: "./csharp/IotaWalletNet/IotaWalletNet.sln"
 
 jobs:
   build:
@@ -21,10 +21,10 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: .csharp\IotaWalletNet 
+      working-directory: .csharp/IotaWalletNet 
     - name: Build
       #run: dotnet build --no-restore --configuration Release ${{ env.MAIN_SOLUTION_PATH }}
       run: dotnet restore
-      working-directory: .csharp\IotaWalletNet 
+      working-directory: .csharp/IotaWalletNet 
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
