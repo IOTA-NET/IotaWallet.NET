@@ -31,7 +31,7 @@ jobs:
 
       -name: Get Version
         id: version
-        uses: batilla7/get-version-action@v2
+        uses: battila7/get-version-action@v2
 
       - name: Pack Nuget
         run: dotnet pack ${{ env.APP_SOLUTION_PATH }} -c Release /p:Version=${{ steps.version.outputs.version-without-v }} /p:PackageReleaseNotes="See https://github.com/wireless90/IotaWallet.NET/releases/tag/${{ github.event.release.tag_name }}" --include-symbols --output ${{ env.NUGET_PATH }}
