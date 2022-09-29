@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: IotaWallet.Net
-          path: ${{ env.NUGET_PATH }}\IotaWallet.Net.${{ github.event.release.tag_name }}.nupkg
+          path: ${{ env.NUGET_PATH }}\IotaWallet.Net.${{ steps.version.outputs.version-without-v }}.nupkg
       
       - name: Push Nuget
         run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SRC_URL }}
