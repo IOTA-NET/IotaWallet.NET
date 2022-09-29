@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./csharp/IotaWalletNet/IotaWalletNet.sln
     - name: Build
-      run: dotnet build --no-restore ./csharp/IotaWalletNet/IotaWalletNet.sln
+      run: dotnet build --no-restore --configuration Release ./csharp/IotaWalletNet/IotaWalletNet.sln
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
