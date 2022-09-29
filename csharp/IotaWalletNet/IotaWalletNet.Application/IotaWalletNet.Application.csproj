@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<PublisherName>Razali</PublisherName>
+	<PackageId>IotaWallet.Net</PackageId>
+	<Version>1.0.0.0</Version>
+	<Copyright>IotaWallet.Net</Copyright>
+	<Title>Iota Wallet Library for .NET</Title>
+	<Description>A .NET implementation of wallet.rs using rust bindings and P/Invoke</Description>
+	<Authors>Razali</Authors>
+	<PackageTags>rust;wallet;iota;csharp;net;core;netcore;wallet;firefly;shimmer;</PackageTags>
+	<PackageProjectUrl>https://github.com/wireless90/IotaWallet.NET</PackageProjectUrl>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/wireless90/IotaWallet.NET</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
