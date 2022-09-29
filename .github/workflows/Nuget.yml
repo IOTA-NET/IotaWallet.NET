@@ -22,7 +22,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-
+    environment: myenv
+    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -44,6 +45,6 @@ jobs:
           path: ${{ env.NUGET_PATH }}\IotaWallet.Net.${{ steps.version.outputs.version-without-v }}.nupkg
       
       - name: Push Nuget
-        run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.nuget_api_key }} 
+        run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} 
 
 
