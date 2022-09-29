@@ -24,7 +24,7 @@ jobs:
       working-directory: ./csharp/IotaWalletNet 
     - name: Build
       #run: dotnet build --no-restore --configuration Release ${{ env.MAIN_SOLUTION_PATH }}
-      run: dotnet restore
+      run: dotnet build --configuration Release --no-restore
       working-directory: ./csharp/IotaWalletNet 
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
