@@ -29,14 +29,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      -name: Get Version
+        id: version
+        uses: batilla7/get-version-action@v2
+
       - name: Pack Nuget
-        run: dotnet pack ${{ env.APP_SOLUTION_PATH }} -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/wireless90/IotaWallet.NET/releases/tag/${{ github.event.release.tag_name }}" --include-symbols --output ${{ env.NUGET_PATH }}
+        run: dotnet pack ${{ env.APP_SOLUTION_PATH }} -c Release /p:Version=${{ steps.version.outputs.version-without-v }} /p:PackageReleaseNotes="See https://github.com/wireless90/IotaWallet.NET/releases/tag/${{ github.event.release.tag_name }}" --include-symbols --output ${{ env.NUGET_PATH }}
         #run: dotnet pack ${{ env.APP_SOLUTION_PATH }} --no-restore --no-build --configuration Release --include-symbols --output ${{ env.NUGET_PATH }}
+      
       - name: Create NuGet Package Artifact
         uses: actions/upload-artifact@v1
         with:
           name: IotaWallet.Net
           path: ./csharp/IotaWalletNet/IotaWalletNet.Application/bin/Release/IotaWalletNet.Application.${{ github.event.release.tag_name }}.nupkg
+      
       - name: Push Nuget
         run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SRC_URL }}
 
