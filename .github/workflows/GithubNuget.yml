@@ -49,5 +49,5 @@ jobs:
         run: dotnet nuget add source --username wireless90 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/wireless90/index.json"
       
       - name: Push Nuget  
-        run: dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg  --api-key ${{ secrets.GHUB_NUGET_AUTH_TOKEN }} --source "github"
+        run: dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg  --api-key ${{ secrets.GHUB_NUGET_AUTH_TOKEN }} --source "github" --skip-duplicate --no-symbols
 
