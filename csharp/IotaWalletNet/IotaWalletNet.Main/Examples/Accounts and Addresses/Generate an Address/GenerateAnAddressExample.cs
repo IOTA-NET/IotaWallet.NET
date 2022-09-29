@@ -1,15 +1,15 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
-using IotaWalletNet.Domain.Common.Models.Address;
+using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet
+namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
 {
-    public static class RequestTokensFromFaucetExample
+    public static class GenerateAnAddressExample
     {
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
@@ -41,7 +41,6 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                                 .ThenBuild()
                             .ThenInitialize();
 
-
                 //Let's retrieve our cookiemonster account
                 (string response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
                 Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
@@ -51,12 +50,12 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     Console.WriteLine("There was a problem retreiving the account.");
                     return;
                 }
-                string r = await account.GenerateAddressesAsync(1, Domain.Common.Models.Network.NetworkType.Testnet);
-                Console.WriteLine(r);
-                //await account.RequestFromFaucet("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", @"https://faucet.testnet.shimmer.network");
+
+                //Lets generate 1 new address!
+                response = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+
+                Console.WriteLine($"GenerateAddressesAsync: {response.PrettyJson()}");
             }
         }
-
-
     }
 }

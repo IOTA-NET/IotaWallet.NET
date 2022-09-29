@@ -97,6 +97,7 @@ Commands  | Requires
 SyncAccountAsync     | -
 SendAmountAsync | [{address:String, amount:String}]
 RequestFromFaucet | {address:String, url:String}]
+GenerateAddressesAsync | numberOfAddresses: int, typeOfNetwork: NetworkType 
 
 ### Queries
 

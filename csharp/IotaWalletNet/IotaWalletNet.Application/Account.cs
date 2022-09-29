@@ -26,11 +26,12 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
-        public async Task<string> GenerateAddresses(uint numberOfAddresses, NetworkType networkType)
+        public async Task<string> GenerateAddressesAsync(uint numberOfAddresses, NetworkType networkType)
         {
             return await _mediator.Send(new GenerateAddressesCommand(this, networkType, Username, numberOfAddresses));
         }
-        public async Task RequestFromFaucet(string address, string url)
+
+        public async Task RequestFromFaucetAsync(string address, string url)
         {
             await _mediator.Send(new RequestFromFaucetCommand(address, url));
         }
