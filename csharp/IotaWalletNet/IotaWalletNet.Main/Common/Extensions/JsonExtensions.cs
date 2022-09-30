@@ -2,7 +2,7 @@
 
 namespace IotaWalletNet.Main.Common.Extensions
 {
-    public static class JsonHelper
+    public static class JsonExtensions
     {
         public static string PrettyJson(this string json)
         {

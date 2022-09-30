@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Network;
 
@@ -16,6 +17,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
 
         Task<string> GetBalanceAsync();
         Task RequestFromFaucetAsync(string address, string url);
-        Task<string> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
+        Task<GenerateAddressesCommandResponse?> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
     }
 }

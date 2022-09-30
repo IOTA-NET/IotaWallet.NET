@@ -18,54 +18,86 @@ Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 ```cs
 static async Task Main(string[] args)
 {
-    //Collate all dependencies of the project.
-    //This will help you in dependency injection
-    IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
+    //Register all of the dependencies into a collection of services
+	IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
-    //Create your dependency injection provider
-    IServiceProvider serviceProvider = services.BuildServiceProvider();
+	//Install services to service provider which is used for dependency injection
+	IServiceProvider serviceProvider = services.BuildServiceProvider();
 
-    //Use serviceprovider to create a scope, which disposes of all services at end of scope
-    using (IServiceScope scope = serviceProvider.CreateScope())
-    {
-        //Request IWallet service from service provider
-        IWallet wallet = scope.ServiceProvider.GetRequiredService<IWallet>();
+	//Use serviceprovider to create a scope, which safely disposes of all services at end of scope
+	using (IServiceScope scope = serviceProvider.CreateScope())
+	{
+		//Request IWallet service from service provider
+		IWallet wallet = scope.ServiceProvider.GetRequiredService<IWallet>();
 
-        //Build wallet using a fluent-style configuration api
-        wallet = wallet
-                    .ConfigureWalletOptions()
-                        .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
-                        .SetStoragePath("./walletdb")
-                        .ThenBuild()
-                    .ConfigureClientOptions()
-                        .AddNodeUrl("https://api.testnet.shimmer.network")
-                        .IsOffline(false)
-                        .IsFallbackToLocalPow()
-                        .IsLocalPow()
-                        .ThenBuild()
-                    .ConfigureSecretManagerOptions()
-                        .SetPassword("password")
-                        .SetSnapshotPath("./mystronghold")
-                        .ThenBuild()
-                    .ThenInitialize();
+		//Build wallet using a fluent-style configuration api
+		wallet = wallet
+					.ConfigureWalletOptions()
+						.SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+						.SetStoragePath("./walletdb")
+						.ThenBuild()
+					.ConfigureClientOptions()
+						.AddNodeUrl("https://api.testnet.shimmer.network")
+						.IsOffline(false)
+						.IsFallbackToLocalPow()
+						.IsLocalPow()
+						.ThenBuild()
+					.ConfigureSecretManagerOptions()
+						.SetPassword("password")
+						.SetSnapshotPath("./mystronghold")
+						.ThenBuild()
+					.ThenInitialize();
 
-        string mnemonic = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+		//Let's generate a Mnemonic
+		//Remember, you only need to do this the first time!
+		GetNewMnemonicQueryResponse getNewMnemonicQueryResponse = await wallet.GetNewMnemonicAsync();
+		string newMnemonic = getNewMnemonicQueryResponse.Payload;
+		Console.WriteLine($"GetNewMnemonicAsync: {newMnemonic}");
+		
+		//Store into stronghold
+		string response = await wallet.StoreMnemonicAsync(newMnemonic);
+		Console.WriteLine($"StoreMnemonicAsync: {response.PrettyJson()}");
 
-        //Let's send a StoreMnemonic request
-        string response = await wallet.StoreMnemonic(mnemonic);
+		//Let's create an accounts, with username "cookiemonster"
+		(response, IAccount? account) = await wallet.CreateAccountAsync("cookiemonster");
+		Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");
+
+		if (account == null)
+		{
+			Console.WriteLine("There was a problem creating the account.");
+			return;
+		}
+		
+		//Lets generate 1 new address!
+		GenerateAddressesCommandResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+		string? generatedAddress = generateAddressesCommandResponse?.Payload?.FirstOrDefault()?.Address;
+
+		if(generatedAddress.IsNotNullAndEmpty())
+			Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
+			
+		//Let's request some Shimmer from the faucet
+        await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
         
-        //Alternatively we can send a StoreMnemonic request with raw jsonified string
-        //await wallet.SendMessageAsync(@"
-        //{
-        //    ""cmd"": ""StoreMnemonic"",
-        //    ""payload"": mnemonic
-        //}
-        //");
+		//Let's Checkout our balance. We will sync the account, followed by checking the balance.
+		//Sync the account with the tangle
+		await account.SyncAccountAsync();
+		//Retrieve balance
+		response = await account.GetBalanceAsync();
+		Console.WriteLine($"GetBalanceAsync: {response.PrettyJson()}");
+		
+		//Great, now that we have some test shimmer tokens to send, send to me!
+		//Let's send 1 shimmer, which is 1,000,000 Glow
+		(string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
+		
+		//You can attach as many (address,amount) pairs as you want
+		AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions = new AddressesWithAmountAndTransactionOptions();
+		addressesWithAmountAndTransactionOptions
+				.AddAddressAndAmount(receiverAddress, amount);
 
-        Console.Read();
+		//Start sending
+		response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
 
-        
-    }
+		Console.WriteLine($"SendAmountAsync: {response.PrettyJson()}");
 }
 ```
 

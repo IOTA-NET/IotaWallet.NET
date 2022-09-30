@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 {
-    public class GenerateAddressesCommandHandler : IRequestHandler<GenerateAddressesCommand, string>
+    public class GenerateAddressesCommandHandler : IRequestHandler<GenerateAddressesCommand, GenerateAddressesCommandResponse>
     {
-        public async Task<string> Handle(GenerateAddressesCommand request, CancellationToken cancellationToken)
+        public async Task<GenerateAddressesCommandResponse?> Handle(GenerateAddressesCommand request, CancellationToken cancellationToken)
         {
             AddressGenerationOptions options = new AddressGenerationOptions()
             {
@@ -21,7 +21,8 @@ namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 
             GenerateAddressesCommandMessage message = new GenerateAddressesCommandMessage(request.Username, data);
             string json = JsonConvert.SerializeObject(message);
-            string response = await request.Account.SendMessageAsync(json);
+            string jsonResponse = await request.Account.SendMessageAsync(json);
+            GenerateAddressesCommandResponse? response = JsonConvert.DeserializeObject<GenerateAddressesCommandResponse>(jsonResponse);
 
             return response;
         }

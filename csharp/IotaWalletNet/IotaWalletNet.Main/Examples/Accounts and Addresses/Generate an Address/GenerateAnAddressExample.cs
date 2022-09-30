@@ -1,9 +1,12 @@
-﻿using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using System.Dynamic;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
 {
@@ -52,9 +55,11 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
                 }
 
                 //Lets generate 1 new address!
-                response = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+                GenerateAddressesCommandResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+                string? generatedAddress = generateAddressesCommandResponse?.Payload?.FirstOrDefault()?.Address;
 
-                Console.WriteLine($"GenerateAddressesAsync: {response.PrettyJson()}");
+                if(generatedAddress.IsNotNullAndEmpty())
+                    Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
             }
         }
     }
