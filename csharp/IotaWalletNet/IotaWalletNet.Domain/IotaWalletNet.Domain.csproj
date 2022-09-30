@@ -40,7 +40,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="$(OutDirectory)/bindings.dll" Pack="true" PackagePath="contentFiles">
+		<Content Include="$(OutDirectory)/bindings.dll" Pack="true" PackagePath="contentFiles/cs/net6.0">
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</Content>
 	</ItemGroup>
