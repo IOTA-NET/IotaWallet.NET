@@ -12,6 +12,19 @@ This wallet leverages IOTA's official wallet.rs bindings and ports it over to .N
 
 Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 
+# Installation from Nuget.org
+> Install-Package IotaWallet.Net.Domain
+
+Or download from [here](https://www.nuget.org/packages/IotaWallet.Net.Domain/).
+
+> Install-Package IotaWallet.Net
+
+Or download from [here](https://www.nuget.org/packages/IotaWallet.Net/).
+
+# Alternative Installation
+
+You can download the nugets from the github repo itself. Look to your right under `Packages`.
+
 # Usage Example
 
 ## Setting up your wallet and sending a command
