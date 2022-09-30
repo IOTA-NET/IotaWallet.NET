@@ -3,7 +3,8 @@
 </p>
 
 [![Continuous Integration](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml/badge.svg?branch=main)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml)
-
+[![Deploy to Github NuGet](https://github.com/wireless90/IotaWallet.NET/actions/workflows/GithubNuget.yml/badge.svg)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/GithubNuget.yml)
+[![Deploy to NuGet.org](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml/badge.svg)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml)
 
 # Introduction
 
@@ -18,7 +19,7 @@ Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 ```cs
 static async Task Main(string[] args)
 {
-    //Register all of the dependencies into a collection of services
+    	//Register all of the dependencies into a collection of services
 	IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
 	//Install services to service provider which is used for dependency injection
@@ -32,29 +33,29 @@ static async Task Main(string[] args)
 
 		//Build wallet using a fluent-style configuration api
 		wallet = wallet
-					.ConfigureWalletOptions()
-						.SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
-						.SetStoragePath("./walletdb")
-						.ThenBuild()
-					.ConfigureClientOptions()
-						.AddNodeUrl("https://api.testnet.shimmer.network")
-						.IsOffline(false)
-						.IsFallbackToLocalPow()
-						.IsLocalPow()
-						.ThenBuild()
-					.ConfigureSecretManagerOptions()
-						.SetPassword("password")
-						.SetSnapshotPath("./mystronghold")
-						.ThenBuild()
-					.ThenInitialize();
+			.ConfigureWalletOptions()
+				.SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+				.SetStoragePath("./walletdb")
+				.ThenBuild()
+			.ConfigureClientOptions()
+				.AddNodeUrl("https://api.testnet.shimmer.network")
+				.IsOffline(false)
+				.IsFallbackToLocalPow()
+				.IsLocalPow()
+				.ThenBuild()
+			.ConfigureSecretManagerOptions()
+				.SetPassword("password")
+				.SetSnapshotPath("./mystronghold")
+				.ThenBuild()
+			.ThenInitialize();
 
 		//Let's generate a Mnemonic
-		//Remember, you only need to do this the first time!
 		GetNewMnemonicQueryResponse getNewMnemonicQueryResponse = await wallet.GetNewMnemonicAsync();
 		string newMnemonic = getNewMnemonicQueryResponse.Payload;
 		Console.WriteLine($"GetNewMnemonicAsync: {newMnemonic}");
 		
 		//Store into stronghold
+		//Remember, Generation and storage of mnemonic only is needed to do done the first time!
 		string response = await wallet.StoreMnemonicAsync(newMnemonic);
 		Console.WriteLine($"StoreMnemonicAsync: {response.PrettyJson()}");
 
@@ -76,7 +77,7 @@ static async Task Main(string[] args)
 			Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
 			
 		//Let's request some Shimmer from the faucet
-        await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
+        	await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
         
 		//Let's Checkout our balance. We will sync the account, followed by checking the balance.
 		//Sync the account with the tangle
