@@ -33,21 +33,21 @@ static async Task Main(string[] args)
 
 		//Build wallet using a fluent-style configuration api
 		wallet = wallet
-					.ConfigureWalletOptions()
-						.SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
-						.SetStoragePath("./walletdb")
-						.ThenBuild()
-					.ConfigureClientOptions()
-						.AddNodeUrl("https://api.testnet.shimmer.network")
-						.IsOffline(false)
-						.IsFallbackToLocalPow()
-						.IsLocalPow()
-						.ThenBuild()
-					.ConfigureSecretManagerOptions()
-						.SetPassword("password")
-						.SetSnapshotPath("./mystronghold")
-						.ThenBuild()
-					.ThenInitialize();
+			.ConfigureWalletOptions()
+				.SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+				.SetStoragePath("./walletdb")
+				.ThenBuild()
+			.ConfigureClientOptions()
+				.AddNodeUrl("https://api.testnet.shimmer.network")
+				.IsOffline(false)
+				.IsFallbackToLocalPow()
+				.IsLocalPow()
+				.ThenBuild()
+			.ConfigureSecretManagerOptions()
+				.SetPassword("password")
+				.SetSnapshotPath("./mystronghold")
+				.ThenBuild()
+			.ThenInitialize();
 
 		//Let's generate a Mnemonic
 		//Remember, you only need to do this the first time!
