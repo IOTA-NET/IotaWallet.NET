@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/12537739/192513130-58bdd96d-60c7-4303-a8b1-949c301485ef.png" width="500" >
+    <img src="https://user-images.githubusercontent.com/12537739/193295914-2d4973cc-acea-4173-8ac3-3e49695f4281.jpg" width="500" >
 </p>
 
 [![Continuous Integration](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml/badge.svg?branch=main)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml)
