@@ -10,6 +10,7 @@ on:
 
 env:
   APP_SOLUTION_PATH: ./csharp/IotaWalletNet/IotaWalletNet.Application/IotaWalletNet.Application.csproj
+  DOMAIN_SOLUTION_PATH: ./csharp/IotaWalletNet/IotaWalletNet.Domain/IotaWalletNet.Domain.csproj
   NUGET_PATH: ${{ github.workspace }}\nugets
   NUGET_SRC_URL: 'https://api.nuget.org/v3/index.json'
 
@@ -34,20 +35,29 @@ jobs:
         id: version
         uses: battila7/get-version-action@v2
 
-      - name: Pack Nuget
+      - name: Pack Domain Nuget
+        run: dotnet pack ${{ env.DOMAIN_SOLUTION_PATH }} -c Release /p:Version=${{ steps.version.outputs.version-without-v }} /p:PackageReleaseNotes="See https://github.com/wireless90/IotaWallet.NET/releases/tag/${{ github.event.release.tag_name }}" --include-symbols --output ${{ env.NUGET_PATH }}
+        
+      - name: Pack Application Nuget
         run: dotnet pack ${{ env.APP_SOLUTION_PATH }} -c Release /p:Version=${{ steps.version.outputs.version-without-v }} /p:PackageReleaseNotes="See https://github.com/wireless90/IotaWallet.NET/releases/tag/${{ github.event.release.tag_name }}" --include-symbols --output ${{ env.NUGET_PATH }}
         #run: dotnet pack ${{ env.APP_SOLUTION_PATH }} --no-restore --no-build --configuration Release --include-symbols --output ${{ env.NUGET_PATH }}
       
-      - name: Create NuGet Package Artifact
+      - name: Create Domain NuGet Package Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: IotaWallet.Net.Domain
+          path: ${{ env.NUGET_PATH }}\IotaWallet.Net.Domain.${{ steps.version.outputs.version-without-v }}.nupkg
+
+      - name: Create Application NuGet Package Artifact
         uses: actions/upload-artifact@v1
         with:
           name: IotaWallet.Net
           path: ${{ env.NUGET_PATH }}\IotaWallet.Net.${{ steps.version.outputs.version-without-v }}.nupkg
-      
+       
       - name: Add Nuget Source
         #run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate --no-symbols
         run: dotnet nuget add source --username wireless90 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/wireless90/index.json"
       
-      - name: Push Nuget  
+      - name: Push All Nugets 
         run: dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg  --api-key ${{ secrets.GHUB_NUGET_AUTH_TOKEN }} --source "github" --skip-duplicate --no-symbols
 
