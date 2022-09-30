@@ -3,7 +3,8 @@
 </p>
 
 [![Continuous Integration](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml/badge.svg?branch=main)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml)
-
+[![Deploy to Github NuGet](https://github.com/wireless90/IotaWallet.NET/actions/workflows/GithubNuget.yml/badge.svg)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/GithubNuget.yml)
+[![Deploy to NuGet.org](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml/badge.svg)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml)
 
 # Introduction
 
@@ -76,7 +77,7 @@ static async Task Main(string[] args)
 			Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
 			
 		//Let's request some Shimmer from the faucet
-        await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
+        	await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
         
 		//Let's Checkout our balance. We will sync the account, followed by checking the balance.
 		//Sync the account with the tangle
