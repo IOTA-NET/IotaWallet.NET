@@ -19,7 +19,7 @@ Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 ```cs
 static async Task Main(string[] args)
 {
-    //Register all of the dependencies into a collection of services
+    	//Register all of the dependencies into a collection of services
 	IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
 	//Install services to service provider which is used for dependency injection
