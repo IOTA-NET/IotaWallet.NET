@@ -18,7 +18,7 @@
 		<PackageProjectUrl>https://github.com/wireless90/IotaWallet.NET</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/wireless90/IotaWallet.NET</RepositoryUrl>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		
 	</PropertyGroup>
 
