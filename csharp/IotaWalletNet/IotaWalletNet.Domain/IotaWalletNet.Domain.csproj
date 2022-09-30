@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RustRootDirectory>../../../rust/bindings</RustRootDirectory>
-
+		<OutDirectory>./bin/$(Configuration)/net6.0</OutDirectory>
 		<PublisherName>Razali</PublisherName>
 		<PackageId>IotaWallet.Net.Domain</PackageId>
 		<Version>1.0.0.0</Version>
@@ -18,13 +18,15 @@
 		<PackageProjectUrl>https://github.com/wireless90/IotaWallet.NET</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/wireless90/IotaWallet.NET</RepositoryUrl>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		
 	</PropertyGroup>
 
-	<Target Name="CargoBuildDebug" BeforeTargets="PreBuildEvent" Condition=" '$(Configuration)' == 'Debug' ">
+	<Target Name="CargoBuildDebug" BeforeTargets="PreBuildEvent">
 		<Exec Command="cargo build" WorkingDirectory="$(RustRootDirectory)" />
-		<ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-			<Content Include="$(RustRootDirectory)/target/debug/*bindings.*">
+		<ItemGroup>
+			<Content Include="$(RustRootDirectory)/target/debug/bindings.dll">
+				<Link>bindings.dll</Link>
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Content>
 		</ItemGroup>
@@ -35,5 +37,11 @@
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="Refit" Version="6.3.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="$(OutDirectory)/bindings.dll" Pack="true" PackagePath="contentFiles">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>
 	</ItemGroup>
 </Project>

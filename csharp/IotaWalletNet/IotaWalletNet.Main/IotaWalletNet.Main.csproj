@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\IotaWalletNet.Application\IotaWalletNet.Application.csproj" />
     <ProjectReference Include="..\IotaWalletNet.Domain\IotaWalletNet.Domain.csproj" />
-    <ProjectReference Include="..\IotaWalletNet\IotaWalletNet.Domain.csproj" />
   </ItemGroup>
 
 </Project>
