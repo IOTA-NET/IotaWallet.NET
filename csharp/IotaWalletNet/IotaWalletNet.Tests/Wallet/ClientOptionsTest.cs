@@ -15,7 +15,6 @@ namespace IotaWalletNet.Tests.Wallet
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
             wallet = wallet
                     .ConfigureClientOptions()
-                        .IsOffline()
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
                         .AddNodeUrl("www.test.com")
@@ -32,7 +31,6 @@ namespace IotaWalletNet.Tests.Wallet
 
             wallet = wallet
                     .ConfigureClientOptions()
-                        .IsOffline()
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
@@ -54,7 +52,6 @@ namespace IotaWalletNet.Tests.Wallet
 
             wallet = wallet
                     .ConfigureClientOptions()
-                        .IsOffline()
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
@@ -76,7 +73,6 @@ namespace IotaWalletNet.Tests.Wallet
 
             wallet = wallet
                     .ConfigureClientOptions()
-                        .IsOffline()
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
@@ -84,7 +80,6 @@ namespace IotaWalletNet.Tests.Wallet
 
             ClientOptions clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
 
-            clientOptions.Offline.Should().BeTrue();
             clientOptions.LocalPow.Should().BeTrue();
             clientOptions.FallbackToLocalPow.Should().BeTrue();
             clientOptions.Nodes.Should().HaveCount(1);
@@ -92,7 +87,6 @@ namespace IotaWalletNet.Tests.Wallet
 
             wallet = wallet
                     .ConfigureClientOptions()
-                        .IsOffline(false)
                         .IsLocalPow(false)
                         .IsFallbackToLocalPow(false)
                         .AddNodeUrl(nodeUrl)
@@ -100,7 +94,6 @@ namespace IotaWalletNet.Tests.Wallet
 
             clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
 
-            clientOptions.Offline.Should().BeFalse();
             clientOptions.LocalPow.Should().BeFalse();
             clientOptions.FallbackToLocalPow.Should().BeFalse();
             clientOptions.Nodes.Should().HaveCount(1);

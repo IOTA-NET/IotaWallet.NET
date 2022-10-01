@@ -10,8 +10,6 @@ namespace IotaWalletNet.Application.Common.Options
 
         public bool FallbackToLocalPow { get; set; } = true;
 
-        public bool Offline { get; set; } = false;
-
     }
 
     public class ClientOptionsBuilder
@@ -40,12 +38,6 @@ namespace IotaWalletNet.Application.Common.Options
         public ClientOptionsBuilder IsFallbackToLocalPow(bool isFallbackToLocalPow = true)
         {
             _clientOptions.FallbackToLocalPow = isFallbackToLocalPow;
-            return this;
-        }
-
-        public ClientOptionsBuilder IsOffline(bool isOffline = true)
-        {
-            _clientOptions.Offline = isOffline;
             return this;
         }
 

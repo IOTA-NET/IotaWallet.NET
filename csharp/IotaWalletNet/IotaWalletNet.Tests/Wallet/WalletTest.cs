@@ -43,7 +43,6 @@ namespace IotaWalletNet.Tests.Wallet
                             .ThenBuild()
                         .ConfigureClientOptions()
                             .AddNodeUrl("https://api.testnet.shimmer.network")
-                            .IsOffline(false)
                             .IsFallbackToLocalPow()
                             .IsLocalPow()
                             .ThenBuild()

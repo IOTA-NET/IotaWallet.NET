@@ -30,7 +30,6 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
