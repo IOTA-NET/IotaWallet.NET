@@ -14,11 +14,12 @@ namespace IotaWalletNet.Tests.Wallet
         public void ClientOptionsBuilderShouldReturnWalletWhenBuild()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
+            
             wallet = wallet
-                    .ConfigureClientOptions()
+                        .ConfigureClientOptions()
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
-                        .AddNodeUrl("www.test.com")
+                        .AddNodeUrl(DEFAFULT_API_URL)
                         .ThenBuild();
 
             wallet.Should().NotBeNull();
@@ -84,6 +85,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
                         .ThenBuild();
+
 
             ClientOptions clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
 
