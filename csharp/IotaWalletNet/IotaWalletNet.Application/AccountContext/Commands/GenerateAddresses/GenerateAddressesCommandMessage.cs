@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Models.Address;
-using IotaWalletNet.Domain.Common.Models;
+﻿using IotaWalletNet.Domain.Common.Models;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 {

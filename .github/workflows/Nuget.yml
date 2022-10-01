@@ -32,6 +32,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./csharp/IotaWalletNet 
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./csharp/IotaWalletNet 
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build --verbosity normal
+        working-directory: ./csharp/IotaWalletNet
+
       - name: Get Version
         id: version
         uses: battila7/get-version-action@v2

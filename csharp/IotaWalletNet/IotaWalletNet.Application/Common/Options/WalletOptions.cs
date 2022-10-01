@@ -9,7 +9,7 @@ namespace IotaWalletNet.Application.Common.Options
     public class WalletOptionsBuilder
     {
         private readonly IWallet _wallet;
-        private WalletOptions _walletOptions;
+        private readonly WalletOptions _walletOptions;
         public WalletOptionsBuilder(IWallet wallet)
         {
             _wallet = wallet;
@@ -52,38 +52,13 @@ namespace IotaWalletNet.Application.Common.Options
             ClientConfigOptions = new ClientOptions();
         }
 
-        [JsonProperty(PropertyName = "secretManager")]
-        public string SecretManagerJson { get; set; } = string.Empty;
-
-
-        [JsonIgnore]
-        public SecretManagerOptions SecretManager
-        {
-            get => _secretManagerOptions;
-            set
-            {
-                _secretManagerOptions = value;
-
-                SecretManagerJson = JsonConvert.SerializeObject(SecretManager);
-            }
-        }
+        public SecretManagerOptions SecretManager { get; set; }
 
         #region ClientOptions
 
+
         [JsonProperty(PropertyName = "clientOptions")]
-        public string ClientOptionsJson { get; set; } = string.Empty;
-
-        [JsonIgnore]
-        public ClientOptions ClientConfigOptions
-        {
-            get => _clientConfigOptions;
-            set
-            {
-                _clientConfigOptions = value;
-                ClientOptionsJson = JsonConvert.SerializeObject(_clientConfigOptions);
-
-            }
-        }
+        public ClientOptions ClientConfigOptions{ get; set; }
 
         #endregion
     }

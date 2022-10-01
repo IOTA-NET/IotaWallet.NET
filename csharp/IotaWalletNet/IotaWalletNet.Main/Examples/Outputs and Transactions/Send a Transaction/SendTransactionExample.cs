@@ -31,7 +31,6 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
@@ -54,7 +53,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
 
                 //Let's send 1 shimmer, which is 1,000,000 Glow
                 (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
-                
+
                 //You can attach as many (address,amount) pairs as you want
                 AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions = new AddressesWithAmountAndTransactionOptions();
                 addressesWithAmountAndTransactionOptions
@@ -67,6 +66,6 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
             }
         }
 
-        
+
     }
 }

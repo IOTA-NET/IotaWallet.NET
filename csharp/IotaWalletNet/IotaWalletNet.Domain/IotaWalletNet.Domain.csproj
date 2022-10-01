@@ -5,8 +5,10 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RustRootDirectory>../../../rust/bindings</RustRootDirectory>
+		
+		<IotaLibraryDirectory>./iota_wallet.dll</IotaLibraryDirectory>
 		<OutDirectory>./bin/$(Configuration)/net6.0</OutDirectory>
+		
 		<PublisherName>Razali</PublisherName>
 		<PackageId>IotaWallet.Net.Domain</PackageId>
 		<Version>1.0.0.0</Version>
@@ -22,15 +24,16 @@
 		
 	</PropertyGroup>
 
-	<Target Name="CargoBuildDebug" BeforeTargets="PreBuildEvent">
-		<Exec Command="cargo build" WorkingDirectory="$(RustRootDirectory)" />
+	<!--<Target Name="BeforeBuild" BeforeTargets="PreBuildEvent">
+		--><!--<Exec Command="cargo clean" WorkingDirectory="$(RustRootDirectory)" />
+		<Exec Command="cargo build" WorkingDirectory="$(RustRootDirectory)" />--><!--
 		<ItemGroup>
-			<Content Include="$(RustRootDirectory)/target/debug/bindings.dll">
-				<Link>bindings.dll</Link>
+			<Content Include="./iota_wallet.dll">
+				--><!--<Link>bindings.dll</Link>--><!--
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Content>
 		</ItemGroup>
-	</Target>
+	</Target>-->
 
 	<ItemGroup>
 	  <PackageReference Include="MediatR" Version="10.0.1" />
@@ -40,8 +43,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="$(OutDirectory)/bindings.dll" Pack="true" PackagePath="contentFiles/cs/net6.0">
+		<!--<Content Include="$(OutDirectory)/bindings.dll" Pack="true" PackagePath="contentFiles/cs/net6.0">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>-->
+		<Content Include="$(OutDirectory)/iota_wallet.dll" Pack="true" PackagePath="contentFiles/cs/net6.0">
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="iota_wallet.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>

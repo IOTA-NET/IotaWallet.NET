@@ -16,7 +16,7 @@ namespace IotaWalletNet.Application
         private readonly IMediator _mediator;
 
         public Account(IMediator mediator, string username, IWallet wallet)
-            :base(wallet.GetWalletHandle())
+            : base(wallet.GetWalletHandle())
         {
             _mediator = mediator;
             Username = username;

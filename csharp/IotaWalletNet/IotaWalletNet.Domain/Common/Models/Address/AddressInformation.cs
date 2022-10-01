@@ -7,6 +7,6 @@
 
         public bool Used { get; set; }
         public bool Internal { get; set; }
-    
+
     }
 }

@@ -1,7 +1,6 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
-using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,7 +30,6 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()

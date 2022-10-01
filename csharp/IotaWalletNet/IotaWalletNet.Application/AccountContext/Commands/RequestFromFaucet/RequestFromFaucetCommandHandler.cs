@@ -1,6 +1,5 @@
 ﻿using IotaWalletNet.Application.Common.HttpClients;
 using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Interfaces;
 using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet

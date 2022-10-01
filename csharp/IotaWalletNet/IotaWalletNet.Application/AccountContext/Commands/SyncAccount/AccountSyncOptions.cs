@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
+﻿namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {
     public class AccountSyncOptions
     {
@@ -37,7 +35,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
         public bool SyncPendingTransactions { get; set; } = true;
 
         public bool SyncAliasesAndNfts { get; set; } = true;
-        
+
         /** Specifies if only basic outputs with an AddressUnlockCondition alone should be synced, will overwrite
           * `syncAliasesAndNfts`. Default: false. 
         */

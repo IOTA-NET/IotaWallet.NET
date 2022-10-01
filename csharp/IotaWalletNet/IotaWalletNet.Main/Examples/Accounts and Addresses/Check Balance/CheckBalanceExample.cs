@@ -1,7 +1,6 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
-using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,7 +30,6 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
@@ -43,13 +41,13 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
 
                 //We can retrieve all account info
                 string response = await wallet.GetAccountsAsync();
-                
+
                 //Or we can simply retrieve a particular account with its username
                 //Let's retrieve our cookiemonster account
-                ( response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                (response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
                 Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
 
-                if(account == null)
+                if (account == null)
                 {
                     Console.WriteLine("There was a problem retreiving the account.");
                     return;
