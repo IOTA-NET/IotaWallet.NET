@@ -17,16 +17,19 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ./csharp/IotaWalletNet 
+
     - name: Build
-      #run: dotnet build --no-restore --configuration Release ${{ env.MAIN_SOLUTION_PATH }}
       run: dotnet build --configuration Release --no-restore
-      working-directory: ./csharp/IotaWalletNet 
-    #- name: Test
-    #  run: dotnet test --no-build --verbosity normal
+      working-directory: ./csharp/IotaWalletNet
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
