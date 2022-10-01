@@ -7,7 +7,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
     {
         protected IServiceScope _serviceScope;
         protected const String STRONGHOLD_PATH = "./stronghold";
-        protected const string DATABASE_PATH = "./mywalletdb";
+        protected const string DATABASE_PATH = "./walletdb";
 
         public DependencyTestBase()
         {
