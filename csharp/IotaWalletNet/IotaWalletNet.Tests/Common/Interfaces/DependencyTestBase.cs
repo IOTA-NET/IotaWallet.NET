@@ -36,6 +36,9 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         {
             _serviceScope.Dispose();
 
+            //Force garbage collection
+            GC.Collect();
+
             //Give enough time for services to close
             Thread.Sleep(100);
 
