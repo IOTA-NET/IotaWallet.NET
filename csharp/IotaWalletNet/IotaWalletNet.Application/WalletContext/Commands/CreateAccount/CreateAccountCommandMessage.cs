@@ -4,7 +4,7 @@ namespace IotaWalletNet.Application.WalletContext.Commands.CreateAccount
 {
     public class CreateAccountCommandMessage : Message<CreateAccountPayload>
     {
-        private const string COMMAND = "CreateAccount";
+        private const string COMMAND = "createAccount";
 
         public CreateAccountCommandMessage(string username)
         {

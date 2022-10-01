@@ -6,7 +6,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
     public class SendAmountCommandMessage : AccountMessage<AddressesWithAmountAndTransactionOptions>
     {
 
-        private const string METHOD_NAME = "SendAmount";
+        private const string METHOD_NAME = "sendAmount";
 
         public SendAmountCommandMessage(string username, AddressesWithAmountAndTransactionOptions methodData)
             : base(username, METHOD_NAME, methodData)
