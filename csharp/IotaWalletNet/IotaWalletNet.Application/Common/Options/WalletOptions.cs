@@ -9,7 +9,7 @@ namespace IotaWalletNet.Application.Common.Options
     public class WalletOptionsBuilder
     {
         private readonly IWallet _wallet;
-        private WalletOptions _walletOptions;
+        private readonly WalletOptions _walletOptions;
         public WalletOptionsBuilder(IWallet wallet)
         {
             _wallet = wallet;

@@ -5,8 +5,6 @@ using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using System.Dynamic;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
 {
@@ -58,7 +56,7 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
                 GenerateAddressesCommandResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
                 string? generatedAddress = generateAddressesCommandResponse?.Payload?.FirstOrDefault()?.Address;
 
-                if(generatedAddress.IsNotNullAndEmpty())
+                if (generatedAddress.IsNotNullAndEmpty())
                     Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
             }
         }

@@ -1,7 +1,6 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
-using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,6 +1,4 @@
-﻿using IotaWalletNet.Application.Common.Interfaces;
-
-namespace IotaWalletNet.Application.Common.HttpClients
+﻿namespace IotaWalletNet.Application.Common.HttpClients
 {
     public record RequestFromFaucetModel
     {

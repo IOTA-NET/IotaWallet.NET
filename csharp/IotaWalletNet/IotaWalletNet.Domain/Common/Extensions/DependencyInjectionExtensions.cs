@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace IotaWalletNet.Domain.Common.Extensions
 {
@@ -7,7 +6,7 @@ namespace IotaWalletNet.Domain.Common.Extensions
     {
         public static IServiceCollection AddDomainServices(this IServiceCollection serviceDescriptors)
         {
-            
+
 
             return serviceDescriptors;
         }

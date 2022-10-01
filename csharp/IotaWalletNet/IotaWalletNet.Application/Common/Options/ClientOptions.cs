@@ -1,5 +1,4 @@
 ﻿using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Interfaces;
 
 namespace IotaWalletNet.Application.Common.Options
 {
@@ -17,8 +16,8 @@ namespace IotaWalletNet.Application.Common.Options
 
     public class ClientOptionsBuilder
     {
-        private IWallet _wallet;
-        private ClientOptions _clientOptions;
+        private readonly IWallet _wallet;
+        private readonly ClientOptions _clientOptions;
 
         public ClientOptionsBuilder(IWallet wallet)
         {

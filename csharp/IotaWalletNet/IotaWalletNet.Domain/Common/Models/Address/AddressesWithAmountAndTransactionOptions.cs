@@ -4,7 +4,7 @@ namespace IotaWalletNet.Domain.Common.Models.Address
 {
     public class AddressesWithAmountAndTransactionOptions
     {
-        
+
         public AddressesWithAmountAndTransactionOptions AddAddressAndAmount(string address, string amount)
         {
             AddressWithAmount addressWithAmount = new AddressWithAmount(address, amount);

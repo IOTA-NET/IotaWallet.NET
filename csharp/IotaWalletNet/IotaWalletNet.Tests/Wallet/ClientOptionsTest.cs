@@ -20,7 +20,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsFallbackToLocalPow()
                         .AddNodeUrl("www.test.com")
                         .ThenBuild();
-            
+
             wallet.Should().NotBeNull();
         }
 

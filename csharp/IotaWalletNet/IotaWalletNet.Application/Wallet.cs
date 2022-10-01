@@ -22,7 +22,7 @@ namespace IotaWalletNet.Application
 
         private StringBuilder _errorBuffer;
 
-        private WalletOptions _walletOptions;
+        private readonly WalletOptions _walletOptions;
 
         private readonly IMediator _mediator;
 
@@ -43,7 +43,7 @@ namespace IotaWalletNet.Application
             _mediator = mediator;
         }
 
-        
+
 
         public async Task<string> GetAccountsAsync()
         {
@@ -53,11 +53,11 @@ namespace IotaWalletNet.Application
 
         public async Task<(string response, IAccount? account)> GetAccountAsync(string username)
         {
-            string response =  await _mediator.Send(new GetAccountQuery(this, username));
+            string response = await _mediator.Send(new GetAccountQuery(this, username));
             dynamic jsonResponse = JsonConvert.DeserializeObject(response);
             string retrievedUsername = jsonResponse.alias;
 
-            if(int.TryParse(retrievedUsername, out _)) //not a usernamed alias but an index instead
+            if (int.TryParse(retrievedUsername, out _)) //not a usernamed alias but an index instead
             {
                 return (response, null);
             }
@@ -121,7 +121,7 @@ namespace IotaWalletNet.Application
 
             return this;
         }
-       
+
         public WalletOptions GetWalletOptions() => _walletOptions;
 
 

@@ -8,7 +8,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
         public GetBalanceQueryMessage(string username)
             : base(username, METHOD_NAME)
         {
-            
+
         }
     }
 }

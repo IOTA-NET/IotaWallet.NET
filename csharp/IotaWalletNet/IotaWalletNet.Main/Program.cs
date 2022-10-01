@@ -1,9 +1,4 @@
-﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
-using IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address;
-using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet;
-using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction;
-using Newtonsoft.Json;
-using System.Dynamic;
+﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address;
 
 namespace IotaWalletNet.Main
 {

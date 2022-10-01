@@ -1,5 +1,4 @@
 ﻿using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.SerializerSettings;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -17,7 +16,7 @@ namespace IotaWalletNet.Application.Common.Options
     public class SecretManagerOptionsBuilder
     {
         private readonly IWallet _wallet;
-        private StrongholdOptions _strongholdOptions;
+        private readonly StrongholdOptions _strongholdOptions;
 
         public SecretManagerOptionsBuilder(IWallet wallet)
         {
