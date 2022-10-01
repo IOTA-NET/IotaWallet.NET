@@ -1,4 +1,7 @@
-﻿using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application;
+using IotaWalletNet.Application.Common.Extensions;
+using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Application.Common.Options;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IotaWalletNet.Tests.Common.Interfaces
@@ -8,6 +11,8 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected IServiceScope _serviceScope;
         protected const String STRONGHOLD_PATH = "./stronghold";
         protected const string DATABASE_PATH = "./walletdb";
+        protected const string DEFAULT_MNEMONIC = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+        protected const string DEFAFULT_API_URL = "https://api.testnet.shimmer.network";
 
         public DependencyTestBase()
         {
@@ -20,6 +25,26 @@ namespace IotaWalletNet.Tests.Common.Interfaces
             //Use serviceprovider to create a scope, which disposes of all services at end of scope
             _serviceScope = serviceProvider.CreateScope();
         }
+
+        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl=DEFAFULT_API_URL)
+        {
+            return wallet
+                        .ConfigureWalletOptions()
+                            .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                            .SetStoragePath(DATABASE_PATH)
+                            .ThenBuild()
+                        .ConfigureClientOptions()
+                            .AddNodeUrl(nodeUrl)
+                            .IsFallbackToLocalPow()
+                            .IsLocalPow()
+                            .ThenBuild()
+                        .ConfigureSecretManagerOptions()
+                            .SetPassword("password")
+                            .SetSnapshotPath(STRONGHOLD_PATH)
+                            .ThenBuild()
+                        .ThenInitialize();
+        }
+
 
         public void StrongholdCleanup(string path=STRONGHOLD_PATH)
         {

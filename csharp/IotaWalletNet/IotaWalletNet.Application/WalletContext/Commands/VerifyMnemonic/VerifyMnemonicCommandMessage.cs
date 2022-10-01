@@ -4,7 +4,7 @@ namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
 {
     public class VerifyMnemonicCommandMessage : Message<string>
     {
-        private const string COMMAND = "VerifyMnemonic";
+        private const string COMMAND = "verifyMnemonic";
 
         public VerifyMnemonicCommandMessage(string mnemonic)
         {
