@@ -7,8 +7,10 @@ using static IotaWalletNet.Application.Common.Options.WalletOptions;
 
 namespace IotaWalletNet.Tests.Wallet
 {
+    [Collection("Sequential")]
     public class WalletTest : DependencyTestBase
     {
+
         [Fact]
         public void WalletShouldBeInitializedWithBasicConfigurations()
         {
@@ -29,6 +31,8 @@ namespace IotaWalletNet.Tests.Wallet
                 .Invoking(w => w = w.ThenInitialize())
                 .Should()
                 .NotThrow();
+
+            
         }
 
         [Fact]
@@ -55,6 +59,8 @@ namespace IotaWalletNet.Tests.Wallet
                 .Invoking(w => w = w.ThenInitialize())
                 .Should()
                 .NotThrow();
+
+            
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IotaWalletNet.Tests.Wallet
 {
+    [Collection("Sequential")]
     public class SecretManagerOptionsTest : DependencyTestBase
     {
         [Fact]
@@ -19,6 +20,8 @@ namespace IotaWalletNet.Tests.Wallet
                             .ThenBuild();
 
             wallet.Should().NotBeNull();
+
+            
         }
 
         [Fact]
@@ -38,6 +41,7 @@ namespace IotaWalletNet.Tests.Wallet
             secretManagerOptions.Stronghold.SnapshotPath.Equals(STRONGHOLD_PATH);
             secretManagerOptions.Stronghold.Password.Equals(password);
 
+            
         }
     }
 }

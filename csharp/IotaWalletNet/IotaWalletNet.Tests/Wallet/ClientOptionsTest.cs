@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IotaWalletNet.Tests.Wallet
 {
+    [Collection("Sequential")]
     public class ClientOptionsTest : DependencyTestBase
     {
 
@@ -21,6 +22,8 @@ namespace IotaWalletNet.Tests.Wallet
                         .ThenBuild();
 
             wallet.Should().NotBeNull();
+
+            
         }
 
         [Fact]
@@ -41,6 +44,8 @@ namespace IotaWalletNet.Tests.Wallet
 
             clientOptions.Nodes.Should().HaveCount(1);
             clientOptions.Nodes.First().Equals(nodeUrl);
+
+            
         }
 
         [Fact]
@@ -63,6 +68,8 @@ namespace IotaWalletNet.Tests.Wallet
             clientOptions.Nodes.Should().HaveCount(2);
             clientOptions.Nodes.First().Equals(nodeUrl);
             clientOptions.Nodes.ToList()[1].Equals(secondNodeUrl);
+
+            
         }
 
         [Fact]
@@ -99,6 +106,7 @@ namespace IotaWalletNet.Tests.Wallet
             clientOptions.Nodes.Should().HaveCount(1);
             clientOptions.Nodes.First().Equals(nodeUrl);
 
+            
         }
     }
 }
