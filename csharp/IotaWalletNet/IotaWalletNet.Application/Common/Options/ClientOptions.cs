@@ -5,7 +5,7 @@ namespace IotaWalletNet.Application.Common.Options
 {
     public class ClientOptions
     {
-        public List<string> Nodes { get; set; } = new List<string>();
+        public HashSet<string> Nodes { get; set; } = new HashSet<string>();
 
         public bool LocalPow { get; set; } = true;
 
