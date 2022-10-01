@@ -6,6 +6,8 @@ namespace IotaWalletNet.Tests.Common.Interfaces
     public class DependencyTestBase : IDisposable
     {
         protected IServiceScope _serviceScope;
+        protected const String STRONGHOLD_PATH = "./stronghold";
+        protected const string DATABASE_PATH = "./walletdb";
 
         public DependencyTestBase()
         {
@@ -19,9 +21,30 @@ namespace IotaWalletNet.Tests.Common.Interfaces
             _serviceScope = serviceProvider.CreateScope();
         }
 
+        public void StrongholdCleanup(string path=STRONGHOLD_PATH)
+        {
+            if(File.Exists(path))
+                File.Delete(path);
+        }
+
+        public void DatabaseCleanup(string path=DATABASE_PATH)
+        {
+            if(Directory.Exists(path))
+                Directory.Delete(path, true);
+        }
         public void Dispose()
         {
             _serviceScope.Dispose();
+
+            //Force garbage collection
+            GC.Collect();
+
+            //Give enough time for services to close
+            Thread.Sleep(100);
+
+            StrongholdCleanup();
+            DatabaseCleanup();
+
         }
     }
 }

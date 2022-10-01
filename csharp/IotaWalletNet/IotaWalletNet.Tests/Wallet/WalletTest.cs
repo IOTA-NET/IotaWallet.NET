@@ -7,8 +7,10 @@ using static IotaWalletNet.Application.Common.Options.WalletOptions;
 
 namespace IotaWalletNet.Tests.Wallet
 {
+    [Collection("Sequential")]
     public class WalletTest : DependencyTestBase
     {
+
         [Fact]
         public void WalletShouldBeInitializedWithBasicConfigurations()
         {
@@ -29,6 +31,8 @@ namespace IotaWalletNet.Tests.Wallet
                 .Invoking(w => w = w.ThenInitialize())
                 .Should()
                 .NotThrow();
+
+            
         }
 
         [Fact]
@@ -39,7 +43,7 @@ namespace IotaWalletNet.Tests.Wallet
             wallet = wallet
                         .ConfigureWalletOptions()
                             .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
-                            .SetStoragePath("./walletdb")
+                            .SetStoragePath(DATABASE_PATH)
                             .ThenBuild()
                         .ConfigureClientOptions()
                             .AddNodeUrl("https://api.testnet.shimmer.network")
@@ -48,13 +52,15 @@ namespace IotaWalletNet.Tests.Wallet
                             .ThenBuild()
                         .ConfigureSecretManagerOptions()
                             .SetPassword("password")
-                            .SetSnapshotPath("./mystronghold")
+                            .SetSnapshotPath(STRONGHOLD_PATH)
                             .ThenBuild();
 
             wallet
                 .Invoking(w => w = w.ThenInitialize())
                 .Should()
                 .NotThrow();
+
+            
         }
     }
 }

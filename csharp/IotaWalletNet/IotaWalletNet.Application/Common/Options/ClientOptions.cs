@@ -10,6 +10,8 @@ namespace IotaWalletNet.Application.Common.Options
 
         public bool FallbackToLocalPow { get; set; } = true;
 
+        //public bool Offline { get; set; } = true;
+
     }
 
     public class ClientOptionsBuilder
