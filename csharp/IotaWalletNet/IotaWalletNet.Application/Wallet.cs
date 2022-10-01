@@ -15,7 +15,7 @@ using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
 
 namespace IotaWalletNet.Application
 {
-    public class Wallet : RustBridgeCommunicator, IWallet, IDisposable
+    public class Wallet : RustBridgeCommunicator, IWallet
     {
 
         #region Variables
@@ -134,6 +134,7 @@ namespace IotaWalletNet.Application
 
         public WalletOptionsBuilder ConfigureWalletOptions()
             => new WalletOptionsBuilder(this);
+
 
         public void Dispose()
         {

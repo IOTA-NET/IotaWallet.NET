@@ -4,7 +4,7 @@ using IotaWalletNet.Domain.Common.Interfaces;
 
 namespace IotaWalletNet.Application.Common.Interfaces
 {
-    public interface IWallet : IRustBridgeCommunicator
+    public interface IWallet : IRustBridgeCommunicator, IDisposable
     {
         ClientOptionsBuilder ConfigureClientOptions();
         SecretManagerOptionsBuilder ConfigureSecretManagerOptions();
