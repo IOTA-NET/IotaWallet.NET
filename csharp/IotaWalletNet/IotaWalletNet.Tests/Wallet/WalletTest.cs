@@ -39,7 +39,7 @@ namespace IotaWalletNet.Tests.Wallet
             wallet = wallet
                         .ConfigureWalletOptions()
                             .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
-                            .SetStoragePath("./walletdb")
+                            .SetStoragePath(DATABASE_PATH)
                             .ThenBuild()
                         .ConfigureClientOptions()
                             .AddNodeUrl("https://api.testnet.shimmer.network")
@@ -48,7 +48,7 @@ namespace IotaWalletNet.Tests.Wallet
                             .ThenBuild()
                         .ConfigureSecretManagerOptions()
                             .SetPassword("password")
-                            .SetSnapshotPath("./mystronghold")
+                            .SetSnapshotPath(STRONGHOLD_PATH)
                             .ThenBuild();
 
             wallet

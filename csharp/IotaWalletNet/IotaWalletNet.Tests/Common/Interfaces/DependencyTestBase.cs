@@ -36,6 +36,9 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         {
             _serviceScope.Dispose();
 
+            //Give enough time for services to close
+            Thread.Sleep(100);
+
             StrongholdCleanup();
             DatabaseCleanup();
 
