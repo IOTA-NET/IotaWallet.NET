@@ -17,7 +17,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
@@ -33,3 +33,4 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: ./csharp/IotaWalletNet
