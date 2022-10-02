@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using IotaWalletNet.Domain.PlatformInvoke;
+using MediatR;
 using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
@@ -9,9 +10,9 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
         {
             SyncAccountCommandMessage message = new SyncAccountCommandMessage(request.Username, new AccountSyncOptions());
             string json = JsonConvert.SerializeObject(message);
-            string response = await request.Account.SendMessageAsync(json);
+            RustBridgeGenericResponse response = await request.Account.SendMessageAsync(json);
 
-            return response;
+            return "";
         }
     }
 }

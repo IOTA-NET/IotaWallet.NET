@@ -79,7 +79,7 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new StoreMnemonicCommand(this, mnemonic));
         }
 
-        public async Task<string> VerifyMnemonicAsync(string mnemonic)
+        public async Task<VerifyMnemonicCommandResponse> VerifyMnemonicAsync(string mnemonic)
         {
             return await _mediator.Send(new VerifyMnemonicCommand(this, mnemonic));
         }

@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Domain.Common.Models.Address;
+using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
 
@@ -21,10 +22,10 @@ namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 
             GenerateAddressesCommandMessage message = new GenerateAddressesCommandMessage(request.Username, data);
             string json = JsonConvert.SerializeObject(message);
-            string jsonResponse = await request.Account.SendMessageAsync(json);
-            GenerateAddressesCommandResponse? response = JsonConvert.DeserializeObject<GenerateAddressesCommandResponse>(jsonResponse);
+            RustBridgeGenericResponse jsonResponse = await request.Account.SendMessageAsync(json);
+            //GenerateAddressesCommandResponse? response = JsonConvert.DeserializeObject<GenerateAddressesCommandResponse>(jsonResponse);
 
-            return response;
+            return new GenerateAddressesCommandResponse();
         }
     }
 }

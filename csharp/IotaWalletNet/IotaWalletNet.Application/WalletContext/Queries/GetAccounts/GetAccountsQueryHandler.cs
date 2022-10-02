@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using IotaWalletNet.Domain.PlatformInvoke;
+using MediatR;
 using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetAccounts
@@ -9,8 +10,9 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetAccounts
         {
             GetAccountsQueryMessage message = new GetAccountsQueryMessage();
             string json = JsonConvert.SerializeObject(message);
-            string response = await request.Wallet.SendMessageAsync(json);
-            return response;
+            RustBridgeGenericResponse response = await request.Wallet.SendMessageAsync(json);
+            
+            return "";
         }
     }
 }
