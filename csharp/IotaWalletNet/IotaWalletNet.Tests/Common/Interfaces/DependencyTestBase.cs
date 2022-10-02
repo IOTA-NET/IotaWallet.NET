@@ -16,6 +16,11 @@ namespace IotaWalletNet.Tests.Common.Interfaces
 
         public DependencyTestBase()
         {
+
+            StrongholdCleanup();
+            
+            DatabaseCleanup();
+
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
@@ -35,6 +40,24 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                             .ThenBuild()
                         .ConfigureClientOptions()
                             .AddNodeUrl(nodeUrl)
+                            .IsFallbackToLocalPow()
+                            .IsLocalPow()
+                            .ThenBuild()
+                        .ConfigureSecretManagerOptions()
+                            .SetPassword("password")
+                            .SetSnapshotPath(STRONGHOLD_PATH)
+                            .ThenBuild()
+                        .ThenInitialize();
+        }
+
+        public static IWallet CreateOfflineFullWallet(IWallet wallet, string nodeUrl = DEFAFULT_API_URL)
+        {
+            return wallet
+                        .ConfigureWalletOptions()
+                            .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                            .SetStoragePath(DATABASE_PATH)
+                            .ThenBuild()
+                        .ConfigureClientOptions()
                             .IsFallbackToLocalPow()
                             .IsLocalPow()
                             .ThenBuild()

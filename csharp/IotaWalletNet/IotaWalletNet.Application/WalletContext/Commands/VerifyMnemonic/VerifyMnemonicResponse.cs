@@ -2,7 +2,7 @@
 
 namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
 {
-    public class VerifyMnemonicCommandResponse : RustBridgeResponseBase
+    public class VerifyMnemonicResponse : RustBridgeResponseBase
     {
 
     }
