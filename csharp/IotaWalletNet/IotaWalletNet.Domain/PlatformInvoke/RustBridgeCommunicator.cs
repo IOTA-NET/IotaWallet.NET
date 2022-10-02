@@ -6,7 +6,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
     public abstract class RustBridgeCommunicator : IRustBridgeCommunicator
     {
         protected MessageReceivedCallback _messageReceivedCallback;
-        protected Action<string>? _endOfCallbackSignaller;
+        protected Action<string, bool>? _endOfCallbackSignaller;
         protected IntPtr _walletHandle;
 
         public RustBridgeCommunicator()
@@ -22,10 +22,12 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         }
         public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
         {
+            bool isError = !String.IsNullOrEmpty(error);
+
             string messageToSignal = String.IsNullOrEmpty(message) ? error : message;
 
             if (_endOfCallbackSignaller != null)
-                _endOfCallbackSignaller(messageToSignal);
+                _endOfCallbackSignaller(messageToSignal, isError);
         }
 
         public async Task<string> SendMessageAsync(string message)
