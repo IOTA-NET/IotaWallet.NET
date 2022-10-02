@@ -11,7 +11,7 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetAccounts
             GetAccountsQueryMessage message = new GetAccountsQueryMessage();
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse response = await request.Wallet.SendMessageAsync(json);
-            
+
             return "";
         }
     }

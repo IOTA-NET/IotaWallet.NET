@@ -30,5 +30,5 @@
         public string Type { get; set; }
         public string Error { get; set; }
     }
-    
+
 }

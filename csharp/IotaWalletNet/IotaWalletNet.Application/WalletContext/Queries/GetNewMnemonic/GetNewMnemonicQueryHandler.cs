@@ -11,7 +11,7 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
             GetNewMnemonicQueryMessage message = new GetNewMnemonicQueryMessage();
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(json);
-            
+
             GetNewMnemonicResponse response = genericResponse.IsSuccess
                                                                     ? genericResponse.As<GetNewMnemonicResponse>()!
                                                                     : new GetNewMnemonicResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };

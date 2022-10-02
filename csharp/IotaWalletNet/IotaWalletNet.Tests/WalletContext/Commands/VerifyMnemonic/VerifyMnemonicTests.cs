@@ -19,7 +19,7 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
             response.Should().NotBeNull();
             response.Error.Should().BeNull();
             response.Type.Should().NotBeNullOrEmpty();
-                        
+
 
         }
 

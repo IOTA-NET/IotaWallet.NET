@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Application;
-using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +17,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         {
 
             StrongholdCleanup();
-            
+
             DatabaseCleanup();
 
             //Register all of the dependencies into a collection of services
@@ -31,7 +30,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
             _serviceScope = serviceProvider.CreateScope();
         }
 
-        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl=DEFAFULT_API_URL)
+        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl = DEFAFULT_API_URL)
         {
             return wallet
                         .ConfigureWalletOptions()
@@ -69,15 +68,15 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         }
 
 
-        public void StrongholdCleanup(string path=STRONGHOLD_PATH)
+        public void StrongholdCleanup(string path = STRONGHOLD_PATH)
         {
-            if(File.Exists(path))
+            if (File.Exists(path))
                 File.Delete(path);
         }
 
-        public void DatabaseCleanup(string path=DATABASE_PATH)
+        public void DatabaseCleanup(string path = DATABASE_PATH)
         {
-            if(Directory.Exists(path))
+            if (Directory.Exists(path))
                 Directory.Delete(path, true);
         }
         public void Dispose()

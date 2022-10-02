@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.WalletContext.Commands.StoreMnemonic
 {
     [Collection("Sequential")]
-    public  class StoreMnemonicTests : DependencyTestBase
+    public class StoreMnemonicTests : DependencyTestBase
     {
         [Fact]
         public async Task WalletShouldShouldStoreMnemonicOnlyTheFirstTime()
@@ -16,7 +16,7 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.StoreMnemonic
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
             wallet = CreateOfflineFullWallet(wallet);
 
-            StoreMnemonicResponse storeMnemonicResponse =  await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
+            StoreMnemonicResponse storeMnemonicResponse = await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
             storeMnemonicResponse.IsSuccess().Should().BeTrue();
 
             //Storing the 2nd time with SAME mnemonic is NOT ok
