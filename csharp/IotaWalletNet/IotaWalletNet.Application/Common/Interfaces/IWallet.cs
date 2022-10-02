@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Application.Common.Options;
+using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Domain.Common.Interfaces;
 
@@ -20,6 +21,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         IntPtr GetWalletHandle();
 
         Task<string> StoreMnemonicAsync(string mnemonic);
-        Task<string> VerifyMnemonicAsync(string mnemonic);
+        Task<VerifyMnemonicCommandResponse> VerifyMnemonicAsync(string mnemonic);
     }
 }

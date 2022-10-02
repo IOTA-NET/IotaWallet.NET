@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using IotaWalletNet.Domain.PlatformInvoke;
+using MediatR;
 using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
@@ -9,10 +10,10 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
         {
             GetNewMnemonicQueryMessage message = new GetNewMnemonicQueryMessage();
             string json = JsonConvert.SerializeObject(message);
-            string jsonResponse = await request.Wallet.SendMessageAsync(json);
-            GetNewMnemonicQueryResponse response = JsonConvert.DeserializeObject<GetNewMnemonicQueryResponse>(jsonResponse);
+            RustBridgeGenericResponse jsonResponse = await request.Wallet.SendMessageAsync(json);
+            //GetNewMnemonicQueryResponse response = JsonConvert.DeserializeObject<GetNewMnemonicQueryResponse>(jsonResponse);
 
-            return response;
+            return new GetNewMnemonicQueryResponse();
         }
     }
 }

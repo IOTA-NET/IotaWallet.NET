@@ -6,7 +6,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
     public abstract class RustBridgeCommunicator : IRustBridgeCommunicator
     {
         protected MessageReceivedCallback _messageReceivedCallback;
-        protected Action<string>? _endOfCallbackSignaller;
+        protected Action<RustBridgeGenericResponse>? _endOfCallbackSignaller;
         protected IntPtr _walletHandle;
 
         public RustBridgeCommunicator()
@@ -22,16 +22,24 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         }
         public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
         {
-            string messageToSignal = String.IsNullOrEmpty(message) ? error : message;
+            bool isSuccess = String.IsNullOrEmpty(error) && !message.Contains(@"{""type"":""error");
+
+            string messageToSignal = String.IsNullOrEmpty(error) ? message : error;
 
             if (_endOfCallbackSignaller != null)
-                _endOfCallbackSignaller(messageToSignal);
+                _endOfCallbackSignaller(new RustBridgeGenericResponse(messageToSignal, isSuccess));
         }
 
-        public async Task<string> SendMessageAsync(string message)
+        /// <summary>
+        /// Sends messages to the rust message interface. 
+        /// In order to follow a async programming paradigm, we create a TaskCompletion Source internally.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public async Task<RustBridgeGenericResponse> SendMessageAsync(string message)
         {
 
-            var taskCompletionSource = new TaskCompletionSource<string>();
+            var taskCompletionSource = new TaskCompletionSource<RustBridgeGenericResponse>();
             var task = taskCompletionSource.Task;
             _endOfCallbackSignaller = taskCompletionSource.SetResult;
 
