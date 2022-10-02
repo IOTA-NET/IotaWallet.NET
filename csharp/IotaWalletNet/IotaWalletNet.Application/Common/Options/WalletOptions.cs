@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using static IotaWalletNet.Application.Common.Options.WalletOptions;
-using JsonIgnoreAttribute = Newtonsoft.Json.JsonIgnoreAttribute;
 
 namespace IotaWalletNet.Application.Common.Options
 {
@@ -33,8 +32,8 @@ namespace IotaWalletNet.Application.Common.Options
 
     public class WalletOptions
     {
-        private SecretManagerOptions _secretManagerOptions;
-        private ClientOptions _clientConfigOptions = new ClientOptions();
+        private readonly SecretManagerOptions _secretManagerOptions;
+        private readonly ClientOptions _clientConfigOptions = new ClientOptions();
 
         public string StoragePath { get; set; } = "./walletdb";
 
@@ -58,7 +57,7 @@ namespace IotaWalletNet.Application.Common.Options
 
 
         [JsonProperty(PropertyName = "clientOptions")]
-        public ClientOptions ClientConfigOptions{ get; set; }
+        public ClientOptions ClientConfigOptions { get; set; }
 
         #endregion
     }

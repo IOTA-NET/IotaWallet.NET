@@ -1,9 +1,11 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
+using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 {
@@ -43,14 +45,15 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 
 
                 //Let's generate a new Mnemonic
-                GetNewMnemonicQueryResponse getNewMnemonicQueryResponse = await wallet.GetNewMnemonicAsync();
-                string newMnemonic = getNewMnemonicQueryResponse.Payload;
+                GetNewMnemonicResponse getNewMnemonicResponse = await wallet.GetNewMnemonicAsync();
+                string newMnemonic = getNewMnemonicResponse.Payload!;
                 Console.WriteLine($"GetNewMnemonicAsync: {newMnemonic}");
 
                 //Store into stronghold
-                string response = await wallet.StoreMnemonicAsync(newMnemonic);
-                Console.WriteLine($"StoreMnemonicAsync: {response.PrettyJson()}");
+                StoreMnemonicResponse storeMnemonicResponse = await wallet.StoreMnemonicAsync(newMnemonic);
+                Console.WriteLine($"StoreMnemonicAsync: {JsonConvert.SerializeObject(storeMnemonicResponse)}");
 
+                string response;
                 //Let's create 2 accounts, with usernames cookiemonster and elmo
                 (response, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
                 Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");

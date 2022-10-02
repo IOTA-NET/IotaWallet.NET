@@ -4,17 +4,17 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
 {
-    public class VerifyMnemonicCommandHandler : IRequestHandler<VerifyMnemonicCommand, VerifyMnemonicCommandResponse>
+    public class VerifyMnemonicCommandHandler : IRequestHandler<VerifyMnemonicCommand, VerifyMnemonicResponse>
     {
-        public async Task<VerifyMnemonicCommandResponse> Handle(VerifyMnemonicCommand request, CancellationToken cancellationToken)
+        public async Task<VerifyMnemonicResponse> Handle(VerifyMnemonicCommand request, CancellationToken cancellationToken)
         {
             VerifyMnemonicCommandMessage message = new VerifyMnemonicCommandMessage(request.Mnemonic);
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(json);
 
-            VerifyMnemonicCommandResponse response = genericResponse.IsSuccess
-                                                                    ? genericResponse.As<VerifyMnemonicCommandResponse>()!
-                                                                    : new VerifyMnemonicCommandResponse() { Error = genericResponse.As<RustBridgeResponseError>() };
+            VerifyMnemonicResponse response = genericResponse.IsSuccess
+                                                                    ? genericResponse.As<VerifyMnemonicResponse>()!
+                                                                    : new VerifyMnemonicResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
 
             return response;
         }

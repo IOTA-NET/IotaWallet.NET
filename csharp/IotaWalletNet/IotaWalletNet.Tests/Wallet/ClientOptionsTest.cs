@@ -14,7 +14,7 @@ namespace IotaWalletNet.Tests.Wallet
         public void ClientOptionsBuilderShouldReturnWalletWhenBuild()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            
+
             wallet = wallet
                         .ConfigureClientOptions()
                         .IsLocalPow()
@@ -24,7 +24,7 @@ namespace IotaWalletNet.Tests.Wallet
 
             wallet.Should().NotBeNull();
 
-            
+
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace IotaWalletNet.Tests.Wallet
             clientOptions.Nodes.Should().HaveCount(1);
             clientOptions.Nodes.First().Equals(nodeUrl);
 
-            
+
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace IotaWalletNet.Tests.Wallet
             clientOptions.Nodes.First().Equals(nodeUrl);
             clientOptions.Nodes.ToList()[1].Equals(secondNodeUrl);
 
-            
+
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace IotaWalletNet.Tests.Wallet
             clientOptions.Nodes.Should().HaveCount(1);
             clientOptions.Nodes.First().Equals(nodeUrl);
 
-            
+
         }
     }
 }

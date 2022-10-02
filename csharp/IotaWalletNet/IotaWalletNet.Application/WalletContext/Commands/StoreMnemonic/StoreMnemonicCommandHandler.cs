@@ -4,15 +4,20 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic
 {
-    public class StoreMnemonicCommandHandler : IRequestHandler<StoreMnemonicCommand, string>
+    public class StoreMnemonicCommandHandler : IRequestHandler<StoreMnemonicCommand, StoreMnemonicResponse>
     {
-        public async Task<string> Handle(StoreMnemonicCommand request, CancellationToken cancellationToken)
+        public async Task<StoreMnemonicResponse> Handle(StoreMnemonicCommand request, CancellationToken cancellationToken)
         {
             StoreMnemonicCommandMessage message = new StoreMnemonicCommandMessage(request.Mnemonic);
             string messageJson = JsonConvert.SerializeObject(message);
-            RustBridgeGenericResponse response = await request.Wallet.SendMessageAsync(messageJson);
+            RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(messageJson);
 
-            return "";
+
+            StoreMnemonicResponse response = genericResponse.IsSuccess
+                                                                    ? genericResponse.As<StoreMnemonicResponse>()!
+                                                                    : new StoreMnemonicResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+
+            return response;
         }
     }
 }

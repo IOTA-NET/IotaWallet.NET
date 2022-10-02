@@ -13,13 +13,13 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
         public async Task WalletShouldValidateTrueForCorrectMnemonic()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            wallet = CreateFullWallet(wallet);
+            wallet = CreateOfflineFullWallet(wallet);
 
-            VerifyMnemonicCommandResponse response = await wallet.VerifyMnemonicAsync(DEFAULT_MNEMONIC);
+            VerifyMnemonicResponse response = await wallet.VerifyMnemonicAsync(DEFAULT_MNEMONIC);
             response.Should().NotBeNull();
             response.Error.Should().BeNull();
             response.Type.Should().NotBeNullOrEmpty();
-                        
+
 
         }
 
@@ -27,9 +27,9 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
         public async Task WalletShouldValidateFalseForWrongMnemonic()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            wallet = CreateFullWallet(wallet);
+            wallet = CreateOfflineFullWallet(wallet);
 
-            VerifyMnemonicCommandResponse response = await wallet.VerifyMnemonicAsync("wrong mnemonic");
+            VerifyMnemonicResponse response = await wallet.VerifyMnemonicAsync("wrong mnemonic");
             response.Should().NotBeNull();
             response.Error.Should().NotBeNull();
             response.Type.Should().NotBeNullOrEmpty();

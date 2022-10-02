@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Application;
-using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +15,11 @@ namespace IotaWalletNet.Tests.Common.Interfaces
 
         public DependencyTestBase()
         {
+
+            StrongholdCleanup();
+
+            DatabaseCleanup();
+
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
 
@@ -26,7 +30,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
             _serviceScope = serviceProvider.CreateScope();
         }
 
-        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl=DEFAFULT_API_URL)
+        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl = DEFAFULT_API_URL)
         {
             return wallet
                         .ConfigureWalletOptions()
@@ -45,16 +49,34 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                         .ThenInitialize();
         }
 
-
-        public void StrongholdCleanup(string path=STRONGHOLD_PATH)
+        public static IWallet CreateOfflineFullWallet(IWallet wallet, string nodeUrl = DEFAFULT_API_URL)
         {
-            if(File.Exists(path))
+            return wallet
+                        .ConfigureWalletOptions()
+                            .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                            .SetStoragePath(DATABASE_PATH)
+                            .ThenBuild()
+                        .ConfigureClientOptions()
+                            .IsFallbackToLocalPow()
+                            .IsLocalPow()
+                            .ThenBuild()
+                        .ConfigureSecretManagerOptions()
+                            .SetPassword("password")
+                            .SetSnapshotPath(STRONGHOLD_PATH)
+                            .ThenBuild()
+                        .ThenInitialize();
+        }
+
+
+        public void StrongholdCleanup(string path = STRONGHOLD_PATH)
+        {
+            if (File.Exists(path))
                 File.Delete(path);
         }
 
-        public void DatabaseCleanup(string path=DATABASE_PATH)
+        public void DatabaseCleanup(string path = DATABASE_PATH)
         {
-            if(Directory.Exists(path))
+            if (Directory.Exists(path))
                 Directory.Delete(path, true);
         }
         public void Dispose()

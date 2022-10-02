@@ -3,8 +3,8 @@
     public abstract class RustBridgeResponseBase<TPayload>
     {
 
-        public string Type { get; } = "ok";
-        public TPayload? Payload { get; }
+        public string Type { get; set; } = "ok";
+        public TPayload? Payload { get; set; }
 
         public RustBridgeResponseError? Error { get; set; }
     }
@@ -12,7 +12,7 @@
     public abstract class RustBridgeResponseBase
     {
 
-        public string Type { get; } = "ok";
+        public string Type { get; set; } = "ok";
 
         public RustBridgeResponseError? Error { get; set; }
 
@@ -30,5 +30,5 @@
         public string Type { get; set; }
         public string Error { get; set; }
     }
-    
+
 }

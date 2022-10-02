@@ -16,13 +16,13 @@ namespace IotaWalletNet.Tests.WalletContext.Queries.GetNewMnemonic
 
             wallet = CreateFullWallet(wallet);
 
-            GetNewMnemonicQueryResponse? getNewMnemonicQueryResponse=null;
+            GetNewMnemonicResponse? getNewMnemonicResponse = null;
 
-            await wallet.Invoking(async w => getNewMnemonicQueryResponse = await w.GetNewMnemonicAsync())
+            await wallet.Invoking(async w => getNewMnemonicResponse = await w.GetNewMnemonicAsync())
                         .Should()
                         .NotThrowAsync();
 
-            string? mnemonic = getNewMnemonicQueryResponse?.Payload;
+            string? mnemonic = getNewMnemonicResponse?.Payload;
 
             mnemonic.Should().NotBeNullOrEmpty();
 

@@ -21,7 +21,7 @@ namespace IotaWalletNet.Tests.Wallet
 
             wallet.Should().NotBeNull();
 
-            
+
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace IotaWalletNet.Tests.Wallet
             secretManagerOptions.Stronghold.SnapshotPath.Equals(STRONGHOLD_PATH);
             secretManagerOptions.Stronghold.Password.Equals(password);
 
-            
+
         }
     }
 }

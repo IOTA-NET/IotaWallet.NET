@@ -69,17 +69,17 @@ namespace IotaWalletNet.Application
             }
         }
 
-        public async Task<GetNewMnemonicQueryResponse> GetNewMnemonicAsync()
+        public async Task<GetNewMnemonicResponse> GetNewMnemonicAsync()
         {
             return await _mediator.Send(new GetNewMnemonicQuery(this));
         }
 
-        public async Task<string> StoreMnemonicAsync(string mnemonic)
+        public async Task<StoreMnemonicResponse> StoreMnemonicAsync(string mnemonic)
         {
             return await _mediator.Send(new StoreMnemonicCommand(this, mnemonic));
         }
 
-        public async Task<VerifyMnemonicCommandResponse> VerifyMnemonicAsync(string mnemonic)
+        public async Task<VerifyMnemonicResponse> VerifyMnemonicAsync(string mnemonic)
         {
             return await _mediator.Send(new VerifyMnemonicCommand(this, mnemonic));
         }

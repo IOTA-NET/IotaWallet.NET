@@ -32,7 +32,7 @@ namespace IotaWalletNet.Tests.Wallet
                 .Should()
                 .NotThrow();
 
-            
+
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace IotaWalletNet.Tests.Wallet
                 .Should()
                 .NotThrow();
 
-            
+
         }
     }
 }
