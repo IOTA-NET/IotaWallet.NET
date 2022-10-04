@@ -28,8 +28,4 @@
     <ProjectReference Include="..\IotaWalletNet.Main\IotaWalletNet.Main.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AccountContext\Queries\" />
-  </ItemGroup>
-
 </Project>

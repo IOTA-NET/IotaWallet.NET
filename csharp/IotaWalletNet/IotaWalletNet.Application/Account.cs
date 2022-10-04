@@ -37,7 +37,7 @@ namespace IotaWalletNet.Application
             await _mediator.Send(new RequestFromFaucetCommand(address, url));
         }
 
-        public async Task<string> GetBalanceAsync()
+        public async Task<GetBalanceResponse> GetBalanceAsync()
         {
             return await _mediator.Send(new GetBalanceQuery(this, Username));
         }
