@@ -20,14 +20,17 @@ namespace IotaWalletNet.Tests.WalletContext.Queries.GetAccount
 
             await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
 
-            userNames.ForEach(async username => await wallet.CreateAccountAsync(username));
+            foreach (string username in userNames)
+            {
+                await wallet.CreateAccountAsync(username);
+            }
 
             (GetAccountResponse respose, IAccount? account) = await wallet.GetAccountAsync(userNames[0]);
 
             respose.Should().NotBeNull();
             respose.Payload.Should().NotBeNull();
             respose.Payload!.Alias.Should().Be(userNames[0]);
-            
+
             account.Should().NotBeNull();
             account!.Username.Should().Be(userNames[0]);
 
