@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
-using IotaWalletNet.Domain.PlatformInvoke;
+﻿using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;

@@ -17,7 +17,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
             SyncAccountResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<SyncAccountResponse>()!
                                             : new SyncAccountResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
-            
+
             return response;
         }
     }

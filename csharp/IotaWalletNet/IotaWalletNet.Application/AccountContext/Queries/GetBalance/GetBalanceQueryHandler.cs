@@ -4,15 +4,19 @@ using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
 {
-    public class GetBalanceQueryHandler : IRequestHandler<GetBalanceQuery, string>
+    public class GetBalanceQueryHandler : IRequestHandler<GetBalanceQuery, GetBalanceResponse>
     {
-        public async Task<string> Handle(GetBalanceQuery request, CancellationToken cancellationToken)
+        public async Task<GetBalanceResponse> Handle(GetBalanceQuery request, CancellationToken cancellationToken)
         {
             GetBalanceQueryMessage message = new GetBalanceQueryMessage(request.Username);
             string json = JsonConvert.SerializeObject(message);
-            RustBridgeGenericResponse response = await request.Account.SendMessageAsync(json);
+            RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            return "";
+            GetBalanceResponse response = genericResponse.IsSuccess
+                                            ? genericResponse.As<GetBalanceResponse>()!
+                                            : new GetBalanceResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+
+            return response;
         }
     }
 }

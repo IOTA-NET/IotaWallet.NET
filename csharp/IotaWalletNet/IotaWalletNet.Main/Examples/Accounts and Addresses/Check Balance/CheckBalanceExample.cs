@@ -1,8 +1,7 @@
-﻿using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Domain.Common.Models.Coin;
-using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
@@ -60,8 +59,8 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
                 await account.SyncAccountAsync();
 
                 //Retrieve balance
-                jsonResponse = await account.GetBalanceAsync();
-                Console.WriteLine($"GetBalanceAsync: {jsonResponse.PrettyJson()}");
+                GetBalanceResponse balanceResponse = await account.GetBalanceAsync();
+                Console.WriteLine($"GetBalanceAsync: {JsonConvert.SerializeObject(balanceResponse)}");
             }
         }
     }
