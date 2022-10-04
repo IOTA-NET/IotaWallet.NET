@@ -1,9 +1,10 @@
 ﻿using IotaWalletNet.Application.Common.Interfaces;
 using MediatR;
+using static IotaWalletNet.Application.AccountContext.Commands.SyncAccount.SyncAccountCommandHandler;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {
-    public class SyncAccountCommand : IRequest<string>
+    public class SyncAccountCommand : IRequest<SyncAccountResponse>
     {
         public SyncAccountCommand(IAccount account, string username)
         {

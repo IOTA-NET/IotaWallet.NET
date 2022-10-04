@@ -8,6 +8,7 @@ using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
+using static IotaWalletNet.Application.AccountContext.Commands.SyncAccount.SyncAccountCommandHandler;
 
 namespace IotaWalletNet.Application
 {
@@ -46,7 +47,7 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new SendAmountCommand(this, Username, addressesWithAmountAndTransactionOptions));
         }
 
-        public async Task<string> SyncAccountAsync()
+        public async Task<SyncAccountResponse> SyncAccountAsync()
         {
             return await _mediator.Send(new SyncAccountCommand(this, Username));
         }
