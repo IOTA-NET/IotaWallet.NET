@@ -7,6 +7,8 @@
         public TPayload? Payload { get; set; }
 
         public RustBridgeResponseError? Error { get; set; }
+
+        public bool IsSuccess() => Error == null;
     }
 
     public abstract class RustBridgeResponseBase

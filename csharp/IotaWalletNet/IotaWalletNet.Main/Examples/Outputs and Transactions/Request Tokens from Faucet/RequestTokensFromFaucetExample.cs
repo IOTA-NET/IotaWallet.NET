@@ -1,6 +1,7 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
+using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +26,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                 //Build wallet using a fluent-style configuration api
                 wallet = wallet
                             .ConfigureWalletOptions()
-                                .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                                .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
                                 .ThenBuild()
                             .ConfigureClientOptions()

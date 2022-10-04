@@ -1,6 +1,7 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
+using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IotaWalletNet.Tests.Common.Interfaces
@@ -34,7 +35,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         {
             return wallet
                         .ConfigureWalletOptions()
-                            .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                            .SetCoinType(TypeOfCoin.Shimmer)
                             .SetStoragePath(DATABASE_PATH)
                             .ThenBuild()
                         .ConfigureClientOptions()
@@ -53,7 +54,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         {
             return wallet
                         .ConfigureWalletOptions()
-                            .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                            .SetCoinType(TypeOfCoin.Shimmer)
                             .SetStoragePath(DATABASE_PATH)
                             .ThenBuild()
                         .ConfigureClientOptions()

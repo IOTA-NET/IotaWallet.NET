@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Application.Common.Options;
+using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
@@ -12,7 +13,7 @@ namespace IotaWalletNet.Application.Common.Interfaces
         SecretManagerOptionsBuilder ConfigureSecretManagerOptions();
         WalletOptionsBuilder ConfigureWalletOptions();
         IWallet ThenInitialize();
-        Task<(string response, IAccount? account)> CreateAccountAsync(string username);
+        Task<(CreateAccountResponse response, IAccount? account)> CreateAccountAsync(string username);
         Task<(string response, IAccount? account)> GetAccountAsync(string username);
         Task<string> GetAccountsAsync();
 
