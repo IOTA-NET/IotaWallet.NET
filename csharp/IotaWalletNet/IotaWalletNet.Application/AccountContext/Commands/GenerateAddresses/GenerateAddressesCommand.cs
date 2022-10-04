@@ -4,7 +4,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 {
-    public class GenerateAddressesCommand : IRequest<GenerateAddressesCommandResponse>
+    public class GenerateAddressesCommand : IRequest<GenerateAddressesResponse>
     {
         public GenerateAddressesCommand(IAccount account, NetworkType networkType, string username, uint amount)
         {
