@@ -55,7 +55,7 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
                 }
 
                 //Lets generate 1 new address!
-                GenerateAddressesCommandResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+                GenerateAddressesResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
                 string? generatedAddress = generateAddressesCommandResponse?.Payload?.FirstOrDefault()?.Address;
 
                 if (generatedAddress.IsNotNullAndEmpty())

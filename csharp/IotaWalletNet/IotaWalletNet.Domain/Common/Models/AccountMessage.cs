@@ -4,7 +4,7 @@
     {
         public AccountMessage(string username, string payloadMethodName)
         {
-            Cmd = "CallAccountMethod";
+            Cmd = "callAccountMethod";
             Payload = new AccountPayload(username, payloadMethodName);
         }
     }
@@ -17,7 +17,7 @@
     {
         public AccountMessage(string username, string payloadMethodName, T methodData)
         {
-            Cmd = "CallAccountMethod";
+            Cmd = "callAccountMethod";
             Payload = new AccountPayload<T>(username, payloadMethodName, methodData);
         }
     }

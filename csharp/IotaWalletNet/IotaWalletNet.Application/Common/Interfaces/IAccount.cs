@@ -17,6 +17,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
 
         Task<string> GetBalanceAsync();
         Task RequestFromFaucetAsync(string address, string url);
-        Task<GenerateAddressesCommandResponse?> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
+        Task<GenerateAddressesResponse> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
     }
 }
