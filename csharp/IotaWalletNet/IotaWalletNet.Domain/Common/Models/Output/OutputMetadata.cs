@@ -7,7 +7,7 @@
         * The block id the output was contained in.
         */
         public string? BlockId { get; set; }
-        
+
         /**
          * The transaction id for the output.
          */

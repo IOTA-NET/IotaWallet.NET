@@ -11,7 +11,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
             GetBalanceQueryMessage message = new GetBalanceQueryMessage(request.Username);
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
-            
+
             GetBalanceResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<GetBalanceResponse>()!
                                             : new GetBalanceResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };

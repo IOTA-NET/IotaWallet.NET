@@ -1,6 +1,4 @@
-﻿using System.Security.Principal;
-
-namespace IotaWalletNet.Domain.Common.Models.Output
+﻿namespace IotaWalletNet.Domain.Common.Models.Output
 {
     /// <summary>
     /// An output with Metadata

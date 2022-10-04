@@ -55,7 +55,7 @@ namespace IotaWalletNet.Application
         public async Task<(GetAccountResponse response, IAccount? account)> GetAccountAsync(string username)
         {
             GetAccountResponse response = await _mediator.Send(new GetAccountQuery(this, username));
-            
+
             if (response.IsSuccess())
             {
                 IAccount account = new Account(_mediator, username, this);

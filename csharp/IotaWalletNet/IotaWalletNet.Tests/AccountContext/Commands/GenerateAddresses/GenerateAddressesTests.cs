@@ -19,7 +19,7 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.GenerateAddresses
 
             await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
 
-            (CreateAccountResponse accountResponse, IAccount? account) = 
+            (CreateAccountResponse accountResponse, IAccount? account) =
                 await wallet.CreateAccountAsync("cookiemonster");
 
             GenerateAddressesResponse response = await account!.GenerateAddressesAsync(numberOfAddresses: 1);

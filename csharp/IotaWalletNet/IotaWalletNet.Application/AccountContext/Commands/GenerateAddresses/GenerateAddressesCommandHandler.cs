@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
-using IotaWalletNet.Domain.Common.Models.Address;
+﻿using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
@@ -19,15 +18,15 @@ namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
                     Syncing = true
                 }
             };
-            
+
             GenerateAddressesData data = new GenerateAddressesData(request.Amount, options);
 
             GenerateAddressesCommandMessage message = new GenerateAddressesCommandMessage(request.Username, data);
-            
+
             string json = JsonConvert.SerializeObject(message);
-            
+
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
-            
+
             GenerateAddressesResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<GenerateAddressesResponse>()!
                                             : new GenerateAddressesResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };

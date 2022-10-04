@@ -1,6 +1,6 @@
 ﻿namespace IotaWalletNet.Domain.Common.Models.Output
 {
-    public  class OutputTypeToClaim
+    public class OutputTypeToClaim
     {
         public const string None = "None";
         public const string MicroTransactions = "MicroTransactions";

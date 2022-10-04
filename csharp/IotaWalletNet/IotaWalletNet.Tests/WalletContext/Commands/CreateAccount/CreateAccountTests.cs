@@ -10,7 +10,7 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.CreateAccount
     public class CreateAccountTests : DependencyTestBase
     {
         [Fact]
-        public async Task WalletShouldBeAbleToCreateAccountsWithDifferentUserNames ()
+        public async Task WalletShouldBeAbleToCreateAccountsWithDifferentUserNames()
         {
             List<string> userNames = new List<string> { "cookiemonster", "elmo" };
 

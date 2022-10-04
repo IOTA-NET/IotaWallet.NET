@@ -1,6 +1,4 @@
-﻿using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
-using IotaWalletNet.Domain.Common.Models.Account;
-using IotaWalletNet.Domain.PlatformInvoke;
+﻿using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
 
