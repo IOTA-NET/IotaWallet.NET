@@ -4,6 +4,8 @@ using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
 {
@@ -41,12 +43,12 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
                             .ThenInitialize();
 
                 //We can retrieve all account info
-                string response = await wallet.GetAccountsAsync();
+                string jsonResponse = await wallet.GetAccountsAsync();
 
                 //Or we can simply retrieve a particular account with its username
                 //Let's retrieve our cookiemonster account
-                (response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
+                (GetAccountResponse response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {JsonConvert.SerializeObject(response)}");
 
                 if (account == null)
                 {
@@ -58,8 +60,8 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
                 await account.SyncAccountAsync();
 
                 //Retrieve balance
-                response = await account.GetBalanceAsync();
-                Console.WriteLine($"GetBalanceAsync: {response.PrettyJson()}");
+                jsonResponse = await account.GetBalanceAsync();
+                Console.WriteLine($"GetBalanceAsync: {jsonResponse.PrettyJson()}");
             }
         }
     }

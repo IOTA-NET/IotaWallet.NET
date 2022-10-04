@@ -11,6 +11,7 @@ using MediatR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Text;
+using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
 
 namespace IotaWalletNet.Application
@@ -51,21 +52,19 @@ namespace IotaWalletNet.Application
         }
 
 
-        public async Task<(string response, IAccount? account)> GetAccountAsync(string username)
+        public async Task<(GetAccountResponse response, IAccount? account)> GetAccountAsync(string username)
         {
-            string response = await _mediator.Send(new GetAccountQuery(this, username));
-            dynamic jsonResponse = JsonConvert.DeserializeObject(response);
-            string retrievedUsername = jsonResponse.alias;
-
-            if (int.TryParse(retrievedUsername, out _)) //not a usernamed alias but an index instead
-            {
-                return (response, null);
-            }
-            else
+            GetAccountResponse response = await _mediator.Send(new GetAccountQuery(this, username));
+            
+            if (response.IsSuccess())
             {
                 IAccount account = new Account(_mediator, username, this);
 
                 return (response, account);
+            }
+            else
+            {
+                return (response, null);
             }
         }
 

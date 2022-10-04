@@ -1,18 +1,25 @@
-﻿using IotaWalletNet.Domain.PlatformInvoke;
+﻿using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
+using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
+using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetAccount
 {
-    public class GetAccountQueryHandler : IRequestHandler<GetAccountQuery, string>
+    public partial class GetAccountQueryHandler : IRequestHandler<GetAccountQuery, GetAccountResponse>
     {
-        public async Task<string> Handle(GetAccountQuery request, CancellationToken cancellationToken)
+        public async Task<GetAccountResponse> Handle(GetAccountQuery request, CancellationToken cancellationToken)
         {
             GetAccountQueryMessage message = new GetAccountQueryMessage(request.Username);
             string json = JsonConvert.SerializeObject(message);
-            RustBridgeGenericResponse response = await request.Wallet.SendMessageAsync(json);
+            RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(json);
 
-            return "";
+            GetAccountResponse response = genericResponse.IsSuccess
+                                            ? genericResponse.As<GetAccountResponse>()!
+                                            : new GetAccountResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+
+
+            return response;
         }
     }
 }
