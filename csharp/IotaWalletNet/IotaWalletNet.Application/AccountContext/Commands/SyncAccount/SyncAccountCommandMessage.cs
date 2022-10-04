@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Domain.Common.Models;
+using IotaWalletNet.Domain.Common.Models.Account;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {

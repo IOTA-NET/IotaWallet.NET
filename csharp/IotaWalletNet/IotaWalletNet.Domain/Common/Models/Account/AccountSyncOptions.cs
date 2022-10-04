@@ -1,4 +1,4 @@
-﻿namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
+﻿namespace IotaWalletNet.Domain.Common.Models.Account
 {
     public class AccountSyncOptions
     {
@@ -6,7 +6,7 @@
         * Specific Bech32 encoded addresses of the account to sync, if addresses are provided,
         * then `address_start_index` will be ignored
         */
-        public List<String> Addresses { get; set; } = new List<String>();
+        public List<string> Addresses { get; set; } = new List<string>();
 
         /**
          * Address index from which to start syncing addresses. 0 by default, using a higher index will be faster because
