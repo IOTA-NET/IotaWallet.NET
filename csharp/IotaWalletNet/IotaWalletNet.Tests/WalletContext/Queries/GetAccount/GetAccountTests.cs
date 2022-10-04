@@ -31,7 +31,7 @@ namespace IotaWalletNet.Tests.WalletContext.Queries.GetAccount
             account.Should().NotBeNull();
             account!.Username.Should().Be(userNames[0]);
 
-            (respose, account) = await wallet.GetAccountAsync(userNames[0]);
+            (respose, account) = await wallet.GetAccountAsync(userNames[1]);
 
             respose.Should().NotBeNull();
             respose.Payload.Should().NotBeNull();
