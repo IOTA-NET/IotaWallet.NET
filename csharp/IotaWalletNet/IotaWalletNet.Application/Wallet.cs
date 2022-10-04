@@ -85,12 +85,12 @@ namespace IotaWalletNet.Application
         }
 
 
-        public async Task<(string response, IAccount? account)> CreateAccountAsync(string username)
+        public async Task<(CreateAccountResponse response, IAccount? account)> CreateAccountAsync(string username)
         {
 
-            string response = await _mediator.Send(new CreateAccountCommand(this, username));
+            CreateAccountResponse response = await _mediator.Send(new CreateAccountCommand(this, username));
 
-            if (response.Contains("\"alias\":"))
+            if (response.IsSuccess())
             {
 
                 IAccount account = new Account(_mediator, username, this);
@@ -100,7 +100,6 @@ namespace IotaWalletNet.Application
             else
             {
                 return (response, null);
-
             }
 
 

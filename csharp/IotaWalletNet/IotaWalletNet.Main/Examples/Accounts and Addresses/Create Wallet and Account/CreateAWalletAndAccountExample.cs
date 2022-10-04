@@ -1,8 +1,10 @@
 ﻿using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
+using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
+using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -29,7 +31,7 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
                 //Build wallet using a fluent-style configuration api
                 wallet = wallet
                             .ConfigureWalletOptions()
-                                .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                                .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
                                 .ThenBuild()
                             .ConfigureClientOptions()
@@ -53,13 +55,13 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
                 StoreMnemonicResponse storeMnemonicResponse = await wallet.StoreMnemonicAsync(newMnemonic);
                 Console.WriteLine($"StoreMnemonicAsync: {JsonConvert.SerializeObject(storeMnemonicResponse)}");
 
-                string response;
+                CreateAccountResponse response;
                 //Let's create 2 accounts, with usernames cookiemonster and elmo
                 (response, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
-                Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");
+                Console.WriteLine($"CreateAccountAsync: {JsonConvert.SerializeObject(response)}");
 
                 (response, IAccount? elmoAccount) = await wallet.CreateAccountAsync("elmo");
-                Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");
+                Console.WriteLine($"CreateAccountAsync: {JsonConvert.SerializeObject(response)}");
 
             }
         }

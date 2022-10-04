@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Models.Coin;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using static IotaWalletNet.Application.Common.Options.WalletOptions;
@@ -39,11 +40,7 @@ namespace IotaWalletNet.Application.Common.Options
 
         public int CoinType { get; set; } = (int)TypeOfCoin.Shimmer;
 
-        public enum TypeOfCoin : int
-        {
-            Iota = 4218,
-            Shimmer = 4219,
-        }
+        
 
         public WalletOptions()
         {
