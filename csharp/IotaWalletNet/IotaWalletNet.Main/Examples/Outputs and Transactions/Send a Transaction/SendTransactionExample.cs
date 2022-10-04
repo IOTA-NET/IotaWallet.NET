@@ -5,6 +5,8 @@ using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction
 {
@@ -43,8 +45,8 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
 
 
                 //Let's retrieve our cookiemonster account
-                (string response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
+                (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {JsonConvert.SerializeObject(accountResponse)}");
 
                 if (account == null)
                 {
@@ -61,7 +63,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
                         .AddAddressAndAmount(receiverAddress, amount);
 
                 //Start sending
-                response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
+                string response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
 
                 Console.WriteLine($"SendAmountAsync: {response.PrettyJson()}");
             }
