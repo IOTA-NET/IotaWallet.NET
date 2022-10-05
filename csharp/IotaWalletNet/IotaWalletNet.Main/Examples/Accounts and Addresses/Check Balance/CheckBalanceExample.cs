@@ -1,6 +1,7 @@
 ﻿using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Application.WalletContext.Queries.GetAccounts;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -42,7 +43,7 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance
                             .ThenInitialize();
 
                 //We can retrieve all account info
-                string jsonResponse = await wallet.GetAccountsAsync();
+                GetAccountsResponse getAccountsResponse = await wallet.GetAccountsAsync();
 
                 //Or we can simply retrieve a particular account with its username
                 //Let's retrieve our cookiemonster account
