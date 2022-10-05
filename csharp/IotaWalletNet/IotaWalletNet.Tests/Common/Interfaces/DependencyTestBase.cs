@@ -11,8 +11,8 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected const String STRONGHOLD_PATH = "./stronghold";
         protected const string DATABASE_PATH = "./walletdb";
         protected const string DEFAULT_MNEMONIC = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
-        protected const string DEFAFULT_API_URL = "https://api.testnet.shimmer.network";
-
+        protected const string DEFAULT_API_URL = "https://api.testnet.shimmer.network";
+        protected const string DEFAULT_FAUCET_URL = @"https://faucet.testnet.shimmer.network";
         public DependencyTestBase()
         {
 
@@ -30,7 +30,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
             _serviceScope = serviceProvider.CreateScope();
         }
 
-        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl = DEFAFULT_API_URL)
+        public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl = DEFAULT_API_URL)
         {
             return wallet
                         .ConfigureWalletOptions()
@@ -49,7 +49,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                         .ThenInitialize();
         }
 
-        public static IWallet CreateOfflineFullWallet(IWallet wallet, string nodeUrl = DEFAFULT_API_URL)
+        public static IWallet CreateOfflineFullWallet(IWallet wallet, string nodeUrl = DEFAULT_API_URL)
         {
             return wallet
                         .ConfigureWalletOptions()
