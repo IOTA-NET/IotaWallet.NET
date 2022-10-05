@@ -19,7 +19,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .ConfigureClientOptions()
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
-                        .AddNodeUrl(DEFAFULT_API_URL)
+                        .AddNodeUrl(DEFAULT_API_URL)
                         .ThenBuild();
 
             wallet.Should().NotBeNull();
