@@ -46,7 +46,7 @@ namespace IotaWalletNet.Application
 
 
 
-        public async Task<string> GetAccountsAsync()
+        public async Task<GetAccountsResponse> GetAccountsAsync()
         {
             return await _mediator.Send(new GetAccountsQuery(this));
         }
