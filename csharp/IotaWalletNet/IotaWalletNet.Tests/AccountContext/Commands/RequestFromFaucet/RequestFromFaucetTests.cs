@@ -34,7 +34,8 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
 
             await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
 
-            Thread.Sleep(20000);
+            Thread.Sleep(30000);
+
             await account.SyncAccountAsync();
             getBalanceResponse = await account.GetBalanceAsync();
 
