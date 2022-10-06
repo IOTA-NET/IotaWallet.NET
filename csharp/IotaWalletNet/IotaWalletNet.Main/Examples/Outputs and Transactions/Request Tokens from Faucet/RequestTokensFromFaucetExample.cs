@@ -51,7 +51,9 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     return;
                 }
 
-                await account.RequestFromFaucetAsync("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", @"https://faucet.testnet.shimmer.network");
+                string address = (await account.GenerateAddressesAsync()).Payload!.First().Address!;
+
+                await account.RequestFromFaucetAsync(address, @"https://faucet.testnet.shimmer.network");
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
+﻿using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Mint_Nfts;
 
 namespace IotaWalletNet.Main
 {
@@ -6,14 +6,15 @@ namespace IotaWalletNet.Main
     {
         static async Task Main(string[] args)
         {
-            await CreateAWalletAndAccountExample.Run();
+            //await CreateAWalletAndAccountExample.Run();
 
             //await RequestTokensFromFaucetExample.Run();
 
+            //await CheckBalanceExample.Run();
             //await SendTransactionExample.Run();
 
             //await GenerateAnAddressExample.Run();
-
+            await MintNftExample.Run();
         }
     }
 }

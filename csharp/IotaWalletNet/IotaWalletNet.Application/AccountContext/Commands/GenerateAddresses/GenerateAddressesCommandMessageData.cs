@@ -2,9 +2,9 @@
 
 namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 {
-    public class GenerateAddressesData
+    public class GenerateAddressesCommandMessageData
     {
-        public GenerateAddressesData(uint amount, AddressGenerationOptions addressGenerationOptions)
+        public GenerateAddressesCommandMessageData(uint amount, AddressGenerationOptions addressGenerationOptions)
         {
             Amount = amount;
             AddressGenerationOptions = addressGenerationOptions;

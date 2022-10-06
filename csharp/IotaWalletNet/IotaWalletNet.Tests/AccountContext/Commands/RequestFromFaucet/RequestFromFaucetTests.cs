@@ -22,14 +22,14 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
 
             (_, IAccount? account) = await wallet.CreateAccountAsync("cookiemonster");
 
-            GenerateAddressesResponse generateAddressesResponse 
+            GenerateAddressesResponse generateAddressesResponse
                 = await account!.GenerateAddressesAsync();
 
 
             await account.SyncAccountAsync();
             GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
             long totalBalance = long.Parse(getBalanceResponse.Payload!.BaseCoin.Total);
-            
+
             string address = generateAddressesResponse.Payload?.First()?.Address!;
 
             await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);

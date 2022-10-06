@@ -11,5 +11,8 @@ namespace IotaWalletNet.Domain.Common.Models.Transaction
 
         /** Optional note, that is only stored locally */
         public string? Note { get; set; }
+
+        //TODO: ITaggedDataPayload
+
     }
 }
