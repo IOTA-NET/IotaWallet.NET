@@ -64,9 +64,9 @@ static async Task Main(string[] args)
 			.ThenInitialize();
 
 		//Let's generate a Mnemonic
-		GetNewMnemonicResponse getNewMnemonic = await wallet.GetNewMnemonicAsync();
-		Console.WriteLine($"GetNewMnemonicAsync: {getNewMnemonic}");
-		string newMnemonic = getNewMnemonicQueryResponse.Payload;
+		GetNewMnemonicResponse getNewMnemonicResponse = await wallet.GetNewMnemonicAsync();
+		Console.WriteLine($"GetNewMnemonicAsync: {getNewMnemonicResponse}");
+		string newMnemonic = getNewMnemonicResponse.Payload;
 		
 		//Store into stronghold
 		//Remember, Generation and storage of mnemonic only is needed to do done the first time!
