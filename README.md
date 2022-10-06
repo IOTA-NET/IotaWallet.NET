@@ -64,18 +64,18 @@ static async Task Main(string[] args)
 			.ThenInitialize();
 
 		//Let's generate a Mnemonic
-		GetNewMnemonicQueryResponse getNewMnemonicQueryResponse = await wallet.GetNewMnemonicAsync();
+		GetNewMnemonicResponse getNewMnemonic = await wallet.GetNewMnemonicAsync();
+		Console.WriteLine($"GetNewMnemonicAsync: {getNewMnemonic}");
 		string newMnemonic = getNewMnemonicQueryResponse.Payload;
-		Console.WriteLine($"GetNewMnemonicAsync: {newMnemonic}");
 		
 		//Store into stronghold
 		//Remember, Generation and storage of mnemonic only is needed to do done the first time!
-		string response = await wallet.StoreMnemonicAsync(newMnemonic);
-		Console.WriteLine($"StoreMnemonicAsync: {response.PrettyJson()}");
+		StoreMnemonicResponse storeMnemonicResponse = await wallet.StoreMnemonicAsync(newMnemonic);
+		Console.WriteLine($"StoreMnemonicAsync: {storeMnemonicResponse}");
 
 		//Let's create an accounts, with username "cookiemonster"
-		(response, IAccount? account) = await wallet.CreateAccountAsync("cookiemonster");
-		Console.WriteLine($"CreateAccountAsync: {response.PrettyJson()}");
+		(CreateAccountResponse createAccountResponse, IAccount? account) = await wallet.CreateAccountAsync("cookiemonster");
+		Console.WriteLine($"CreateAccountAsync: {createAccountResponse}");
 
 		if (account == null)
 		{
@@ -84,11 +84,9 @@ static async Task Main(string[] args)
 		}
 		
 		//Lets generate 1 new address!
-		GenerateAddressesCommandResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
-		string? generatedAddress = generateAddressesCommandResponse?.Payload?.FirstOrDefault()?.Address;
-
-		if(generatedAddress.IsNotNullAndEmpty())
-			Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
+		GenerateAddressesResponse generateAddressesResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+		Console.WriteLine($"GenerateAddressesAsync: {generateAddressesResponse}");
+		string? generatedAddress = generateAddressesResponse.Payload?.FirstOrDefault()?.Address;
 			
 		//Let's request some Shimmer from the faucet
         	await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
@@ -97,8 +95,8 @@ static async Task Main(string[] args)
 		//Sync the account with the tangle
 		await account.SyncAccountAsync();
 		//Retrieve balance
-		response = await account.GetBalanceAsync();
-		Console.WriteLine($"GetBalanceAsync: {response.PrettyJson()}");
+		GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
+		Console.WriteLine($"GetBalanceAsync: {getBalanceResponse}");
 		
 		//Great, now that we have some test shimmer tokens to send, send to me!
 		//Let's send 1 shimmer, which is 1,000,000 Glow
@@ -110,9 +108,9 @@ static async Task Main(string[] args)
 				.AddAddressAndAmount(receiverAddress, amount);
 
 		//Start sending
-		response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
+		SendAmountResponse sendAmountResponse = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
 
-		Console.WriteLine($"SendAmountAsync: {response.PrettyJson()}");
+		Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
 }
 ```
 
