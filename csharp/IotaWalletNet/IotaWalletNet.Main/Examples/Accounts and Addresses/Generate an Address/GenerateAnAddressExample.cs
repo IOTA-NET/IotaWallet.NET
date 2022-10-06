@@ -1,11 +1,10 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
-using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
@@ -44,8 +43,8 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
                             .ThenInitialize();
 
                 //Let's retrieve our cookiemonster account
-                (GetAccountResponse response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {JsonConvert.SerializeObject(response)}");
+                (GetAccountResponse getAccountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {getAccountResponse}");
 
                 if (account == null)
                 {

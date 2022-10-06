@@ -5,7 +5,6 @@ using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 
 namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 {
@@ -46,20 +45,20 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
 
                 //Let's generate a new Mnemonic
                 GetNewMnemonicResponse getNewMnemonicResponse = await wallet.GetNewMnemonicAsync();
+                Console.WriteLine($"GetNewMnemonicAsync: {getNewMnemonicResponse}");
                 string newMnemonic = getNewMnemonicResponse.Payload!;
-                Console.WriteLine($"GetNewMnemonicAsync: {newMnemonic}");
 
                 //Store into stronghold
                 StoreMnemonicResponse storeMnemonicResponse = await wallet.StoreMnemonicAsync(newMnemonic);
-                Console.WriteLine($"StoreMnemonicAsync: {JsonConvert.SerializeObject(storeMnemonicResponse)}");
+                Console.WriteLine($"StoreMnemonicAsync: {storeMnemonicResponse}");
 
-                CreateAccountResponse response;
                 //Let's create 2 accounts, with usernames cookiemonster and elmo
-                (response, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
-                Console.WriteLine($"CreateAccountAsync: {JsonConvert.SerializeObject(response)}");
+                CreateAccountResponse createAccountResponse;
+                (createAccountResponse, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
+                Console.WriteLine($"CreateAccountAsync: {createAccountResponse}");
 
-                (response, IAccount? elmoAccount) = await wallet.CreateAccountAsync("elmo");
-                Console.WriteLine($"CreateAccountAsync: {JsonConvert.SerializeObject(response)}");
+                (createAccountResponse, IAccount? elmoAccount) = await wallet.CreateAccountAsync("elmo");
+                Console.WriteLine($"CreateAccountAsync: {createAccountResponse}");
 
             }
         }

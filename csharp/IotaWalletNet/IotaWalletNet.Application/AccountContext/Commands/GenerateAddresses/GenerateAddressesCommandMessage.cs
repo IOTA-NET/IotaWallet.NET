@@ -2,10 +2,10 @@
 
 namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 {
-    public class GenerateAddressesCommandMessage : AccountMessage<GenerateAddressesData>
+    public class GenerateAddressesCommandMessage : AccountMessage<GenerateAddressesCommandMessageData>
     {
         private const string METHOD_NAME = "generateAddresses";
-        public GenerateAddressesCommandMessage(string username, GenerateAddressesData methodData)
+        public GenerateAddressesCommandMessage(string username, GenerateAddressesCommandMessageData methodData)
             : base(username, METHOD_NAME, methodData)
         {
 

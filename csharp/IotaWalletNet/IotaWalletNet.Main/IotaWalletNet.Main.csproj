@@ -10,11 +10,21 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="SiaSkynet" Version="3.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\IotaWalletNet.Application\IotaWalletNet.Application.csproj" />
     <ProjectReference Include="..\IotaWalletNet.Domain\IotaWalletNet.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="blackcat.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="whitecat.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

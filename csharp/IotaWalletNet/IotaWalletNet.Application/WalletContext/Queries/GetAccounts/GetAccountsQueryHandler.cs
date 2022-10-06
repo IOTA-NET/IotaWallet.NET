@@ -1,7 +1,6 @@
 ﻿using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
-using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetAccounts
 {

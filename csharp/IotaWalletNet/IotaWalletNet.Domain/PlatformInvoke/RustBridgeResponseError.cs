@@ -1,4 +1,6 @@
-﻿namespace IotaWalletNet.Domain.PlatformInvoke
+﻿using Newtonsoft.Json;
+
+namespace IotaWalletNet.Domain.PlatformInvoke
 {
     public abstract class RustBridgeResponseBase<TPayload>
     {
@@ -9,6 +11,11 @@
         public RustBridgeResponseError? Error { get; set; }
 
         public bool IsSuccess() => Error == null;
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
     }
 
     public abstract class RustBridgeResponseBase
@@ -19,6 +26,11 @@
         public RustBridgeResponseError? Error { get; set; }
 
         public bool IsSuccess() => Error == null;
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
     }
 
     public class RustBridgeResponseError

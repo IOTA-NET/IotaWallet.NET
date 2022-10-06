@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
 using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
@@ -6,6 +7,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Network;
+using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using static IotaWalletNet.Application.AccountContext.Commands.SyncAccount.SyncAccountCommandHandler;
@@ -35,6 +37,12 @@ namespace IotaWalletNet.Application
         public async Task RequestFromFaucetAsync(string address, string url)
         {
             await _mediator.Send(new RequestFromFaucetCommand(address, url));
+        }
+
+
+        public async Task<MintNftsResponse> MintNftsAsync(List<NftOptions> nftsOptions)
+        {
+            return await _mediator.Send(new MintNftsCommand(this, Username, nftsOptions));
         }
 
         public async Task<GetBalanceResponse> GetBalanceAsync()

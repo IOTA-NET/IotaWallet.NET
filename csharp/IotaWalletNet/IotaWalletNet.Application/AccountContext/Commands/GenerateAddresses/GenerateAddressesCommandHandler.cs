@@ -19,7 +19,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
                 }
             };
 
-            GenerateAddressesData data = new GenerateAddressesData(request.Amount, options);
+            GenerateAddressesCommandMessageData data = new GenerateAddressesCommandMessageData(request.Amount, options);
 
             GenerateAddressesCommandMessage message = new GenerateAddressesCommandMessage(request.Username, data);
 
