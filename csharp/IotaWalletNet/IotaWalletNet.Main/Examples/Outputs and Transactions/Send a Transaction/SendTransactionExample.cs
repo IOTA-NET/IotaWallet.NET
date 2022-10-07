@@ -45,7 +45,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
 
                 //Let's retrieve our cookiemonster account
                 (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {JsonConvert.SerializeObject(accountResponse)}");
+                Console.WriteLine($"GetAccountAsync: {accountResponse}");
 
                 if (account == null)
                 {

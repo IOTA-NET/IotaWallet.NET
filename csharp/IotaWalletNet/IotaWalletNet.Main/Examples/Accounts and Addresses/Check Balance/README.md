@@ -29,12 +29,11 @@ The following example will:
                 //Build wallet using a fluent-style configuration api
                 wallet = wallet
                             .ConfigureWalletOptions()
-                                .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                                .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
@@ -45,14 +44,14 @@ The following example will:
                             .ThenInitialize();
 
                 //We can retrieve all account info
-                string response = await wallet.GetAccountsAsync();
-                
+                GetAccountsResponse getAccountsResponse = await wallet.GetAccountsAsync();
+
                 //Or we can simply retrieve a particular account with its username
                 //Let's retrieve our cookiemonster account
-                (response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
+                (GetAccountResponse getAccountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {getAccountResponse}");
 
-                if(account == null)
+                if (account == null)
                 {
                     Console.WriteLine("There was a problem retreiving the account.");
                     return;
@@ -62,8 +61,8 @@ The following example will:
                 await account.SyncAccountAsync();
 
                 //Retrieve balance
-                response = await account.GetBalanceAsync();
-                Console.WriteLine($"GetBalanceAsync: {response.PrettyJson()}");
+                GetBalanceResponse balanceResponse = await account.GetBalanceAsync();
+                Console.WriteLine($"GetBalanceAsync: {balanceResponse}");
             }
         }
     }

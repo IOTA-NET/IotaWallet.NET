@@ -32,9 +32,6 @@ namespace IotaWalletNet.Application.Common.Options
 
     public class WalletOptions
     {
-        private readonly SecretManagerOptions _secretManagerOptions;
-        private readonly ClientOptions _clientConfigOptions = new ClientOptions();
-
         public string StoragePath { get; set; } = "./walletdb";
 
         public int CoinType { get; set; } = (int)TypeOfCoin.Shimmer;

@@ -28,12 +28,11 @@ The following example will:
                 //Build wallet using a fluent-style configuration api
                 wallet = wallet
                             .ConfigureWalletOptions()
-                                .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                                .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
@@ -45,8 +44,8 @@ The following example will:
 
 
                 //Let's retrieve our cookiemonster account
-                (string response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
+                (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {JsonConvert.SerializeObject(accountResponse)}");
 
                 if (account == null)
                 {
@@ -54,7 +53,11 @@ The following example will:
                     return;
                 }
 
-                await account.RequestFromFaucet("rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7", @"https://faucet.testnet.shimmer.network");
+                //Let's generate an address!
+                string address = (await account.GenerateAddressesAsync()).Payload!.First().Address!;
+
+                //Now we request shimmer tokens into that address
+                await account.RequestFromFaucetAsync(address, @"https://faucet.testnet.shimmer.network");
             }
         }
 

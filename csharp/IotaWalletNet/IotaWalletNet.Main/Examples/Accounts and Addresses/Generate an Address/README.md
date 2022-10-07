@@ -1,19 +1,17 @@
-﻿# Create a Wallet and an Account
+# Generate an Address
 
 ## Code Example
 
 The following example will:
 
-1. Create an wallet
-2. Create a Stronghold mnemonic
-2. Use the wallet to store the Stronghold mnemonic into a stronghold file
-3. Create 2 accounts with usernames `cookiemonster` and `elmo`
+1. Load our wallet
+2. Retrieve our `cookiemonster` account
+3. Generate an address
 
 ```cs
-    public static class CreateAWalletAndAccountExample
+    public static class GenerateAnAddressExample
     {
-        
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
@@ -44,26 +42,23 @@ The following example will:
                                 .ThenBuild()
                             .ThenInitialize();
 
+                //Let's retrieve our cookiemonster account
+                (GetAccountResponse getAccountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {getAccountResponse}");
 
-                //Let's generate a new Mnemonic
-                GetNewMnemonicResponse getNewMnemonicResponse = await wallet.GetNewMnemonicAsync();
-                Console.WriteLine($"GetNewMnemonicAsync: {getNewMnemonicResponse}");
-                string newMnemonic = getNewMnemonicResponse.Payload!;
+                if (account == null)
+                {
+                    Console.WriteLine("There was a problem retreiving the account.");
+                    return;
+                }
 
-                //Store into stronghold
-                StoreMnemonicResponse storeMnemonicResponse = await wallet.StoreMnemonicAsync(newMnemonic);
-                Console.WriteLine($"StoreMnemonicAsync: {storeMnemonicResponse}");
+                //Lets generate 1 new address!
+                GenerateAddressesResponse? generateAddressesCommandResponse = await account.GenerateAddressesAsync(numberOfAddresses: 1, NetworkType.Testnet);
+                string? generatedAddress = generateAddressesCommandResponse?.Payload?.FirstOrDefault()?.Address;
 
-                //Let's create 2 accounts, with usernames cookiemonster and elmo
-                CreateAccountResponse createAccountResponse;
-                (createAccountResponse, IAccount? cookieMonsterAccount) = await wallet.CreateAccountAsync("cookiemonster");
-                Console.WriteLine($"CreateAccountAsync: {createAccountResponse}");
-
-                (createAccountResponse, IAccount? elmoAccount) = await wallet.CreateAccountAsync("elmo");
-                Console.WriteLine($"CreateAccountAsync: {createAccountResponse}");
-
+                if (generatedAddress.IsNotNullAndEmpty())
+                    Console.WriteLine($"GenerateAddressesAsync: {generatedAddress}");
             }
         }
-
     }
 ```

@@ -29,12 +29,11 @@ The following example will:
                 //Build wallet using a fluent-style configuration api
                 wallet = wallet
                             .ConfigureWalletOptions()
-                                .SetCoinType(WalletOptions.TypeOfCoin.Shimmer)
+                                .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
-                                .IsOffline(false)
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
@@ -46,8 +45,8 @@ The following example will:
 
 
                 //Let's retrieve our cookiemonster account
-                (string response, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {response.PrettyJson()}");
+                (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                Console.WriteLine($"GetAccountAsync: {accountResponse}");
 
                 if (account == null)
                 {
@@ -57,13 +56,14 @@ The following example will:
 
                 //Let's send 1 shimmer, which is 1,000,000 Glow
                 (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
-                
+
                 //You can attach as many (address,amount) pairs as you want
                 AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions = new AddressesWithAmountAndTransactionOptions();
                 addressesWithAmountAndTransactionOptions
                         .AddAddressAndAmount(receiverAddress, amount);
 
-                response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
+                //Start sending
+                string response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
 
                 Console.WriteLine($"SendAmountAsync: {response.PrettyJson()}");
             }

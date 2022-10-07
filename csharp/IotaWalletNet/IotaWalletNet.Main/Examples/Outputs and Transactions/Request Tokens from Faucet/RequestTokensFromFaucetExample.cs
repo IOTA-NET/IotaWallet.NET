@@ -51,8 +51,10 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     return;
                 }
 
+                //Let's generate an address!
                 string address = (await account.GenerateAddressesAsync()).Payload!.First().Address!;
 
+                //Now we request shimmer tokens into that address
                 await account.RequestFromFaucetAsync(address, @"https://faucet.testnet.shimmer.network");
             }
         }
