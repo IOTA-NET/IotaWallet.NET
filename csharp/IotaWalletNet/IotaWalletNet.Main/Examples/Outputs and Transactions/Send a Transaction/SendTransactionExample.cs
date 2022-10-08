@@ -4,7 +4,6 @@ using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Main.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction

@@ -22,7 +22,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet
         {
             IFaucetApi faucetApi = _faucetApiProvider(request.Url);
             Func<Task> faucetRequestFunc = async () => await faucetApi.RequestFromFaucet(new RequestFromFaucetModel(request.Address));
-            
+
             await _retryPolicy.ExecuteAsync(faucetRequestFunc);
 
             return Unit.Value;

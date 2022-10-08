@@ -1,5 +1,6 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
+using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
@@ -23,5 +24,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task RequestFromFaucetAsync(string address, string url);
         Task<GenerateAddressesResponse> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
         Task<MintNftsResponse> MintNftsAsync(List<NftOptions> nftsOptions);
+        Task<GetAddressesResponse> GetAddresses();
     }
 }
