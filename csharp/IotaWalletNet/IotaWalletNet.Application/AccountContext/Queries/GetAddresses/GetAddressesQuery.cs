@@ -12,6 +12,6 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetAddresses
         }
         public string Username { get; set; }
 
-        public IAccount Account{ get; set; }
+        public IAccount Account { get; set; }
     }
 }
