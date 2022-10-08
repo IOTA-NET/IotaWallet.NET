@@ -3,6 +3,7 @@ using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
 using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
+using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
@@ -29,9 +30,14 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
-        public async Task<GenerateAddressesResponse?> GenerateAddressesAsync(uint numberOfAddresses, NetworkType networkType)
+        public async Task<GenerateAddressesResponse> GenerateAddressesAsync(uint numberOfAddresses, NetworkType networkType)
         {
             return await _mediator.Send(new GenerateAddressesCommand(this, networkType, Username, numberOfAddresses));
+        }
+
+        public async Task<GetAddressesResponse> GetAddresses()
+        {
+            return await _mediator.Send(new GetAddressesQuery(Username, this));
         }
 
         public async Task RequestFromFaucetAsync(string address, string url)
