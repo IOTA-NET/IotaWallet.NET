@@ -36,6 +36,7 @@
 	</Target>-->
 
 	<ItemGroup>
+	  <PackageReference Include="JsonSubTypes" Version="1.9.0" />
 	  <PackageReference Include="MediatR" Version="10.0.1" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 	  <PackageReference Include="MimeMapping" Version="1.0.1.37" />
