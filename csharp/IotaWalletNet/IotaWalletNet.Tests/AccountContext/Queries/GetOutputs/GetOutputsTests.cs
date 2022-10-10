@@ -46,7 +46,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
                 var transactionOptions = new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, amountToSend.ToString());
                 await account.SendAmountAsync(transactionOptions);
 
-                await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS));//Let's wait for it to be confirmed
+                await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_TRANSACTION));//Let's wait for it to be confirmed
                 await account.SyncAccountAsync();
 
                 getBalanceResponse = await account.GetBalanceAsync();
@@ -58,7 +58,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 
             await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
 
-            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS));
+            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
 
             await account.SyncAccountAsync();
 
@@ -71,7 +71,9 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 
             MintNftsResponse mintNftsResponse = await account.MintNftsAsync(new NftOptions[] { nftOptions }.ToList());
 
-            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS));
+            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
+
+            await account.SyncAccountAsync();
 
             GetOutputsResponse response = await account.GetOutputsAsync();
 
