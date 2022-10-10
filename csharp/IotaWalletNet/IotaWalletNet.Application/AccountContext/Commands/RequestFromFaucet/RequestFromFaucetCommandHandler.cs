@@ -14,7 +14,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet
         public RequestFromFaucetCommandHandler(Func<string, IFaucetApi> faucetApiProvider)
         {
             _faucetApiProvider = faucetApiProvider;
-            _retryPolicy = Policy.Handle<ApiException>().WaitAndRetryAsync(retryCount: 3, attemptNumber => TimeSpan.FromSeconds(10));
+            _retryPolicy = Policy.Handle<ApiException>().WaitAndRetryAsync(retryCount: 3, attemptNumber => TimeSpan.FromSeconds(3));
 
         }
 
