@@ -14,7 +14,9 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected const string DEFAULT_API_URL = "https://api.testnet.shimmer.network";
         protected const string DEFAULT_FAUCET_URL = @"https://faucet.testnet.shimmer.network";
         protected const string ANOTHER_WALLET_ADDRESS = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
-        protected const int SLEEP_DURATION_MS = 20 * 1000;
+        protected const int SLEEP_DURATION_SECONDS_TRANSACTION = 5;
+        protected const int SLEEP_DURATION_SECONDS_FAUCET = 15;
+        protected const int SLEEP_DURATION_SECONDS_API_RATE_LIMIT = 10;
         public DependencyTestBase()
         {
 
@@ -30,10 +32,13 @@ namespace IotaWalletNet.Tests.Common.Interfaces
 
             //Use serviceprovider to create a scope, which disposes of all services at end of scope
             _serviceScope = serviceProvider.CreateScope();
+            
+            RateLimitApi();
         }
 
         public static IWallet CreateFullWallet(IWallet wallet, string nodeUrl = DEFAULT_API_URL)
         {
+
             return wallet
                         .ConfigureWalletOptions()
                             .SetCoinType(TypeOfCoin.Shimmer)
@@ -69,7 +74,10 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                         .ThenInitialize();
         }
 
-
+        public void RateLimitApi()
+        {
+            Thread.Sleep(SLEEP_DURATION_SECONDS_API_RATE_LIMIT);
+        }
         public void StrongholdCleanup(string path = STRONGHOLD_PATH)
         {
             if (File.Exists(path))

@@ -40,7 +40,8 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
                 var transactionOptions = new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, amountToSend.ToString());
                 await account.SendAmountAsync(transactionOptions);
 
-                Thread.Sleep(SLEEP_DURATION_MS);//Let's wait for it to be confirmed
+                await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_TRANSACTION));//Let's wait for it to be confirmed
+                
                 await account.SyncAccountAsync();
 
                 getBalanceResponse = await account.GetBalanceAsync();
@@ -54,7 +55,7 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
 
             await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
 
-            Thread.Sleep(SLEEP_DURATION_MS);
+            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
 
             await account.SyncAccountAsync();
             getBalanceResponse = await account.GetBalanceAsync();

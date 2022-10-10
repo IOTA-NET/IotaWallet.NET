@@ -1,5 +1,6 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
+using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
@@ -28,5 +29,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<MintNftsResponse> MintNftsAsync(List<NftOptions> nftsOptions);
         Task<GetAddressesResponse> GetAddresses();
         Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions = null);
+        Task<SendNftsResponse> SendNftsAsync(List<AddressAndNftId> addressAndNftIds);
     }
 }
