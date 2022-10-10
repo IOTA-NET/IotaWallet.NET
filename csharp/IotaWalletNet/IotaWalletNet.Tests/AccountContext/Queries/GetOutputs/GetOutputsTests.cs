@@ -33,9 +33,30 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 
             string address = generateAddressesResponse.Payload?.First()?.Address!;
 
+            await account.SyncAccountAsync();
+            GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
+            long totalBalance = long.Parse(getBalanceResponse.Payload!.BaseCoin.Total);
+
+            long thousandShimmer = 1000000 * 1000;
+            if (totalBalance >= thousandShimmer)
+            {
+                //Lets send our tokens to some other address, else we cant ask from faucet
+                var transactionOptions = new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, totalBalance.ToString());
+                await account.SendAmountAsync(transactionOptions);
+
+                Thread.Sleep(SLEEP_DURATION_MS);//Let's wait for it to be confirmed
+                await account.SyncAccountAsync();
+
+                getBalanceResponse = await account.GetBalanceAsync();
+                totalBalance = long.Parse(getBalanceResponse.Payload!.BaseCoin.Total);
+
+                if (totalBalance >= thousandShimmer)
+                    throw new Exception("Tried sending out shimmer in order to obtain new ones from faucet, however, sending out shimmer failed or did not complete on time.");
+            }
+
             await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
 
-            Thread.Sleep(30 * 1000);
+            Thread.Sleep(SLEEP_DURATION_MS);
 
             await account.SyncAccountAsync();
 
@@ -48,7 +69,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 
             MintNftsResponse mintNftsResponse = await account.MintNftsAsync(new NftOptions[] { nftOptions }.ToList());
 
-            Thread.Sleep(20 * 1000);
+            Thread.Sleep(SLEEP_DURATION_MS);
 
             GetOutputsResponse response = await account.GetOutputsAsync();
 

@@ -14,6 +14,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected const string DEFAULT_API_URL = "https://api.testnet.shimmer.network";
         protected const string DEFAULT_FAUCET_URL = @"https://faucet.testnet.shimmer.network";
         protected const string ANOTHER_WALLET_ADDRESS = "smr1qqag2rv57slkxvet0j0vtjcyjegz4q3vt09qh7eyas9uds4uscqxz77m2a7";
+        protected const int SLEEP_DURATION_MS = 20 * 1000;
         public DependencyTestBase()
         {
 
