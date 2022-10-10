@@ -34,8 +34,10 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
             long thousandShimmer = 1000000 * 1000;
             if (totalBalance >= thousandShimmer)
             {
+                long amountToSend = totalBalance - thousandShimmer;
+
                 //Lets send our tokens to some other address, else we cant ask from faucet
-                var transactionOptions = new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, totalBalance.ToString());
+                var transactionOptions = new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, amountToSend.ToString());
                 await account.SendAmountAsync(transactionOptions);
 
                 Thread.Sleep(SLEEP_DURATION_MS);//Let's wait for it to be confirmed
@@ -44,7 +46,7 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
                 getBalanceResponse = await account.GetBalanceAsync();
                 totalBalance = long.Parse(getBalanceResponse.Payload!.BaseCoin.Total);
 
-                if (totalBalance >= thousandShimmer)
+                if (totalBalance > thousandShimmer)
                     throw new Exception("Tried sending out shimmer in order to obtain new ones from faucet, however, sending out shimmer failed or did not complete on time.");
             }
 
