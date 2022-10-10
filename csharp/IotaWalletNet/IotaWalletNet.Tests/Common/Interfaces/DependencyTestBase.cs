@@ -13,8 +13,8 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected const string DEFAULT_MNEMONIC = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
         protected const string DEFAULT_API_URL = "https://api.testnet.shimmer.network";
         protected const string DEFAULT_FAUCET_URL = @"https://faucet.testnet.shimmer.network";
-        protected const string ANOTHER_WALLET_ADDRESS = "smr1qqag2rv57slkxvet0j0vtjcyjegz4q3vt09qh7eyas9uds4uscqxz77m2a7";
-        protected const int SLEEP_DURATION_MS = 20 * 1000;
+        protected const string ANOTHER_WALLET_ADDRESS = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
+        protected const int SLEEP_DURATION_MS = 30 * 1000;
         public DependencyTestBase()
         {
 
