@@ -27,6 +27,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<GenerateAddressesResponse> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
         Task<MintNftsResponse> MintNftsAsync(List<NftOptions> nftsOptions);
         Task<GetAddressesResponse> GetAddresses();
-        Task<GetOutputsResponse> GetOutputs(OutputFilterOptions? outputFilterOptions = null);
+        Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions = null);
     }
 }

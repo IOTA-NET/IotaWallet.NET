@@ -32,7 +32,7 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
-        public async Task<GetOutputsResponse> GetOutputs(OutputFilterOptions? outputFilterOptions=null)
+        public async Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions=null)
         {
             return await _mediator.Send(new GetOutputsQuery(Username, this, outputFilterOptions));
         }

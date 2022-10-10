@@ -4,9 +4,9 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputs
 {
     public class GetOutputsQueryMessageData
     {
-        public OutputFilterOptions FilterOptions { get; set; }
+        public OutputFilterOptions? FilterOptions { get; set; }
 
-        public GetOutputsQueryMessageData(OutputFilterOptions filterOptions)
+        public GetOutputsQueryMessageData(OutputFilterOptions? filterOptions)
         {
             FilterOptions = filterOptions;
         }

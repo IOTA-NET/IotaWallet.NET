@@ -1,19 +1,24 @@
 ﻿using FluentAssertions;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
 using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Models.Address;
+using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Tests.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MimeMapping;
+using Newtonsoft.Json;
 
-namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
+namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 {
-
     [Collection("Sequential")]
-    public class RequestFromFaucetTests : DependencyTestBase
+    public class GetOutputsTests : DependencyTestBase
     {
         [Fact]
-        public async Task AccountShouldBeAbleToGetTokensFromFaucet()
+        public async Task AccountShouldBeAbleToGetOutputsAfterSyncing()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
@@ -26,6 +31,7 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
             GenerateAddressesResponse generateAddressesResponse
                 = await account!.GenerateAddressesAsync();
 
+            string address = generateAddressesResponse.Payload?.First()?.Address!;
 
             await account.SyncAccountAsync();
             GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
@@ -50,18 +56,28 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
                     throw new Exception("Tried sending out shimmer in order to obtain new ones from faucet, however, sending out shimmer failed or did not complete on time.");
             }
 
-            string address = generateAddressesResponse.Payload?.First()?.Address!;
-
             await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
 
             Thread.Sleep(SLEEP_DURATION_MS);
 
             await account.SyncAccountAsync();
-            getBalanceResponse = await account.GetBalanceAsync();
 
-            long newBalance = long.Parse(getBalanceResponse.Payload!.BaseCoin.Total);
+            //This will create a basic output
+            await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
 
-            newBalance.Should().BeGreaterThan(totalBalance);
+            NFTIRC27 nftIrc27 = new NFTIRC27(KnownMimeTypes.Text, "IotaWalletNetTest", "iotawallet.net");
+
+            NftOptions nftOptions = new NftOptions() { ImmutableMetadata = JsonConvert.SerializeObject(nftIrc27).ToHexString() };
+
+            MintNftsResponse mintNftsResponse = await account.MintNftsAsync(new NftOptions[] { nftOptions }.ToList());
+
+            Thread.Sleep(SLEEP_DURATION_MS);
+
+            GetOutputsResponse response = await account.GetOutputsAsync();
+
+            response.Should().NotBeNull();
+            response.IsSuccess().Should().BeTrue();
+            response.Payload!.Count.Should().BeGreaterThanOrEqualTo(2);
         }
     }
 }

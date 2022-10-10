@@ -8,14 +8,14 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputs
     {
         public string Username { get; set; }
 
-        public OutputFilterOptions FilterOptions { get; set; }
+        public OutputFilterOptions? FilterOptions { get; set; }
 
         public IAccount Account{ get; set; }
         public GetOutputsQuery(string username, IAccount account, OutputFilterOptions? outputFilterOptions=null)
         {
             Username = username;
             Account = account;
-            FilterOptions = outputFilterOptions ?? new OutputFilterOptions();
+            FilterOptions = outputFilterOptions;
         }
     }
 }

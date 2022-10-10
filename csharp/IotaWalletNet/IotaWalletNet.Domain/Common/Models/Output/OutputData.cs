@@ -1,13 +1,25 @@
-﻿namespace IotaWalletNet.Domain.Common.Models.Output
+﻿using IotaWalletNet.Domain.Common.Interfaces;
+
+namespace IotaWalletNet.Domain.Common.Models.Output
 {
     /// <summary>
     /// An output with Metadata
     /// </summary>
     public class OutputData
     {
-        public OutputData(string outputId)
+        public OutputData(
+            string outputId, 
+            string networkId, 
+            IAddressType address, 
+            IOutputType outputType, 
+            OutputMetadata outputMetadata
+            )
         {
             OutputId = outputId;
+            NetworkId = networkId;
+            Address = address;
+            Output = outputType;
+            Metadata = outputMetadata;
         }
 
         /// <summary>
@@ -24,8 +36,15 @@
 
         public bool Remainder { get; set; }
 
-        //addresstypes not mapped
-        //outputtypes not mapped
+        /// <summary>
+        /// Associated account address
+        /// </summary>
+        public IAddressType Address { get; set; }
+
+        /// <summary>
+        /// The actual Output
+        /// </summary>
+        public IOutputType Output { get; set; }
 
         /// <summary>
         /// The metadata of the output
