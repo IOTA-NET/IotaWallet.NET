@@ -1,9 +1,18 @@
 ﻿using IotaWalletNet.Domain.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Models.Account;
+using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 
 namespace IotaWalletNet.Domain.Common.Models.Transaction.MilestoneOptionTypes
 {
     public class ReceiptMilestoneOption : IMilestoneOptionType
     {
+
+        public ReceiptMilestoneOption(List<MigratedFunds> funds, TreasuryTransactionPayload transaction)
+        {
+            Funds = funds;
+            Transaction = transaction;
+        }
+
         public int Type { get; } = 0;
 
         /// <summary>
@@ -17,7 +26,14 @@ namespace IotaWalletNet.Domain.Common.Models.Transaction.MilestoneOptionTypes
         /// </summary>
         public bool Final { get; set; }
 
-        //funds: IMigratedFunds[];
-        public Trea MyProperty { get; set; }
+        /// <summary>
+        /// The index data.
+        /// </summary>
+        public List<MigratedFunds> Funds { get; set; }
+
+        /// <summary>
+        /// The TreasuryTransaction used to fund the funds.
+        /// </summary>
+        public TreasuryTransactionPayload Transaction { get; set; }
     }
 }

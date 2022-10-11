@@ -1,5 +1,6 @@
 ﻿using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Output.InputTypes;
+using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 
 namespace IotaWalletNet.Domain.Common.Models.Transaction.EssenceTypes
 {
