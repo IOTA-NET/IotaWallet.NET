@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Models.Coin.TokenSchemeTypes;
-using IotaWalletNet.Domain.Common.Models.Crypto.SignatureTypes;
+﻿using IotaWalletNet.Domain.Common.Models.Crypto.SignatureTypes;
 using JsonSubTypes;
 using Newtonsoft.Json;
 
