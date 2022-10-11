@@ -37,7 +37,7 @@ namespace IotaWalletNet.Application
         {
             return await _mediator.Send(new SendNftsCommand(Username, this, addressAndNftIds));
         }
-        public async Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions=null)
+        public async Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions = null)
         {
             return await _mediator.Send(new GetOutputsQuery(Username, this, outputFilterOptions));
         }

@@ -1,8 +1,10 @@
-﻿namespace IotaWalletNet.Domain.Common.Models.Transaction
+﻿using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
+
+namespace IotaWalletNet.Domain.Common.Models.Transaction
 {
     public class Transaction
     {
-        public Transaction(TransactionPayload payload, string blockId, string timestamp, string transactionId, string networkId, bool incoming)
+        public Transaction(TransactionPayload payload, string blockId, string timestamp, string transactionId, string networkId, bool incoming, string inclusionState)
         {
             Payload = payload;
             BlockId = blockId;
@@ -10,6 +12,7 @@
             TransactionId = transactionId;
             NetworkId = networkId;
             Incoming = incoming;
+            InclusionState = inclusionState;
         }
 
         /// <summary>
@@ -21,6 +24,8 @@
         /// The block id in which the transaction payload was included
         /// </summary>
         public string BlockId { get; set; }
+
+        public string InclusionState { get; set; }
 
         /// <summary>
         /// The creation time

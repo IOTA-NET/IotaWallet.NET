@@ -41,7 +41,7 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
                 await account.SendAmountAsync(transactionOptions);
 
                 await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_TRANSACTION));//Let's wait for it to be confirmed
-                
+
                 await account.SyncAccountAsync();
 
                 getBalanceResponse = await account.GetBalanceAsync();

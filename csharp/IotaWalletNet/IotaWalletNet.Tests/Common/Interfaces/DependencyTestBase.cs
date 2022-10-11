@@ -32,7 +32,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
 
             //Use serviceprovider to create a scope, which disposes of all services at end of scope
             _serviceScope = serviceProvider.CreateScope();
-            
+
             RateLimitApi();
         }
 
