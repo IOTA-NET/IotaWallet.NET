@@ -1,5 +1,4 @@
 ﻿using IotaWalletNet.Domain.Common.Models.Output.InputTypes;
-using IotaWalletNet.Domain.Common.Models.Output.OutputTypes;
 using JsonSubTypes;
 using Newtonsoft.Json;
 
@@ -11,6 +10,6 @@ namespace IotaWalletNet.Domain.Common.Interfaces
     [JsonSubtypes.KnownSubType(typeof(TreasuryInput), 1)]
     internal interface IInputType
     {
-        public int Type { get; }    
+        public int Type { get; }
     }
 }

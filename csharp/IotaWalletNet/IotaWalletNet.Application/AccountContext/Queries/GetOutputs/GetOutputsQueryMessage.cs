@@ -7,7 +7,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputs
         private const string METHOD_NAME = "outputs";
 
         public GetOutputsQueryMessage(string username, GetOutputsQueryMessageData getOutputsQueryMessageData)
-            :base(username, METHOD_NAME, getOutputsQueryMessageData)
+            : base(username, METHOD_NAME, getOutputsQueryMessageData)
         {
 
         }

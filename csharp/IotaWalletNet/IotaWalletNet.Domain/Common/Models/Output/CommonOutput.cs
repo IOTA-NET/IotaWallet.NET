@@ -13,12 +13,12 @@ namespace IotaWalletNet.Domain.Common.Models.Output
         /// <summary>
         /// The native tokens held by the output.
         /// </summary>
-        public List<NativeToken>? NativeTokens{ get; set; }
+        public List<NativeToken>? NativeTokens { get; set; }
 
         /// <summary>
         /// The unlock conditions for the output.
         /// </summary>
-        public List<IUnlockConditionType> UnlockConditions{ get; set; }
+        public List<IUnlockConditionType> UnlockConditions { get; set; }
 
         /// <summary>
         /// Features contained by the output.

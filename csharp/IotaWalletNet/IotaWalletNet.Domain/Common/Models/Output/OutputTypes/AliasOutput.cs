@@ -5,7 +5,7 @@ namespace IotaWalletNet.Domain.Common.Models.Output.OutputTypes
     public class AliasOutput : CommonOutput, IOutputType
     {
         public AliasOutput(string amount, string aliasId, List<IUnlockConditionType> unlockConditions)
-            :base(unlockConditions)
+            : base(unlockConditions)
         {
             Amount = amount;
             AliasId = aliasId;

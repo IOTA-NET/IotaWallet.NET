@@ -8,10 +8,10 @@ namespace IotaWalletNet.Domain.Common.Models.Output
     public class OutputData
     {
         public OutputData(
-            string outputId, 
-            string networkId, 
-            IAddressType address, 
-            IOutputType outputType, 
+            string outputId,
+            string networkId,
+            IAddressType address,
+            IOutputType outputType,
             OutputMetadata outputMetadata
             )
         {

@@ -10,8 +10,8 @@ namespace IotaWalletNet.Domain.Common.Models.Coin.TokenSchemeTypes
             MeltedTokens = meltedTokens;
             MaximumSupply = maximumSupply;
         }
-     
-        
+
+
         public int Type { get; set; } = 0;
 
         /// <summary>

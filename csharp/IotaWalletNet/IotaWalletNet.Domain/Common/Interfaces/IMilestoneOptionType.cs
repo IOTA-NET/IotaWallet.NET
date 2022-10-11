@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Models.Output.OutputTypes;
-using IotaWalletNet.Domain.Common.Models.Transaction.MilestoneOptionTypes;
+﻿using IotaWalletNet.Domain.Common.Models.Transaction.MilestoneOptionTypes;
 using JsonSubTypes;
 using Newtonsoft.Json;
 

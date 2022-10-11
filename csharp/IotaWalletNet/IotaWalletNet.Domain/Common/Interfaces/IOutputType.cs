@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Models.Nft;
-using IotaWalletNet.Domain.Common.Models.Output.OutputTypes;
+﻿using IotaWalletNet.Domain.Common.Models.Output.OutputTypes;
 using JsonSubTypes;
 using Newtonsoft.Json;
 

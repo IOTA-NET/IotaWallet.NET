@@ -8,7 +8,7 @@ namespace IotaWalletNet.Domain.Common.Interfaces
     [JsonSubtypes.KnownSubType(typeof(TransactionEssence), 1)]
     public interface IEssenceType
     {
-        
+
         public int Type { get; }
     }
 }
