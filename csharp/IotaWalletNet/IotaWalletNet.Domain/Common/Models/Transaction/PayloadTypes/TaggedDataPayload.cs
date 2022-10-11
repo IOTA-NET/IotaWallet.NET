@@ -1,23 +1,26 @@
-﻿namespace IotaWalletNet.Domain.Common.Models.Transaction
-{
-    public class TaggedDataPayload
-    {
+﻿using IotaWalletNet.Domain.Common.Interfaces;
 
+namespace IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes
+{
+    public class TaggedDataPayload : IPayloadType
+    {
         public TaggedDataPayload(string tag, string data)
         {
             Tag = tag;
             Data = data;
         }
 
+        public int Type { get; } = 5;
 
         /// <summary>
-        /// The tag used to categorize the data
+        /// [HexEncoded] The tag to use to categorize the data.
         /// </summary>
         public string Tag { get; set; }
 
         /// <summary>
-        /// The indexed data
+        /// [HexEncoded] The index data
         /// </summary>
         public string Data { get; set; }
+
     }
 }
