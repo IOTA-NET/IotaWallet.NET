@@ -14,7 +14,7 @@ namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
 
             VerifyMnemonicResponse response = genericResponse.IsSuccess
                                                                     ? genericResponse.As<VerifyMnemonicResponse>()!
-                                                                    : new VerifyMnemonicResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+                                                                    : new VerifyMnemonicResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
             return response;
         }

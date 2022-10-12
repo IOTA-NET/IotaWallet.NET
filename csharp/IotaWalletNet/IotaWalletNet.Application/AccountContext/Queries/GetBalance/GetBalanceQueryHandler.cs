@@ -14,7 +14,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetBalance
 
             GetBalanceResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<GetBalanceResponse>()!
-                                            : new GetBalanceResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+                                            : new GetBalanceResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
             return response;
         }

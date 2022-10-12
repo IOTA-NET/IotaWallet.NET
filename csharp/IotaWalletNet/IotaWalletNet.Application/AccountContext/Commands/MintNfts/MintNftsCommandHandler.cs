@@ -19,7 +19,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.MintNfts
 
             MintNftsResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<MintNftsResponse>()!
-                                            : new MintNftsResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+                                            : new MintNftsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
             return response;
         }
