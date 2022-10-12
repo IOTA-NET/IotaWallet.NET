@@ -18,7 +18,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNft
             BurnNftResponse response = genericResponse.IsSuccess
                                         ? genericResponse.As<BurnNftResponse>()!
                                         : new BurnNftResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-            
+
             return response;
         }
     }

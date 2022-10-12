@@ -6,7 +6,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNft
     {
         private const string METHOD_NAME = "burnNft";
 
-        public BurnNftCommandMessage(string username, BurnNftCommandMessageData methodData) 
+        public BurnNftCommandMessage(string username, BurnNftCommandMessageData methodData)
             : base(username, METHOD_NAME, methodData)
         {
         }
