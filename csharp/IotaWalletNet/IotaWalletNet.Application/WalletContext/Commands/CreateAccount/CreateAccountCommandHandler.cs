@@ -15,7 +15,7 @@ namespace IotaWalletNet.Application.WalletContext.Commands.CreateAccount
 
             CreateAccountResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<CreateAccountResponse>()!
-                                            : new CreateAccountResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+                                            : new CreateAccountResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
 
             return response;

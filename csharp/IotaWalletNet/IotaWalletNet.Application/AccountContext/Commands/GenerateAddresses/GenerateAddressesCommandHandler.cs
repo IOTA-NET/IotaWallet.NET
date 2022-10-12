@@ -29,7 +29,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 
             GenerateAddressesResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<GenerateAddressesResponse>()!
-                                            : new GenerateAddressesResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+                                            : new GenerateAddressesResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
 
             return response;

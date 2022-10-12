@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+﻿using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
+using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
 using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
@@ -37,6 +38,12 @@ namespace IotaWalletNet.Application
         {
             return await _mediator.Send(new SendNftsCommand(Username, this, addressAndNftIds));
         }
+
+        public async Task<BurnNftResponse> BurnNftAsync(string nftId)
+        {
+            return await _mediator.Send(new BurnNftCommand(nftId, Username, this));
+        }
+
         public async Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions = null)
         {
             return await _mediator.Send(new GetOutputsQuery(Username, this, outputFilterOptions));

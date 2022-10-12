@@ -14,7 +14,7 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic
 
             GetNewMnemonicResponse response = genericResponse.IsSuccess
                                             ? genericResponse.As<GetNewMnemonicResponse>()!
-                                            : new GetNewMnemonicResponse() { Error = genericResponse.As<RustBridgeResponseError>(), Type = "error" };
+                                            : new GetNewMnemonicResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
             return response;
         }

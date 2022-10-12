@@ -7,7 +7,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 
         public string Type { get; set; } = "ok";
 
-        public RustBridgeResponseError? Error { get; set; }
+        public RustBridgeErrorResponse? Error { get; set; }
 
         public bool IsSuccess() => Error == null;
 
@@ -23,7 +23,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public string Type { get; set; } = "ok";
         public TPayload? Payload { get; set; }
 
-        public RustBridgeResponseError? Error { get; set; }
+        public RustBridgeErrorResponse? Error { get; set; }
 
         public bool IsSuccess() => Error == null;
 
