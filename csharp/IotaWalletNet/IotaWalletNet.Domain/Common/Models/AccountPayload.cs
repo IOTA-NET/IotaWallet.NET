@@ -13,7 +13,7 @@
 
     public class AccountPayload<TPayloadMethodData>
     {
-        public AccountPayload(string username, string payloadMethodName, TPayloadMethodData methodData)
+        public AccountPayload(string username, string payloadMethodName, TPayloadMethodData? methodData)
         {
             AccountId = username;
             Method = new PayloadMethod<TPayloadMethodData>(payloadMethodName, methodData);
