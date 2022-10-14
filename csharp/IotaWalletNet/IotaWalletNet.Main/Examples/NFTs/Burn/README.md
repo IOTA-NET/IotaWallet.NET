@@ -1,4 +1,4 @@
-﻿# Send NFTs
+﻿# Burn NFTs
 
 ## Code Example
 
@@ -6,12 +6,13 @@ The following example will:
 
 1. Initialize your account
 2. Retrieve your `cookiemonster` account
-3. Send your nft identified by the nftid, to another address
+3. Burn your nft using the nftid, you can get back the storage deposit as well
+
 
 ```cs
-    public static class SendNftExample
+    public static class BurnNftExample
     {
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();
@@ -45,7 +46,7 @@ The following example will:
 
                 //Let's retrieve our cookiemonster account
                 (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {JsonConvert.SerializeObject(accountResponse)}");
+                Console.WriteLine($"GetAccountAsync: {accountResponse}");
 
                 if (account == null)
                 {
@@ -53,26 +54,26 @@ The following example will:
                     return;
                 }
 
+                //Sync account
                 await account.SyncAccountAsync();
-                
 
                 //TODO: Replace with the address of your choice!
                 string receiverAddress = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
-                
+
                 //TODO: Replace with an nft output id from your accounts.
-                string outputId = "0x9c5fc8b575e29377e0401d2cd6138c0f4859fbb95b5acf0ea81b3354de6eb2e70000";
+                string outputId = "0x9c5fc8b575e29377e0401d2cd6138c0f4859fbb95b5acf0ea81b3354de6eb2e70100";
 
                 var nftId = outputId.ComputeBlake2bHash();
-                
-                AddressAndNftId addressAndNftId = new AddressAndNftId(receiverAddress, nftId);
 
-                SendNftsResponse sendNftsResponse = await account.SendNftsAsync(new List<AddressAndNftId> { addressAndNftId });
+
+                //Burn our nfts
+                BurnNftResponse burnNftResponse = await account.BurnNftAsync(nftId);
 
                 //For testnet
-                Console.WriteLine($"Check your transaction on https://explorer.shimmer.network/testnet/block/{sendNftsResponse.Payload!.TransactionId}");
+                Console.WriteLine($"Check your block on https://explorer.shimmer.network/testnet/block/{burnNftResponse.Payload!.BlockId}");
+
             }
         }
-
-
     }
+    
 ```
