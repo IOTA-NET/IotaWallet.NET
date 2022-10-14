@@ -31,12 +31,12 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task RequestFromFaucetAsync(string address, string url);
         Task<GenerateAddressesResponse> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
         Task<MintNftsResponse> MintNftsAsync(List<NftOptions> nftsOptions);
-        Task<GetAddressesResponse> GetAddresses();
+        Task<GetAddressesResponse> GetAddressesAsync();
         Task<GetOutputsResponse> GetOutputsAsync(OutputFilterOptions? outputFilterOptions = null);
         Task<SendNftsResponse> SendNftsAsync(List<AddressAndNftId> addressAndNftIds);
         Task<BurnNftResponse> BurnNftAsync(string nftId);
-        Task<GetUnspentOutputsResponse> GetUnspentOutputs();
-        Task<GetAddressesWithUnspentOutputsResponse> GetAddressesWithUnspentOutputs();
+        Task<GetUnspentOutputsResponse> GetUnspentOutputsAsync();
+        Task<GetAddressesWithUnspentOutputsResponse> GetAddressesWithUnspentOutputsAsync();
         Task<GetTransactionsResponse> GetTransactionsAsync();
     }
 }
