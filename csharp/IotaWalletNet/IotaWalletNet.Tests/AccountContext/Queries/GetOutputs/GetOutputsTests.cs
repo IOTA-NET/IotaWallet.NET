@@ -65,7 +65,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
             //This will create a basic output
             await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
 
-            NFTIRC27 nftIrc27 = new NFTIRC27(KnownMimeTypes.Text, "IotaWalletNetTest", "iotawallet.net");
+            NftIrc27 nftIrc27 = new NftIrc27(KnownMimeTypes.Text, "IotaWalletNetTest", "iotawallet.net");
 
             NftOptions nftOptions = new NftOptions() { ImmutableMetadata = JsonConvert.SerializeObject(nftIrc27).ToHexString() };
 
