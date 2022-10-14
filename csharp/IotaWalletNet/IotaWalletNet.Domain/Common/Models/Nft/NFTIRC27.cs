@@ -1,6 +1,6 @@
 ﻿namespace IotaWalletNet.Domain.Common.Models.Nft
 {
-    public class NFTIRC27
+    public class NftIrc27
     {
         public string Standard { get; } = "IRC27";
 
@@ -38,45 +38,45 @@
         /// 
         /// </summary>
         /// <param name="mimeType">Use KnownMimeTypes class to help</param>
-        public NFTIRC27(string mimeType, string nameOfNft, string uri)
+        public NftIrc27(string mimeType, string nameOfNft, string uri)
         {
             Type = mimeType;
             NameOfNft = nameOfNft;
             Uri = uri;
         }
 
-        public NFTIRC27 SetDescription(string description)
+        public NftIrc27 SetDescription(string description)
         {
             Description = description;
             return this;
         }
 
-        public NFTIRC27 SetCollectionName(string collectionName)
+        public NftIrc27 SetCollectionName(string collectionName)
         {
             CollectionName = collectionName;
             return this;
         }
 
-        public NFTIRC27 SetIssuerName(string issuerName)
+        public NftIrc27 SetIssuerName(string issuerName)
         {
             IssuerName = issuerName;
             return this;
         }
 
-        public NFTIRC27 AddRoyalty(string address, decimal royaltyPercentage)
+        public NftIrc27 AddRoyalty(string address, decimal royaltyPercentage)
         {
             Royalties[address] = royaltyPercentage;
 
             return this;
         }
 
-        public NFTIRC27 AddAttribute(string traitType, string value)
+        public NftIrc27 AddAttribute(string traitType, string value)
         {
             Attributes.Add(new NFTIRC27Attribute(traitType, value));
             return this;
         }
 
-        public NFTIRC27 AddInternalAttribute(string traitType, string value)
+        public NftIrc27 AddInternalAttribute(string traitType, string value)
         {
             InternalAttributes.Add(new NFTIRC27Attribute(traitType, value));
             return this;
