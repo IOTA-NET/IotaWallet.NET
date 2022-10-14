@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Main.Examples.NFTs.Send;
+﻿using IotaWalletNet.Main.Examples.NFTs.Burn;
 
 namespace IotaWalletNet.Main
 {
@@ -16,7 +16,9 @@ namespace IotaWalletNet.Main
             //await GenerateAnAddressExample.Run();
             //await MintNftExample.Run();
 
-            await SendNftExample.Run();
+            //await SendNftExample.Run();
+
+            await BurnNftExample.Run();
         }
     }
 }
