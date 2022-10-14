@@ -75,7 +75,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Mint_Nfts
                 }
 
                 //Lets prepare our nfts
-                NFTIRC27 nft1 = new NFTIRC27(KnownMimeTypes.Jpg, "Cats #003", urlsOfUploadedFiles[0])
+                NftIrc27 nft1 = new NftIrc27(KnownMimeTypes.Jpg, "Cats #003", urlsOfUploadedFiles[0])
                                 .SetCollectionName("Pussy")
                                 .SetDescription("A collection of cats")
                                 .SetIssuerName("CookieMonster")
@@ -84,7 +84,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Mint_Nfts
                                 .AddInternalAttribute("foreignKey", "OWN1112")
                                 .AddInternalAttribute("primaryKey", "PC003");
 
-                NFTIRC27 nft2 = new NFTIRC27(KnownMimeTypes.Jpg, "Cats #004", urlsOfUploadedFiles[1])
+                NftIrc27 nft2 = new NftIrc27(KnownMimeTypes.Jpg, "Cats #004", urlsOfUploadedFiles[1])
                                 .SetCollectionName("Pussy")
                                 .SetDescription("A collection of cats")
                                 .SetIssuerName("CookieMonster")
@@ -112,6 +112,9 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Mint_Nfts
                 //Mint our nfts!
                 MintNftsResponse mintNftsResponse = await account.MintNftsAsync(nftOptions);
                 Console.WriteLine($"MintNftsAsync: {mintNftsResponse}");
+
+                //For testnet
+                Console.WriteLine($"Check your block on https://explorer.shimmer.network/testnet/block/{mintNftsResponse.Payload!.BlockId}");
 
             }
         }
