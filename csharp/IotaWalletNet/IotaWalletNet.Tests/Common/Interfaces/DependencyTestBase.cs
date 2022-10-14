@@ -16,7 +16,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected const string ANOTHER_WALLET_ADDRESS = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
         protected const int SLEEP_DURATION_SECONDS_TRANSACTION = 5;
         protected const int SLEEP_DURATION_SECONDS_FAUCET = 15;
-        protected const int SLEEP_DURATION_SECONDS_API_RATE_LIMIT = 10;
+        protected const int SLEEP_DURATION_SECONDS_API_RATE_LIMIT = 15;
         public DependencyTestBase()
         {
 
