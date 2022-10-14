@@ -2,12 +2,12 @@
 {
     public class PayloadMethod<T> : PayloadMethod
     {
-        public PayloadMethod(string payloadMethodName, T data)
+        public PayloadMethod(string payloadMethodName, T? data)
             : base(payloadMethodName)
         {
             Data = data;
         }
-        public T Data { get; set; }
+        public T? Data { get; set; }
     }
 
     public class PayloadMethod

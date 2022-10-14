@@ -15,7 +15,7 @@
     /// <typeparam name="T">The type of payload method data</typeparam>
     public class AccountMessage<T> : Message<AccountPayload<T>>
     {
-        public AccountMessage(string username, string payloadMethodName, T methodData)
+        public AccountMessage(string username, string payloadMethodName, T? methodData)
         {
             Cmd = "callAccountMethod";
             Payload = new AccountPayload<T>(username, payloadMethodName, methodData);
