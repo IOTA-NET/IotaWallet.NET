@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction;
+﻿using IotaWalletNet.Main.Examples.NFTs.Send;
 
 namespace IotaWalletNet.Main
 {
@@ -11,10 +11,12 @@ namespace IotaWalletNet.Main
             //await RequestTokensFromFaucetExample.Run();
 
             //await CheckBalanceExample.Run();
-            await SendTransactionExample.Run();
+            //await SendTransactionExample.Run();
 
             //await GenerateAnAddressExample.Run();
             //await MintNftExample.Run();
+
+            await SendNftExample.Run();
         }
     }
 }
