@@ -9,6 +9,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
+using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
@@ -37,6 +38,10 @@ namespace IotaWalletNet.Application
         public IWallet Wallet { get; }
 
 
+        public async Task<GetTransactionsResponse> GetTransactionsAsync()
+        {
+            return await _mediator.Send(new GetTransactionsQuery(Username, this));
+        }
         public async Task<GetAddressesWithUnspentOutputsResponse> GetAddressesWithUnspentOutputs()
         {
             return await _mediator.Send(new GetAddressesWithUnspentOutputsQuery(Username, this));
