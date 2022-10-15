@@ -56,12 +56,6 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
                     throw new Exception("Tried sending out shimmer in order to obtain new ones from faucet, however, sending out shimmer failed or did not complete on time.");
             }
 
-            //await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
-
-            //await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
-
-            //await account.SyncAccountAsync();
-
             //This will create a basic output
             await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
 
@@ -71,7 +65,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 
             MintNftsResponse mintNftsResponse = await account.MintNftsAsync(new NftOptions[] { nftOptions }.ToList());
 
-            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_TRANSACTION));
+            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
 
             await account.SyncAccountAsync();
 
