@@ -5,6 +5,7 @@ using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+using IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepositRequired;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
@@ -38,5 +39,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<GetUnspentOutputsResponse> GetUnspentOutputsAsync();
         Task<GetAddressesWithUnspentOutputsResponse> GetAddressesWithUnspentOutputsAsync();
         Task<GetTransactionsResponse> GetTransactionsAsync();
+        Task<GetMinimumStorageDepositRequiredResponse> GetMinimumStorageDepositRequiredAsync(IOutputType outputType);
     }
 }

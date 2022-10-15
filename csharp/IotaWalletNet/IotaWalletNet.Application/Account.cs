@@ -8,10 +8,12 @@ using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+using IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepositRequired;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
 using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
@@ -37,6 +39,11 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
+
+        public async Task<GetMinimumStorageDepositRequiredResponse> GetMinimumStorageDepositRequiredAsync(IOutputType outputType)
+        {
+            return await _mediator.Send(new GetMinimumStorageDepositRequiredQuery(Username, this, outputType));
+        }
 
         public async Task<GetTransactionsResponse> GetTransactionsAsync()
         {
