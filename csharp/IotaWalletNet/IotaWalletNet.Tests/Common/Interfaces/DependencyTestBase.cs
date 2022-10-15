@@ -10,13 +10,13 @@ namespace IotaWalletNet.Tests.Common.Interfaces
         protected IServiceScope _serviceScope;
         protected const String STRONGHOLD_PATH = "./stronghold";
         protected const string DATABASE_PATH = "./walletdb";
-        protected const string DEFAULT_MNEMONIC = "sail symbol venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
+        protected const string DEFAULT_MNEMONIC = "bamboo trumpet budget depth pupil garden vague opinion repair monkey market skate wish butter destroy fence rookie tuition smart off arrive abuse you swift";
         protected const string DEFAULT_API_URL = "https://api.testnet.shimmer.network";
         protected const string DEFAULT_FAUCET_URL = @"https://faucet.testnet.shimmer.network";
         protected const string ANOTHER_WALLET_ADDRESS = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
         protected const int SLEEP_DURATION_SECONDS_TRANSACTION = 5;
         protected const int SLEEP_DURATION_SECONDS_FAUCET = 15;
-        protected const int SLEEP_DURATION_SECONDS_API_RATE_LIMIT = 15;
+        protected const int SLEEP_DURATION_SECONDS_API_RATE_LIMIT = 5;
         public DependencyTestBase()
         {
 
