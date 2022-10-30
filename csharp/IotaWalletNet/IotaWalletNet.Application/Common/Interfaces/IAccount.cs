@@ -7,6 +7,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOu
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepositRequired;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
+using IotaWalletNet.Application.AccountContext.Queries.GetPendingTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransaction;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
@@ -42,5 +43,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<GetTransactionsResponse> GetTransactionsAsync();
         Task<GetMinimumStorageDepositRequiredResponse> GetMinimumStorageDepositRequiredAsync(IOutputType outputType);
         Task<GetTransactionResponse> GetTransactionAsync(string transactionId);
+        Task<GetPendingTransactionsResponse> GetPendingTransactionsAsync();
     }
 }
