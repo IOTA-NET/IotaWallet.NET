@@ -1,5 +1,5 @@
-﻿using Blake2Fast;
-using System.Text;
+﻿using System.Text;
+using Blake2Fast;
 
 namespace IotaWalletNet.Domain.Common.Extensions
 {

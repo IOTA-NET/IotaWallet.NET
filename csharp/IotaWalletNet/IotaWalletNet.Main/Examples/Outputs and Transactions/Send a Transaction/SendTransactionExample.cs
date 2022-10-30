@@ -10,7 +10,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
 {
     public static class SendTransactionExample
     {
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();

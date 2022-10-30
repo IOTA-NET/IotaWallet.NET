@@ -9,7 +9,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
 {
     public static class RequestTokensFromFaucetExample
     {
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();

@@ -55,9 +55,6 @@ namespace IotaWalletNet.Main.Examples.NFTs.Burn
                 //Sync account
                 await account.SyncAccountAsync();
 
-                //TODO: Replace with the address of your choice!
-                string receiverAddress = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
-
                 //TODO: Replace with an nft output id from your accounts.
                 string outputId = "0x9c5fc8b575e29377e0401d2cd6138c0f4859fbb95b5acf0ea81b3354de6eb2e70100";
 
