@@ -12,7 +12,7 @@ namespace IotaWalletNet.Main.Examples.NFTs.Send
 {
     public static class SendNftExample
     {
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();

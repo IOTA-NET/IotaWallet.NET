@@ -11,7 +11,7 @@ using SiaSkynet;
 using SiaSkynet.Responses;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
-namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Mint_Nfts
+namespace IotaWalletNet.Main.Examples.NFTs.Mint
 {
     public static class MintNftExample
     {

@@ -11,7 +11,7 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses
     public static class CreateAWalletAndAccountExample
     {
 
-        public async static Task Run()
+        public static async Task Run()
         {
             //Register all of the dependencies into a collection of services
             IServiceCollection services = new ServiceCollection().AddIotaWalletServices();

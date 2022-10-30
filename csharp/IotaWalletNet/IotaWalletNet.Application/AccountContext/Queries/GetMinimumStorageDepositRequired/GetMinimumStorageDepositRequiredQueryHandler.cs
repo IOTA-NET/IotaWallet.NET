@@ -11,7 +11,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepo
             GetMinimumStorageDepositRequiredQueryMessage message = new GetMinimumStorageDepositRequiredQueryMessage(request.Username, request.OutputType);
             string json = JsonConvert.SerializeObject(message);
 
-            RustBridgeGenericResponse genericResponse =  await request.Account.SendMessageAsync(json);
+            RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
             GetMinimumStorageDepositRequiredResponse response = genericResponse.IsSuccess
                                                                     ? genericResponse.As<GetMinimumStorageDepositRequiredResponse>()!
