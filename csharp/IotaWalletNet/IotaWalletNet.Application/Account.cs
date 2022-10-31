@@ -1,6 +1,7 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
 using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
@@ -18,6 +19,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
+using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
@@ -45,6 +47,11 @@ namespace IotaWalletNet.Application
         public async Task<GetTransactionResponse> GetTransactionAsync(string transactionId)
         {
             return await _mediator.Send(new GetTransactionQuery(Username, this, transactionId));
+        }
+
+        public async Task<MintNativeTokensResponse> MintNativeTokensAsync(NativeTokenOptions nativeTokenOptions)
+        {
+            return await _mediator.Send(new MintNativeTokensCommand(Username, this, nativeTokenOptions));
         }
 
         public async Task<GetPendingTransactionsResponse> GetPendingTransactionsAsync()
