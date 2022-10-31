@@ -15,7 +15,7 @@
         public string MaximumSupply { get; set; }
 
         /// <summary>
-        /// [HexEncoded]
+        /// [HexEncoded]    
         /// </summary>
         public string? FoundryMetadata { get; set; }
     }
