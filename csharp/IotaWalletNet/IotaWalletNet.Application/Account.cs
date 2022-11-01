@@ -5,6 +5,7 @@ using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
 using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
+using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
@@ -49,6 +50,10 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new GetTransactionQuery(Username, this, transactionId));
         }
 
+        public async Task<SendNativeTokensResponse> SendNativeTokensAsync(List<AddressWithNativeTokens> addressWithNativeTokens)
+        {
+            return await _mediator.Send(new SendNativeTokensCommand(Username, this, addressWithNativeTokens));
+        }
         public async Task<MintNativeTokensResponse> MintNativeTokensAsync(NativeTokenOptions nativeTokenOptions)
         {
             return await _mediator.Send(new MintNativeTokensCommand(Username, this, nativeTokenOptions));

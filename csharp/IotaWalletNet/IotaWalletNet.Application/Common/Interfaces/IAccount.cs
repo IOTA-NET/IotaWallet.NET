@@ -3,6 +3,7 @@ using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
+using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
@@ -49,5 +50,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<GetPendingTransactionsResponse> GetPendingTransactionsAsync();
         Task<ClaimOutputsResponse> ClaimOutputsAsync(List<string> outputIds);
         Task<MintNativeTokensResponse> MintNativeTokensAsync(NativeTokenOptions nativeTokenOptions);
+        Task<SendNativeTokensResponse> SendNativeTokensAsync(List<AddressWithNativeTokens> addressWithNativeTokens);
     }
 }

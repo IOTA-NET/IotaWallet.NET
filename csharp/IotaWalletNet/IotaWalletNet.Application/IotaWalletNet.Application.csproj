@@ -18,6 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NetworkContext\**" />
+    <EmbeddedResource Remove="NetworkContext\**" />
+    <None Remove="NetworkContext\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Polly" Version="7.2.3" />
@@ -27,11 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IotaWalletNet.Domain\IotaWalletNet.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NetworkContext\Commands\" />
-    <Folder Include="NetworkContext\Queries\" />
   </ItemGroup>
 
 </Project>
