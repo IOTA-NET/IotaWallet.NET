@@ -1,13 +1,17 @@
-﻿using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
+using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
+using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Extensions;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
-namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet
+namespace IotaWalletNet.Main.Examples.Native_Tokens.Mint
 {
-    public static class RequestTokensFromFaucetExample
+    public static class MintNativeTokensExample
     {
         public static async Task Run()
         {
@@ -51,12 +55,36 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     return;
                 }
 
-                //Let's generate an address!
-                string address = (await account.GenerateAddressesAsync()).Payload!.First().Address!;
+                SyncAccountResponse syncAccountResponse =  await account.SyncAccountAsync();
+                Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
 
-                //Now we request shimmer tokens into that address
-                await account.RequestFromFaucetAsync(address, @"https://faucet.testnet.shimmer.network");
+
+                string hexEncodedCirculatingSupply = "1000000".ToHexString();
+                string hexEncodedMaximumSupply = "1500000".ToHexString();
+
+                NativeTokenIRC30 nativeTokenMetadata = new NativeTokenIRC30("iotanet", "inet", 6)
+                                                        .SetDescription("Just a test coin")
+                                                        .SetUrl("https://github.com/IOTA-NET/IotaWallet.NET")
+                                                        .SetLogo("C:\\Users\\mrazali\\Desktop\\iotawalletnetlogo.jpg");
+                
+                string nativeTokenMetadataJson = JsonConvert.SerializeObject(nativeTokenMetadata);
+                
+                NativeTokenOptions nativeTokenOptions = new NativeTokenOptions(hexEncodedCirculatingSupply, hexEncodedMaximumSupply)
+                {
+                    FoundryMetadata = nativeTokenMetadataJson.ToHexString(),
+                };
+
+                MintNativeTokensResponse mintNativeTokensResponse =  await account.MintNativeTokensAsync(nativeTokenOptions);
+                Console.WriteLine($"MintNativeTokensAsync: {mintNativeTokensResponse}");
+                Thread.Sleep(10000);
+
+                await account.SyncAccountAsync();
+
+                GetBalanceResponse response = await account.GetBalanceAsync();
+
+                Console.WriteLine(response);
             }
+
         }
 
 

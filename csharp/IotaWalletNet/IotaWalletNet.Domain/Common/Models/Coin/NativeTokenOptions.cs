@@ -2,6 +2,12 @@
 {
     public class NativeTokenOptions
     {
+        public NativeTokenOptions(string hexEncodedCirculatingSupply, string hexEncodedMaximumSupply)
+        {
+            CirculatingSupply = hexEncodedCirculatingSupply;
+            MaximumSupply = hexEncodedMaximumSupply;
+        }
+
         public string? AliasId { get; set; }
 
         /// <summary>
