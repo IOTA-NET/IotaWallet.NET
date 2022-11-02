@@ -3,11 +3,8 @@ using IotaWalletNet.Domain.PlatformInvoke;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {
-    public partial class SyncAccountCommandHandler
+    public class SyncAccountResponse : RustBridgeResponseBase<AccountBalance>
     {
-        public class SyncAccountResponse : RustBridgeResponseBase<AccountBalance>
-        {
 
-        }
     }
 }
