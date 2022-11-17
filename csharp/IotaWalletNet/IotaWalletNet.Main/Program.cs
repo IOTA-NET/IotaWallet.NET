@@ -1,7 +1,4 @@
-﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
-using IotaWalletNet.Main.Examples.Native_Tokens.Mint;
-using IotaWalletNet.Main.Examples.NFTs.Burn;
-using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet;
+﻿using IotaWalletNet.Main.Examples.Native_Tokens.Mint;
 
 namespace IotaWalletNet.Main
 {

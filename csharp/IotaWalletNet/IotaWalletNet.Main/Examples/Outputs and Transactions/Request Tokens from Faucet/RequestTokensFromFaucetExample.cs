@@ -2,7 +2,6 @@
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
 namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet

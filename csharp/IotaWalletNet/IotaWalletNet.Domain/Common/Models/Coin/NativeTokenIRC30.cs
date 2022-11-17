@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace IotaWalletNet.Domain.Common.Models.Coin
+﻿namespace IotaWalletNet.Domain.Common.Models.Coin
 {
     /// <summary>
     /// IRC30 Native Token Metadata Schema
@@ -29,7 +27,7 @@ namespace IotaWalletNet.Domain.Common.Models.Coin
         /// The human-readable description of the token
         /// </summary>
         public string? Description { get; set; }
-        
+
         public NativeTokenIRC30 SetDescription(string description)
         {
             Description = description;
@@ -69,7 +67,7 @@ namespace IotaWalletNet.Domain.Common.Models.Coin
 
         public NativeTokenIRC30 SetLogo(string logoFilePath)
         {
-            if(File.Exists(logoFilePath))
+            if (File.Exists(logoFilePath))
             {
                 byte[] fileBytes = File.ReadAllBytes(logoFilePath);
                 Logo = Convert.ToHexString(fileBytes);
