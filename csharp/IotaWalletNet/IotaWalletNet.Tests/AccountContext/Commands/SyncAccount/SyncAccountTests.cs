@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Tests.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
