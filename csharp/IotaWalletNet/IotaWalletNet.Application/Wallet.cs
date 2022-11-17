@@ -1,5 +1,4 @@
-﻿using System.Text;
-using IotaWalletNet.Application.Common.Interfaces;
+﻿using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.Common.Options;
 using IotaWalletNet.Application.WalletContext.Commands.CreateAccount;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
@@ -11,6 +10,7 @@ using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Text;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
 

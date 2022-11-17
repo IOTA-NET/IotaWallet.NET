@@ -1,6 +1,5 @@
 ﻿using IotaWalletNet.Application.Common.Interfaces;
 using MediatR;
-using static IotaWalletNet.Application.AccountContext.Commands.SyncAccount.SyncAccountCommandHandler;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SyncAccount
 {

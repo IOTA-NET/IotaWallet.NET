@@ -22,7 +22,6 @@ using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
-using static IotaWalletNet.Application.AccountContext.Commands.SyncAccount.SyncAccountCommandHandler;
 
 namespace IotaWalletNet.Application.Common.Interfaces
 {

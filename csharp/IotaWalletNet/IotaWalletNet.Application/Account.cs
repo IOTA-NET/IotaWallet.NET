@@ -27,7 +27,6 @@ using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
-using static IotaWalletNet.Application.AccountContext.Commands.SyncAccount.SyncAccountCommandHandler;
 
 namespace IotaWalletNet.Application
 {
