@@ -10,7 +10,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens
         public async Task<MintNativeTokensResponse> Handle(MintNativeTokensCommand request, CancellationToken cancellationToken)
         {
             MintNativeTokensCommandMessageData messageData = new MintNativeTokensCommandMessageData(request.NativeTokenOptions, new TransactionOptions());
-            MintNAtiveTokensCommandMessage message = new MintNAtiveTokensCommandMessage(messageData);
+            MintNativeTokensCommandMessage message = new MintNativeTokensCommandMessage(request.Username, messageData);
             string messageJson = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);

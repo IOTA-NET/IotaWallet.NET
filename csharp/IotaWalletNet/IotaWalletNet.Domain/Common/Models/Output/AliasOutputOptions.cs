@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace IotaWalletNet.Domain.Common.Models.Output
+﻿namespace IotaWalletNet.Domain.Common.Models.Output
 {
     /// <summary>
     /// Options for the alias output creation

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.CreateAliasOutput
 {
-    
+
     public class CreateAliasOutputCommand : IRequest<CreateAliasOutputResponse>
     {
         public CreateAliasOutputCommand(string username, IAccount account, AliasOutputOptions aliasOutputOptions)
