@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Main.Examples.Native_Tokens.Mint;
+using IotaWalletNet.Main.Examples.Native_Tokens.Send;
 
 namespace IotaWalletNet.Main
 {
@@ -20,7 +21,9 @@ namespace IotaWalletNet.Main
 
             //await BurnNftExample.Run();
 
-            await MintNativeTokensExample.Run();
+            //await MintNativeTokensExample.Run();
+
+            await SendNativeTokensExample.Run();
         }
     }
 }
