@@ -11,6 +11,15 @@ namespace IotaWalletNet.Domain.Common.Extensions
 
         public static string ToHexString(this string input) => "0x" + Convert.ToHexString(Encoding.UTF8.GetBytes(input));
 
+        public static string FromHexString(this string hexString)
+        {
+            hexString = hexString.Substring(2); // remove the 0x of a hexstring eg 0x1337
+
+            byte[] utf8StringBytes = Convert.FromHexString(hexString);
+
+            return Encoding.UTF8.GetString(utf8StringBytes);
+        }
+
         public static string ComputeBlake2bHash(this string hexEncoded)
         {
             if (hexEncoded.StartsWith("0x") == false)

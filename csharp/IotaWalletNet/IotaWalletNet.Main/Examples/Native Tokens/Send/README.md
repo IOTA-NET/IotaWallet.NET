@@ -1,18 +1,18 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
-using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
-using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
-using IotaWalletNet.Application.Common.Extensions;
-using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Extensions;
-using IotaWalletNet.Domain.Common.Models.Account;
-using IotaWalletNet.Domain.Common.Models.Address;
-using IotaWalletNet.Domain.Common.Models.Coin;
-using Microsoft.Extensions.DependencyInjection;
-using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
+﻿# Mint Native Tokens
 
-namespace IotaWalletNet.Main.Examples.Native_Tokens.Send
-{
-    public class SendNativeTokensExample
+## Code Example
+
+The following example will:
+
+1. Initialize your account
+2. Retrieve your `cookiemonster` account
+3. Retrieve your balance
+4. Check if there exists any NativeTokens with atleast 10 tokens
+5. Send NativeTokens
+
+
+```cs
+     public class SendNativeTokensExample
     {
         public static async Task Run()
         {
@@ -56,7 +56,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Send
                     return;
                 }
 
-               
+                
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
 
@@ -90,4 +90,5 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Send
         }
 
     }
-}
+    
+```

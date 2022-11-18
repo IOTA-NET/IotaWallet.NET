@@ -2,29 +2,22 @@
 {
     public class AddressWithNativeTokens
     {
-        public AddressWithNativeTokens(List<TokenIdWithAmount> tokenIdWithAmounts, string address)
+        public AddressWithNativeTokens(List<string[]> tokenIdWithAmounts, string address)
         {
-            TokenIdWithAmounts = tokenIdWithAmounts;
+            NativeTokens = tokenIdWithAmounts;
             Address = address;
         }
 
 
-        public List<TokenIdWithAmount> TokenIdWithAmounts { get; set; }
+        /// <summary>
+        /// A list of (string tokenId, string hexEncodedAmount) 
+        /// </summary>
+        public List<string[]> NativeTokens { get; set; }
 
         public string Address { get; set; }
 
         public string? ReturnAddress { get; set; }
 
         public ulong? Expiration { get; set; }
-    }
-
-    public class TokenIdWithAmount
-    {
-        public string TokenID { get; set; }
-
-        /// <summary>
-        /// [HexEncoded Amount]
-        /// </summary>
-        public string Amount { get; set; }
     }
 }
