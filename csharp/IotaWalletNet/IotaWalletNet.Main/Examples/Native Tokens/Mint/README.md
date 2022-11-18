@@ -96,7 +96,7 @@ The following example will:
                 string hexEncodedCirculatingSupply = "1000000".ToHexString();
                 string hexEncodedMaximumSupply = "1500000".ToHexString();
 
-                NativeTokenIRC30 nativeTokenMetadata = new NativeTokenIRC30("iotanet", "inet", 6)
+                NativeTokenIRC30 nativeTokenMetadata = new NativeTokenIRC30(name: "iotanet", symbol:"inet", decimals:6)
                                                         .SetDescription("Just a test coin")
                                                         .SetUrl("https://github.com/IOTA-NET/IotaWallet.NET");
 
