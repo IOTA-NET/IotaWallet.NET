@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
+﻿using IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens;
+using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.CreateAliasOutput;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
@@ -55,5 +56,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<SendNativeTokensResponse> SendNativeTokensAsync(List<AddressWithNativeTokens> addressWithNativeTokens);
         Task<CreateAliasOutputResponse> CreateAliasOutputAsync(AliasOutputOptions aliasOutputOptions);
         Task<MeltNativeTokensResponse> MeltNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
+        Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
     }
 }

@@ -10,9 +10,9 @@ namespace IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens
         public async Task<MeltNativeTokensResponse> Handle(MeltNativeTokensCommand request, CancellationToken cancellationToken)
         {
             //SOLVE use case
-            MeltNativeTokensMessageData messageData = new MeltNativeTokensMessageData(request.TokenId, request.MeltAmount, new TransactionOptions());
+            MeltNativeTokensCommandMessageData messageData = new MeltNativeTokensCommandMessageData(request.TokenId, request.MeltAmount, new TransactionOptions());
 
-            MeltNativeTokensMessage message = new MeltNativeTokensMessage(request.Username, messageData);
+            MeltNativeTokensCommandMessage message = new MeltNativeTokensCommandMessage(request.Username, messageData);
 
             string jsonMessage = JsonConvert.SerializeObject(message);
 
