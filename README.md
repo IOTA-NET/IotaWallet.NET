@@ -119,37 +119,36 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 # Supported Commands/Queries
 
 ## Wallet
-### Commands
-
-Commands  | Requires
-------------- | -------------
-StoreMnemonicAsync  | mnemonic : String
-CreateAccountAsync | username : String
-VerifyMnemonicAsync | mnemonic : String
 
 
-### Queries
+Commands  | 
+------------- |
+CreateAccount |
+StoreMnemonic  | 
+VerifyMnemonic| 
 
-Queries | Requires
---------- | -----------
-GetAccountAsync | username : String
-GetAccountsAsync | -
-GetNewMnemonicAsync | -
+Queries | 
+--------- |
+GetAccount |
+GetAccounts | 
+GetNewMnemonic | 
 
 ## Account
 
-### Commands
+Commands  | 
+------------- |
+BurnNativeTokens |
+BurnNft | 
+ClaimOutputs | 
+CreateAliasOutput | 
+GenerateAddresses |
+MeltNativeTokens | 
+MintNativeTokens |
+MintNfts |
+RequestFromFaucet |
+SendAmount | 
+SendNativeTokens |
+SendNfts |
+SyncAccount | 
 
-Commands  | Requires
-------------- | -------------
-SyncAccountAsync     | -
-SendAmountAsync | [{address:String, amount:String}]
-RequestFromFaucet | {address:String, url:String}]
-GenerateAddressesAsync | numberOfAddresses: int, typeOfNetwork: NetworkType 
 
-### Queries
-
-
-Queries | Requires
---------- | -----------
-GetBalanceAsync | username : String
