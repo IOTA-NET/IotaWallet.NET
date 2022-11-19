@@ -73,7 +73,7 @@ jobs:
        
       - name: Add Nuget Source
         #run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate --no-symbols
-        run: dotnet nuget add source --username wireless90 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/wireless90/index.json"
+        run: dotnet nuget add source --username wireless90 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/IOTA-NET/index.json"
       
       - name: Push All Nugets 
         run: dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg  --api-key ${{ secrets.GHUB_NUGET_AUTH_TOKEN }} --source "github" --skip-duplicate --no-symbols
