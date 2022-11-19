@@ -56,7 +56,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Send
                     return;
                 }
 
-               
+
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
 
