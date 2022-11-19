@@ -1,10 +1,10 @@
 ﻿using IotaWalletNet.Domain.Common.Models.Transaction;
 
-namespace IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens
+namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
 {
-    public class MeltNativeTokensMessageData
+    public class BurnNativeTokensCommandMessageData
     {
-        public MeltNativeTokensMessageData(string tokenId, string meltAmount, TransactionOptions options)
+        public BurnNativeTokensCommandMessageData(string tokenId, string meltAmount, TransactionOptions options)
         {
             TokenId = tokenId;
             MeltAmount = meltAmount;

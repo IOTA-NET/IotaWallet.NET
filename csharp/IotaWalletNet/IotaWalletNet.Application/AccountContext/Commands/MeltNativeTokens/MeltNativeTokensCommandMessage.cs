@@ -2,11 +2,11 @@
 
 namespace IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens
 {
-    public class MeltNativeTokensMessage : AccountMessage<MeltNativeTokensMessageData>
+    public class MeltNativeTokensCommandMessage : AccountMessage<MeltNativeTokensCommandMessageData>
     {
         private const string METHOD_NAME = "decreaseNativeTokenSupply";
 
-        public MeltNativeTokensMessage(string username, MeltNativeTokensMessageData messageData)
+        public MeltNativeTokensCommandMessage(string username, MeltNativeTokensCommandMessageData messageData)
             : base(username, METHOD_NAME, messageData)
         {
         }
