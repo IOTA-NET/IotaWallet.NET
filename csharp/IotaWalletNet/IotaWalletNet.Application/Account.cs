@@ -2,6 +2,7 @@
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.CreateAliasOutput;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
+using IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet;
@@ -55,6 +56,10 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new GetTransactionQuery(Username, this, transactionId));
         }
 
+        public async Task<MeltNativeTokensResponse> MeltNativeTokensAsync(string tokenId, string meltAmountHexEncoded)
+        {
+            return await _mediator.Send(new MeltNativeTokensCommand(tokenId, meltAmountHexEncoded, Username, this);
+        }
         public async Task<SendNativeTokensResponse> SendNativeTokensAsync(List<AddressWithNativeTokens> addressWithNativeTokens)
         {
             return await _mediator.Send(new SendNativeTokensCommand(Username, this, addressWithNativeTokens));
