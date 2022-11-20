@@ -1,4 +1,4 @@
-# Send a Transaction
+# Request Shimmer from Faucet
 
 ## Code Example
 
