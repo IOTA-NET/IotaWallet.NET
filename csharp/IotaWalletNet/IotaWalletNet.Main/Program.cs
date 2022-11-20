@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Main.Examples.Native_Tokens.Send;
+﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
+using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet;
 
 namespace IotaWalletNet.Main
 {
@@ -8,7 +9,7 @@ namespace IotaWalletNet.Main
         {
             //await CreateAWalletAndAccountExample.Run();
 
-            //await RequestTokensFromFaucetExample.Run();
+            await RequestTokensFromFaucetExample.Run();
 
             //await CheckBalanceExample.Run();
             //await SendTransactionExample.Run();
@@ -22,7 +23,7 @@ namespace IotaWalletNet.Main
 
             //await MintNativeTokensExample.Run();
 
-            await SendNativeTokensExample.Run();
+            //await SendNativeTokensExample.Run();
         }
     }
 }
