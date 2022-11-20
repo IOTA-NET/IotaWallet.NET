@@ -17,9 +17,9 @@
 		<Description>Contains important classes for IotaWallet.Net</Description>
 		<Authors>Razali</Authors>
 		<PackageTags>rust;wallet;iota;csharp;net;core;netcore;wallet;firefly;shimmer;</PackageTags>
-		<PackageProjectUrl>https://github.com/wireless90/IotaWallet.NET</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/IOTA-NET/IotaWallet.NET</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/wireless90/IotaWallet.NET</RepositoryUrl>
+		<RepositoryUrl>https://github.com/IOTA-NET/IotaWallet.NET</RepositoryUrl>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		
 	</PropertyGroup>
