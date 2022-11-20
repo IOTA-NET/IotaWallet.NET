@@ -46,7 +46,7 @@ jobs:
         working-directory: ./csharp/IotaWalletNet 
 
       - name: Test
-        run: dotnet test --configuration Release --no-build --verbosity normal -p:ParallelizeTestCollections=false
+        run: dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed" 
         working-directory: ./csharp/IotaWalletNet
 
       - name: Get Version
