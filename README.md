@@ -4,9 +4,9 @@
 
 [![status](https://img.shields.io/badge/Status-Alpha-yellow.svg)](https://github.com/wireless90/IotaWallet.NET)
 
-[![Continuous Integration](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml/badge.svg?branch=main)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml)
-[![Deploy to Github NuGet](https://github.com/wireless90/IotaWallet.NET/actions/workflows/GithubNuget.yml/badge.svg)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/GithubNuget.yml)
-[![Deploy to NuGet.org](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml/badge.svg)](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml)
+[![Continuous Integration](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Compile.yml/badge.svg?branch=main)](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/Compile.yml)
+[![Deploy to Github NuGet](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/GithubNuget.yml/badge.svg?branch=v0.2.8-alpha)](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/GithubNuget.yml)
+[![Deploy to NuGet.org](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml/badge.svg)](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/Nuget.yml)
 
 # Introduction
 
