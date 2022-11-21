@@ -15,6 +15,9 @@ This wallet leverages IOTA's official wallet.rs bindings and ports it over to .N
 Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 
 # Installation from Nuget.org
+
+> Note the following packages must be installed explicitly, do not skip it.
+
 > Install-Package IotaWallet.Net.Domain
 
 Or download from [here](https://www.nuget.org/packages/IotaWallet.Net.Domain/).
@@ -89,7 +92,7 @@ static async Task Main(string[] args)
 		string? generatedAddress = generateAddressesResponse.Payload?.FirstOrDefault()?.Address;
 			
 		//Let's request some Shimmer from the faucet
-        	await account.RequestFromFaucet(generatedAddress, @"https://faucet.testnet.shimmer.network");
+        	await account.RequestFromFaucetAsync(generatedAddress, @"https://faucet.testnet.shimmer.network");
         
 		//Let's Checkout our balance. We will sync the account, followed by checking the balance.
 		//Sync the account with the tangle
@@ -120,35 +123,44 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 
 ## Wallet
 
+### Commands
 
-Commands  | 
-------------- |
-CreateAccount |
-StoreMnemonic  | 
-VerifyMnemonic| 
+- [x] CreateAccount
+- [x] StoreMnemonic
+- [x] VerifyMnemonic
 
-Queries | 
---------- |
-GetAccount |
-GetAccounts | 
-GetNewMnemonic | 
+### Queries
+
+- [x] GetAccount
+- [x] GetAccounts
+- [x] GetNewMnemonic
 
 ## Account
 
-Commands  | 
-------------- |
-BurnNativeTokens |
-BurnNft | 
-ClaimOutputs | 
-CreateAliasOutput | 
-GenerateAddresses |
-MeltNativeTokens | 
-MintNativeTokens |
-MintNfts |
-RequestFromFaucet |
-SendAmount | 
-SendNativeTokens |
-SendNfts |
-SyncAccount | 
+### Commands
 
+- [x] BurnNativeTokens
+- [x] BurnNft
+- [x] ClaimOutputs
+- [x] CreateAliasOutput
+- [x] GenerateAddresses
+- [x] MeltNativeTokens
+- [x] MintNativeTokens
+- [x] MintNfts
+- [x] RequestFromFaucet
+- [x] SendNativeTokens
+- [x] SendNfts
+- [x] SyncAccount
+
+### Queries
+
+- [x] GetAddresses
+- [x] GetAddressesWithUnspentOutputs
+- [x] GetBalance
+- [x] GetMinimumStorageDepositRequired
+- [x] GetOutputs
+- [x] GetPendingTransactions
+- [x] GetTransaction
+- [x] GetTransactions
+- [x] GetUnspentOutputs
 
