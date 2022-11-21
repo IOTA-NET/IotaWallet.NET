@@ -59,13 +59,17 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
             //This will create a basic output
             await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
 
-            NftIrc27 nftIrc27 = new NftIrc27(KnownMimeTypes.Text, "IotaWalletNetTest", "iotawallet.net");
+            //This will create another basic output
+            await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
 
-            NftOptions nftOptions = new NftOptions() { ImmutableMetadata = JsonConvert.SerializeObject(nftIrc27).ToHexString() };
 
-            MintNftsResponse mintNftsResponse = await account.MintNftsAsync(new NftOptions[] { nftOptions }.ToList());
+            //NftIrc27 nftIrc27 = new NftIrc27(KnownMimeTypes.Text, "IotaWalletNetTest", "iotawallet.net");
 
-            await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
+            //NftOptions nftOptions = new NftOptions() { ImmutableMetadata = JsonConvert.SerializeObject(nftIrc27).ToHexString() };
+
+            //MintNftsResponse mintNftsResponse = await account.MintNftsAsync(new NftOptions[] { nftOptions }.ToList());
+
+            //await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
 
             await account.SyncAccountAsync();
 
