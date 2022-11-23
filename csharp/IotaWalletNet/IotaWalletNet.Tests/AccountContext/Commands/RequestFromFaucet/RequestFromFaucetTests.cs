@@ -10,16 +10,14 @@ namespace IotaWalletNet.Tests.AccountContext.Commands.RequestFromFaucet
 {
 
     [Collection("Sequential")]
-    public class RequestFromFaucetTests : DependencyTestBase
+    public class RequestFromFaucetTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task AccountShouldBeAbleToGetTokensFromFaucet()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
-            wallet = CreateFullWallet(wallet);
-
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
+            wallet = await CreateFullWalletAsync(wallet);
 
             (_, IAccount? account) = await wallet.CreateAccountAsync("cookiemonster");
 

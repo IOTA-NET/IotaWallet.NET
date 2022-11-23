@@ -15,7 +15,7 @@ namespace IotaWalletNet.Tests.Wallet
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
             wallet = wallet
                         .ConfigureSecretManagerOptions()
-                            .SetSnapshotPath(STRONGHOLD_PATH)
+                            .SetSnapshotPath(GetRandomStrongholdFilename())
                             .SetPassword("password")
                             .ThenBuild();
 
@@ -30,15 +30,16 @@ namespace IotaWalletNet.Tests.Wallet
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
             string password = "password";
 
+            string filename = GetRandomStrongholdFilename();
             wallet = wallet
                         .ConfigureSecretManagerOptions()
-                            .SetSnapshotPath(STRONGHOLD_PATH)
+                            .SetSnapshotPath(filename)
                             .SetPassword(password)
                             .ThenBuild();
 
             SecretManagerOptions secretManagerOptions = wallet.GetWalletOptions().SecretManager;
 
-            secretManagerOptions.Stronghold.SnapshotPath.Equals(STRONGHOLD_PATH);
+            secretManagerOptions.Stronghold.SnapshotPath.Equals(filename);
             secretManagerOptions.Stronghold.Password.Equals(password);
 
 

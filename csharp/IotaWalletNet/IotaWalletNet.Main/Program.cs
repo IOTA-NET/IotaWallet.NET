@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
-using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet;
+﻿using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet;
 
 namespace IotaWalletNet.Main
 {

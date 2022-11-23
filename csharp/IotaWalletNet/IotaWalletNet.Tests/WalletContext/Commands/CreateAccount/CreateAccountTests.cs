@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.WalletContext.Commands.CreateAccount
 {
     [Collection("Sequential")]
-    public class CreateAccountTests : DependencyTestBase
+    public class CreateAccountTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task WalletShouldBeAbleToCreateAccountsWithDifferentUserNames()
@@ -16,9 +16,8 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.CreateAccount
 
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
-            wallet = CreateFullWallet(wallet);
+            wallet = await CreateFullWalletAsync(wallet);
 
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
 
             foreach (string username in userNames)
             {

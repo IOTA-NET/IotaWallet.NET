@@ -7,14 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.WalletContext.Queries.GetNewMnemonic
 {
     [Collection("Sequential")]
-    public class GetNewMnemonicTests : DependencyTestBase
+    public class GetNewMnemonicTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task WalletShouldBeAbleToCreateAMnemonic()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
-            wallet = CreateFullWallet(wallet);
+            wallet = await CreateFullWalletAsync(wallet, shouldCreateAndStoreMnemonic: false);
 
             GetNewMnemonicResponse? getNewMnemonicResponse = null;
 

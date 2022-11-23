@@ -7,15 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.WalletContext.Queries.GetAccounts
 {
     [Collection("Sequential")]
-    public class GetAccountsTests : DependencyTestBase
+    public class GetAccountsTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task WalletShouldBeAbleToGetAllCreatedAccounts()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            wallet = CreateFullWallet(wallet);
-
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
+            wallet = await CreateFullWalletAsync(wallet);
 
 
             await wallet.CreateAccountAsync("cookiemonster");
