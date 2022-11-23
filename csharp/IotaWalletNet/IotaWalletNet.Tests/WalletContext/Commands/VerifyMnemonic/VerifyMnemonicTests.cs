@@ -7,15 +7,16 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
 {
     [Collection("Sequential")]
-    public class VerifyMnemonicTests : DependencyTestBase
+    public class VerifyMnemonicTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task WalletShouldValidateTrueForCorrectMnemonic()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            wallet = CreateOfflineFullWallet(wallet);
+            wallet = await CreateOfflineFullWalletAsync(wallet, shouldCreateAndStoreMnemonic: false);
+            string mnemonic = "hood medal among prevent during embrace inmate swarm ancient damp token rail wolf risk tortoise record dose language rival cloud sting grace palm style";
 
-            VerifyMnemonicResponse response = await wallet.VerifyMnemonicAsync(DEFAULT_MNEMONIC);
+            VerifyMnemonicResponse response = await wallet.VerifyMnemonicAsync(mnemonic);
             response.Should().NotBeNull();
             response.Error.Should().BeNull();
             response.Type.Should().NotBeNullOrEmpty();
@@ -27,14 +28,15 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
         public async Task WalletShouldValidateFalseForWrongMnemonic()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            wallet = CreateOfflineFullWallet(wallet);
+            wallet = await CreateOfflineFullWalletAsync(wallet, shouldCreateAndStoreMnemonic: false);
+            string mnemonic = "hood medal among prevent during embrace inmate swarm ancient damp token rail wolf risk tortoise record dose language rival cloud sting grace palm style";
 
             VerifyMnemonicResponse response = await wallet.VerifyMnemonicAsync("wrong mnemonic");
             response.Should().NotBeNull();
             response.Error.Should().NotBeNull();
             response.Type.Should().NotBeNullOrEmpty();
 
-            response = await wallet.VerifyMnemonicAsync(DEFAULT_MNEMONIC + "random");
+            response = await wallet.VerifyMnemonicAsync(mnemonic + "random");
             response.Should().NotBeNull();
             response.Error.Should().NotBeNull();
             response.Type.Should().NotBeNullOrEmpty();

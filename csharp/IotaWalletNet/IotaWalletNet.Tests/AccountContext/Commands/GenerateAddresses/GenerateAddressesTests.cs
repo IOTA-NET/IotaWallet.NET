@@ -8,16 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.AccountContext.Commands.GenerateAddresses
 {
     [Collection("Sequential")]
-    public class GenerateAddressesTests : DependencyTestBase
+    public class GenerateAddressesTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task AccountShouldBeAbleToGenerateNewAddresses()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
-            wallet = CreateFullWallet(wallet);
+            wallet = await CreateFullWalletAsync(wallet);
 
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
 
             (CreateAccountResponse accountResponse, IAccount? account) =
                 await wallet.CreateAccountAsync("cookiemonster");

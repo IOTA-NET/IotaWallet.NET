@@ -7,7 +7,7 @@ using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccou
 namespace IotaWalletNet.Tests.WalletContext.Queries.GetAccount
 {
     [Collection("Sequential")]
-    public class GetAccountTests : DependencyTestBase
+    public class GetAccountTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task WalletShouldBeAbleToGetAnExistingAccount()
@@ -16,9 +16,8 @@ namespace IotaWalletNet.Tests.WalletContext.Queries.GetAccount
 
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
-            wallet = CreateFullWallet(wallet);
+            wallet = await CreateFullWalletAsync(wallet);
 
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
 
             foreach (string username in userNames)
             {
@@ -44,5 +43,7 @@ namespace IotaWalletNet.Tests.WalletContext.Queries.GetAccount
             account!.Username.Should().Be(userNames[1]);
 
         }
+
+
     }
 }

@@ -7,15 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.AccountContext.Queries.GetBalance
 {
     [Collection("Sequential")]
-    public class GetBalanceTests : DependencyTestBase
+    public class GetBalanceTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task AccountShouldBeAbleToGetBalanceAfterSync()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
-            wallet = CreateFullWallet(wallet);
+            wallet = await CreateFullWalletAsync(wallet);
 
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
 
             (_, IAccount? account) = await wallet.CreateAccountAsync("cookiemonster");
 

@@ -7,16 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IotaWalletNet.Tests.AccountContext.Commands.SyncAccount
 {
     [Collection("Sequential")]
-    public class SyncAccountTests : DependencyTestBase
+    public class SyncAccountTests : DependencyTestBase, IDisposable
     {
         [Fact]
         public async Task ValidAccountShouldBeAbleToBeSynced()
         {
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
 
-            wallet = CreateFullWallet(wallet);
-
-            await wallet.StoreMnemonicAsync(DEFAULT_MNEMONIC);
+            wallet = await CreateFullWalletAsync(wallet);
 
             string username = "cookiemonster";
 
