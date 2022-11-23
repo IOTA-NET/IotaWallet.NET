@@ -33,11 +33,12 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
             await account.SyncAccountAsync();
             GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
 
-            //This will create a basic output
-            await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
-
-            //This will create another basic output
-            await account.SendAmountAsync(new AddressesWithAmountAndTransactionOptions().AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000"));
+            //This will create  basic outputs
+            await account.SendAmountAsync(
+                new AddressesWithAmountAndTransactionOptions()
+                .AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000")
+                .AddAddressAndAmount(ANOTHER_WALLET_ADDRESS, "1000000")
+                );
 
             await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_TRANSACTION));
             await account.SyncAccountAsync();
