@@ -103,15 +103,12 @@ static async Task Main(string[] args)
 		
 		//Great, now that we have some test shimmer tokens to send, send to me!
 		//Let's send 1 shimmer, which is 1,000,000 Glow
-		(string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
-		
-		//You can attach as many (address,amount) pairs as you want
-		AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions = new AddressesWithAmountAndTransactionOptions();
-		addressesWithAmountAndTransactionOptions
-				.AddAddressAndAmount(receiverAddress, amount);
+        (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
 
-		//Start sending
-		SendAmountResponse sendAmountResponse = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
+        List<AddressWithAmount> addressesWithAmounts = new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, amount) };
+
+        //Start sending
+        SendAmountResponse sendAmountResponse = await account.SendAmountAsync(addressesWithAmounts);
 
 		Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
 }

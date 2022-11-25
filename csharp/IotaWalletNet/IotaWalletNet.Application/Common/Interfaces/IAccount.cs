@@ -6,6 +6,7 @@ using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
+using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
@@ -33,8 +34,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
 
         IWallet Wallet { get; }
 
-        Task<string> SendAmountAsync(AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions);
-
         Task<SyncAccountResponse> SyncAccountAsync();
 
         Task<GetBalanceResponse> GetBalanceAsync();
@@ -57,5 +56,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<CreateAliasOutputResponse> CreateAliasOutputAsync(AliasOutputOptions aliasOutputOptions);
         Task<MeltNativeTokensResponse> MeltNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
         Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
+        Task<SendAmountResponse> SendAmountAsync(List<AddressWithAmount> addressesWithAmounts);
     }
 }
