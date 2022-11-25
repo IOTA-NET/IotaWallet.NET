@@ -11,7 +11,7 @@ namespace IotaWalletNet.Domain.Common.Models.Address
         }
 
         public SendAmountCommandMessageData(TransactionOptions transactionOptions)
-            :this(new List<AddressWithAmount>(), transactionOptions)
+            : this(new List<AddressWithAmount>(), transactionOptions)
         {
 
         }

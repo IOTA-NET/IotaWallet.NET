@@ -1,8 +1,6 @@
 ﻿using FluentAssertions;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
-using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Tests.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 

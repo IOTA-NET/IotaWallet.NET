@@ -11,9 +11,9 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
         public async Task<SendAmountResponse> Handle(SendAmountCommand request, CancellationToken cancellationToken)
         {
             SendAmountCommandMessageData messageData = new SendAmountCommandMessageData(request.AddressesWithAmount, new TransactionOptions());
-            SendAmountCommandMessage message = new SendAmountCommandMessage(request.Username,messageData);
+            SendAmountCommandMessage message = new SendAmountCommandMessage(request.Username, messageData);
             string json = JsonConvert.SerializeObject(message);
-            
+
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
             SendAmountResponse response = genericResponse.IsSuccess

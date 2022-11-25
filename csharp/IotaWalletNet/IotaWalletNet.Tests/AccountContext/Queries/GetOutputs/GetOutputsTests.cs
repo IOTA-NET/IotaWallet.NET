@@ -41,7 +41,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
             };
 
             await account.SendAmountAsync(addressesWithAmounts);
-               
+
 
             await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_TRANSACTION));
             await account.SyncAccountAsync();
