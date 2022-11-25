@@ -145,9 +145,9 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new GetBalanceQuery(this, Username));
         }
 
-        public async Task<string> SendAmountAsync(AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions)
+        public async Task<SendAmountResponse> SendAmountAsync(List<AddressWithAmount> addressesWithAmounts)
         {
-            return await _mediator.Send(new SendAmountCommand(this, Username, addressesWithAmountAndTransactionOptions));
+            return await _mediator.Send(new SendAmountCommand(this, Username, addressesWithAmounts));
         }
 
         public async Task<SyncAccountResponse> SyncAccountAsync()

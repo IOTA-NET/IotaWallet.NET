@@ -6,7 +6,7 @@ The following example will:
 
 1. Initialize your wallet
 2. Retrieve an account
-3. Prepare AddressesWithAmountAndTransactionOptions
+3. Prepare SendAmountCommandMessageData
 4. Send your transaction!
 
 ```cs
@@ -58,7 +58,7 @@ The following example will:
                 (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
 
                 //You can attach as many (address,amount) pairs as you want
-                AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions = new AddressesWithAmountAndTransactionOptions();
+                SendAmountCommandMessageData addressesWithAmountAndTransactionOptions = new SendAmountCommandMessageData();
                 addressesWithAmountAndTransactionOptions
                         .AddAddressAndAmount(receiverAddress, amount);
 

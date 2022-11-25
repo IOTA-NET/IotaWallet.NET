@@ -4,17 +4,18 @@ using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
 {
-    public class SendAmountCommand : IRequest<string>
+    public class SendAmountCommand : IRequest<SendAmountResponse>
     {
-        public SendAmountCommand(IAccount account, string username, AddressesWithAmountAndTransactionOptions addressesWithAmountAndTransactionOptions)
+        public SendAmountCommand(IAccount account, string username, List<AddressWithAmount> addressesWithAmount)
         {
             Account = account;
             Username = username;
-            AddressesWithAmountAndTransactionOptions = addressesWithAmountAndTransactionOptions;
+            AddressesWithAmount = addressesWithAmount;
         }
 
         public IAccount Account { get; }
         public string Username { get; }
-        public AddressesWithAmountAndTransactionOptions AddressesWithAmountAndTransactionOptions { get; }
+        public List<AddressWithAmount> AddressesWithAmount { get; set; } = new List<AddressWithAmount>();
+
     }
 }

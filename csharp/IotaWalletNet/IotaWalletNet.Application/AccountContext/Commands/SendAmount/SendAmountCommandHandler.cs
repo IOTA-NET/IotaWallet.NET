@@ -1,18 +1,27 @@
-﻿using IotaWalletNet.Domain.PlatformInvoke;
+﻿using IotaWalletNet.Domain.Common.Models.Address;
+using IotaWalletNet.Domain.Common.Models.Transaction;
+using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
 {
-    public class SendAmountCommandHandler : IRequestHandler<SendAmountCommand, string>
+    public class SendAmountCommandHandler : IRequestHandler<SendAmountCommand, SendAmountResponse>
     {
-        public async Task<string> Handle(SendAmountCommand request, CancellationToken cancellationToken)
+        public async Task<SendAmountResponse> Handle(SendAmountCommand request, CancellationToken cancellationToken)
         {
-            SendAmountCommandMessage message = new SendAmountCommandMessage(request.Username, request.AddressesWithAmountAndTransactionOptions);
+            SendAmountCommandMessageData messageData = new SendAmountCommandMessageData(request.AddressesWithAmount, new TransactionOptions());
+            SendAmountCommandMessage message = new SendAmountCommandMessage(request.Username,messageData);
             string json = JsonConvert.SerializeObject(message);
-            RustBridgeGenericResponse response = await request.Account.SendMessageAsync(json);
+            
+            RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            return "";
+            SendAmountResponse response = genericResponse.IsSuccess
+                                            ? genericResponse.As<SendAmountResponse>()!
+                                            : new SendAmountResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
+
+
+            return response;
         }
     }
 }
