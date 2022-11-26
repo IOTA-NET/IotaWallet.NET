@@ -139,6 +139,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] BurnNativeTokens
 - [x] BurnNft
 - [x] ClaimOutputs
+- [x] ConsolidateOutputs
 - [x] CreateAliasOutput
 - [x] GenerateAddresses
 - [x] MeltNativeTokens
