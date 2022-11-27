@@ -8,7 +8,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs
     {
         public async Task<GetUnspentOutputsResponse> Handle(GetUnspentOutputsQuery request, CancellationToken cancellationToken)
         {
-            GetUnspentOutputsQueryMessage message = new GetUnspentOutputsQueryMessage(request.Username, null);
+            GetUnspentOutputsQueryMessage message = new GetUnspentOutputsQueryMessage(request.Username, new GetUnspentOutputsQueryMessageData());
 
             string json = JsonConvert.SerializeObject(message);
 
