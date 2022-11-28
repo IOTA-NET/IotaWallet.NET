@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Domain.Common.Models.Transaction.Strategy;
+﻿using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
+using IotaWalletNet.Domain.Common.Models.Transaction.Strategy;
 
 namespace IotaWalletNet.Domain.Common.Models.Transaction
 {
@@ -12,7 +13,28 @@ namespace IotaWalletNet.Domain.Common.Models.Transaction
         /** Optional note, that is only stored locally */
         public string? Note { get; set; }
 
-        //TODO: ITaggedDataPayload
+        public TaggedDataPayload? TaggedDataPayload { get; set; }
 
+        
+        public TransactionOptions AddTaggedDataPayload(string tag, string payload)
+        {
+            TaggedDataPayload = new TaggedDataPayload(tag, payload);
+            return this;
+        }
+
+        public TransactionOptions SetNote(string note)
+        {
+            Note = note;
+            return this;
+        }
+
+        public TransactionOptions AddCustomInputs(string input)
+        {
+            if (CustomInputs == null)
+                CustomInputs = new List<string>();
+            CustomInputs.Add(input);
+
+            return this;
+        }
     }
 }

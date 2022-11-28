@@ -26,6 +26,7 @@ using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
+using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 
 namespace IotaWalletNet.Application.Common.Interfaces
 {
@@ -57,7 +58,7 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<CreateAliasOutputResponse> CreateAliasOutputAsync(AliasOutputOptions aliasOutputOptions);
         Task<MeltNativeTokensResponse> MeltNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
         Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
-        Task<SendAmountResponse> SendAmountAsync(List<AddressWithAmount> addressesWithAmounts);
+        Task<SendAmountResponse> SendAmountAsync(List<AddressWithAmount> addressesWithAmounts, TaggedDataPayload? taggedDataPayload = null);
         Task<ConsolidateOutputsResponse> ConsolidateOutputsAsync(bool force, int? outputsConsolidationThreshold = null);
     }
 }
