@@ -1,5 +1,5 @@
-﻿using IotaWalletNet.Domain.Common.Models.Address;
-using IotaWalletNet.Domain.Common.Models.Transaction;
+﻿using IotaWalletNet.Domain.Common.Models.Transaction;
+using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
 using Newtonsoft.Json;
@@ -10,8 +10,12 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
     {
         public async Task<SendAmountResponse> Handle(SendAmountCommand request, CancellationToken cancellationToken)
         {
-            SendAmountCommandMessageData messageData = new SendAmountCommandMessageData(request.AddressesWithAmount, new TransactionOptions());
+            TransactionOptions transactionOptions = new TransactionOptions() { TaggedDataPayload = request.TaggedDataPayload };
+
+            SendAmountCommandMessageData messageData = new SendAmountCommandMessageData(request.AddressesWithAmount, transactionOptions);
+
             SendAmountCommandMessage message = new SendAmountCommandMessage(request.Username, messageData);
+            
             string json = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
