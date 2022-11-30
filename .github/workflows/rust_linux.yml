@@ -31,7 +31,7 @@ jobs:
         cargo build --release
         mkdir iota_wallet_linux_x86_64
         cd iota_wallet_linux_x86_64
-        cp ./target/release/iota_wallet ./iota_wallet_linux_x86_64/.
+        cp ./target/release/iota-wallet ./iota_wallet_linux_x86_64/.
         
         
     - name: Upload a Build Artifact
