@@ -1,4 +1,4 @@
-name: Compile Rust bindings for windows
+name: Compile Rust bindings for linux
 
 on:
   workflow_dispatch:
