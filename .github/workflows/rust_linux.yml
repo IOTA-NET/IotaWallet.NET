@@ -29,3 +29,15 @@ jobs:
       run: |
         cd ./wallet.rs/bindings/swift
         cargo build --release
+        mkdir iota_wallet_linux_x86_64
+        cd iota_wallet_linux_x86_64
+        cp ./target/release/iota_wallet ./iota_wallet_linux_x86_64/.
+        
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        name: iota_wallet_linux_x86_64
+        path: iota_wallet_linux_x86_64
+    
+    
