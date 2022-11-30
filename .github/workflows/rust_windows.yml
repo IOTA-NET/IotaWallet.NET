@@ -24,3 +24,8 @@ jobs:
       with:
         owner: 'iotaledger'
         repository: 'wallet.rs'
+
+    - name: Compile swift bindings
+      run: |
+        cd ./wallet.rs/bindings/swift
+        cargo build --release
