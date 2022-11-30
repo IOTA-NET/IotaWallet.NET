@@ -30,18 +30,20 @@ jobs:
         cd ./wallet.rs/bindings/swift
         cargo build --release
         mkdir iota_wallet_linux_x86_64
-        cd iota_wallet_linux_x86_64
-        # cp ./target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
-        
-    - name: list files
-      uses: the-coding-turtle/ga-file-list@v0.2
-      with:
-        directory: "."
-        
+        pwd
+        ls -la
+        ls -la ./target/release/
+        cp ./target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
+      
+    - name: Just see if i am out of directory
+      run: |
+        pwd
+        ls 
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
         name: iota_wallet_linux_x86_64
-        path: iota_wallet_linux_x86_64
+        path: ./wallet.rs/bindings/swift/iota_wallet_linux_x86_64
     
     
