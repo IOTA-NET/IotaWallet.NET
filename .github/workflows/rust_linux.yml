@@ -34,10 +34,10 @@ jobs:
         # cp ./target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
         
     - name: list files
-      uses: philips-labs/list-folders-action@v1
+      uses: the-coding-turtle/ga-file-list@v0.2
       with:
-        path: .
-          
+        directory: "./target/release"
+        
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
