@@ -1,4 +1,4 @@
-name: Continuous Integration IotaWallet.NET
+name: Compile Rust bindings for windows
 
 on:
   workflow_dispatch:
