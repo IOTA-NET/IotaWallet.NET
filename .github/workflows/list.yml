@@ -1,0 +1,37 @@
+name: List
+
+on:
+  workflow_dispatch:
+env:
+  MAIN_SOLUTION_PATH: "./csharp/IotaWalletNet/IotaWalletNet.sln"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    environment: myenv
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Rust
+      uses: ATiltedTree/setup-rust@v1.0.5
+      with:
+          rust-version: stable
+      
+    - name: Clone wallet.rs
+      uses: GuillaumeFalourd/clone-github-repo-action@v2
+      with:
+        owner: 'iotaledger'
+        repository: 'wallet.rs'
+
+    - name: Compile swift bindings
+      run: |
+        cd ./wallet.rs/bindings/swift
+        
+    - name: list files
+      run: |
+        ls -la
+        echo "hello world!"
+        
+    
