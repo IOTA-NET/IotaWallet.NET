@@ -43,6 +43,7 @@
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="Refit" Version="6.3.2" />
 	  <PackageReference Include="SauceControl.Blake2Fast" Version="2.0.0" />
+	  <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -52,11 +53,17 @@
 		<Content Include="$(OutDirectory)/iota_wallet.dll" Pack="true" PackagePath="contentFiles/cs/net6.0">
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</Content>
+		<Content Include="$(OutDirectory)/libiota_wallet.so" Pack="true" PackagePath="contentFiles/cs/net6.0">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="iota_wallet.dll">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+		<None Update="iota_wallet.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="libiota_wallet.so">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>
