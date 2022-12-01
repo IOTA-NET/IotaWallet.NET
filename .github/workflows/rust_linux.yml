@@ -1,4 +1,4 @@
-name: Compile Rust bindings for linux
+name: Compile Rust bindings for linux x86_64
 
 on:
   workflow_dispatch:
@@ -30,15 +30,7 @@ jobs:
         cd ./wallet.rs/bindings/swift
         cargo build --release
         mkdir iota_wallet_linux_x86_64
-        pwd
-        ls -la
-        ls -la ./target/release/
         cp ./target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
-      
-    - name: Just see if i am out of directory
-      run: |
-        pwd
-        ls 
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
