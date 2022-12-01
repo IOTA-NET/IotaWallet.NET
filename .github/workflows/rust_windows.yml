@@ -1,4 +1,4 @@
-name: Compile Rust bindings for linux x86_64
+name: Compile Rust bindings for windows x64
 
 on:
   workflow_dispatch:
