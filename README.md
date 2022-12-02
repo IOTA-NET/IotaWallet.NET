@@ -16,15 +16,28 @@ Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 
 # Installation from Nuget.org
 
-> Note the following packages must be installed explicitly, do not skip it.
+### [!] Note the following packages must be installed explicitly, do not skip it. !!!
 
-> Install-Package IotaWallet.Net.Domain
+> dotnet add package IotaWallet.Net.Domain
 
 Or download from [here](https://www.nuget.org/packages/IotaWallet.Net.Domain/).
 
-> Install-Package IotaWallet.Net
+> dotnet add package IotaWallet.Net
 
 Or download from [here](https://www.nuget.org/packages/IotaWallet.Net/).
+
+### Architecture support
+
+It currently supports `Windows x64` and `Linux x86_64`.
+
+### Additional Instructions for Linux
+
+After installing `IotaWallet.Net.Domain`, when you build using `dotnet build`, you would see a file `libiota_wallet.so`. This is the precompiled rust bindings. You need to add it to your lib path.
+
+Example...
+> export LD_LIBRARY_PATH="<folder path to the library>"
+
+Note that its the folder path, not the filepath.
 
 # Alternative Installation
 
