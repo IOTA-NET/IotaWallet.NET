@@ -144,6 +144,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] GetAccount
 - [x] GetAccounts
 - [x] GetNewMnemonic
+- [x] GetFoundryOutput
 
 ## Account
 
