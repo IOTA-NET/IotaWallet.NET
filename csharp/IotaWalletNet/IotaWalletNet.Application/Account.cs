@@ -15,6 +15,7 @@ using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
+using IotaWalletNet.Application.AccountContext.Queries.GetFoundryOutput;
 using IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepositRequired;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
 using IotaWalletNet.Application.AccountContext.Queries.GetPendingTransactions;
@@ -54,6 +55,10 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new ConsolidateOutputsCommand(force, Username, this, outputsConsolidationThreshold));
         }
 
+        public async Task<GetFoundryOutputResponse> GetFoundryOutputAsync(string tokenId)
+        {
+            return await _mediator.Send(new GetFoundryOutputQuery(tokenId, Username, this));
+        }
 
         public async Task<CreateAliasOutputResponse> CreateAliasOutputAsync(AliasOutputOptions aliasOutputOptions)
         {
