@@ -144,7 +144,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] GetAccount
 - [x] GetAccounts
 - [x] GetNewMnemonic
-- [x] GetFoundryOutput
+
 
 ## Account
 
@@ -155,6 +155,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] ClaimOutputs
 - [x] ConsolidateOutputs
 - [x] CreateAliasOutput
+- [x] DestroyFoundry
 - [x] GenerateAddresses
 - [x] MeltNativeTokens
 - [x] MintNativeTokens
@@ -169,6 +170,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] GetAddresses
 - [x] GetAddressesWithUnspentOutputs
 - [x] GetBalance
+- [x] GetFoundryOutput
 - [x] GetMinimumStorageDepositRequired
 - [x] GetOutputs
 - [x] GetPendingTransactions
