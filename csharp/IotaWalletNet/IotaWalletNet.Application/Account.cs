@@ -3,6 +3,7 @@ using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.ConsolidateOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.CreateAliasOutput;
+using IotaWalletNet.Application.AccountContext.Commands.DestroyFoundry;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
@@ -49,6 +50,12 @@ namespace IotaWalletNet.Application
 
         public string Username { get; }
         public IWallet Wallet { get; }
+
+
+        public async Task<DestroyFoundryResponse> DestroyFoundryAsync(string foundryId)
+        {
+            return await _mediator.Send(new DestroyFoundryCommand(foundryId, Username, this));
+        }
 
         public async Task<ConsolidateOutputsResponse> ConsolidateOutputsAsync(bool force, int? outputsConsolidationThreshold=null)
         {
