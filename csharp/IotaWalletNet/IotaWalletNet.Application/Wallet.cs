@@ -111,7 +111,7 @@ namespace IotaWalletNet.Application
 
             _errorBuffer = new StringBuilder(errorBufferSize);
 
-            _walletHandle = InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
+            _walletHandle = RustBridge.InitializeIotaWallet(walletOptions, _errorBuffer, errorBufferSize);
 
             if (!string.IsNullOrEmpty(_errorBuffer.ToString()))
                 throw new Exception(_errorBuffer.ToString());

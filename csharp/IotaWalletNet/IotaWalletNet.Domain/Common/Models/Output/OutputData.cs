@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Domain.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Models.Explorer;
 
 namespace IotaWalletNet.Domain.Common.Models.Output
 {
@@ -12,7 +13,7 @@ namespace IotaWalletNet.Domain.Common.Models.Output
             string networkId,
             IAddressType address,
             IOutputType outputType,
-            OutputMetadata outputMetadata
+            OutputMetadataResponse outputMetadata
             )
         {
             OutputId = outputId;
@@ -49,6 +50,6 @@ namespace IotaWalletNet.Domain.Common.Models.Output
         /// <summary>
         /// The metadata of the output
         /// </summary>
-        public OutputMetadata Metadata { get; set; }
+        public OutputMetadataResponse Metadata { get; set; }
     }
 }
