@@ -7,6 +7,17 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 {
     public static class RustBridge
     {
+
+        #region Delegates
+
+        public delegate void MessageReceivedCallback(string message, string errors, IntPtr context);
+
+
+        public delegate void EventReceivedCallback(string message, string errors, IntPtr context);
+
+        #endregion
+
+
         public static string ResolveLibraryNameFromPlatformType()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -16,20 +27,6 @@ namespace IotaWalletNet.Domain.PlatformInvoke
             else
                 throw new NotSupportedException($"Only windows x64 and Linux x86_64 is supported");
         }
-
-        public delegate void MessageReceivedCallback(string message, string errors, IntPtr context);
-
-        //public const string LIBRARY_NAME = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? WINDOWS_LIBRARY_NAME : LINUX_LIBRARY_NAME;
-        //public static string s = "sdf";
-        //[DllImport("s", EntryPoint = "iota_initialize", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern IntPtr InitializeIotaWallet(string managerOptions, [MarshalAs(UnmanagedType.LPStr)] StringBuilder errorBuffer, int errorBufferSize);
-
-        //[DllImport("iota_wallet", EntryPoint = "iota_send_message", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void SendMessageToRust(IntPtr walletHandle, string message, [MarshalAs(UnmanagedType.FunctionPtr)] MessageReceivedCallback callback, IntPtr context);
-
-        //[DllImport("iota_wallet", EntryPoint = "iota_destroy", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void CloseIotaWallet(IntPtr walletHandle);
-
         public static IntPtr InitializeIotaWallet(string managerOptions, [MarshalAs(UnmanagedType.LPStr)] StringBuilder errorBuffer, int errorBufferSize)
         {
             Type[] paramTypes = { typeof(string), typeof(StringBuilder), typeof(int) };
@@ -38,19 +35,27 @@ namespace IotaWalletNet.Domain.PlatformInvoke
             return (IntPtr)DynamicPInvokeBuilder(typeof(IntPtr), ResolveLibraryNameFromPlatformType(), "iota_initialize", args, paramTypes);
         }
 
+        public static byte ListenForIotaWalletEvents(IntPtr walletHandle, string eventTypesAsJsonArray, [MarshalAs(UnmanagedType.FunctionPtr)] EventReceivedCallback callback, IntPtr context, [MarshalAs(UnmanagedType.LPStr)] StringBuilder errorBuffer, int errorBufferSize)
+        {
+            Type[] paramTypes = { typeof(IntPtr), typeof(string), typeof(EventReceivedCallback), typeof(IntPtr), typeof(StringBuilder), typeof(int) };
+            Object[] args = { walletHandle, eventTypesAsJsonArray, callback, context, errorBuffer, errorBufferSize };
 
-        public static  void SendMessageToRust(IntPtr walletHandle, string message, [MarshalAs(UnmanagedType.FunctionPtr)] MessageReceivedCallback callback, IntPtr context)
+            return (byte)DynamicPInvokeBuilder(typeof(byte), ResolveLibraryNameFromPlatformType(), "iota_listen", args, paramTypes);
+
+        }
+
+
+        public static void SendMessageToRust(IntPtr walletHandle, string message, [MarshalAs(UnmanagedType.FunctionPtr)] MessageReceivedCallback callback, IntPtr context)
         {
             Type[] paramTypes = { typeof(IntPtr), typeof(string), typeof(MessageReceivedCallback), typeof(IntPtr) };
             Object[] args = { walletHandle, message, callback, context };
 
             DynamicPInvokeBuilder(typeof(void), ResolveLibraryNameFromPlatformType(), "iota_send_message", args, paramTypes);
         }
-
         public static void CloseIotaWallet(IntPtr walletHandle)
         {
             Type[] paramTypes = { typeof(IntPtr) };
-            Object[] args = { walletHandle  };
+            Object[] args = { walletHandle };
             DynamicPInvokeBuilder(typeof(void), ResolveLibraryNameFromPlatformType(), "iota_destroy", args, paramTypes);
         }
 

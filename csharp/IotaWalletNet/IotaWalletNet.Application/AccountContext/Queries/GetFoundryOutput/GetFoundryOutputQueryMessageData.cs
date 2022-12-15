@@ -4,7 +4,7 @@
     {
         public GetFoundryOutputQueryMessageData(string tokenId)
         {
-                TokenId = tokenId;
+            TokenId = tokenId;
         }
         public string TokenId { get; set; }
     }

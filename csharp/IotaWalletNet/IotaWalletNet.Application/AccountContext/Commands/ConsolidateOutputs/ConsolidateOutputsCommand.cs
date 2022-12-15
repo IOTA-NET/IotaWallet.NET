@@ -5,7 +5,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.ConsolidateOutputs
 {
     public class ConsolidateOutputsCommand : IRequest<ConsolidateOutputsResponse>
     {
-        public ConsolidateOutputsCommand(bool force, string username, IAccount account, int? outputConsolidationThreshold=null)
+        public ConsolidateOutputsCommand(bool force, string username, IAccount account, int? outputConsolidationThreshold = null)
         {
             Force = force;
             OutputConsolidationThreshold = outputConsolidationThreshold;

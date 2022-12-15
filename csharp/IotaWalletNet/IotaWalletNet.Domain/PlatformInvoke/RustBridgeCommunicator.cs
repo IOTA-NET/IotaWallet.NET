@@ -1,4 +1,9 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using EnumsNET;
+using IotaWalletNet.Domain.Common.Interfaces;
+using IotaWalletNet.Domain.Common.Models.Events.WalletEventTypes;
+using Newtonsoft.Json;
+using System.Text;
+using static IotaWalletNet.Domain.Common.Models.Events.EventTypes;
 using static IotaWalletNet.Domain.PlatformInvoke.RustBridge;
 
 namespace IotaWalletNet.Domain.PlatformInvoke
@@ -6,28 +11,47 @@ namespace IotaWalletNet.Domain.PlatformInvoke
     public abstract class RustBridgeCommunicator : IRustBridgeCommunicator
     {
         protected MessageReceivedCallback _messageReceivedCallback;
-        protected Action<RustBridgeGenericResponse>? _endOfCallbackSignaller;
+        protected Action<RustBridgeGenericResponse>? _messageReceivedCallbackSetResult;
+
+        protected EventReceivedCallback _eventReceivedCallback;
+        public event EventHandler<IWalletEvent?>? WalletEventReceived;
+
         protected IntPtr _walletHandle;
 
+        protected StringBuilder _eventErrorBuffer;
         public RustBridgeCommunicator()
         {
             _messageReceivedCallback = WalletMessageReceivedCallback;
-            _endOfCallbackSignaller = null;
+            _messageReceivedCallbackSetResult = null;
+
+            _eventReceivedCallback = WalletEventsReceivedCallback;
+            _eventErrorBuffer = new StringBuilder();
         }
+
 
         public RustBridgeCommunicator(IntPtr walletHandle)
             : this()
         {
             _walletHandle = walletHandle;
         }
+
+        public void WalletEventsReceivedCallback(string message, string error, IntPtr context)
+        {
+            dynamic parsedJson = JsonConvert.DeserializeObject(message);
+            string s = JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+            Console.WriteLine(s);
+            IWalletEvent? walletEvent = JsonConvert.DeserializeObject<WalletEvent>(message);
+            WalletEventReceived?.Invoke(this, walletEvent);
+        }
+
         public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
         {
             bool isSuccess = String.IsNullOrEmpty(error) && !message.Contains(@"{""type"":""error");
 
             string messageToSignal = String.IsNullOrEmpty(error) ? message : error;
 
-            if (_endOfCallbackSignaller != null)
-                _endOfCallbackSignaller(new RustBridgeGenericResponse(messageToSignal, isSuccess));
+            if (_messageReceivedCallbackSetResult != null)
+                _messageReceivedCallbackSetResult(new RustBridgeGenericResponse(messageToSignal, isSuccess));
         }
 
         /// <summary>
@@ -39,9 +63,11 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public async Task<RustBridgeGenericResponse> SendMessageAsync(string message)
         {
 
-            var taskCompletionSource = new TaskCompletionSource<RustBridgeGenericResponse>();
-            var task = taskCompletionSource.Task;
-            _endOfCallbackSignaller = taskCompletionSource.SetResult;
+            TaskCompletionSource<RustBridgeGenericResponse>? taskCompletionSource =
+                new TaskCompletionSource<RustBridgeGenericResponse>();
+
+            Task<RustBridgeGenericResponse>? task = taskCompletionSource.Task;
+            _messageReceivedCallbackSetResult = taskCompletionSource.SetResult;
 
             await Task.Factory.StartNew(() =>
             {
@@ -50,6 +76,29 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 
 
             return await task;
+        }
+
+        public void SubscribeToEvents(WalletEventTypes walletEventTypes)
+        {
+            List<string> eventNames = new List<string>();
+
+            foreach (EnumMember<WalletEventTypes> walletEventMember in Enums.GetMembers<WalletEventTypes>())
+            {
+                if (walletEventMember.Value == WalletEventTypes.AllEvents)
+                    continue;
+
+                if (walletEventTypes.HasFlag(walletEventMember.Value))
+                    eventNames.Add(walletEventMember.AsString());
+            }
+
+            string eventsAsJsonArray = JsonConvert.SerializeObject(eventNames);
+
+
+            int errorBufferSize = 1024;
+
+            _eventErrorBuffer = new StringBuilder(errorBufferSize);
+
+            RustBridge.ListenForIotaWalletEvents(_walletHandle, eventsAsJsonArray, _eventReceivedCallback, IntPtr.Zero, _eventErrorBuffer, errorBufferSize);
         }
     }
 }

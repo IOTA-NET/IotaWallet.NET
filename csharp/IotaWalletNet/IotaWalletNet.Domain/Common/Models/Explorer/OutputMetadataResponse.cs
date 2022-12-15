@@ -1,6 +1,6 @@
-﻿namespace IotaWalletNet.Domain.Common.Models.Output
+﻿namespace IotaWalletNet.Domain.Common.Models.Explorer
 {
-    public class OutputMetadata
+    public class OutputMetadataResponse
     {
 
         /**
