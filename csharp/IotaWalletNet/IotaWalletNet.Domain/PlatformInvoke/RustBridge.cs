@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Models;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -56,7 +55,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public static void CloseIotaWallet(IntPtr walletHandle)
         {
             Type[] paramTypes = { typeof(IntPtr) };
-            Object[] args = { walletHandle  };
+            Object[] args = { walletHandle };
             DynamicPInvokeBuilder(typeof(void), ResolveLibraryNameFromPlatformType(), "iota_destroy", args, paramTypes);
         }
 

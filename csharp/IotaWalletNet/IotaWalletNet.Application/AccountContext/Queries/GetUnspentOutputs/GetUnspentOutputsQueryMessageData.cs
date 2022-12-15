@@ -4,7 +4,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs
 {
     public class GetUnspentOutputsQueryMessageData
     {
-        public GetUnspentOutputsQueryMessageData(OutputFilterOptions? filterOptions=null)
+        public GetUnspentOutputsQueryMessageData(OutputFilterOptions? filterOptions = null)
         {
             FilterOptions = filterOptions;
         }

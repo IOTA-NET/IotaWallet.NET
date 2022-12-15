@@ -1,5 +1,4 @@
-﻿using IotaWalletNet.Domain.Common.Models.Events;
-using IotaWalletNet.Domain.PlatformInvoke;
+﻿using IotaWalletNet.Domain.PlatformInvoke;
 using static IotaWalletNet.Domain.Common.Models.Events.EventTypes;
 
 namespace IotaWalletNet.Domain.Common.Interfaces

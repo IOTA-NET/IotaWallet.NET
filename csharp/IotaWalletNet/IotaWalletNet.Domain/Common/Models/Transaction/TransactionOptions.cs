@@ -15,7 +15,7 @@ namespace IotaWalletNet.Domain.Common.Models.Transaction
 
         public TaggedDataPayload? TaggedDataPayload { get; set; }
 
-        
+
         public TransactionOptions AddTaggedDataPayload(string tag, string payload)
         {
             TaggedDataPayload = new TaggedDataPayload(tag, payload);

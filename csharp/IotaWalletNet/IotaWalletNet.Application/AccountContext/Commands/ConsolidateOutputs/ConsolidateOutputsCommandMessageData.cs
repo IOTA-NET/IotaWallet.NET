@@ -2,7 +2,7 @@
 {
     public class ConsolidateOutputsCommandMessageData
     {
-        public ConsolidateOutputsCommandMessageData(bool force, int? outputConsolidationThreshold=null)
+        public ConsolidateOutputsCommandMessageData(bool force, int? outputConsolidationThreshold = null)
         {
             Force = force;
             OutputConsolidationThreshold = outputConsolidationThreshold;

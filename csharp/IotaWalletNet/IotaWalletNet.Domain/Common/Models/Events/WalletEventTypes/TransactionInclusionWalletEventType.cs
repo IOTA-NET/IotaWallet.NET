@@ -7,7 +7,7 @@ namespace IotaWalletNet.Domain.Common.Models.Events.WalletEventTypes
         public TransactionInclusionWalletEvent(string transactionId, string inclusionState)
         {
             TransactionId = transactionId;
-            InclusionState = inclusionState;    
+            InclusionState = inclusionState;
         }
 
         public string TransactionId { get; set; }
@@ -19,7 +19,7 @@ namespace IotaWalletNet.Domain.Common.Models.Events.WalletEventTypes
     {
         public TransactionInclusionWalletEventType(TransactionInclusionWalletEvent transactionInclusion)
         {
-            TransactionInclusion = transactionInclusion;    
+            TransactionInclusion = transactionInclusion;
         }
 
         public string Type { get; set; } = "TransactionInclusion";

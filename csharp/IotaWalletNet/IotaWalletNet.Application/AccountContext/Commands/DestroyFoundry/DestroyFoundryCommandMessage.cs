@@ -7,7 +7,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.DestroyFoundry
         private const string METHOD_NAME = "destroyFoundry";
 
         public DestroyFoundryCommandMessage(string username, DestroyFoundryCommandMessageData messageData)
-            :base(username, METHOD_NAME, messageData)
+            : base(username, METHOD_NAME, messageData)
         {
 
         }

@@ -19,7 +19,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.DestroyFoundry
             DestroyFoundryResponse response = genericResponse.IsSuccess
                                                 ? genericResponse.As<DestroyFoundryResponse>()!
                                                 : new DestroyFoundryResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-        
+
             return response;
         }
     }

@@ -57,7 +57,7 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new DestroyFoundryCommand(foundryId, Username, this));
         }
 
-        public async Task<ConsolidateOutputsResponse> ConsolidateOutputsAsync(bool force, int? outputsConsolidationThreshold=null)
+        public async Task<ConsolidateOutputsResponse> ConsolidateOutputsAsync(bool force, int? outputsConsolidationThreshold = null)
         {
             return await _mediator.Send(new ConsolidateOutputsCommand(force, Username, this, outputsConsolidationThreshold));
         }

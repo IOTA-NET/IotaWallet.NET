@@ -23,7 +23,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         {
             _messageReceivedCallback = WalletMessageReceivedCallback;
             _messageReceivedCallbackSetResult = null;
-            
+
             _eventReceivedCallback = WalletEventsReceivedCallback;
             _eventErrorBuffer = new StringBuilder();
         }
@@ -63,9 +63,9 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public async Task<RustBridgeGenericResponse> SendMessageAsync(string message)
         {
 
-            TaskCompletionSource<RustBridgeGenericResponse>? taskCompletionSource = 
+            TaskCompletionSource<RustBridgeGenericResponse>? taskCompletionSource =
                 new TaskCompletionSource<RustBridgeGenericResponse>();
-            
+
             Task<RustBridgeGenericResponse>? task = taskCompletionSource.Task;
             _messageReceivedCallbackSetResult = taskCompletionSource.SetResult;
 
@@ -81,7 +81,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public void SubscribeToEvents(WalletEventTypes walletEventTypes)
         {
             List<string> eventNames = new List<string>();
-            
+
             foreach (EnumMember<WalletEventTypes> walletEventMember in Enums.GetMembers<WalletEventTypes>())
             {
                 if (walletEventMember.Value == WalletEventTypes.AllEvents)
@@ -95,7 +95,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 
 
             int errorBufferSize = 1024;
-                        
+
             _eventErrorBuffer = new StringBuilder(errorBufferSize);
 
             RustBridge.ListenForIotaWalletEvents(_walletHandle, eventsAsJsonArray, _eventReceivedCallback, IntPtr.Zero, _eventErrorBuffer, errorBufferSize);
