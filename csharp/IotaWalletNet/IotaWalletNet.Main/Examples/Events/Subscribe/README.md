@@ -10,7 +10,7 @@ The following example will:
 4. Events that are printed to the console
 
 ```cs
-    public static class EventsExample
+	public static class EventsExample
     {
         public static async Task Run()
         {
@@ -63,17 +63,9 @@ The following example will:
                     return;
                 }
 
-                /*
-                 * Let's sync and get the balance of our account. We need to check if we have an alias output
-                 * An alias output is needed to keep track of foundries.
-                 * A foundry output is an output that controls the supply of user defined native tokens. 
-                 * It can mint and melt tokens according to the policy defined in the Token Scheme field of the output. 
-                 * Foundries can only be created and controlled by aliases.
-                 */
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
-                Console.WriteLine(await account.GetAddressesAsync());
-                Console.WriteLine(await account.GetAddressesWithUnspentOutputsAsync());
+                
                 await account.ConsolidateOutputsAsync(true);
 
                 GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
@@ -97,7 +89,7 @@ The following example will:
 
         private static void Wallet_WalletEventReceived(object? sender, IWalletEvent? walletEvent)
         {
-            Console.WriteLine($"WOOOOHOO: {JsonConvert.SerializeObject(walletEvent)}");
+            Console.WriteLine($"Event Received: {JsonConvert.SerializeObject(walletEvent)}");
         }
     }
 ```

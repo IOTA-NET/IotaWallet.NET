@@ -8,7 +8,7 @@
 [![Deploy to Github NuGet](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/GithubNuget.yml/badge.svg?branch=v0.2.8-alpha)](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/GithubNuget.yml)
 [![Deploy to NuGet.org](https://github.com/wireless90/IotaWallet.NET/actions/workflows/Nuget.yml/badge.svg)](https://github.com/IOTA-NET/IotaWallet.NET/actions/workflows/Nuget.yml)
 
-# Introduction
+# Introduction :smile:
 
 This wallet leverages IOTA's official wallet.rs bindings and ports it over to .Net.
 
@@ -16,21 +16,21 @@ Now .Net developers can have a chance trying out IOTA/Shimmer as well!
 
 # Installation from Nuget.org
 
-### [!] Note the following packages must be installed explicitly, do not skip it. !!!
+### [!] Note the following two packages must be installed explicitly, do not skip it. !!! :rage:
 
-> dotnet add package IotaWallet.Net.Domain
+> dotnet add package IotaWallet.Net.Domain --prerelease
 
 Or download from [here](https://www.nuget.org/packages/IotaWallet.Net.Domain/).
 
-> dotnet add package IotaWallet.Net
+> dotnet add package IotaWallet.Net --prerelease
 
 Or download from [here](https://www.nuget.org/packages/IotaWallet.Net/).
 
-### Architecture support
+### Architecture support :grin:
 
 It currently supports `Windows x64` and `Linux x86_64`.
 
-### Additional Instructions for Linux
+### Additional Instructions for Linux :open_mouth:
 
 After installing `IotaWallet.Net.Domain`, when you build using `dotnet build`, you would see a file `libiota_wallet.so`. This is the precompiled rust bindings. You need to add it to your lib path.
 
@@ -39,11 +39,11 @@ Example...
 
 Note that its the folder path, not the filepath.
 
-# Alternative Installation
+# Alternative Installation :dizzy:
 
 You can download the nugets from the github repo itself. Look to your right under `Packages`.
 
-# Usage Example
+# Usage Example :runner:
 
 ## Setting up your wallet and sending a command
 
@@ -127,9 +127,10 @@ static async Task Main(string[] args)
 }
 ```
 
+# Examples :heart_eyes:
 For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.NET/tree/main/csharp/IotaWalletNet/IotaWalletNet.Main/Examples) directory.
 
-# Supported Commands/Queries
+# Supported Commands/Queries :bookmark_tabs:
 
 ## Wallet
 
