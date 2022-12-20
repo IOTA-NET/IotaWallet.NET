@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
+using IotaWalletNet.Application.Common.Exceptions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Tests.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
 {
@@ -31,22 +33,13 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
             wallet = await CreateOfflineFullWalletAsync(wallet, shouldCreateAndStoreMnemonic: false);
             string mnemonic = "hood medal among prevent during embrace inmate swarm ancient damp token rail wolf risk tortoise record dose language rival cloud sting grace palm style";
 
-            VerifyMnemonicResponse response = await wallet.VerifyMnemonicAsync("wrong mnemonic");
-            response.Should().NotBeNull();
-            response.Error.Should().NotBeNull();
-            response.Type.Should().NotBeNullOrEmpty();
-
-            response = await wallet.VerifyMnemonicAsync(mnemonic + "random");
-            response.Should().NotBeNull();
-            response.Error.Should().NotBeNull();
-            response.Type.Should().NotBeNullOrEmpty();
+            await wallet.Awaiting(x => x.VerifyMnemonicAsync("wrong mnemonic")).Should().ThrowAsync<RustBridgeException>();
+            await wallet.Awaiting(x => x.VerifyMnemonicAsync(mnemonic + "random")).Should().ThrowAsync<RustBridgeException>();
 
             string wrongMnemonic = "symbol sail venture people general equal sight pencil slight muscle sausage faculty retreat decorate library all humor metal place mandate cake door disease dwarf";
 
-            response = await wallet.VerifyMnemonicAsync(wrongMnemonic);
-            response.Should().NotBeNull();
-            response.Error.Should().NotBeNull();
-            response.Type.Should().NotBeNullOrEmpty();
+            await wallet.Awaiting(x => x.VerifyMnemonicAsync(wrongMnemonic)).Should().ThrowAsync<RustBridgeException>();
+
 
         }
     }

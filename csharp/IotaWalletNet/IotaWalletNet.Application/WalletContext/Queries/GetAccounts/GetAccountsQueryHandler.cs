@@ -12,10 +12,7 @@ namespace IotaWalletNet.Application.WalletContext.Queries.GetAccounts
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(json);
 
-            GetAccountsResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<GetAccountsResponse>()!
-                                            : new GetAccountsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            GetAccountsResponse response = genericResponse.As<GetAccountsResponse>()!;
 
             return response;
         }

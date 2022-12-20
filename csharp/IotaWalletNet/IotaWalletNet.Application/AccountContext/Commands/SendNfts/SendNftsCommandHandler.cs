@@ -14,9 +14,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendNfts
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            SendNftsResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<SendNftsResponse>()!
-                                            : new SendNftsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
+            SendNftsResponse response = genericResponse.As<SendNftsResponse>()!;
 
             return response;
         }

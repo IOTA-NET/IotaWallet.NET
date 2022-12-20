@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using IotaWalletNet.Application.Common.Exceptions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic;
 using IotaWalletNet.Application.WalletContext.Queries.GetNewMnemonic;
@@ -20,14 +21,14 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.StoreMnemonic
             storeMnemonicResponse.IsSuccess().Should().BeTrue();
 
             //Storing the 2nd time with SAME mnemonic is NOT ok
-            storeMnemonicResponse = await wallet.StoreMnemonicAsync(mnemonic);
-            storeMnemonicResponse?.IsSuccess().Should().BeFalse();
+            await wallet.Awaiting(x => x.StoreMnemonicAsync(mnemonic)).Should().ThrowAsync<RustBridgeException>();
+
 
             GetNewMnemonicResponse getNewMnemonicResponse = await wallet.GetNewMnemonicAsync();
 
-            //However storing with a DIFFERENT mnemonic is NOT ok
-            storeMnemonicResponse = await wallet.StoreMnemonicAsync(getNewMnemonicResponse.Payload!);
-            storeMnemonicResponse?.IsSuccess().Should().BeFalse();
+            //And storing with a DIFFERENT mnemonic is also NOT ok
+            await wallet.Awaiting(x => x.StoreMnemonicAsync(getNewMnemonicResponse.Payload!)).Should().ThrowAsync<RustBridgeException>();
+
 
         }
 

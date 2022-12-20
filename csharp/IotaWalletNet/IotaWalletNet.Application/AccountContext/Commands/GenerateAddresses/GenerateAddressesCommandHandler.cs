@@ -27,10 +27,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            GenerateAddressesResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<GenerateAddressesResponse>()!
-                                            : new GenerateAddressesResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            GenerateAddressesResponse response = genericResponse.As<GenerateAddressesResponse>()!;
 
             return response;
         }

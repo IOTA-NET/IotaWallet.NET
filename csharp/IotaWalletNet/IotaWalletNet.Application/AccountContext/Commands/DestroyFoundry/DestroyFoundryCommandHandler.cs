@@ -16,9 +16,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.DestroyFoundry
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
 
-            DestroyFoundryResponse response = genericResponse.IsSuccess
-                                                ? genericResponse.As<DestroyFoundryResponse>()!
-                                                : new DestroyFoundryResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
+            DestroyFoundryResponse response = genericResponse.As<DestroyFoundryResponse>()!;
 
             return response;
         }

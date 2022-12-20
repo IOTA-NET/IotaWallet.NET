@@ -19,10 +19,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            SendAmountResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<SendAmountResponse>()!
-                                            : new SendAmountResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            SendAmountResponse response = genericResponse.As<SendAmountResponse>()!;
 
             return response;
         }

@@ -57,7 +57,7 @@ namespace IotaWalletNet.Main.Examples.Events.Subscribe
                 //TODO unsubscribe from events
 
                 //Let's retrieve our cookiemonster account
-                (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
+                (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cosokiemonster");
                 Console.WriteLine($"GetAccountAsync: {accountResponse}");
 
                 if (account == null)

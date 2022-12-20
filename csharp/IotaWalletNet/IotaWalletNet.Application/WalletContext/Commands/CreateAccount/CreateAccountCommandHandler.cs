@@ -13,10 +13,7 @@ namespace IotaWalletNet.Application.WalletContext.Commands.CreateAccount
 
             RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(json);
 
-            CreateAccountResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<CreateAccountResponse>()!
-                                            : new CreateAccountResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            CreateAccountResponse response = genericResponse.As<CreateAccountResponse>()!;
 
             return response;
         }
