@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Application.Common.Interfaces;
+using IotaWalletNet.Application.Common.Pipelines;
 using IotaWalletNet.Domain.Common.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,9 @@ namespace IotaWalletNet.Application.Common.Extensions
             serviceDescriptors
                 .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddTransient<IWallet, Wallet>();
+
+            serviceDescriptors
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RustExceptionPipeline<,>));
 
             serviceDescriptors
                 .AddSingleton(faucetApiProvider => new Func<string, IFaucetApi>((url) => RestService.For<IFaucetApi>(url)));

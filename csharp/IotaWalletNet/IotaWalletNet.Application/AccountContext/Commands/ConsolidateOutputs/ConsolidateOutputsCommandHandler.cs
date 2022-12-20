@@ -13,10 +13,8 @@ namespace IotaWalletNet.Application.AccountContext.Commands.ConsolidateOutputs
             string messageJson = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
-            ConsolidateOutputsResponse response = genericResponse.IsSuccess
-                                                    ? genericResponse.As<ConsolidateOutputsResponse>()!
-                                                    : new ConsolidateOutputsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
 
+            ConsolidateOutputsResponse response = genericResponse.As<ConsolidateOutputsResponse>()!;
             return response;
         }
     }

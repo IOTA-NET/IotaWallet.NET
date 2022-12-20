@@ -15,10 +15,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
 
-            MintNativeTokensResponse response = genericResponse.IsSuccess
-                                                    ? genericResponse.As<MintNativeTokensResponse>()!
-                                                    : new MintNativeTokensResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            MintNativeTokensResponse response = genericResponse.As<MintNativeTokensResponse>()!;
             return response;
         }
     }

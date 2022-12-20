@@ -12,10 +12,7 @@ namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(json);
 
-            VerifyMnemonicResponse response = genericResponse.IsSuccess
-                                                                    ? genericResponse.As<VerifyMnemonicResponse>()!
-                                                                    : new VerifyMnemonicResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            VerifyMnemonicResponse response = genericResponse.As<VerifyMnemonicResponse>()!;
             return response;
         }
     }

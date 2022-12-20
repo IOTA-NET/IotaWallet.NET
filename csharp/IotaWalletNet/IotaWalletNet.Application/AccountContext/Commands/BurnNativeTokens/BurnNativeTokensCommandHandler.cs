@@ -17,10 +17,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(jsonMessage);
 
-            BurnNativeTokensResponse response = genericResponse.IsSuccess
-                                                    ? genericResponse.As<BurnNativeTokensResponse>()!
-                                                    : new BurnNativeTokensResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            BurnNativeTokensResponse response = genericResponse.As<BurnNativeTokensResponse>()!;
             return response;
         }
     }

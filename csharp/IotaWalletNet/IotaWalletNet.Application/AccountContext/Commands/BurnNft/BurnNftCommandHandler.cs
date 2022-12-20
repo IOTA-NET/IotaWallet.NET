@@ -15,10 +15,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNft
             string json = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            BurnNftResponse response = genericResponse.IsSuccess
-                                        ? genericResponse.As<BurnNftResponse>()!
-                                        : new BurnNftResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            BurnNftResponse response = genericResponse.As<BurnNftResponse>()!;
             return response;
         }
     }

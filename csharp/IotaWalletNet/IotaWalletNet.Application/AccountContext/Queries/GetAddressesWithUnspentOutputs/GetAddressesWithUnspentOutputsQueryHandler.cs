@@ -13,9 +13,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspe
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            GetAddressesWithUnspentOutputsResponse response = genericResponse.IsSuccess
-                                                                ? genericResponse.As<GetAddressesWithUnspentOutputsResponse>()!
-                                                                : new GetAddressesWithUnspentOutputsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
+            GetAddressesWithUnspentOutputsResponse response = genericResponse.As<GetAddressesWithUnspentOutputsResponse>()!;
 
             return response;
         }

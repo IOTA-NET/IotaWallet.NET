@@ -13,10 +13,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepo
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            GetMinimumStorageDepositRequiredResponse response = genericResponse.IsSuccess
-                                                                    ? genericResponse.As<GetMinimumStorageDepositRequiredResponse>()!
-                                                                    : new GetMinimumStorageDepositRequiredResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            GetMinimumStorageDepositRequiredResponse response = genericResponse.As<GetMinimumStorageDepositRequiredResponse>()!;
             return response;
         }
     }

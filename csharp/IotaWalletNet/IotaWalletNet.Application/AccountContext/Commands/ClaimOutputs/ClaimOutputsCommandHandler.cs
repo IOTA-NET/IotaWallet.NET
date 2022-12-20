@@ -13,10 +13,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
 
-            ClaimOutputsResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<ClaimOutputsResponse>()!
-                                            : new ClaimOutputsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            ClaimOutputsResponse response = genericResponse.As<ClaimOutputsResponse>()!;
             return response;
         }
     }

@@ -17,10 +17,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.MintNfts
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
-            MintNftsResponse response = genericResponse.IsSuccess
-                                            ? genericResponse.As<MintNftsResponse>()!
-                                            : new MintNftsResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            MintNftsResponse response = genericResponse.As<MintNftsResponse>()!;
             return response;
         }
     }

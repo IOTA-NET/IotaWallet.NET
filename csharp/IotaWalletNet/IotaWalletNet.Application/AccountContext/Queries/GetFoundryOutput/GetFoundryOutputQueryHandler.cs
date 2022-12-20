@@ -14,10 +14,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetFoundryOutput
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
 
-            GetFoundryOutputResponse getFoundryOutputResponse = genericResponse.IsSuccess
-                                                                    ? genericResponse.As<GetFoundryOutputResponse>()!
-                                                                    : new GetFoundryOutputResponse() { Error = genericResponse.As<RustBridgeErrorResponse>(), Type = "error" };
-
+            GetFoundryOutputResponse getFoundryOutputResponse = genericResponse.As<GetFoundryOutputResponse>()!;
             return getFoundryOutputResponse;
         }
     }
