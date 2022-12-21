@@ -149,9 +149,10 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new GetAddressesQuery(Username, this));
         }
 
-        public async Task RequestFromFaucetAsync(string address, string url)
+        public async Task RequestFromFaucetAsync(string address)
         {
-            await _mediator.Send(new RequestFromFaucetCommand(address, url));
+            string faucetUrl = Wallet.GetWalletOptions().ClientConfigOptions.FaucetUrl;
+            await _mediator.Send(new RequestFromFaucetCommand(address, faucetUrl));
         }
 
 

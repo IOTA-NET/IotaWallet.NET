@@ -5,7 +5,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.RequestFromFaucet
 
     public class RequestFromFaucetCommand : IRequest
     {
-        public RequestFromFaucetCommand(string address, string url = @"https://faucet.testnet.shimmer.network")
+        public RequestFromFaucetCommand(string address, string url)
         {
             Address = address;
             Url = url;

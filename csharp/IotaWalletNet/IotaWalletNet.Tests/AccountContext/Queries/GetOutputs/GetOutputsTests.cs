@@ -26,7 +26,7 @@ namespace IotaWalletNet.Tests.AccountContext.Queries.GetOutputs
 
             string address = generateAddressesResponse.Payload?.First()?.Address!;
 
-            await account.RequestFromFaucetAsync(address, DEFAULT_FAUCET_URL);
+            await account.RequestFromFaucetAsync(address);
 
             await Task.Delay(TimeSpan.FromSeconds(SLEEP_DURATION_SECONDS_FAUCET));
 

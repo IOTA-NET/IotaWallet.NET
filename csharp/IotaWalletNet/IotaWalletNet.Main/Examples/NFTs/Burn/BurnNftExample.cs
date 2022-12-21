@@ -32,6 +32,7 @@ namespace IotaWalletNet.Main.Examples.NFTs.Burn
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
+                                .SetFaucetUrl("https://faucet.testnet.shimmer.network")
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()

@@ -10,8 +10,7 @@ namespace IotaWalletNet.Application.Common.Options
 
         public bool FallbackToLocalPow { get; set; } = true;
 
-        //public bool Offline { get; set; } = true;
-
+        public string FaucetUrl { get; set; } = "https://faucet.testnet.shimmer.network";
     }
 
     public class ClientOptionsBuilder
@@ -40,6 +39,12 @@ namespace IotaWalletNet.Application.Common.Options
         public ClientOptionsBuilder IsFallbackToLocalPow(bool isFallbackToLocalPow = true)
         {
             _clientOptions.FallbackToLocalPow = isFallbackToLocalPow;
+            return this;
+        }
+
+        public ClientOptionsBuilder SetFaucetUrl(string faucetUrl)
+        {
+            _clientOptions.FaucetUrl = faucetUrl;
             return this;
         }
 
