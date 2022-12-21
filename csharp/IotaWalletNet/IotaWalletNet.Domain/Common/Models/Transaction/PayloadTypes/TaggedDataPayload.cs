@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Domain.Common.Interfaces;
+﻿using IotaWalletNet.Domain.Common.Extensions;
+using IotaWalletNet.Domain.Common.Interfaces;
 
 namespace IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes
 {
@@ -6,8 +7,8 @@ namespace IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes
     {
         public TaggedDataPayload(string tag, string data)
         {
-            Tag = tag;
-            Data = data;
+            Tag = tag.ToHexString();
+            Data = data.ToHexString();
         }
 
         public int Type { get; } = 5;
