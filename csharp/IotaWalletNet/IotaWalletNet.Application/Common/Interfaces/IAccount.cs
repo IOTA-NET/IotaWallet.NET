@@ -41,7 +41,7 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<SyncAccountResponse> SyncAccountAsync();
 
         Task<GetBalanceResponse> GetBalanceAsync();
-        Task RequestFromFaucetAsync(string address, string url);
+        Task RequestFromFaucetAsync(string address);
         Task<GenerateAddressesResponse> GenerateAddressesAsync(uint numberOfAddresses = 1, NetworkType networkType = default);
         Task<MintNftsResponse> MintNftsAsync(List<NftOptions> nftsOptions);
         Task<GetAddressesResponse> GetAddressesAsync();

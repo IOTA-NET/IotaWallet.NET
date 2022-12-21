@@ -57,6 +57,7 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                     .ThenBuild()
                 .ConfigureClientOptions()
                     .AddNodeUrl(nodeUrl)
+                    .SetFaucetUrl(DEFAULT_FAUCET_URL)
                     .IsFallbackToLocalPow()
                     .IsLocalPow()
                     .ThenBuild()

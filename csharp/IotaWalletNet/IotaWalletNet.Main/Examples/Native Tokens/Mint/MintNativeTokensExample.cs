@@ -38,6 +38,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Mint
                                 .ThenBuild()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
+                                .SetFaucetUrl("https://faucet.testnet.shimmer.network")
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
                                 .ThenBuild()
