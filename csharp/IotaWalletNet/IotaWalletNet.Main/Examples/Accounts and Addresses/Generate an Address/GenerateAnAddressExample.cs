@@ -30,18 +30,18 @@ namespace IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address
                             .ConfigureWalletOptions()
                                 .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
-                                .ThenBuild()
+                                .Then()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
                                 .SetFaucetUrl("https://faucet.testnet.shimmer.network")
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
-                                .ThenBuild()
+                                .Then()
                             .ConfigureSecretManagerOptions()
                                 .SetPassword("password")
                                 .SetSnapshotPath("./mystronghold")
-                                .ThenBuild()
-                            .ThenInitialize();
+                                .Then()
+                            .Initialize();
 
                 //Let's retrieve our cookiemonster account
                 (GetAccountResponse getAccountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");

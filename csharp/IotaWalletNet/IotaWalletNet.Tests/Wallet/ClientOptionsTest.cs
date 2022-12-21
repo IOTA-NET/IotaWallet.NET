@@ -20,7 +20,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(DEFAULT_API_URL)
-                        .ThenBuild();
+                        .Then();
 
             wallet.Should().NotBeNull();
 
@@ -39,7 +39,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
                         .AddNodeUrl(nodeUrl)
-                        .ThenBuild();
+                        .Then();
 
             ClientOptions clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
 
@@ -62,7 +62,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
                         .AddNodeUrl(secondNodeUrl)
-                        .ThenBuild();
+                        .Then();
 
             ClientOptions clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
 
@@ -84,7 +84,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsLocalPow()
                         .IsFallbackToLocalPow()
                         .AddNodeUrl(nodeUrl)
-                        .ThenBuild();
+                        .Then();
 
 
             ClientOptions clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
@@ -99,7 +99,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .IsLocalPow(false)
                         .IsFallbackToLocalPow(false)
                         .AddNodeUrl(nodeUrl)
-                        .ThenBuild();
+                        .Then();
 
             clientOptions = wallet.GetWalletOptions().ClientConfigOptions;
 

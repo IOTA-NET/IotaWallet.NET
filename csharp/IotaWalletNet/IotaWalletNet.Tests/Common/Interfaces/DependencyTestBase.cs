@@ -54,18 +54,18 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                 .ConfigureWalletOptions()
                     .SetCoinType(TypeOfCoin.Shimmer)
                     .SetStoragePath(databaseFilename)
-                    .ThenBuild()
+                    .Then()
                 .ConfigureClientOptions()
                     .AddNodeUrl(nodeUrl)
                     .SetFaucetUrl(DEFAULT_FAUCET_URL)
                     .IsFallbackToLocalPow()
                     .IsLocalPow()
-                    .ThenBuild()
+                    .Then()
                 .ConfigureSecretManagerOptions()
                     .SetPassword("password")
                     .SetSnapshotPath(strongholdFilename)
-                    .ThenBuild()
-                .ThenInitialize();
+                    .Then()
+                .Initialize();
 
 
             if (shouldCreateAndStoreMnemonic)
@@ -90,16 +90,16 @@ namespace IotaWalletNet.Tests.Common.Interfaces
                 .ConfigureWalletOptions()
                     .SetCoinType(TypeOfCoin.Shimmer)
                     .SetStoragePath(strongholdFilename)
-                    .ThenBuild()
+                    .Then()
                 .ConfigureClientOptions()
                     .IsFallbackToLocalPow()
                     .IsLocalPow()
-                    .ThenBuild()
+                    .Then()
                 .ConfigureSecretManagerOptions()
                     .SetPassword("password")
                     .SetSnapshotPath(databaseFilename)
-                    .ThenBuild()
-                .ThenInitialize();
+                    .Then()
+                .Initialize();
 
             if (shouldCreateAndStoreMnemonic)
             {
