@@ -4,7 +4,6 @@ using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -69,7 +68,7 @@ namespace IotaWalletNet.Main.Examples.Events.Subscribe
 
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
-                
+
                 await account.ConsolidateOutputsAsync(true);
 
                 GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();

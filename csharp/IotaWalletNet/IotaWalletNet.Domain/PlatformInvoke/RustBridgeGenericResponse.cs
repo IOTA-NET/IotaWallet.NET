@@ -17,7 +17,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public string Response { get; }
         public T? As<T>() where T : RustBridgeResponseBase
         {
-            if(IsSuccess)
+            if (IsSuccess)
                 return JsonConvert.DeserializeObject<T>(Response);
 
             dynamic obj = JsonConvert.DeserializeObject(Response)!;

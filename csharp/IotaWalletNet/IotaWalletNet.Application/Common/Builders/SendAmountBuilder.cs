@@ -16,7 +16,7 @@ namespace IotaWalletNet.Application.Common.Builders
 
         public SendAmountBuilder(IMediator mediator, IAccount account, string username)
         {
-            _addressWithAmounts= new List<AddressWithAmount>();
+            _addressWithAmounts = new List<AddressWithAmount>();
             _mediator = mediator;
             _account = account;
             _username = username;

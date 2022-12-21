@@ -4,7 +4,6 @@ using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic;
 using IotaWalletNet.Tests.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
 {

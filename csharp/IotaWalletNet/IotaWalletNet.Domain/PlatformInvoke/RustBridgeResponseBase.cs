@@ -11,7 +11,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         public string Type { get; set; } = "ok";
 
 
-        public RustBridgeErrorResponse?  Error { get; set; }
+        public RustBridgeErrorResponse? Error { get; set; }
 
         public bool IsSuccess() => Type != "error" && Error == null;
 
