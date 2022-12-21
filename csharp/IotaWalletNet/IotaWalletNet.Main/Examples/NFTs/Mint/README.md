@@ -63,7 +63,7 @@ The following example will:
                 List<string> urlsOfUploadedFiles = new List<string>();
 
                 //We will be leveraging Sia for free ipfs storage for 90 days
-                SiaSkynetClient siaSkynetClient = new SiaSkynetClient();
+                SiaSkynetClient siaSkynetClient = new SiaSkynetClient(baseUrl: "https://web3portal.com/");
                 foreach (string fileToUpload in filesToUpload)
                 {
                     using (FileStream fileStream = File.OpenRead(fileToUpload))
