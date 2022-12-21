@@ -106,7 +106,7 @@ static async Task Main(string[] args)
 		string? generatedAddress = generateAddressesResponse.Payload?.FirstOrDefault()?.Address;
 			
 		//Let's request some Shimmer from the faucet
-        await account.RequestFromFaucetAsync(generatedAddress);
+		await account.RequestFromFaucetAsync(generatedAddress);
         
 		//Let's Checkout our balance. We will sync the account, followed by checking the balance.
 		//Sync the account with the tangle
@@ -116,15 +116,18 @@ static async Task Main(string[] args)
 		Console.WriteLine($"GetBalanceAsync: {getBalanceResponse}");
 		
 		//Great, now that we have some test shimmer tokens to send, send to me!
-		//Let's send 1 shimmer, which is 1,000,000 Glow
-        (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
+		//Let's send 1 shimmer, which is 1,000,000 Glow, followed by 2 shimmer, which is 2000000 glow, via a single transaction
+                //The below creates 2 outputs to the receiver address and 1 more output for your balance.
 
-        List<AddressWithAmount> addressesWithAmounts = new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, amount) };
+                string receiverAddress = "rms1qp8rknypruss89dkqnnuedm87y7xmnmdj2tk3rrpcy3sw3ev52q0vzl42tr";
 
-        //Start sending
-        SendAmountResponse sendAmountResponse = await account.SendAmountAsync(addressesWithAmounts);
+                SendAmountResponse sendAmountResponse = await account.SendAmountUsingBuilder()
+                                                                        .AddAddressAndAmount(receiverAddress, 1000000)
+                                                                        .AddAddressAndAmount(receiverAddress, 2000000)
+                                                                        .SendAmountAsync();
 
-		Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
+
+                Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
 }
 ```
 
