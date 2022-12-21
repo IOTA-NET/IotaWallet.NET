@@ -48,7 +48,7 @@ namespace IotaWalletNet.Application.Common.Options
             return this;
         }
 
-        public IWallet ThenBuild()
+        public IWallet Then()
         {
             //To trigger json re-construction
             _wallet.GetWalletOptions().ClientConfigOptions = _clientOptions;

@@ -27,7 +27,7 @@ namespace IotaWalletNet.Application.Common.Options
             return this;
         }
 
-        public IWallet ThenBuild() => _wallet;
+        public IWallet Then() => _wallet;
     }
 
     public class WalletOptions

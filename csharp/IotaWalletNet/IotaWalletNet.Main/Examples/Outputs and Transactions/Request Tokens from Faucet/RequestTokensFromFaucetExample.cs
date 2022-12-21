@@ -27,18 +27,18 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                             .ConfigureWalletOptions()
                                 .SetCoinType(TypeOfCoin.Shimmer)
                                 .SetStoragePath("./walletdb")
-                                .ThenBuild()
+                                .Then()
                             .ConfigureClientOptions()
                                 .AddNodeUrl("https://api.testnet.shimmer.network")
                                 .SetFaucetUrl("https://faucet.testnet.shimmer.network")
                                 .IsFallbackToLocalPow()
                                 .IsLocalPow()
-                                .ThenBuild()
+                                .Then()
                             .ConfigureSecretManagerOptions()
                                 .SetPassword("password")
                                 .SetSnapshotPath("./mystronghold")
-                                .ThenBuild()
-                            .ThenInitialize();
+                                .Then()
+                            .Initialize();
 
 
                 //Let's retrieve our cookiemonster account

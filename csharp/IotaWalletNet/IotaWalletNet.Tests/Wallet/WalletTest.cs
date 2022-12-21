@@ -18,17 +18,17 @@ namespace IotaWalletNet.Tests.Wallet
             wallet = wallet
                         .ConfigureSecretManagerOptions()
                             .SetPassword("password")
-                            .ThenBuild()
+                            .Then()
                         .ConfigureClientOptions()
                             .AddNodeUrl("https://api.testnet.shimmer.network")
                             .SetFaucetUrl("https://faucet.testnet.shimmer.network")
-                            .ThenBuild()
+                            .Then()
                         .ConfigureWalletOptions()
                             .SetCoinType(TypeOfCoin.Shimmer)
-                            .ThenBuild();
+                            .Then();
 
             wallet
-                .Invoking(w => w = w.ThenInitialize())
+                .Invoking(w => w = w.Initialize())
                 .Should()
                 .NotThrow();
 
@@ -44,20 +44,20 @@ namespace IotaWalletNet.Tests.Wallet
                         .ConfigureWalletOptions()
                             .SetCoinType(TypeOfCoin.Shimmer)
                             .SetStoragePath(GetRandomDatabaseFilename())
-                            .ThenBuild()
+                            .Then()
                         .ConfigureClientOptions()
                             .AddNodeUrl("https://api.testnet.shimmer.network")
                             .SetFaucetUrl("https://faucet.testnet.shimmer.network")
                             .IsFallbackToLocalPow()
                             .IsLocalPow()
-                            .ThenBuild()
+                            .Then()
                         .ConfigureSecretManagerOptions()
                             .SetPassword("password")
                             .SetSnapshotPath(GetRandomStrongholdFilename())
-                            .ThenBuild();
+                            .Then();
 
             wallet
-                .Invoking(w => w = w.ThenInitialize())
+                .Invoking(w => w = w.Initialize())
                 .Should()
                 .NotThrow();
 

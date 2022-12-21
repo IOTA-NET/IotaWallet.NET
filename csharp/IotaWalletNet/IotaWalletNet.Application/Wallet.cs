@@ -103,7 +103,7 @@ namespace IotaWalletNet.Application
 
         }
 
-        public IWallet ThenInitialize()
+        public IWallet Initialize()
         {
             string walletOptions = JsonConvert.SerializeObject(GetWalletOptions());
 

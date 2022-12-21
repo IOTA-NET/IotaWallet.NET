@@ -14,7 +14,7 @@ namespace IotaWalletNet.Application.Common.Interfaces
         ClientOptionsBuilder ConfigureClientOptions();
         SecretManagerOptionsBuilder ConfigureSecretManagerOptions();
         WalletOptionsBuilder ConfigureWalletOptions();
-        IWallet ThenInitialize();
+        IWallet Initialize();
         Task<(CreateAccountResponse response, IAccount? account)> CreateAccountAsync(string username);
         Task<(GetAccountResponse response, IAccount? account)> GetAccountAsync(string username);
         Task<GetAccountsResponse> GetAccountsAsync();

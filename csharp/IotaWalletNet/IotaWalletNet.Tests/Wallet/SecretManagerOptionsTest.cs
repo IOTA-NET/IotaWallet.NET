@@ -17,7 +17,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .ConfigureSecretManagerOptions()
                             .SetSnapshotPath(GetRandomStrongholdFilename())
                             .SetPassword("password")
-                            .ThenBuild();
+                            .Then();
 
             wallet.Should().NotBeNull();
 
@@ -35,7 +35,7 @@ namespace IotaWalletNet.Tests.Wallet
                         .ConfigureSecretManagerOptions()
                             .SetSnapshotPath(filename)
                             .SetPassword(password)
-                            .ThenBuild();
+                            .Then();
 
             SecretManagerOptions secretManagerOptions = wallet.GetWalletOptions().SecretManager;
 
