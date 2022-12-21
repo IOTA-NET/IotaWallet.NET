@@ -73,14 +73,14 @@ The following example will:
                 Console.WriteLine($"GetBalanceAsync: {getBalanceResponse}");
 
                 //Let's send 1 shimmer, which is 1,000,000 Glow
-                (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
+                string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
 
-                List<AddressWithAmount> addressesWithAmounts = new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, amount) };
-
-                //Start sending
-                SendAmountResponse sendAmountResponse = await account.SendAmountAsync(addressesWithAmounts);
+                SendAmountResponse sendAmountResponse = await account.SendAmountUsingBuilder()
+                                                                        .AddAddressAndAmount(receiverAddress, 1000000)
+                                                                        .SendAmountAsync();
 
                 Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
+
 
                 Console.ReadLine();
 

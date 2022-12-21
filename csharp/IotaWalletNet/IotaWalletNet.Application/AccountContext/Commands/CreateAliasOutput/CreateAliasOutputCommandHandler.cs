@@ -16,7 +16,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.CreateAliasOutput
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
 
             CreateAliasOutputResponse response = genericResponse.As<CreateAliasOutputResponse>()!;
-            
+
             return response;
         }
     }

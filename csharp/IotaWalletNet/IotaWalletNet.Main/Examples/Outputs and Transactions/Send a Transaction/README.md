@@ -55,18 +55,19 @@ The following example will:
                     return;
                 }
 
-                //Let's send 1 shimmer, which is 1,000,000 Glow
-                (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
+                //Let's send 1 shimmer, which is 1,000,000 Glow, followed by 2 shimmer, which is 2000000 glow, via a single transaction
+                //The below creates 2 outputs to the receiver address and 1 more output for your balance.
 
-                //You can attach as many (address,amount) pairs as you want
-                SendAmountCommandMessageData addressesWithAmountAndTransactionOptions = new SendAmountCommandMessageData();
-                addressesWithAmountAndTransactionOptions
-                        .AddAddressAndAmount(receiverAddress, amount);
+                string receiverAddress = "rms1qp8rknypruss89dkqnnuedm87y7xmnmdj2tk3rrpcy3sw3ev52q0vzl42tr";
 
-                //Start sending
-                string response = await account.SendAmountAsync(addressesWithAmountAndTransactionOptions);
+                SendAmountResponse sendAmountResponse = await account.SendAmountUsingBuilder()
+                                                                        .AddAddressAndAmount(receiverAddress, 1000000)
+                                                                        .AddAddressAndAmount(receiverAddress, 2000000)
+                                                                        .SetTaggedDataPayload(tag: "iotawallet.net", data: "hello world")
+                                                                        .SendAmountAsync();
 
-                Console.WriteLine($"SendAmountAsync: {response.PrettyJson()}");
+
+                Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
             }
         }
 

@@ -22,6 +22,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetPendingTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransaction;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
+using IotaWalletNet.Application.Common.Builders;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Coin;
@@ -64,5 +65,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<ConsolidateOutputsResponse> ConsolidateOutputsAsync(bool force, int? outputsConsolidationThreshold = null);
         Task<GetFoundryOutputResponse> GetFoundryOutputAsync(string tokenId);
         Task<DestroyFoundryResponse> DestroyFoundryAsync(string foundryId);
+        SendAmountBuilder SendAmountUsingBuilder();
     }
 }

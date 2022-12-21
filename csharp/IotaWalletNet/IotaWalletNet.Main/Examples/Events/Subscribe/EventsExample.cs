@@ -4,7 +4,6 @@ using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -69,21 +68,21 @@ namespace IotaWalletNet.Main.Examples.Events.Subscribe
 
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
-                
+
                 await account.ConsolidateOutputsAsync(true);
 
                 GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
                 Console.WriteLine($"GetBalanceAsync: {getBalanceResponse}");
 
                 //Let's send 1 shimmer, which is 1,000,000 Glow
-                (string receiverAddress, string amount) = ("rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q", "1000000");
+                string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
 
-                List<AddressWithAmount> addressesWithAmounts = new List<AddressWithAmount>() { new AddressWithAmount(receiverAddress, amount) };
-
-                //Start sending
-                SendAmountResponse sendAmountResponse = await account.SendAmountAsync(addressesWithAmounts);
+                SendAmountResponse sendAmountResponse = await account.SendAmountUsingBuilder()
+                                                                        .AddAddressAndAmount(receiverAddress, 1000000)
+                                                                        .SendAmountAsync();
 
                 Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
+
 
                 Console.ReadLine();
 

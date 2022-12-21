@@ -23,6 +23,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetPendingTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransaction;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetUnspentOutputs;
+using IotaWalletNet.Application.Common.Builders;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Address;
@@ -170,6 +171,8 @@ namespace IotaWalletNet.Application
         {
             return await _mediator.Send(new SendAmountCommand(this, Username, addressesWithAmounts, taggedDataPayload));
         }
+
+        public SendAmountBuilder SendAmountUsingBuilder() => new SendAmountBuilder(_mediator, this, Username);
 
         public async Task<SyncAccountResponse> SyncAccountAsync()
         {

@@ -13,7 +13,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetAddresses
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
 
             GetAddressesResponse response = genericResponse.As<GetAddressesResponse>()!;
-            
+
             return response;
         }
     }

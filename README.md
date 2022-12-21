@@ -106,7 +106,7 @@ static async Task Main(string[] args)
 		string? generatedAddress = generateAddressesResponse.Payload?.FirstOrDefault()?.Address;
 			
 		//Let's request some Shimmer from the faucet
-        	await account.RequestFromFaucetAsync(generatedAddress);
+        await account.RequestFromFaucetAsync(generatedAddress);
         
 		//Let's Checkout our balance. We will sync the account, followed by checking the balance.
 		//Sync the account with the tangle
