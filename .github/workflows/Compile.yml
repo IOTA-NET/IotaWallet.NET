@@ -33,5 +33,8 @@ jobs:
       working-directory: ./csharp/IotaWalletNet
 
     - name: Test
-      run: export LD_LIBRARY_PATH="./IotaWalletNet.Main/bin/Release/net6.0/" && dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
+      run: |
+        ls -la ./IotaWalletNet.Main/bin/Release/net6.0/
+        export LD_LIBRARY_PATH="./IotaWalletNet.Main/bin/Release/net6.0/"
+        dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
       working-directory: ./csharp/IotaWalletNet
