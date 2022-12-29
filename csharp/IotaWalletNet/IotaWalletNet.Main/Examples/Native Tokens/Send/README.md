@@ -1,4 +1,4 @@
-﻿# Mint Native Tokens
+﻿# Send Native Tokens
 
 ## Code Example
 
@@ -10,9 +10,8 @@ The following example will:
 4. Check if there exists any NativeTokens with atleast 10 tokens
 5. Send NativeTokens
 
-
 ```cs
-     public class SendNativeTokensExample
+    public class SendNativeTokensExample
     {
         public static async Task Run()
         {
@@ -57,7 +56,7 @@ The following example will:
                     return;
                 }
 
-                
+
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
 
@@ -69,7 +68,7 @@ The following example will:
                  * For this example, we are just getting the first native token available which has atleast 10 tokens,
                  * since we are intending to send 10 tokens.
                  * */
-                NativeTokenBalance? nativeTokenBalance = getBalanceResponse.Payload?.NativeTokens?.First(nativeTokenBalance => int.Parse(nativeTokenBalance.Available.FromHexString()) > 10);
+                NativeTokenBalance? nativeTokenBalance = getBalanceResponse.Payload?.NativeTokens?.First(nativeTokenBalance => nativeTokenBalance.Available.FromHexEncodedAmountToUInt64() > 10);
 
                 if (nativeTokenBalance == null)
                 {
@@ -77,7 +76,7 @@ The following example will:
                 }
 
                 string tokenId = nativeTokenBalance.TokenId;
-                string amount = "10".ToHexString();
+                string amount = 10.ToHexEncodedAmount();
 
                 string receiverAddress = "rms1qrcagm98yyj983aan86wvvlgv8g72zspvhv40eynpmdn4ms8rmvrgkfqvfp";
                 AddressWithNativeTokens addressWithNativeTokens = new AddressWithNativeTokens(new List<string[]> { new string[] { tokenId, amount } }.ToList(), receiverAddress);
@@ -91,5 +90,4 @@ The following example will:
         }
 
     }
-    
 ```
