@@ -12,7 +12,7 @@ on:
 env:
   APP_SOLUTION_PATH: ./csharp/IotaWalletNet/IotaWalletNet.Application/IotaWalletNet.Application.csproj
   DOMAIN_SOLUTION_PATH: ./csharp/IotaWalletNet/IotaWalletNet.Domain/IotaWalletNet.Domain.csproj
-  NUGET_PATH: ${{ github.workspace }}\nugets
+  NUGET_PATH: ${{ github.workspace }}/nugets
   NUGET_SRC_URL: 'https://api.nuget.org/v3/index.json'
 
   # Allows you to run this workflow manually from the Actions tab
