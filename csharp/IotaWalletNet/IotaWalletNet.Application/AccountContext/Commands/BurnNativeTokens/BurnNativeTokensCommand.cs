@@ -5,10 +5,10 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
 {
     public class BurnNativeTokensCommand : IRequest<BurnNativeTokensResponse>
     {
-        public BurnNativeTokensCommand(string tokenId, string meltAmount, string username, IAccount account)
+        public BurnNativeTokensCommand(string tokenId, string burnAmount, string username, IAccount account)
         {
             TokenId = tokenId;
-            MeltAmount = meltAmount;
+            BurnAmount = burnAmount;
             Username = username;
             Account = account;
         }
@@ -21,7 +21,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
         /// <summary>
         /// [HexEncodedAmount] To be melted amount.
         /// </summary>
-        public string MeltAmount { get; set; }
+        public string BurnAmount { get; set; }
 
 
         public string Username { get; set; }

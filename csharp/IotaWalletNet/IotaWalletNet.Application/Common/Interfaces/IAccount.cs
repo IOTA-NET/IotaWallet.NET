@@ -60,7 +60,7 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<SendNativeTokensResponse> SendNativeTokensAsync(List<AddressWithNativeTokens> addressWithNativeTokens);
         Task<CreateAliasOutputResponse> CreateAliasOutputAsync(AliasOutputOptions aliasOutputOptions);
         Task<MeltNativeTokensResponse> MeltNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
-        Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string meltAmountHexEncoded);
+        Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string burnAmountHexEncoded);
         Task<SendAmountResponse> SendAmountAsync(List<AddressWithAmount> addressesWithAmounts, TaggedDataPayload? taggedDataPayload = null);
         Task<ConsolidateOutputsResponse> ConsolidateOutputsAsync(bool force, int? outputsConsolidationThreshold = null);
         Task<GetFoundryOutputResponse> GetFoundryOutputAsync(string tokenId);
