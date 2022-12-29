@@ -8,6 +8,7 @@ on:
    branches: [ "main" ]
 env:
   MAIN_SOLUTION_PATH: "./csharp/IotaWalletNet/IotaWalletNet.sln"
+  
 
 jobs:
   build:
@@ -30,6 +31,9 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ./csharp/IotaWalletNet
+
+    - name: Set Env var of library
+      run: export LD_LIBRARY_PATH="./csharp/IotaWalletNet/IotaWalletNet.Main/bin/Release/net6.0/"
 
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
