@@ -9,7 +9,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
     {
         public async Task<BurnNativeTokensResponse> Handle(BurnNativeTokensCommand request, CancellationToken cancellationToken)
         {
-            BurnNativeTokensCommandMessageData messageData = new BurnNativeTokensCommandMessageData(request.TokenId, request.MeltAmount, new TransactionOptions());
+            BurnNativeTokensCommandMessageData messageData = new BurnNativeTokensCommandMessageData(request.TokenId, request.BurnAmount, new TransactionOptions());
 
             BurnNativeTokensCommandMessage message = new BurnNativeTokensCommandMessage(request.Username, messageData);
 

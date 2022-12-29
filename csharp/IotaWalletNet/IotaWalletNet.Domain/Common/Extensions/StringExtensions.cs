@@ -9,11 +9,18 @@ namespace IotaWalletNet.Domain.Common.Extensions
 
         public static bool IsNotNullAndEmpty(this string? input) => !input.IsNullOrEmpty();
 
-        public static string ToHexString(this string input) => "0x" + Convert.ToHexString(Encoding.UTF8.GetBytes(input));
+        public static string ToHexString(this string input) 
+            => "0x" + Convert.ToHexString(Encoding.UTF8.GetBytes(input));
+        
 
         public static string FromHexString(this string hexString)
         {
-            hexString = hexString.Substring(2); // remove the 0x of a hexstring eg 0x1337
+            if(hexString.ToLower().StartsWith("0x"))
+                hexString = hexString.Substring(2); // remove the 0x of a hexstring eg 0x1337
+
+            // eg 0x0 becomes 0 then becomes 00, to be able to use fromhexstring, we need length of hexstring to be % 2
+            if (hexString.Length % 2 != 0)
+                hexString = $"0{hexString}";
 
             byte[] utf8StringBytes = Convert.FromHexString(hexString);
 

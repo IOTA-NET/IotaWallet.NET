@@ -4,10 +4,10 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
 {
     public class BurnNativeTokensCommandMessageData
     {
-        public BurnNativeTokensCommandMessageData(string tokenId, string meltAmount, TransactionOptions options)
+        public BurnNativeTokensCommandMessageData(string tokenId, string burnAmount, TransactionOptions options)
         {
             TokenId = tokenId;
-            MeltAmount = meltAmount;
+            BurnAmount = burnAmount;
             Options = options;
         }
 
@@ -17,9 +17,9 @@ namespace IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens
         public string TokenId { get; set; }
 
         /// <summary>
-        /// [HexEncodedAmount] To be melted amount.
+        /// [HexEncodedAmount] To be burned amount.
         /// </summary>
-        public string MeltAmount { get; set; }
+        public string BurnAmount { get; set; }
 
         /// <summary>
         /// The options to define a `RemainderValueStrategy` or custom inputs.

@@ -83,9 +83,9 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new MeltNativeTokensCommand(tokenId, meltAmountHexEncoded, Username, this));
         }
 
-        public async Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string meltAmountHexEncoded)
+        public async Task<BurnNativeTokensResponse> BurnNativeTokensAsync(string tokenId, string burnAmountHexEncoded)
         {
-            return await _mediator.Send(new BurnNativeTokensCommand(tokenId, meltAmountHexEncoded, Username, this));
+            return await _mediator.Send(new BurnNativeTokensCommand(tokenId, burnAmountHexEncoded, Username, this));
         }
         public async Task<SendNativeTokensResponse> SendNativeTokensAsync(List<AddressWithNativeTokens> addressWithNativeTokens)
         {
