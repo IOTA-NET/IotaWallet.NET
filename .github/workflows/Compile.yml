@@ -32,9 +32,6 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       working-directory: ./csharp/IotaWalletNet
 
-    - name: Set Env var of library
-      run: export LD_LIBRARY_PATH="./csharp/IotaWalletNet/IotaWalletNet.Main/bin/Release/net6.0/"
-
     - name: Test
-      run: dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
+      run: export LD_LIBRARY_PATH="./IotaWalletNet.Main/bin/Release/net6.0/" && dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
       working-directory: ./csharp/IotaWalletNet
