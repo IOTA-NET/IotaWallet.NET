@@ -65,13 +65,14 @@ namespace IotaWalletNet.Main.Examples.NFTs.Mint
                 List<string> urlsOfUploadedFiles = new List<string>();
 
                 //We will be leveraging Sia for free ipfs storage for 90 days
-                SiaSkynetClient siaSkynetClient = new SiaSkynetClient(baseUrl: "https://web3portal.com/");
+                string siaSkynetPortalUrl = "https://web3portal.com/";
+                SiaSkynetClient siaSkynetClient = new SiaSkynetClient(baseUrl: siaSkynetPortalUrl);
                 foreach (string fileToUpload in filesToUpload)
                 {
                     using (FileStream fileStream = File.OpenRead(fileToUpload))
                     {
                         SkyfileResponse skyfileResponse = await siaSkynetClient.UploadFileAsync(fileToUpload, fileStream);
-                        urlsOfUploadedFiles.Add($"https://siasky.net/{skyfileResponse.Skylink}");
+                        urlsOfUploadedFiles.Add($"{siaSkynetPortalUrl}{skyfileResponse.Skylink}");
                     }
                 }
 

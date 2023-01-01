@@ -1,4 +1,4 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
+﻿using IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount;
 using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Coin;
@@ -7,7 +7,7 @@ using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccou
 
 namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction
 {
-    public static class SendTransactionExample
+    public static class SendMicroTransactionExample
     {
         public static async Task Run()
         {
@@ -54,18 +54,26 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
 
                 await account.SyncAccountAsync();
 
-                //Let's send 1 shimmer, which is 1,000,000 Glow, followed by 2 shimmer, which is 2000000 glow, via a single transaction
+                //Let's send 1 Glow, followed by 2 glow, via a single transaction
                 //The below creates 2 outputs to the receiver address and 1 more output for your balance.
-
+                //Since a micro transaction creates dust for the receiver, the sender first pays a temporary storage deposit along with the sending micro amount.
+                // The receiver now bears the burden of whether to accept this transaction, as if he accepts it he needs to pay storage deposit and the sender's storage deposit
+                // would be returned back to the sender.
+                //Thus the receiver is given a choice of whether to acccept this transaction within the stipulated time as indicated
+                //by [expirationInSeconds].
+                //[1]If it expired, both the amount sent and storage deposit sent is returned back to the sender.
+                //[2]If receiver rejects the transaction,  both the amount sent and storage deposit sent is returned back to the sender.
+                //[3]If the receiver accepts the transaction, the sender's storage deposit is returned. In turn, the receiver now has to put in the storage deposit
+                //   to claim the micro amount.
                 string receiverAddress = "rms1qp8rknypruss89dkqnnuedm87y7xmnmdj2tk3rrpcy3sw3ev52q0vzl42tr";
 
-                SendAmountResponse sendAmountResponse = await account.SendAmountUsingBuilder()
-                                                                        .AddAddressAndAmount(receiverAddress, 1000000)
-                                                                        .AddAddressAndAmount(receiverAddress, 2000000)
-                                                                        .SendAmountAsync();
+                SendMicroAmountResponse sendMicroAmountResponse = await account.SendMicroAmountUsingBuilder()
+                                                                        .AddAddressAndAmount(receiverAddress, 1, expirationInSeconds: 120)
+                                                                        .AddAddressAndAmount(receiverAddress, 2, expirationInSeconds: 60)
+                                                                        .SendMicroAmountAsync();
 
 
-                Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
+                Console.WriteLine($"SendMicroAmountAsync: {sendMicroAmountResponse}");
 
             }
         }

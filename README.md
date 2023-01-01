@@ -166,6 +166,8 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] MintNativeTokens
 - [x] MintNfts
 - [x] RequestFromFaucet
+- [x] SendAmount
+- [x] SendMicroAmount
 - [x] SendNativeTokens
 - [x] SendNfts
 - [x] SyncAccount
