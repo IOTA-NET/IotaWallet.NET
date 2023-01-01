@@ -22,9 +22,9 @@ namespace IotaWalletNet.Application.Common.Builders
             _username = username;
         }
 
-        public SendMicroAmountBuilder AddAddressAndAmount(string receiverAddress, ulong amountInGlow)
+        public SendMicroAmountBuilder AddAddressAndAmount(string receiverAddress, ulong amountInGlow, ulong expirationInSeconds)
         {
-            AddressWithMicroAmount addressWithMicroAmount = new AddressWithMicroAmount(receiverAddress, amountInGlow.ToString(), expiration:0);
+            AddressWithMicroAmount addressWithMicroAmount = new AddressWithMicroAmount(receiverAddress, amountInGlow.ToString(), expirationInSeconds);
             _addressWithMicroAmounts.Add(addressWithMicroAmount);
 
             return this;
