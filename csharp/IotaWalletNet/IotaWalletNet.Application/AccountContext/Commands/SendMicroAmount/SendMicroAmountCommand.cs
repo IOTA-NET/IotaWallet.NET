@@ -12,7 +12,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount
             AddressesWithMicroAmount = addressesWithMicroAmount;
             Username = username;
             Account = account;
-            TaggedDataPayload= taggedDataPayload;
+            TaggedDataPayload = taggedDataPayload;
         }
 
         public List<AddressWithMicroAmount> AddressesWithMicroAmount { get; set; }

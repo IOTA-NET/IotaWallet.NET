@@ -2,7 +2,7 @@
 {
     public class AddressWithMicroAmount
     {
-        public AddressWithMicroAmount(string address, string amount, ulong expiration, string? returnAddress=null)
+        public AddressWithMicroAmount(string address, string amount, ulong expiration, string? returnAddress = null)
         {
             Address = address;
             Amount = amount;

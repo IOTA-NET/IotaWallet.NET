@@ -53,7 +53,7 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
-        
+
         public async Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts, TaggedDataPayload? taggedDataPayload = null)
         {
             return await _mediator.Send(new SendMicroAmountCommand(addressWithMicroAmounts, taggedDataPayload, Username, this));

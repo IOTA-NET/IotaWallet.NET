@@ -15,7 +15,7 @@ namespace IotaWalletNet.Main
             //await SendTransactionExample.Run();
 
             await SendMicroTransactionExample.Run();
-           
+
             //await GenerateAnAddressExample.Run();
             //await MintNftExample.Run();
 

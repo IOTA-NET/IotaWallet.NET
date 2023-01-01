@@ -68,8 +68,8 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transactio
                 string receiverAddress = "rms1qp8rknypruss89dkqnnuedm87y7xmnmdj2tk3rrpcy3sw3ev52q0vzl42tr";
 
                 SendMicroAmountResponse sendMicroAmountResponse = await account.SendMicroAmountUsingBuilder()
-                                                                        .AddAddressAndAmount(receiverAddress, 1, expirationInSeconds:120)
-                                                                        .AddAddressAndAmount(receiverAddress, 2, expirationInSeconds:60)
+                                                                        .AddAddressAndAmount(receiverAddress, 1, expirationInSeconds: 120)
+                                                                        .AddAddressAndAmount(receiverAddress, 2, expirationInSeconds: 60)
                                                                         .SendMicroAmountAsync();
 
 
