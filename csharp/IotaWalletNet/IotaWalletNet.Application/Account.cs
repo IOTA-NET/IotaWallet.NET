@@ -54,9 +54,9 @@ namespace IotaWalletNet.Application
         public IWallet Wallet { get; }
 
         
-        public async Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts)
+        public async Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts, TaggedDataPayload? taggedDataPayload = null)
         {
-            return await _mediator.Send(new SendMicroAmountCommand(addressWithMicroAmounts, Username, this));
+            return await _mediator.Send(new SendMicroAmountCommand(addressWithMicroAmounts, taggedDataPayload, Username, this));
         }
 
         public async Task<DestroyFoundryResponse> DestroyFoundryAsync(string foundryId)
