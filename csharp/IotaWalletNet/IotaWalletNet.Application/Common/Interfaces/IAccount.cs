@@ -9,6 +9,7 @@ using IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNfts;
 using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
+using IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
@@ -66,5 +67,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<GetFoundryOutputResponse> GetFoundryOutputAsync(string tokenId);
         Task<DestroyFoundryResponse> DestroyFoundryAsync(string foundryId);
         SendAmountBuilder SendAmountUsingBuilder();
+        Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts);
     }
 }
