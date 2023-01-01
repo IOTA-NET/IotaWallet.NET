@@ -9,7 +9,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount
     {
         public async Task<SendMicroAmountResponse> Handle(SendMicroAmountCommand request, CancellationToken cancellationToken)
         {
-            SendMicroAmountCommandMessageData messageData = new SendMicroAmountCommandMessageData(request.AddressesWithMicroAmount, new TransactionOptions());
+            SendMicroAmountCommandMessageData messageData = new SendMicroAmountCommandMessageData(request.AddressesWithMicroAmount, new TransactionOptions() { TaggedDataPayload = request.TaggedDataPayload } );
             SendMicroAmountCommandMessage message = new SendMicroAmountCommandMessage(request.Username, messageData);
             string messageJson = JsonConvert.SerializeObject(messageData);
 
