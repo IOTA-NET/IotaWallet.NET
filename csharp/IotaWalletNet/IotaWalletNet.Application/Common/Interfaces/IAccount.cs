@@ -68,5 +68,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<DestroyFoundryResponse> DestroyFoundryAsync(string foundryId);
         SendAmountBuilder SendAmountUsingBuilder();
         Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts, TaggedDataPayload? taggedDataPayload = null);
+        SendMicroAmountBuilder SendMicroAmountUsingBuilder();
     }
 }
