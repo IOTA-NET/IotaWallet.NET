@@ -11,7 +11,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount
         {
             SendMicroAmountCommandMessageData messageData = new SendMicroAmountCommandMessageData(request.AddressesWithMicroAmount, new TransactionOptions() { TaggedDataPayload = request.TaggedDataPayload } );
             SendMicroAmountCommandMessage message = new SendMicroAmountCommandMessage(request.Username, messageData);
-            string messageJson = JsonConvert.SerializeObject(messageData);
+            string messageJson = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
 
