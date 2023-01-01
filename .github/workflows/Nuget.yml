@@ -12,7 +12,7 @@ on:
 env:
   APP_SOLUTION_PATH: ./csharp/IotaWalletNet/IotaWalletNet.Application/IotaWalletNet.Application.csproj
   DOMAIN_SOLUTION_PATH: ./csharp/IotaWalletNet/IotaWalletNet.Domain/IotaWalletNet.Domain.csproj
-  NUGET_PATH: ${{ github.workspace }}\nugets
+  NUGET_PATH: ${{ github.workspace }}/nugets
   NUGET_SRC_URL: 'https://api.nuget.org/v3/index.json'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -23,7 +23,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: myenv
     
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -46,7 +46,9 @@ jobs:
         working-directory: ./csharp/IotaWalletNet 
 
       - name: Test
-        run: dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
+        run: |
+         export LD_LIBRARY_PATH="/home/runner/work/IotaWallet.NET/IotaWallet.NET/csharp/IotaWalletNet/IotaWalletNet.Main/bin/Release/net6.0/"
+         dotnet test --configuration Release --no-build --verbosity normal --logger:"console;verbosity=detailed"
         working-directory: ./csharp/IotaWalletNet
 
       - name: Get Version
@@ -64,14 +66,14 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: IotaWallet.Net.Domain
-          path: ${{ env.NUGET_PATH }}\IotaWallet.Net.Domain.${{ steps.version.outputs.version-without-v }}.nupkg
+          path: ${{ env.NUGET_PATH }}/IotaWallet.Net.Domain.${{ steps.version.outputs.version-without-v }}.nupkg
 
       - name: Create Application NuGet Package Artifact
         uses: actions/upload-artifact@v1
         with:
           name: IotaWallet.Net
-          path: ${{ env.NUGET_PATH }}\IotaWallet.Net.${{ steps.version.outputs.version-without-v }}.nupkg
+          path: ${{ env.NUGET_PATH }}/IotaWallet.Net.${{ steps.version.outputs.version-without-v }}.nupkg
        
       - name: Push All Nugets
-        run:  dotnet nuget push ${{ env.NUGET_PATH }}\*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate --no-symbols
+        run:  dotnet nuget push ${{ env.NUGET_PATH }}/*.nupkg -s "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate --no-symbols
         

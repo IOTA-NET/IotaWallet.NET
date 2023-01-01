@@ -1,9 +1,11 @@
-﻿namespace IotaWalletNet.Domain.Common.Models.Account
+﻿using IotaWalletNet.Domain.Common.Models.Transaction;
+
+namespace IotaWalletNet.Domain.Common.Models.Account
 {
     public class AccountBalance
     {
 
-        public AccountBalance(BaseCoinBalance baseCoin, string requiredStorageDeposit)
+        public AccountBalance(BaseCoinBalance baseCoin, RequiredStorageDeposit requiredStorageDeposit)
         {
             BaseCoin = baseCoin;
             RequiredStorageDeposit = requiredStorageDeposit;
@@ -18,7 +20,7 @@
         /// <summary>
         /// The required storage deposit for the outputs
         /// </summary>
-        public string RequiredStorageDeposit { get; set; }
+        public RequiredStorageDeposit RequiredStorageDeposit { get; set; }
 
 
         /// <summary>

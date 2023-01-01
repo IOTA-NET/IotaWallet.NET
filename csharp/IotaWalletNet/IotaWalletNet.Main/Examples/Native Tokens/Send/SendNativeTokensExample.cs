@@ -69,7 +69,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Send
                  * For this example, we are just getting the first native token available which has atleast 10 tokens,
                  * since we are intending to send 10 tokens.
                  * */
-                NativeTokenBalance? nativeTokenBalance = getBalanceResponse.Payload?.NativeTokens?.First(nativeTokenBalance => int.Parse(nativeTokenBalance.Available.FromHexString()) > 10);
+                NativeTokenBalance? nativeTokenBalance = getBalanceResponse.Payload?.NativeTokens?.First(nativeTokenBalance => nativeTokenBalance.Available.FromHexEncodedAmountToUInt64() > 10);
 
                 if (nativeTokenBalance == null)
                 {
@@ -77,7 +77,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Send
                 }
 
                 string tokenId = nativeTokenBalance.TokenId;
-                string amount = "10".ToHexString();
+                string amount = 10.ToHexEncodedAmount();
 
                 string receiverAddress = "rms1qrcagm98yyj983aan86wvvlgv8g72zspvhv40eynpmdn4ms8rmvrgkfqvfp";
                 AddressWithNativeTokens addressWithNativeTokens = new AddressWithNativeTokens(new List<string[]> { new string[] { tokenId, amount } }.ToList(), receiverAddress);
