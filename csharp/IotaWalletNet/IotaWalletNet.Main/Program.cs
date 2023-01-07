@@ -1,5 +1,6 @@
 ﻿using IotaWalletNet.Main.Examples.Native_Tokens.Melt;
 using IotaWalletNet.Main.Examples.Native_Tokens.Mint;
+using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Claim_Outputs;
 using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction;
 
 namespace IotaWalletNet.Main
@@ -16,7 +17,7 @@ namespace IotaWalletNet.Main
 
             //await SendTransactionExample.Run();
 
-            await SendMicroTransactionExample.Run();
+            //await SendMicroTransactionExample.Run();
 
             //await GenerateAnAddressExample.Run();
 
@@ -32,9 +33,10 @@ namespace IotaWalletNet.Main
 
             //await MeltNativeTokensExample.Run();
 
-            await BurnNativeTokensExample.Run();
-
+            //await BurnNativeTokensExample.Run();
             //await EventsExample.Run();
+
+            await ClaimOutputsExample.Run();
         }
 
     }

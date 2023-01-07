@@ -1,12 +1,18 @@
-﻿using IotaWalletNet.Application.Common.Extensions;
-using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Models.Coin;
-using Microsoft.Extensions.DependencyInjection;
-using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
+# Claim Outputs Example
 
-namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet
-{
-    public static class RequestTokensFromFaucetExample
+## Code Example
+
+The following example will:
+
+1. Initialize your wallet
+2. Retrieve an account
+3. Sync account
+4. Check if there are any outputs with Additional Unlock Conditions
+5. Claim these outputs
+
+```cs
+
+  public static class ClaimOutputsExample
     {
         public static async Task Run()
         {
@@ -51,15 +57,26 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     return;
                 }
 
-                //Let's generate an address!
-                string address = (await account.GenerateAddressesAsync()).Payload!.First().Address!;
+                //Sync account so that we can get the latest changes from the tangle
+                await account.SyncAccountAsync();
 
-                //Now we request shimmer tokens into that address
-                await account.RequestFromFaucetAsync(address);
+                // Get outputs with unlock conditions
+                GetOutputsWithAdditionalUnlockConditionsResponse getOutputsWithAdditionalUnlockConditionsResponse =
+                    await account.GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim.All);
+
+                //Retrieve all their outputids
+                List<string> outputIds = getOutputsWithAdditionalUnlockConditionsResponse.Payload!;
+
+                if(outputIds.Any())
+                {
+                    await account.ClaimOutputsAsync(outputIds);
+                }
+
             }
         }
 
 
     }
 
-}
+
+```

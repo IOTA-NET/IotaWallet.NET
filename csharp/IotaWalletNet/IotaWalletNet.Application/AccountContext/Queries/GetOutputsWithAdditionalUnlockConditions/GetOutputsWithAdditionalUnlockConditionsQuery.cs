@@ -6,6 +6,8 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditio
 {
     public class GetOutputsWithAdditionalUnlockConditionsQuery : IRequest<GetOutputsWithAdditionalUnlockConditionsResponse>
     {
+        private OutputTypeToClaim _outputsTypeToClaim;
+
         public GetOutputsWithAdditionalUnlockConditionsQuery(OutputTypeToClaim outputsTypeToClaim, string username, IAccount account)
         {
             OutputsTypeToClaim = outputsTypeToClaim;
@@ -13,7 +15,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditio
             Account = account;
         }
 
-        public OutputTypeToClaim OutputsTypeToClaim { get; set; }
+        public OutputTypeToClaim OutputsTypeToClaim { get => _outputsTypeToClaim; set => _outputsTypeToClaim = value; }
 
         public string Username { get; set; }
 

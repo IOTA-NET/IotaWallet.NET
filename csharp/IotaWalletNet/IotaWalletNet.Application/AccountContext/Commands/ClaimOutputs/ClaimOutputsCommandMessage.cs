@@ -2,11 +2,11 @@
 
 namespace IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs
 {
-    public class ClaimOutputsCommandMessage : AccountMessage<List<string>>
+    public class ClaimOutputsCommandMessage : AccountMessage<ClaimOutputsCommandMessageData>
     {
         private const string METHOD_NAME = "claimOutputs";
-        public ClaimOutputsCommandMessage(string username, List<string> outputIds)
-            : base(username, METHOD_NAME, outputIds)
+        public ClaimOutputsCommandMessage(string username, ClaimOutputsCommandMessageData messageData)
+            : base(username, METHOD_NAME, messageData)
         {
 
         }
