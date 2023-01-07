@@ -19,6 +19,7 @@ using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
 using IotaWalletNet.Application.AccountContext.Queries.GetFoundryOutput;
 using IotaWalletNet.Application.AccountContext.Queries.GetMinimumStorageDepositRequired;
 using IotaWalletNet.Application.AccountContext.Queries.GetOutputs;
+using IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditionalUnlockConditions;
 using IotaWalletNet.Application.AccountContext.Queries.GetPendingTransactions;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransaction;
 using IotaWalletNet.Application.AccountContext.Queries.GetTransactions;
@@ -69,5 +70,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         SendAmountBuilder SendAmountUsingBuilder();
         Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts, TaggedDataPayload? taggedDataPayload = null);
         SendMicroAmountBuilder SendMicroAmountUsingBuilder();
+        Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim);
     }
 }
