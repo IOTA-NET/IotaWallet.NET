@@ -14,7 +14,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditio
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
             GetOutputsWithAdditionalUnlockConditionsResponse response = genericResponse.As<GetOutputsWithAdditionalUnlockConditionsResponse>()!;
-            
+
             return response;
         }
     }

@@ -30,7 +30,6 @@
                 hexEncodedAmount = "0" + hexEncodedAmount;
 
             return hexEncodedAmount;
-            return new string(hexEncodedAmount.AsEnumerable().Reverse().ToArray());
         }
 
         /// <summary>

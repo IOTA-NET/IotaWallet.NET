@@ -1,12 +1,14 @@
-﻿using IotaWalletNet.Application.Common.Extensions;
+﻿using IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditionalUnlockConditions;
+using IotaWalletNet.Application.Common.Extensions;
 using IotaWalletNet.Application.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Coin;
+using IotaWalletNet.Domain.Common.Models.Output;
 using Microsoft.Extensions.DependencyInjection;
 using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
 
-namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet
+namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Claim_Outputs
 {
-    public static class RequestTokensFromFaucetExample
+    public static class ClaimOutputsExample
     {
         public static async Task Run()
         {
@@ -51,11 +53,21 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_fr
                     return;
                 }
 
-                //Let's generate an address!
-                string address = (await account.GenerateAddressesAsync()).Payload!.First().Address!;
+                //Sync account so that we can get the latest changes from the tangle
+                await account.SyncAccountAsync();
 
-                //Now we request shimmer tokens into that address
-                await account.RequestFromFaucetAsync(address);
+                // Get outputs with unlock conditions
+                GetOutputsWithAdditionalUnlockConditionsResponse getOutputsWithAdditionalUnlockConditionsResponse =
+                    await account.GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim.All);
+
+                //Retrieve all their outputids
+                List<string> outputIds = getOutputsWithAdditionalUnlockConditionsResponse.Payload!;
+
+                if(outputIds.Any())
+                {
+                    await account.ClaimOutputsAsync(outputIds);
+                }
+
             }
         }
 

@@ -6,9 +6,9 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditio
     {
         public GetOutputsWithAdditionalUnlockConditionsMessageData(OutputTypeToClaim outputTypeToClaim)
         {
-            OutputsToClaim = outputTypeToClaim;
+            OutputsToClaim = outputTypeToClaim.ToString();
         }
 
-        public OutputTypeToClaim OutputsToClaim { get; set; }
+        public string OutputsToClaim { get; set; }
     }
 }

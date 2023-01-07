@@ -8,7 +8,8 @@ namespace IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs
     {
         public async Task<ClaimOutputsResponse> Handle(ClaimOutputsCommand request, CancellationToken cancellationToken)
         {
-            ClaimOutputsCommandMessage message = new ClaimOutputsCommandMessage(request.Username, request.OutputIds);
+            ClaimOutputsCommandMessageData messageData = new ClaimOutputsCommandMessageData(request.OutputIds);
+            ClaimOutputsCommandMessage message = new ClaimOutputsCommandMessage(request.Username, messageData);
             string messageJson = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(messageJson);
