@@ -19,6 +19,8 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         protected IntPtr _walletHandle;
 
         protected StringBuilder _eventErrorBuffer;
+        private static SemaphoreSlim _semaphore = new SemaphoreSlim(1);
+
         public RustBridgeCommunicator()
         {
             _messageReceivedCallback = WalletMessageReceivedCallback;
@@ -37,18 +39,15 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 
         public void WalletEventsReceivedCallback(string message, string error, IntPtr context)
         {
-            dynamic parsedJson = JsonConvert.DeserializeObject(message);
-            string s = JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
-            Console.WriteLine(s);
             IWalletEvent? walletEvent = JsonConvert.DeserializeObject<WalletEvent>(message);
             WalletEventReceived?.Invoke(this, walletEvent);
         }
 
         public void WalletMessageReceivedCallback(string message, string error, IntPtr context)
         {
-            bool isSuccess = String.IsNullOrEmpty(error) && !message.Contains(@"{""type"":""error");
+            bool isSuccess = string.IsNullOrEmpty(error) && !message.Contains(@"{""type"":""error");
 
-            string messageToSignal = String.IsNullOrEmpty(error) ? message : error;
+            string messageToSignal = string.IsNullOrEmpty(error) ? message : error;
 
             if (_messageReceivedCallbackSetResult != null)
                 _messageReceivedCallbackSetResult(new RustBridgeGenericResponse(messageToSignal, isSuccess));
@@ -62,6 +61,7 @@ namespace IotaWalletNet.Domain.PlatformInvoke
         /// <returns></returns>
         public async Task<RustBridgeGenericResponse> SendMessageAsync(string message)
         {
+            await _semaphore.WaitAsync();
 
             TaskCompletionSource<RustBridgeGenericResponse>? taskCompletionSource =
                 new TaskCompletionSource<RustBridgeGenericResponse>();
@@ -75,7 +75,11 @@ namespace IotaWalletNet.Domain.PlatformInvoke
             }, TaskCreationOptions.AttachedToParent);
 
 
-            return await task;
+            RustBridgeGenericResponse genericResponse = await task;
+
+            _semaphore.Release();
+
+            return genericResponse;
         }
 
         public void SubscribeToEvents(WalletEventTypes walletEventTypes)
