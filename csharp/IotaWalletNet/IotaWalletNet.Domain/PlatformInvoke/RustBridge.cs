@@ -61,10 +61,10 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 
         public static object? DynamicPInvokeBuilder(Type returnType, string libraryName, string methodName, Object[] args, Type[] paramTypes)
         {
-            AssemblyName assemblyName = new AssemblyName($"dyn1_{ResolveLibraryNameFromPlatformType()}");
+            AssemblyName assemblyName = new AssemblyName($"dyn1_{libraryName}");
             AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 
-            ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule($"dyn2_{ResolveLibraryNameFromPlatformType()}");
+            ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule($"dyn2_{libraryName}");
             MethodBuilder methodBuilder = moduleBuilder.DefinePInvokeMethod(methodName, libraryName, MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.PinvokeImpl, CallingConventions.Standard, returnType, paramTypes, CallingConvention.Cdecl, CharSet.Ansi);
             methodBuilder.SetImplementationFlags(methodBuilder.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
             moduleBuilder.CreateGlobalFunctions();
