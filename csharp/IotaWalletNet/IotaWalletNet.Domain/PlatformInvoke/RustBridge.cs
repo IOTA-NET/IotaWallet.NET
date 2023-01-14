@@ -52,6 +52,15 @@ namespace IotaWalletNet.Domain.PlatformInvoke
 
             DynamicPInvokeBuilder(typeof(void), ResolveLibraryNameFromPlatformType(), "iota_send_message", args, paramTypes);
         }
+
+        public static byte EnableLogging(string filename, string filterLevel)
+        {
+            Type[] paramTypes = { typeof(string), typeof(string) };
+            Object[] args = { filename, filterLevel };
+
+            return  (byte)DynamicPInvokeBuilder(typeof(byte), ResolveLibraryNameFromPlatformType(), "iota_init_logger", args, paramTypes);
+        }
+
         public static void CloseIotaWallet(IntPtr walletHandle)
         {
             Type[] paramTypes = { typeof(IntPtr) };

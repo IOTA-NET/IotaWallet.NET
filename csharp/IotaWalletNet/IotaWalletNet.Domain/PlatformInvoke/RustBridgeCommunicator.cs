@@ -1,6 +1,7 @@
 ﻿using EnumsNET;
 using IotaWalletNet.Domain.Common.Interfaces;
 using IotaWalletNet.Domain.Common.Models.Events.WalletEventTypes;
+using IotaWalletNet.Domain.Common.Models.Logging;
 using Newtonsoft.Json;
 using System.Text;
 using static IotaWalletNet.Domain.Common.Models.Events.EventTypes;
@@ -80,6 +81,11 @@ namespace IotaWalletNet.Domain.PlatformInvoke
             _semaphore.Release();
 
             return genericResponse;
+        }
+
+        public byte EnableLogging(string filename, LogLevel logLevel)
+        {
+            return RustBridge.EnableLogging(filename, logLevel.ToString());
         }
 
         public void SubscribeToEvents(WalletEventTypes walletEventTypes)
