@@ -1,4 +1,4 @@
-# Request Shimmer from Faucet
+# Periodic Syncing
 
 ## Code Example
 
