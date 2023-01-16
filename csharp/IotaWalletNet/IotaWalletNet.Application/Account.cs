@@ -4,6 +4,7 @@ using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.ConsolidateOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.CreateAliasOutput;
 using IotaWalletNet.Application.AccountContext.Commands.DestroyFoundry;
+using IotaWalletNet.Application.AccountContext.Commands.EnablePeriodicSyncing;
 using IotaWalletNet.Application.AccountContext.Commands.GenerateAddresses;
 using IotaWalletNet.Application.AccountContext.Commands.MeltNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.MintNativeTokens;
@@ -54,6 +55,11 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
+
+        public async Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds)
+        {
+            return await _mediator.Send(new EnablePeriodicSyncingCommand(this, intervalInMilliSeconds));
+        }
 
         public async Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim)
         {
