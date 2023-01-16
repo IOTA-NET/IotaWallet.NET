@@ -1,4 +1,9 @@
-﻿using Blake2Fast;
+﻿using Bech32;
+using Blake2Fast;
+using IotaWalletNet.Domain.Common.Models.Address;
+using IotaWalletNet.Domain.Common.Models.Coin;
+using IotaWalletNet.Domain.Common.Models.Network;
+using System.Buffers.Text;
 using System.Text;
 
 namespace IotaWalletNet.Domain.Common.Extensions
@@ -41,6 +46,36 @@ namespace IotaWalletNet.Domain.Common.Extensions
             byte[] hash = Blake2b.ComputeHash(32, decodedData);
 
             return "0x" + Convert.ToHexString(hash);
+        }
+        
+        public static string EncodeEd25519HashIntoBech32(this string blake2bHashOfEd25519, NetworkType networkType, TypeOfCoin typeOfCoin)
+        {
+            blake2bHashOfEd25519 = blake2bHashOfEd25519.Trim().ToLower();
+            if (blake2bHashOfEd25519.StartsWith("0x"))
+                blake2bHashOfEd25519 = blake2bHashOfEd25519.Substring(2); // remove the 0x of a hexstring eg 0x1337
+
+            string hrp = HumanReadablePart.GetHumanReadablePart(networkType, typeOfCoin);
+            const string ED25519_TYPE = "00";
+            blake2bHashOfEd25519 = ED25519_TYPE + blake2bHashOfEd25519;
+
+            string bech32 = Bech32Engine.Encode(hrp, Convert.FromHexString(blake2bHashOfEd25519));
+
+            const string HRP_CONSTANT = "1";
+
+            return $"{hrp}{HRP_CONSTANT}{bech32}";
+        }
+
+        public static string DecodeBech32IntoEd25519Hash(this string bech32, NetworkType networkType, TypeOfCoin typeOfCoin)
+        {
+            bech32 = bech32.Trim().ToLower();
+
+            string hrp = HumanReadablePart.GetHumanReadablePart(networkType, typeOfCoin);
+
+            string bech32OfInterest = bech32.Substring(4); //eg remove iota1 or smr1 or atoi1 or rms1
+
+            byte[] decoded = Bech32Engine.Decode(bech32OfInterest, hrp);
+            
+            return "0x" + Convert.ToHexString(decoded);
         }
     }
 }
