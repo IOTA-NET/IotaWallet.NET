@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens;
+﻿using IotaWalletNet.Application.AccountContext.Commands.BuildBasicOutput;
+using IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.ConsolidateOutputs;
@@ -31,6 +32,7 @@ using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
+using IotaWalletNet.Domain.Common.Models.Output.OutputDataTypes;
 using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 
 namespace IotaWalletNet.Application.Common.Interfaces
@@ -72,5 +74,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         SendMicroAmountBuilder SendMicroAmountUsingBuilder();
         Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim);
         Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds);
+        Task<BuildBasicOutputResponse> BuildBasicOutput(BuildBasicOutputData buildBasicOutputData);
     }
 }

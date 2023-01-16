@@ -1,4 +1,5 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens;
+﻿using IotaWalletNet.Application.AccountContext.Commands.BuildBasicOutput;
+using IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.ConsolidateOutputs;
@@ -34,6 +35,7 @@ using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
+using IotaWalletNet.Domain.Common.Models.Output.OutputDataTypes;
 using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
@@ -55,6 +57,11 @@ namespace IotaWalletNet.Application
         public string Username { get; }
         public IWallet Wallet { get; }
 
+
+        public async Task<BuildBasicOutputResponse> BuildBasicOutput(BuildBasicOutputData buildBasicOutputData)
+        {
+            return await _mediator.Send(new BuildBasicOutputCommand(buildBasicOutputData, Username, this));
+        }
 
         public async Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds)
         {
