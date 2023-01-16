@@ -13,6 +13,7 @@ using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
+using IotaWalletNet.Application.AccountContext.Commands.SendOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
@@ -74,6 +75,7 @@ namespace IotaWalletNet.Application.Common.Interfaces
         SendMicroAmountBuilder SendMicroAmountUsingBuilder();
         Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim);
         Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds);
-        Task<BuildBasicOutputResponse> BuildBasicOutput(BuildBasicOutputData buildBasicOutputData);
+        Task<BuildBasicOutputResponse> BuildBasicOutputAsync(BuildBasicOutputData buildBasicOutputData);
+        Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null);
     }
 }

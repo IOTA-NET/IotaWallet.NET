@@ -15,6 +15,7 @@ using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount;
 using IotaWalletNet.Application.AccountContext.Commands.SendNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.SendNfts;
+using IotaWalletNet.Application.AccountContext.Commands.SendOutputs;
 using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddresses;
 using IotaWalletNet.Application.AccountContext.Queries.GetAddressesWithUnspentOutputs;
@@ -36,6 +37,7 @@ using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
 using IotaWalletNet.Domain.Common.Models.Output.OutputDataTypes;
+using IotaWalletNet.Domain.Common.Models.Transaction;
 using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
@@ -58,7 +60,12 @@ namespace IotaWalletNet.Application
         public IWallet Wallet { get; }
 
 
-        public async Task<BuildBasicOutputResponse> BuildBasicOutput(BuildBasicOutputData buildBasicOutputData)
+        public async Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload=null)
+        {
+            return await _mediator.Send(new SendOutputsCommand(this, Username, outputs, taggedDataPayload));
+        }
+
+        public async Task<BuildBasicOutputResponse> BuildBasicOutputAsync(BuildBasicOutputData buildBasicOutputData)
         {
             return await _mediator.Send(new BuildBasicOutputCommand(buildBasicOutputData, Username, this));
         }

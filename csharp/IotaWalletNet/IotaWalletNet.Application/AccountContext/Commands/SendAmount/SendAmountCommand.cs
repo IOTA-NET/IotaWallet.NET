@@ -7,7 +7,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
 {
     public class SendAmountCommand : IRequest<SendAmountResponse>
     {
-        public SendAmountCommand(IAccount account, string username, List<AddressWithAmount> addressesWithAmount, TaggedDataPayload? taggedDataPayload)
+        public SendAmountCommand(IAccount account, string username, List<AddressWithAmount> addressesWithAmount, TaggedDataPayload? taggedDataPayload = null)
         {
             Account = account;
             Username = username;

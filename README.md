@@ -155,6 +155,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 
 ### Commands
 
+- [x] BuildBasicOutput
 - [x] BurnNativeTokens
 - [x] BurnNft
 - [x] ClaimOutputs
@@ -171,6 +172,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] SendMicroAmount
 - [x] SendNativeTokens
 - [x] SendNfts
+- [x] SendOutputs
 - [x] SyncAccount
 
 ### Queries
