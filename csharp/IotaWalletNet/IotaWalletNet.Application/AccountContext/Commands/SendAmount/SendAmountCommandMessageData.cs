@@ -8,7 +8,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
         public SendAmountCommandMessageData(List<AddressWithAmount> addressesWithAmount, TransactionOptions transactionOptions)
         {
             AddressesWithAmount = addressesWithAmount;
-            TransactionOptions = transactionOptions;
+            Options = transactionOptions;
         }
 
         public SendAmountCommandMessageData(TransactionOptions transactionOptions)
@@ -25,6 +25,6 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendAmount
         }
 
         public List<AddressWithAmount> AddressesWithAmount { get; } = new List<AddressWithAmount>();
-        public TransactionOptions TransactionOptions { get; set; } = new TransactionOptions();
+        public TransactionOptions Options { get; set; } = new TransactionOptions();
     }
 }
