@@ -161,6 +161,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 - [x] ConsolidateOutputs
 - [x] CreateAliasOutput
 - [x] DestroyFoundry
+- [x] EnablePeriodicSyncing
 - [x] GenerateAddresses
 - [x] MeltNativeTokens
 - [x] MintNativeTokens
