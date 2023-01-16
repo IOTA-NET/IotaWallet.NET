@@ -90,7 +90,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Melt
 
 
                 nativeTokenBalance = getBalanceResponse.Payload?.NativeTokens?.First(nativeTokenBalance => nativeTokenBalance.TokenId == tokenId)!;
-               
+
 
                 Console.WriteLine($"After burning, we now have {nativeTokenBalance.Total.FromHexEncodedAmountToUInt64()} tokens left.");
             }

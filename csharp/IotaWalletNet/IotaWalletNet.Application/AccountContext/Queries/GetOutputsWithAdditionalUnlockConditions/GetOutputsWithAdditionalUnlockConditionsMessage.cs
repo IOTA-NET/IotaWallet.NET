@@ -6,7 +6,7 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetOutputsWithAdditio
     {
         private const string METHOD_NAME = "getOutputsWithAdditionalUnlockConditions";
 
-        public GetOutputsWithAdditionalUnlockConditionsMessage(string username, GetOutputsWithAdditionalUnlockConditionsMessageData? methodData) 
+        public GetOutputsWithAdditionalUnlockConditionsMessage(string username, GetOutputsWithAdditionalUnlockConditionsMessageData? methodData)
             : base(username, METHOD_NAME, methodData)
         {
         }

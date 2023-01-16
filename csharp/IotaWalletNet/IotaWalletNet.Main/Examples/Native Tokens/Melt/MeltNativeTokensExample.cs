@@ -87,7 +87,7 @@ namespace IotaWalletNet.Main.Examples.Native_Tokens.Melt
 
 
                 string amount = 10.ToHexEncodedAmount();
-                
+
                 MeltNativeTokensResponse meltNativeTokensResponse = await account.MeltNativeTokensAsync(tokenId, amount);
 
                 Thread.Sleep(12000);
