@@ -20,7 +20,7 @@ namespace IotaWalletNet.Domain.Common.Models.Output.OutputDataTypes
 
         public NativeToken? NativeTokens { get; set; }
 
-        public List<IUnlockConditionType> UnlockConditions{ get; set; }
+        public List<IUnlockConditionType> UnlockConditions { get; set; }
 
         public List<IFeatureType>? Features { get; set; }
     }

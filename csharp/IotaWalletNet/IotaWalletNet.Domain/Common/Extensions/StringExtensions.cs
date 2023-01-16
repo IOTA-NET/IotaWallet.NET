@@ -3,7 +3,6 @@ using Blake2Fast;
 using IotaWalletNet.Domain.Common.Models.Address;
 using IotaWalletNet.Domain.Common.Models.Coin;
 using IotaWalletNet.Domain.Common.Models.Network;
-using System.Buffers.Text;
 using System.Text;
 
 namespace IotaWalletNet.Domain.Common.Extensions
@@ -14,13 +13,13 @@ namespace IotaWalletNet.Domain.Common.Extensions
 
         public static bool IsNotNullAndEmpty(this string? input) => !input.IsNullOrEmpty();
 
-        public static string ToHexString(this string input) 
+        public static string ToHexString(this string input)
             => "0x" + Convert.ToHexString(Encoding.UTF8.GetBytes(input));
-        
+
 
         public static string FromHexString(this string hexString)
         {
-            if(hexString.ToLower().StartsWith("0x"))
+            if (hexString.ToLower().StartsWith("0x"))
                 hexString = hexString.Substring(2); // remove the 0x of a hexstring eg 0x1337
 
             // eg 0x0 becomes 0 then becomes 00, to be able to use fromhexstring, we need length of hexstring to be % 2
@@ -47,7 +46,7 @@ namespace IotaWalletNet.Domain.Common.Extensions
 
             return "0x" + Convert.ToHexString(hash);
         }
-        
+
         public static string EncodeEd25519HashIntoBech32(this string blake2bHashOfEd25519, NetworkType networkType, TypeOfCoin typeOfCoin)
         {
             blake2bHashOfEd25519 = blake2bHashOfEd25519.Trim().ToLower();
@@ -74,7 +73,7 @@ namespace IotaWalletNet.Domain.Common.Extensions
             string bech32OfInterest = bech32.Substring(4); //eg remove iota1 or smr1 or atoi1 or rms1
 
             byte[] decoded = Bech32Engine.Decode(bech32OfInterest, hrp);
-            
+
             return "0x" + Convert.ToHexString(decoded);
         }
     }

@@ -13,7 +13,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.EnablePeriodicSyncin
 
         public IAccount Account { get; set; }
 
-        public int IntervalInMilliSeconds { get;set; }
-        
+        public int IntervalInMilliSeconds { get; set; }
+
     }
 }

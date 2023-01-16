@@ -63,7 +63,7 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Claim_Outputs
                 //Retrieve all their outputids
                 List<string> outputIds = getOutputsWithAdditionalUnlockConditionsResponse.Payload!;
 
-                if(outputIds.Any())
+                if (outputIds.Any())
                 {
                     await account.ClaimOutputsAsync(outputIds);
                 }

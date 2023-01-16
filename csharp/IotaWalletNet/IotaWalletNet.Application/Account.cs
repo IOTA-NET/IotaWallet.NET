@@ -37,7 +37,6 @@ using IotaWalletNet.Domain.Common.Models.Network;
 using IotaWalletNet.Domain.Common.Models.Nft;
 using IotaWalletNet.Domain.Common.Models.Output;
 using IotaWalletNet.Domain.Common.Models.Output.OutputDataTypes;
-using IotaWalletNet.Domain.Common.Models.Transaction;
 using IotaWalletNet.Domain.Common.Models.Transaction.PayloadTypes;
 using IotaWalletNet.Domain.PlatformInvoke;
 using MediatR;
@@ -60,7 +59,7 @@ namespace IotaWalletNet.Application
         public IWallet Wallet { get; }
 
 
-        public async Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload=null)
+        public async Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null)
         {
             return await _mediator.Send(new SendOutputsCommand(this, Username, outputs, taggedDataPayload));
         }

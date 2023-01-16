@@ -10,15 +10,15 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendOutputs
         public async Task<SendOutputsResponse> Handle(SendOutputsCommand request, CancellationToken cancellationToken)
         {
             TransactionOptions transactionOptions = new TransactionOptions() { TaggedDataPayload = request.TaggedDataPayload };
-            
+
             SendOutputsCommandMessageData messageData = new SendOutputsCommandMessageData(request.Outputs, transactionOptions);
-            
+
             SendOutputsCommandMessage message = new SendOutputsCommandMessage(request.Username, messageData);
 
             string messageJson = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse rustBridgeGenericResponse = await request.Account.SendMessageAsync(messageJson);
-            
+
             SendOutputsResponse sendOutputsResponse = rustBridgeGenericResponse.As<SendOutputsResponse>()!;
 
             return sendOutputsResponse;

@@ -7,7 +7,7 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendOutputs
 {
     public class SendOutputsCommand : IRequest<SendOutputsResponse>
     {
-        public SendOutputsCommand(IAccount account, string username, List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload=null)
+        public SendOutputsCommand(IAccount account, string username, List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null)
         {
             Account = account;
             Username = username;
@@ -18,9 +18,9 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendOutputs
         public IAccount Account { get; set; }
 
         public string Username { get; set; }
-        
+
         public List<IOutputType> Outputs { get; set; }
-        
+
         public TaggedDataPayload? TaggedDataPayload { get; set; }
 
     }

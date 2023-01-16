@@ -26,7 +26,7 @@
             if (hexEncodedAmount.ToLower().StartsWith("0x"))
                 hexEncodedAmount = hexEncodedAmount.Substring(2);
 
-            if(hexEncodedAmount.Length % 2 != 0)
+            if (hexEncodedAmount.Length % 2 != 0)
                 hexEncodedAmount = "0" + hexEncodedAmount;
 
             return hexEncodedAmount;
