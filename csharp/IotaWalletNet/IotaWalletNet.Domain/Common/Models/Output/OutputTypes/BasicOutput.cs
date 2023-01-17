@@ -1,7 +1,9 @@
 ﻿using IotaWalletNet.Domain.Common.Interfaces;
+using Newtonsoft.Json;
 
 namespace IotaWalletNet.Domain.Common.Models.Output.OutputTypes
 {
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class BasicOutput : CommonOutput, IOutputType
     {
         public BasicOutput(string amount, List<IUnlockConditionType> unlockConditions)

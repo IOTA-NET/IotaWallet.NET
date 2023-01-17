@@ -44,5 +44,21 @@ namespace IotaWalletNet.Domain.Common.Models.Address
             else
                 return TestnetToHrp[typeOfCoin];
         }
+
+        public static (NetworkType, TypeOfCoin) DetermineNetworkAndTypeOfCoin(string bech32)
+        {
+            bech32 = bech32.ToLower();
+
+            if (bech32.StartsWith(MainnetToHrp[TypeOfCoin.Iota]))
+                return (NetworkType.Mainnet, TypeOfCoin.Iota);
+            else if (bech32.StartsWith(MainnetToHrp[TypeOfCoin.Shimmer]))
+                return (NetworkType.Mainnet, TypeOfCoin.Shimmer);
+            else if (bech32.StartsWith(TestnetToHrp[TypeOfCoin.Iota]))
+                return (NetworkType.Testnet, TypeOfCoin.Iota);
+            else if (bech32.StartsWith(TestnetToHrp[TypeOfCoin.Shimmer]))
+                return (NetworkType.Testnet, TypeOfCoin.Shimmer);
+            else
+                throw new ArgumentException("Unknown type of bech32 address supplied");
+        }
     }
 }

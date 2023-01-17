@@ -9,17 +9,13 @@ namespace IotaWalletNet.Application.Common.Builders
     public class SendAmountBuilder
     {
         private readonly List<AddressWithAmount> _addressWithAmounts;
-        private readonly IMediator _mediator;
         private readonly IAccount _account;
-        private readonly string _username;
         private TaggedDataPayload? _taggedDataPayload;
 
-        public SendAmountBuilder(IMediator mediator, IAccount account, string username)
+        public SendAmountBuilder(IAccount account)
         {
             _addressWithAmounts = new List<AddressWithAmount>();
-            _mediator = mediator;
             _account = account;
-            _username = username;
         }
 
         public SendAmountBuilder AddAddressAndAmount(string receiverAddress, ulong amountInGlow)
@@ -37,7 +33,7 @@ namespace IotaWalletNet.Application.Common.Builders
         }
         public async Task<SendAmountResponse> SendAmountAsync()
         {
-            return await _mediator.Send(new SendAmountCommand(_account, _username, _addressWithAmounts, _taggedDataPayload));
+            return await _account.SendAmountAsync(_addressWithAmounts, _taggedDataPayload);
         }
     }
 }

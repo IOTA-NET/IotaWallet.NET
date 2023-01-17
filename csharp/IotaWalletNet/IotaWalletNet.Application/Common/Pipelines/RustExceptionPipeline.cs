@@ -16,7 +16,7 @@ namespace IotaWalletNet.Application.Common.Pipelines
             if (response.IsSuccess() == false)
             {
                 string formattedError = JsonConvert.SerializeObject(response.Error, Formatting.Indented);
-                throw new RustBridgeException($"Source: {typeof(TResponse).FullName}\n\n Error: {formattedError}");
+                //throw new RustBridgeException($"Source: {typeof(TResponse).FullName}\n\n Error: {formattedError}");
             }
 
             return response;

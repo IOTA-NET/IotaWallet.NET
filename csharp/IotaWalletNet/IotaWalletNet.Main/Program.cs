@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Periodic_Syncing;
+using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_Data_Only_Transactions;
 
 namespace IotaWalletNet.Main
 {
@@ -35,7 +36,9 @@ namespace IotaWalletNet.Main
 
             //await ClaimOutputsExample.Run();
 
-            await PeriodicSyncingExample.Run();
+            //await PeriodicSyncingExample.Run();
+
+            await SendDataOnlyTransactionExample.Run();
         }
 
     }

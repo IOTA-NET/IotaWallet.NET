@@ -1,13 +1,17 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SendMicroAmount;
-using IotaWalletNet.Application.Common.Extensions;
-using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Models.Coin;
-using Microsoft.Extensions.DependencyInjection;
-using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
+# Send a Data-Only Transaction
 
-namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_Data_Only_Transactions
-{
-    public static class SendMicroTransactionExample
+## Code Example
+
+The following example will:
+
+1. Initialize your wallet
+2. Retrieve an account
+3. Build a basic output with Metadata
+4. Send the output
+
+
+```cs
+	public static class SendDataOnlyTransactionExample
     {
         public static async Task Run()
         {
@@ -52,32 +56,34 @@ namespace IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_Data_Only_Tr
                     return;
                 }
 
+                //Let's sync our account with the tangle
                 await account.SyncAccountAsync();
 
-                //Let's send 1 Glow, followed by 2 glow, via a single transaction
-                //The below creates 2 outputs to the receiver address and 1 more output for your balance.
-                //Since a micro transaction creates dust for the receiver, the sender first pays a temporary storage deposit along with the sending micro amount.
-                // The receiver now bears the burden of whether to accept this transaction, as if he accepts it he needs to pay storage deposit and the sender's storage deposit
-                // would be returned back to the sender.
-                //Thus the receiver is given a choice of whether to acccept this transaction within the stipulated time as indicated
-                //by [expirationInSeconds].
-                //[1]If it expired, both the amount sent and storage deposit sent is returned back to the sender.
-                //[2]If receiver rejects the transaction,  both the amount sent and storage deposit sent is returned back to the sender.
-                //[3]If the receiver accepts the transaction, the sender's storage deposit is returned. In turn, the receiver now has to put in the storage deposit
-                //   to claim the micro amount.
+
                 string receiverAddress = "rms1qp8rknypruss89dkqnnuedm87y7xmnmdj2tk3rrpcy3sw3ev52q0vzl42tr";
 
-                SendMicroAmountResponse sendMicroAmountResponse = await account.SendMicroAmountUsingBuilder()
-                                                                        .AddAddressAndAmount(receiverAddress, 1, expirationInSeconds: 120)
-                                                                        .AddAddressAndAmount(receiverAddress, 2, expirationInSeconds: 60)
-                                                                        .SendMicroAmountAsync();
+                //Let's build an output manually ourselves!
+                //We simply add the metadata feaeture to include our data, and the address unlock condition which is the receiver's address
+                BuildBasicOutputResponse buildBasicOutputResponse = await account.BuildBasicOutputUsingBuilder()
+                                                                                    .SetAmount(5_000_000)
+                                                                                    .Features
+                                                                                        .AddMetadataFeature(data: "Hello world!")
+                                                                                        .Then()
+                                                                                    .UnlockConditions
+                                                                                        .SetAddressUnlockConditionUsingBech32(receiverAddress)
+                                                                                        .Then()
+                                                                                    .BuildBasicOutputAsync();
 
+                BasicOutput basicOutput = buildBasicOutputResponse.Payload!;
 
-                Console.WriteLine($"SendMicroAmountAsync: {sendMicroAmountResponse}");
+                //Let's send out the basicOutput
+                SendOutputsResponse sendOutputsResponse = await account.SendOutputsAsync(new List<IOutputType>() { basicOutput });
+
+                Console.WriteLine($"SendOutputsResponse: {sendOutputsResponse}");
 
             }
         }
 
 
     }
-}
+```

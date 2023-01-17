@@ -70,11 +70,11 @@ namespace IotaWalletNet.Domain.Common.Extensions
 
             string hrp = HumanReadablePart.GetHumanReadablePart(networkType, typeOfCoin);
 
-            string bech32OfInterest = bech32.Substring(4); //eg remove iota1 or smr1 or atoi1 or rms1
+            //string bech32OfInterest = bech32.Substring(hrp.Length+1); //eg remove iota1 or smr1 or atoi1 or rms1
 
-            byte[] decoded = Bech32Engine.Decode(bech32OfInterest, hrp);
+            byte[] decoded = Bech32Engine.Decode(bech32, hrp);
 
-            return "0x" + Convert.ToHexString(decoded);
+            return "0x" + Convert.ToHexString(decoded.Skip(1).ToArray()); //skip the 1st byte "00" which represents ed25519 type
         }
     }
 }

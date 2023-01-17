@@ -9,7 +9,8 @@ namespace IotaWalletNet.Application.AccountContext.Commands.SendOutputs
     {
         public async Task<SendOutputsResponse> Handle(SendOutputsCommand request, CancellationToken cancellationToken)
         {
-            TransactionOptions transactionOptions = new TransactionOptions() { TaggedDataPayload = request.TaggedDataPayload };
+            //TODO tagged data payload
+            TransactionOptions transactionOptions = new TransactionOptions() { }; 
 
             SendOutputsCommandMessageData messageData = new SendOutputsCommandMessageData(request.Outputs, transactionOptions);
 

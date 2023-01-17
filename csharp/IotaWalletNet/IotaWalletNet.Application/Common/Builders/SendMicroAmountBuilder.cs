@@ -9,17 +9,13 @@ namespace IotaWalletNet.Application.Common.Builders
     public class SendMicroAmountBuilder
     {
         private readonly List<AddressWithMicroAmount> _addressWithMicroAmounts;
-        private readonly IMediator _mediator;
         private readonly IAccount _account;
-        private readonly string _username;
         private TaggedDataPayload? _taggedDataPayload;
 
-        public SendMicroAmountBuilder(IMediator mediator, IAccount account, string username)
+        public SendMicroAmountBuilder(IAccount account)
         {
             _addressWithMicroAmounts = new List<AddressWithMicroAmount>();
-            _mediator = mediator;
             _account = account;
-            _username = username;
         }
 
         public SendMicroAmountBuilder AddAddressAndAmount(string receiverAddress, ulong amountInGlow, ulong expirationInSeconds)
@@ -37,7 +33,7 @@ namespace IotaWalletNet.Application.Common.Builders
         }
         public async Task<SendMicroAmountResponse> SendMicroAmountAsync()
         {
-            return await _mediator.Send(new SendMicroAmountCommand(_addressWithMicroAmounts, _taggedDataPayload, _username, _account));
+            return await _account.SendMicroAmountAsync(_addressWithMicroAmounts, _taggedDataPayload);
         }
     }
 }

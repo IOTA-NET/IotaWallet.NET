@@ -203,9 +203,12 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new SendAmountCommand(this, Username, addressesWithAmounts, taggedDataPayload));
         }
 
-        public SendAmountBuilder SendAmountUsingBuilder() => new SendAmountBuilder(_mediator, this, Username);
+        public SendAmountBuilder SendAmountUsingBuilder() => new SendAmountBuilder(this);
 
-        public SendMicroAmountBuilder SendMicroAmountUsingBuilder() => new SendMicroAmountBuilder(_mediator, this, Username);
+        public BuildBasicOutputBuilder BuildBasicOutputUsingBuilder() => new BuildBasicOutputBuilder(this);
+
+
+        public SendMicroAmountBuilder SendMicroAmountUsingBuilder() => new SendMicroAmountBuilder(this);
 
         public async Task<SyncAccountResponse> SyncAccountAsync()
         {

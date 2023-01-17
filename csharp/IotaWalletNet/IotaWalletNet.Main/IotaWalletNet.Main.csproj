@@ -27,4 +27,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Examples\Outputs and Transactions\Send a Transaction\" />
+  </ItemGroup>
+
 </Project>

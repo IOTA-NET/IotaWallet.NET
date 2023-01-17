@@ -77,5 +77,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds);
         Task<BuildBasicOutputResponse> BuildBasicOutputAsync(BuildBasicOutputData buildBasicOutputData);
         Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null);
+        BuildBasicOutputBuilder BuildBasicOutputUsingBuilder();
     }
 }
