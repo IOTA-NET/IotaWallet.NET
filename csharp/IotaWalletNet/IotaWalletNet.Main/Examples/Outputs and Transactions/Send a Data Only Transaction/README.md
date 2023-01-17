@@ -65,7 +65,6 @@ The following example will:
                 //Let's build an output manually ourselves!
                 //We simply add the metadata feaeture to include our data, and the address unlock condition which is the receiver's address
                 BuildBasicOutputResponse buildBasicOutputResponse = await account.BuildBasicOutputUsingBuilder()
-                                                                                    .SetAmount(5_000_000)
                                                                                     .Features
                                                                                         .AddMetadataFeature(data: "Hello world!")
                                                                                         .Then()
