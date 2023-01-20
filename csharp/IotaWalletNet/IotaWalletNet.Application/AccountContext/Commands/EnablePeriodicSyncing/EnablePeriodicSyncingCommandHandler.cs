@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using IotaWalletNet.Application.Common.Interfaces;
+using MediatR;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.EnablePeriodicSyncing
 {
@@ -6,13 +7,32 @@ namespace IotaWalletNet.Application.AccountContext.Commands.EnablePeriodicSyncin
     {
         public Task<Task> Handle(EnablePeriodicSyncingCommand request, CancellationToken cancellationToken)
         {
+            static async Task SyncAndDelay(IAccount account, int interval)
+            {
+                Console.WriteLine(("Syncing..."));
+                await account.SyncAccountAsync();
+                await Task.Delay(interval);
+            }
+
             Task periodicSyncingTask = Task.Run(async () =>
             {
-                await request.Account.SyncAccountAsync();
-                await Task.Delay(request.IntervalInMilliSeconds);
+                if (request.Count <= 0)
+                {
+                    while (true)
+                        await SyncAndDelay(request.Account, request.IntervalInMilliSeconds);
+                }
+                else
+                {
+                    while(request.Count != 0)
+                    {
+                        await SyncAndDelay(request.Account, request.IntervalInMilliSeconds);
+                        request.Count--;
+                    }
+                }
             });
 
             return Task.FromResult(periodicSyncingTask);
+
         }
     }
 }

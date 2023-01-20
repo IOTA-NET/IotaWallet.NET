@@ -69,9 +69,9 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new BuildBasicOutputCommand(buildBasicOutputData, Username, this));
         }
 
-        public async Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds)
+        public async Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds, int count = 0)
         {
-            return await _mediator.Send(new EnablePeriodicSyncingCommand(this, intervalInMilliSeconds));
+            return await _mediator.Send(new EnablePeriodicSyncingCommand(this, intervalInMilliSeconds, count));
         }
 
         public async Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim)
