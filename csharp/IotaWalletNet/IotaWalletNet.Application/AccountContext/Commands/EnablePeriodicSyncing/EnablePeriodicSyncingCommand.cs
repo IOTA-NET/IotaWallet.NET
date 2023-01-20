@@ -5,15 +5,16 @@ namespace IotaWalletNet.Application.AccountContext.Commands.EnablePeriodicSyncin
 {
     public class EnablePeriodicSyncingCommand : IRequest<Task>
     {
-        public EnablePeriodicSyncingCommand(IAccount account, int intervalInMilliSeconds)
+        public EnablePeriodicSyncingCommand(IAccount account, int intervalInMilliSeconds, int count)
         {
             Account = account;
             IntervalInMilliSeconds = intervalInMilliSeconds;
+            Count = count;
         }
 
         public IAccount Account { get; set; }
 
         public int IntervalInMilliSeconds { get; set; }
-
+        public int Count { get; set; }
     }
 }

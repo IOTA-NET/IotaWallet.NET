@@ -1,18 +1,17 @@
-﻿using IotaWalletNet.Application.AccountContext.Commands.SendAmount;
-using IotaWalletNet.Application.AccountContext.Commands.SyncAccount;
-using IotaWalletNet.Application.AccountContext.Queries.GetBalance;
-using IotaWalletNet.Application.Common.Extensions;
-using IotaWalletNet.Application.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Interfaces;
-using IotaWalletNet.Domain.Common.Models.Coin;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using static IotaWalletNet.Application.WalletContext.Queries.GetAccount.GetAccountQueryHandler;
-using static IotaWalletNet.Domain.Common.Models.Events.EventTypes;
+# Wait for Transaction Confirmation
 
-namespace IotaWalletNet.Main.Examples.Events.Subscribe
-{
-    public static class EventsExample
+## Code Example
+
+The following example will:
+
+1. Load our wallet
+2. Subscribe to events
+3. Enable Periodic Syncing
+3. Send a transaction and call `WaitForConfirmationAsync` on the transaction
+
+
+```cs
+    public static class WaitForTransactionConfirmationExample
     {
         public static async Task Run()
         {
@@ -46,33 +45,23 @@ namespace IotaWalletNet.Main.Examples.Events.Subscribe
                                 .Then()
                             .Initialize();
 
-                //Lets subscribe to all events
+                //We can subscrive to all events using WalletEventTypes.AllEvents
+                //Howevever for this example, is only focussed on waiting for a transaction to complete.
+                //Hence only the TransactionInclusion event is of interest.
+                wallet.SubscribeToEvents(WalletEventTypes.TransactionInclusion);
 
-                wallet.WalletEventReceived += Wallet_WalletEventReceived;
-                wallet.SubscribeToEvents(WalletEventTypes.AllEvents);
-
-                //We can also choose the particular events we want to subscribe to
-                //wallet.SubscribeToEvents(WalletEventTypes.TransactionProgress | WalletEventTypes.TransactionInclusion);
-
-                //TODO unsubscribe from events
 
                 //Let's retrieve our cookiemonster account
                 (GetAccountResponse accountResponse, IAccount? account) = await wallet.GetAccountAsync("cookiemonster");
-                Console.WriteLine($"GetAccountAsync: {accountResponse}");
 
-                if (account == null)
-                {
-                    Console.WriteLine("There was a problem retreiving the account.");
-                    return;
-                }
-
-                SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
-                Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
-
-                await account.ConsolidateOutputsAsync(true);
+                //We can also opt for periodic syncing of our account,
+                //so that we don't have to worry about manual syncing
+                //Below, we want to sync periodically 30 times.
+                //Set count to 0 for forever periodic syncing
+                account.EnablePeriodicSyncing(intervalInMilliSeconds: 3000, count: 30);
 
                 GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
-                Console.WriteLine($"GetBalanceAsync: {getBalanceResponse}");
+                Console.WriteLine($"Current balance is : {getBalanceResponse.Payload!.BaseCoin.Total}");
 
                 //Let's send 1 shimmer, which is 1,000,000 Glow
                 string receiverAddress = "rms1qz9f7vecqscfynnxacyzefwvpza0wz3r0lnnwrc8r7qhx65s5x7rx2fln5q";
@@ -80,19 +69,20 @@ namespace IotaWalletNet.Main.Examples.Events.Subscribe
                 SendAmountResponse sendAmountResponse = await account.SendAmountUsingBuilder()
                                                                         .AddAddressAndAmount(receiverAddress, 1000000)
                                                                         .SendAmountAsync();
+                Transaction transaction = sendAmountResponse.Payload!;
 
-                Console.WriteLine($"SendAmountAsync: {sendAmountResponse}");
+                //We will setup the event handler for you and let you proceed once we receive
+                //confirmation from the node that the transactionid has been confirmed.
+                await transaction.WaitForConfirmationAsync(wallet);
+
+                getBalanceResponse = await account.GetBalanceAsync();
+                Console.WriteLine($"New balance is : {getBalanceResponse.Payload!.BaseCoin.Total}");
 
 
-                Console.ReadLine();
-
+                await Task.Delay(200 * 1000);
             }
 
         }
 
-        private static void Wallet_WalletEventReceived(object? sender, IWalletEvent? walletEvent)
-        {
-            Console.WriteLine($"Event Received: {JsonConvert.SerializeObject(walletEvent)}");
-        }
     }
-}
+```
