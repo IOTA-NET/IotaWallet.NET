@@ -8,7 +8,8 @@ namespace IotaWalletNet.Application.AccountContext.Queries.GetTransaction
     {
         public async Task<GetTransactionResponse> Handle(GetTransactionQuery request, CancellationToken cancellationToken)
         {
-            GetTransactionQueryMessage message = new GetTransactionQueryMessage(request.Username, request.TransactionId);
+            GetTransactionQueryMessageData messageData = new GetTransactionQueryMessageData(request.TransactionId);
+            GetTransactionQueryMessage message = new GetTransactionQueryMessage(request.Username, messageData);
             string json = JsonConvert.SerializeObject(message);
 
             RustBridgeGenericResponse genericResponse = await request.Account.SendMessageAsync(json);
