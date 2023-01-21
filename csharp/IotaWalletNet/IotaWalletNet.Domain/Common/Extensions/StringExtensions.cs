@@ -59,20 +59,50 @@ namespace IotaWalletNet.Domain.Common.Extensions
 
             string bech32 = Bech32Engine.Encode(hrp, Convert.FromHexString(blake2bHashOfEd25519));
 
-            const string HRP_CONSTANT = "1";
-
-            return $"{hrp}{HRP_CONSTANT}{bech32}";
+            return bech32;
         }
 
-        public static string DecodeBech32IntoEd25519Hash(this string bech32, NetworkType networkType, TypeOfCoin typeOfCoin)
+        public static string EncodeAliasIdIntoBech32(this string aliasID, NetworkType networkType, TypeOfCoin typeOfCoin)
+        {
+            aliasID = aliasID.Trim().ToLower();
+            if (aliasID.StartsWith("0x"))
+                aliasID = aliasID.Substring(2); // remove the 0x of a hexstring eg 0x1337
+
+            string hrp = HumanReadablePart.GetHumanReadablePart(networkType, typeOfCoin);
+            const string ALIAS_TYPE = "08";
+            aliasID = ALIAS_TYPE + aliasID;
+
+            string bech32 = Bech32Engine.Encode(hrp, Convert.FromHexString(aliasID));
+
+            return bech32;
+        }
+
+        public static string EncodeNftIdIntoBech32(this string nftId, NetworkType networkType, TypeOfCoin typeOfCoin)
+        {
+            nftId = nftId.Trim().ToLower();
+            if (nftId.StartsWith("0x"))
+                nftId = nftId.Substring(2); // remove the 0x of a hexstring eg 0x1337
+
+            string hrp = HumanReadablePart.GetHumanReadablePart(networkType, typeOfCoin);
+            const string NFT_TYPE = "10";
+            nftId = NFT_TYPE + nftId;
+
+            string bech32 = Bech32Engine.Encode(hrp, Convert.FromHexString(nftId));
+
+            return bech32;
+        }
+
+        public static string DecodeBech32(this string bech32, NetworkType networkType, TypeOfCoin typeOfCoin)
         {
             bech32 = bech32.Trim().ToLower();
 
             string hrp = HumanReadablePart.GetHumanReadablePart(networkType, typeOfCoin);
 
-            string bech32OfInterest = bech32.Substring(4); //eg remove iota1 or smr1 or atoi1 or rms1
 
-            byte[] decoded = Bech32Engine.Decode(bech32OfInterest, hrp);
+            byte[] decoded = Bech32Engine.Decode(bech32, hrp+"1");
+            
+            //Remove type bytes
+            decoded = decoded.Skip(1).ToArray();
 
             return "0x" + Convert.ToHexString(decoded);
         }
