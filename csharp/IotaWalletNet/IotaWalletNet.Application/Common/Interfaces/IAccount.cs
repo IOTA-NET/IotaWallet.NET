@@ -74,8 +74,9 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<SendMicroAmountResponse> SendMicroAmountAsync(List<AddressWithMicroAmount> addressWithMicroAmounts, TaggedDataPayload? taggedDataPayload = null);
         SendMicroAmountBuilder SendMicroAmountUsingBuilder();
         Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim);
-        Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds, int count=0);
+        Task EnablePeriodicSyncing(int intervalInMilliSeconds, CancellationToken cancellationToken=default);
         Task<BuildBasicOutputResponse> BuildBasicOutputAsync(BuildBasicOutputData buildBasicOutputData);
         Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null);
+        Task<T> RetryAsyncFuncUntil<T>(Func<Task<T>> function, int intervalInMilliseconds, Func<T, bool> predicate, CancellationToken cancellationToken = default);
     }
 }

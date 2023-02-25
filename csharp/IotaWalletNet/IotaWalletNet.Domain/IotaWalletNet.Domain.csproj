@@ -20,7 +20,7 @@
 		<PackageProjectUrl>https://github.com/IOTA-NET/IotaWallet.NET</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/IOTA-NET/IotaWallet.NET</RepositoryUrl>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		
 	</PropertyGroup>
 

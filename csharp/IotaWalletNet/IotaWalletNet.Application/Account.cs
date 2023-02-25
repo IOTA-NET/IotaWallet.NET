@@ -59,6 +59,27 @@ namespace IotaWalletNet.Application
         public IWallet Wallet { get; }
 
 
+        public async Task<T> RetryAsyncFuncUntil<T>(Func<Task<T>> function, int intervalInMilliseconds, Func<T, bool> predicate, CancellationToken cancellationToken=default)
+        {
+            while(true)
+            {
+                T response = await function();
+
+                if(predicate(response))
+                {
+                    return response;
+                }
+
+                if (cancellationToken.IsCancellationRequested)
+                    return response;
+                
+                await Task.Delay(intervalInMilliseconds);
+
+                if (cancellationToken.IsCancellationRequested)
+                    return response;
+            }
+        }
+
         public async Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null)
         {
             return await _mediator.Send(new SendOutputsCommand(this, Username, outputs, taggedDataPayload));
@@ -69,9 +90,9 @@ namespace IotaWalletNet.Application
             return await _mediator.Send(new BuildBasicOutputCommand(buildBasicOutputData, Username, this));
         }
 
-        public async Task<Task> EnablePeriodicSyncing(int intervalInMilliSeconds, int count = 0)
+        public async Task EnablePeriodicSyncing(int intervalInMilliSeconds, CancellationToken cancellationToken=default)
         {
-            return await _mediator.Send(new EnablePeriodicSyncingCommand(this, intervalInMilliSeconds, count));
+            await _mediator.Send(new EnablePeriodicSyncingCommand(this, intervalInMilliSeconds), cancellationToken);
         }
 
         public async Task<GetOutputsWithAdditionalUnlockConditionsResponse> GetOutputsWithAdditionalUnlockConditionsAsync(OutputTypeToClaim outputTypeToClaim)

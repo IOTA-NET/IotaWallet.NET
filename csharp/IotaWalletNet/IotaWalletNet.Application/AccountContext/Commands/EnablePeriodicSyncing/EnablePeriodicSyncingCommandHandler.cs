@@ -1,38 +1,30 @@
-﻿using IotaWalletNet.Application.Common.Interfaces;
-using MediatR;
+﻿using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace IotaWalletNet.Application.AccountContext.Commands.EnablePeriodicSyncing
 {
-    public class EnablePeriodicSyncingCommandHandler : IRequestHandler<EnablePeriodicSyncingCommand, Task>
+    public class EnablePeriodicSyncingCommandHandler : IRequestHandler<EnablePeriodicSyncingCommand>
     {
-        public Task<Task> Handle(EnablePeriodicSyncingCommand request, CancellationToken cancellationToken)
+
+        public EnablePeriodicSyncingCommandHandler()
         {
-            static async Task SyncAndDelay(IAccount account, int interval)
+        }
+
+        public async Task<Unit> Handle(EnablePeriodicSyncingCommand request, CancellationToken cancellationToken=default)
+        {
+            while (true)
             {
-                Console.WriteLine(("Syncing..."));
-                await account.SyncAccountAsync();
-                await Task.Delay(interval);
+                Console.WriteLine("SYNCING");
+                await request.Account.SyncAccountAsync();
+
+                if (cancellationToken != CancellationToken.None && cancellationToken.IsCancellationRequested)
+                    return Unit.Value;
+
+                await Task.Delay(request.IntervalInMilliSeconds);
+
+                if (cancellationToken != CancellationToken.None && cancellationToken.IsCancellationRequested)
+                    return Unit.Value;
             }
-
-            Task periodicSyncingTask = Task.Run(async () =>
-            {
-                if (request.Count <= 0)
-                {
-                    while (true)
-                        await SyncAndDelay(request.Account, request.IntervalInMilliSeconds);
-                }
-                else
-                {
-                    while(request.Count != 0)
-                    {
-                        await SyncAndDelay(request.Account, request.IntervalInMilliSeconds);
-                        request.Count--;
-                    }
-                }
-            });
-
-            return Task.FromResult(periodicSyncingTask);
-
         }
     }
 }
