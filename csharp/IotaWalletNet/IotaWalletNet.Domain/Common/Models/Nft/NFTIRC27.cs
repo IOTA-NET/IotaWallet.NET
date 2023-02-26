@@ -10,7 +10,7 @@
         /// Mime type
         /// </summary>
         public string Type { get; set; }
-        public string NameOfNft { get; }
+        public string Name { get; }
         public string Uri { get; }
 
         public string? CollectionName { get; set; }
@@ -41,7 +41,7 @@
         public NftIrc27(string mimeType, string nameOfNft, string uri)
         {
             Type = mimeType;
-            NameOfNft = nameOfNft;
+            Name = nameOfNft;
             Uri = uri;
         }
 
