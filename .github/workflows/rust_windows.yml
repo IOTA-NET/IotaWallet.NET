@@ -27,7 +27,7 @@ jobs:
 
     - name: Compile swift bindings
       run: |
-        cd ./wallet.rs/bindings/swift
+        cd ./wallet.rs/wallet/bindings/swift
         cargo build --release
         mkdir iota_wallet_windows_x64
         copy ./target/release/iota_wallet.dll ./iota_wallet_windows_x64/.
@@ -36,6 +36,6 @@ jobs:
       uses: actions/upload-artifact@v3.1.1
       with:
         name: iota_wallet_windows_x64
-        path: ./wallet.rs/bindings/swift/iota_wallet_windows_x64
+        path: ./wallet.rs/wallet/bindings/swift/iota_wallet_windows_x64
     
     
