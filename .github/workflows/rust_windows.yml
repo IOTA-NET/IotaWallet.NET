@@ -30,6 +30,7 @@ jobs:
         cd ./wallet.rs/wallet/bindings/swift
         cargo build --release
         mkdir iota_wallet_windows_x64
+        dir ./target/release
         copy ./target/release/iota_wallet.dll ./iota_wallet_windows_x64/.
       
     - name: Upload a Build Artifact
