@@ -27,7 +27,7 @@ jobs:
 
     - name: Compile swift bindings
       run: |
-        cd ./wallet/bindings/swift
+        cd ./wallet.rs/wallet/bindings/swift
         cargo build --release
         mkdir iota_wallet_linux_x86_64
         cp ./target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
@@ -36,6 +36,6 @@ jobs:
       uses: actions/upload-artifact@v3.1.1
       with:
         name: iota_wallet_linux_x86_64
-        path: ./wallet/bindings/swift/iota_wallet_linux_x86_64
+        path: ./wallet.rs/wallet/bindings/swift/iota_wallet_linux_x86_64
     
     
