@@ -2,14 +2,14 @@
 
 namespace IotaWalletNet.Application.WalletContext.Queries.GetAccount
 {
-    public class GetAccountQueryMessage : Message<string>
+    internal class GetAccountQueryMessage : Message<GetAccountQueryMessageData>
     {
         private const string COMMAND = "getAccount";
 
-        public GetAccountQueryMessage(string username)
+        public GetAccountQueryMessage(GetAccountQueryMessageData getAccountQueryMessageData)
         {
             Cmd = COMMAND;
-            Payload = username;
+            Payload = getAccountQueryMessageData;
         }
     }
 }
