@@ -2,14 +2,14 @@
 
 namespace IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic
 {
-    internal class StoreMnemonicCommandMessage : Message<string>
+    internal class StoreMnemonicCommandMessage : Message<StoreMnemonicCommandMessageData>
     {
         private const string COMMAND = "storeMnemonic";
 
-        public StoreMnemonicCommandMessage(string mnemonic)
+        public StoreMnemonicCommandMessage(StoreMnemonicCommandMessageData storeMnemonicCommandMessageData)
         {
             Cmd = COMMAND;
-            Payload = mnemonic;
+            Payload = storeMnemonicCommandMessageData;
         }
     }
 }

@@ -57,12 +57,13 @@ namespace IotaWalletNet.Main.Examples.NFTs.Send
 
                 await account.SyncAccountAsync();
 
+                Console.WriteLine(await account.GetBalanceAsync());
 
                 //TODO: Replace with the address of your choice!
                 string receiverAddress = "rms1qz8wf6jrchvsfmcnsfhlf6s53x3u85y0j4hvwth9a5ff3xhrxtmvvyc9ae7";
 
                 //TODO: Replace with an nft output id from your accounts.
-                string outputId = "0x9c5fc8b575e29377e0401d2cd6138c0f4859fbb95b5acf0ea81b3354de6eb2e70000";
+                string outputId = "0xbb237bab9e5277867c99cb05ce89176838a57bce230a9cd593aee586bffa11b50100";
 
                 var nftId = outputId.ComputeBlake2bHash();
 

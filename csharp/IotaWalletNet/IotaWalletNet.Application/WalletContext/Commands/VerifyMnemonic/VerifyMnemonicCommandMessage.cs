@@ -2,14 +2,14 @@
 
 namespace IotaWalletNet.Application.WalletContext.Commands.VerifyMnemonic
 {
-    public class VerifyMnemonicCommandMessage : Message<string>
+    internal class VerifyMnemonicCommandMessage : Message<VerifyMnemonicCommandMessageData>
     {
         private const string COMMAND = "verifyMnemonic";
 
-        public VerifyMnemonicCommandMessage(string mnemonic)
+        public VerifyMnemonicCommandMessage(VerifyMnemonicCommandMessageData verifyMnemonicCommandMessageData)
         {
             Cmd = COMMAND;
-            Payload = mnemonic;
+            Payload = verifyMnemonicCommandMessageData;
         }
     }
 }
