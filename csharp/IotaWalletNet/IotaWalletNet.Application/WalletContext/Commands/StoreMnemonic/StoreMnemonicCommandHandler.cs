@@ -8,7 +8,9 @@ namespace IotaWalletNet.Application.WalletContext.Commands.StoreMnemonic
     {
         public async Task<StoreMnemonicResponse> Handle(StoreMnemonicCommand request, CancellationToken cancellationToken)
         {
-            StoreMnemonicCommandMessage message = new StoreMnemonicCommandMessage(request.Mnemonic);
+            StoreMnemonicCommandMessageData messageData = new StoreMnemonicCommandMessageData(request.Mnemonic);
+            StoreMnemonicCommandMessage message = new StoreMnemonicCommandMessage(messageData);
+
             string messageJson = JsonConvert.SerializeObject(message);
             RustBridgeGenericResponse genericResponse = await request.Wallet.SendMessageAsync(messageJson);
 

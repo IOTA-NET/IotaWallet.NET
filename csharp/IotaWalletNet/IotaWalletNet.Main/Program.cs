@@ -1,4 +1,6 @@
-﻿using IotaWalletNet.Main.Examples.Events.WaitForTransactionConfirmation;
+﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
+using IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance;
+using IotaWalletNet.Main.Examples.Events.WaitForTransactionConfirmation;
 using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Periodic_Syncing;
 
 namespace IotaWalletNet.Main
@@ -7,7 +9,8 @@ namespace IotaWalletNet.Main
     {
         private static async Task Main(string[] args)
         {
-            //await CreateAWalletAndAccountExample.Run();
+
+            await CreateAWalletAndAccountExample.Run();
 
             //await RequestTokensFromFaucetExample.Run();
 
@@ -37,7 +40,7 @@ namespace IotaWalletNet.Main
             //await ClaimOutputsExample.Run();
 
             //await PeriodicSyncingExample.Run();
-            await WaitForTransactionConfirmationExample.Run();
+            //await WaitForTransactionConfirmationExample.Run();
         }
 
     }
