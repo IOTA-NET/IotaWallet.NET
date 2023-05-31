@@ -56,8 +56,10 @@ namespace IotaWalletNet.Main.Examples.NFTs.Burn
                 //Sync account
                 await account.SyncAccountAsync();
 
+                Console.WriteLine(await account.GetBalanceAsync());
+
                 //TODO: Replace with an nft output id from your accounts.
-                string outputId = "0x9c5fc8b575e29377e0401d2cd6138c0f4859fbb95b5acf0ea81b3354de6eb2e70100";
+                string outputId = "0xbb237bab9e5277867c99cb05ce89176838a57bce230a9cd593aee586bffa11b50000";
 
                 var nftId = outputId.ComputeBlake2bHash();
 

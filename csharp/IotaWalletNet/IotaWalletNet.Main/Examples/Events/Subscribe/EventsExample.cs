@@ -69,7 +69,7 @@ namespace IotaWalletNet.Main.Examples.Events.Subscribe
                 SyncAccountResponse syncAccountResponse = await account.SyncAccountAsync();
                 Console.WriteLine($"SyncAccountAsync: {syncAccountResponse}");
 
-                await account.ConsolidateOutputsAsync(true);
+                //await account.ConsolidateOutputsAsync(true);
 
                 GetBalanceResponse getBalanceResponse = await account.GetBalanceAsync();
                 Console.WriteLine($"GetBalanceAsync: {getBalanceResponse}");
