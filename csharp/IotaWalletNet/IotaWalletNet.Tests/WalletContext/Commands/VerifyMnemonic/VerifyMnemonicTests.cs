@@ -31,6 +31,15 @@ namespace IotaWalletNet.Tests.WalletContext.Commands.VerifyMnemonic
             IWallet wallet = _serviceScope.ServiceProvider.GetRequiredService<IWallet>();
             wallet = await CreateOfflineFullWalletAsync(wallet, shouldCreateAndStoreMnemonic: false);
             string mnemonic = "hood medal among prevent during embrace inmate swarm ancient damp token rail wolf risk tortoise record dose language rival cloud sting grace palm style";
+            try
+            {
+            await wallet.VerifyMnemonicAsync("asdasd");
+
+            }
+            catch(RustBridgeException e)
+            {
+
+            }
 
             await wallet.Awaiting(x => x.VerifyMnemonicAsync("wrong mnemonic")).Should().ThrowAsync<RustBridgeException>();
             await wallet.Awaiting(x => x.VerifyMnemonicAsync(mnemonic + "random")).Should().ThrowAsync<RustBridgeException>();
