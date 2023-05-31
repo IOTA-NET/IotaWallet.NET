@@ -31,7 +31,7 @@ jobs:
         cargo build --release
         mkdir iota_wallet_linux_x86_64
         ls ./target/release/
-        cp ./target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
+        cp ../../../target/release/libiota_wallet.so ./iota_wallet_linux_x86_64/.
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
