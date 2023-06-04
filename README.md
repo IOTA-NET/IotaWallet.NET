@@ -156,6 +156,7 @@ For more examples, see the [Examples](https://github.com/wireless90/IotaWallet.N
 ### Commands
 
 - [x] BuildBasicOutput
+- [x] BuildNftOutput
 - [x] BurnNativeTokens
 - [x] BurnNft
 - [x] ClaimOutputs

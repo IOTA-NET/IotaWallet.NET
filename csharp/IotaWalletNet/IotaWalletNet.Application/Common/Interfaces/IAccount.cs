@@ -1,4 +1,5 @@
 ﻿using IotaWalletNet.Application.AccountContext.Commands.BuildBasicOutput;
+using IotaWalletNet.Application.AccountContext.Commands.BuildNftOutput;
 using IotaWalletNet.Application.AccountContext.Commands.BurnNativeTokens;
 using IotaWalletNet.Application.AccountContext.Commands.BurnNft;
 using IotaWalletNet.Application.AccountContext.Commands.ClaimOutputs;
@@ -78,5 +79,6 @@ namespace IotaWalletNet.Application.Common.Interfaces
         Task<BuildBasicOutputResponse> BuildBasicOutputAsync(BuildBasicOutputData buildBasicOutputData);
         Task<SendOutputsResponse> SendOutputsAsync(List<IOutputType> outputs, TaggedDataPayload? taggedDataPayload = null);
         Task<T> RetryAsyncFuncUntil<T>(Func<Task<T>> function, int intervalInMilliseconds, Func<T, bool> predicate, CancellationToken cancellationToken = default);
+        Task<BuildNftOutputResponse> BuildNftOutputAsync(BuildNftOutputData buildNftOutputData);
     }
 }
