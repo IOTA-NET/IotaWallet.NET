@@ -6,7 +6,7 @@ namespace IotaWalletNet.Domain.Common.Models.Output.UnlockConditionTypes
     {
         public StorageDepositReturnUnlockCondition(IAddressType addressType, string amount)
         {
-            Address = addressType;
+            ReturnAddress = addressType;
             Amount = amount;
         }
 
@@ -15,7 +15,7 @@ namespace IotaWalletNet.Domain.Common.Models.Output.UnlockConditionTypes
         /// <summary>
         /// The return address
         /// </summary>
-        public IAddressType Address { get; set; }
+        public IAddressType ReturnAddress { get; set; }
 
         /// <summary>
         /// Amount of IOTA tokens the consuming transaction should deposit to the address defined in return address.

@@ -26,6 +26,8 @@ namespace IotaWalletNet.Main
 
             //await CheckBalanceExample.Run();
 
+            await MintNftUsingBuildOutputExample.Run();
+
             //await SendTransactionExample.Run();
 
             //await SendMicroTransactionExample.Run();
