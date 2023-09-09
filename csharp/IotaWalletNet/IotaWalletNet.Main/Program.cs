@@ -1,4 +1,6 @@
-﻿using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
+﻿using IotaWalletNet.Domain.Common.Extensions;
+using IotaWalletNet.Domain.Common.Models.Nft;
+using IotaWalletNet.Main.Examples.Accounts_and_Addresses;
 using IotaWalletNet.Main.Examples.Accounts_and_Addresses.Check_Balance;
 using IotaWalletNet.Main.Examples.Accounts_and_Addresses.Generate_an_Address;
 using IotaWalletNet.Main.Examples.Events.Subscribe;
@@ -12,6 +14,7 @@ using IotaWalletNet.Main.Examples.NFTs.Send;
 using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Periodic_Syncing;
 using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Request_Tokens_from_Faucet;
 using IotaWalletNet.Main.Examples.Outputs_and_Transactions.Send_a_Transaction;
+using Newtonsoft.Json;
 
 namespace IotaWalletNet.Main
 {
@@ -24,7 +27,7 @@ namespace IotaWalletNet.Main
 
             //await RequestTokensFromFaucetExample.Run();
 
-            //await CheckBalanceExample.Run();
+            await CheckBalanceExample.Run();
 
             //await SendTransactionExample.Run();
 
