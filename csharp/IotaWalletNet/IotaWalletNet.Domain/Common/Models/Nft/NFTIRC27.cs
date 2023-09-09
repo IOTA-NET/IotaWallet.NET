@@ -10,8 +10,8 @@
         /// Mime type
         /// </summary>
         public string Type { get; set; }
-        public string Name { get; }
         public string Uri { get; }
+        public string Name { get; set; }
 
         public string? CollectionName { get; set; }
 
